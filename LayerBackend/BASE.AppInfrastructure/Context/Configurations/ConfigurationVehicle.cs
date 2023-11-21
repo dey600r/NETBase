@@ -16,6 +16,7 @@ namespace BASE.AppInfrastructure.Context.Configurations
 			builder.Property(b => b.DateKms).IsRequired();
 			builder.Property(b => b.Active).IsRequired();
 
+			builder.HasOne(b => b.Configuration).WithMany(b => b.Vehicles).HasForeignKey(b => b.IdConfiguration).IsRequired();
 			builder.HasOne(b => b.VehicleType).WithMany(b => b.Vehicles).HasForeignKey(b => b.IdVehicleType).IsRequired();
 		}
 	}

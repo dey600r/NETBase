@@ -1,4 +1,5 @@
-﻿using BASE.AppInfrastructure.Entities;
+﻿using BASE.AppInfrastructure.Context.SeedData;
+using BASE.AppInfrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -23,9 +24,8 @@ namespace BASE.AppInfrastructure.Context
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Seed();
 			base.OnModelCreating(modelBuilder);
-			//modelBuilder.Entity<VehicleType>();
-			//modelBuilder.Entity<Vehicle>();
 		}
 	}
 }

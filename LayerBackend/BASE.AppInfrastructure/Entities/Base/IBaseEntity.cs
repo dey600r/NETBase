@@ -1,7 +1,7 @@
 ﻿namespace BASE.AppInfrastructure.Entities
 {
-	public interface IBaseEntity
+	public interface IBaseEntity<TId> where TId : struct
 	{
-		public Guid Id { get; set; }
+		public TId Id { get; set; }
 	}
 }

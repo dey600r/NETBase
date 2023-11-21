@@ -22,11 +22,46 @@ namespace BASE.AppInfrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("BASE.AppInfrastructure.Entities.Configuration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Master")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Configuration");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "PRODUCTION_SETUP",
+                            Master = true,
+                            Name = "PRODUCTION"
+                        });
+                });
+
             modelBuilder.Entity("BASE.AppInfrastructure.Entities.Vehicle", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -35,14 +70,20 @@ namespace BASE.AppInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ConfigurationId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateKms")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DatePurchase")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("IdVehicleType")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("IdConfiguration")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdVehicleType")
+                        .HasColumnType("int");
 
                     b.Property<int>("Km")
                         .HasColumnType("int");
@@ -54,13 +95,15 @@ namespace BASE.AppInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("VehicleTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("VehicleTypeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConfigurationId");
 
                     b.HasIndex("VehicleTypeId");
 
@@ -69,9 +112,11 @@ namespace BASE.AppInfrastructure.Migrations
 
             modelBuilder.Entity("BASE.AppInfrastructure.Entities.VehicleType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -84,17 +129,50 @@ namespace BASE.AppInfrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VehicleTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "M",
+                            Description = "MOTORBIKE"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "C",
+                            Description = "CAR"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "O",
+                            Description = "OTHER"
+                        });
                 });
 
             modelBuilder.Entity("BASE.AppInfrastructure.Entities.Vehicle", b =>
                 {
+                    b.HasOne("BASE.AppInfrastructure.Entities.Configuration", "Configuration")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("ConfigurationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BASE.AppInfrastructure.Entities.VehicleType", "VehicleType")
                         .WithMany("Vehicles")
                         .HasForeignKey("VehicleTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Configuration");
+
                     b.Navigation("VehicleType");
+                });
+
+            modelBuilder.Entity("BASE.AppInfrastructure.Entities.Configuration", b =>
+                {
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("BASE.AppInfrastructure.Entities.VehicleType", b =>
