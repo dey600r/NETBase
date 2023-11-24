@@ -1,7 +1,10 @@
-using Autofac.Core;
-using BASE.AppInfrastructure.Context;
 using BASE.IoC;
-using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Web;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
+
+var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+logger.Debug("--------- Initializing Server ----------");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// NLog: Setup NLog for Dependency injection
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(LogLevel.Trace);
+builder.Host.UseNLog();
 
 DependencyInjection.ConfigureDBContext(builder.Services, builder.Configuration);
 DependencyInjection.AddMyDependencyGroup(builder.Services);

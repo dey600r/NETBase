@@ -9,7 +9,7 @@ namespace BASE.WebApi.Controllers
 	{
 		IVehicleService _vehicleService;
 
-		public VehicleController(IVehicleService vehicleService)
+		public VehicleController(IVehicleService vehicleService, ILogger<BaseController> logger): base(logger)
 		{
 			_vehicleService = vehicleService;
 		}
@@ -17,13 +17,26 @@ namespace BASE.WebApi.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<VehicleTypeModel>> Get()
 		{
-			return Ok(_vehicleService.GetAll());
+			try { 
+				return Ok(_vehicleService.GetAll());
+			} catch(Exception ex)
+			{
+				LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
 		}
 
 		[HttpPost]
 		public ActionResult<VehicleTypeModel> Add(VehicleTypeModel addModel)
 		{
-			return Ok(_vehicleService.Add(addModel));
+			try
+			{
+				return Ok(_vehicleService.Add(addModel));
+			} catch(Exception ex)
+			{
+				LogError(ex.Message);
+				return BadRequest(ex.Message);
+			}
 		}
 
 
