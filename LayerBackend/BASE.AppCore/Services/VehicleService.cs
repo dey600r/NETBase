@@ -8,10 +8,10 @@ namespace BASE.AppCore.Services
 {
 	public  class VehicleService : IVehicleService
 	{
-		private readonly VehicleRepository _vehicleRepository;
+		private readonly IVehicleRepository _vehicleRepository;
 		private readonly IMapper _mapper;
 
-		public VehicleService(VehicleRepository vehicleRepository, IMapper mapper) {
+		public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper) {
 			_vehicleRepository = vehicleRepository;
 			_mapper = mapper;
 		}
@@ -27,6 +27,7 @@ namespace BASE.AppCore.Services
 
 		public IEnumerable<VehicleTypeModel> GetAll()
 		{
+			_vehicleRepository.GetAll().Select(x => _mapper.Map<VehicleTypeModel>(x));
 			return _vehicleRepository.GetAll().Select(x => _mapper.Map<VehicleTypeModel>(x));
 		}
 	}

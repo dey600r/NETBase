@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BASE.AppInfrastructure.Repository
 {
-    public class BaseRepository<TEntity, TId> : IBaseRepository<TEntity, TId> where TEntity : class, IBaseEntity<TId>, new()
+    public class BaseRepository<TEntity, TId> : BaseDisposable, IBaseRepository<TEntity, TId> where TEntity : class, IBaseEntity<TId>, new()
                                                                                 where TId : struct
     {
         protected readonly DBContext _dbContext;
-        public BaseRepository(DBContext dbContext)
+        public BaseRepository(DBContext dbContext) 
         {
             _dbContext = dbContext;
         }
@@ -41,7 +41,7 @@ namespace BASE.AppInfrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TEntity> GetAll()
+		public IEnumerable<TEntity> GetAll()
         {
             return _dbContext.Set<TEntity>().AsNoTracking();
         }

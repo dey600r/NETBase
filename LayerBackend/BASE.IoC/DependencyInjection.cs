@@ -16,7 +16,8 @@ namespace BASE.IoC
 		public static void ConfigureDBContext(IServiceCollection service, IConfiguration configuration)
 		{
 			service.AddDbContext<DBContext>(options =>
-				options.UseSqlServer(configuration.GetConnectionString("SqlServer"))
+				options.UseSqlServer(configuration.GetConnectionString("SqlServer")),
+				ServiceLifetime.Scoped
 			);
 		}
 
@@ -36,10 +37,11 @@ namespace BASE.IoC
 			services.AddAutoMapper(typeof(BusinessProfile));
 
 			// SERVICES
-			services.AddScoped(typeof(IBaseRepository<VehicleType, int>), typeof(BaseRepository<VehicleType, int>));
-			services.AddScoped(typeof(IBaseRepository<VehicleType, int>), typeof(VehicleRepository));
-			//services.AddTransient<IBaseRepository<VehicleType, int>, VehicleRepository>();
-			//services.AddTransient<IBaseRepository<VehicleType, int>, BaseRepository<VehicleType, int>>();
+			//services.AddScoped(typeof(IBaseRepository<VehicleType, int>), typeof(BaseRepository<VehicleType, int>));
+			//services.AddScoped(typeof(IBaseRepository<VehicleType, int>), typeof(VehicleRepository));
+			//services.AddScoped<IBaseRepository<VehicleType, int>, VehicleRepository>();
+			//services.AddScoped<IBaseRepository<VehicleType, int>, BaseRepository<VehicleType, int>>();
+			services.AddScoped<IVehicleRepository, VehicleRepository>();
 			services.AddScoped<IVehicleService, VehicleService>();
 
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Diagnostics.Eventing.Reader;
+using System.Reflection;
 
 namespace BASE.WebApi.Controllers
 {
@@ -15,23 +17,26 @@ namespace BASE.WebApi.Controllers
 
 		public override void OnActionExecuting(ActionExecutingContext context)
 		{
-			_logger.LogError($"Autolog - {context.Controller.ToString()}");
+			Log($"Autolog - {context.Controller}");
 			base.OnActionExecuting(context);
 		}
 
-		protected void LogInfo(string message)
+		protected void Log(string message, LogLevel level = LogLevel.Information)
 		{
-			_logger?.LogInformation(message);
+			string showMessage = GetMessage(message);
+			switch (level)
+			{
+				case LogLevel.Information: _logger.LogInformation(showMessage); break;
+				case LogLevel.Error: _logger.LogError(showMessage); break;
+				case LogLevel.Warning: _logger.LogWarning(showMessage); break;
+				default: _logger.LogCritical(showMessage); break;
+			}
 		}
 
-		protected void LogWarn(string message)
+		private string GetMessage(string message)
 		{
-			_logger?.LogWarning(message);
-		}
-
-		protected void LogError(string message)
-		{
-			_logger?.LogError(message);
+			MethodBase method = MethodBase.GetCurrentMethod();
+			return $"{method?.ReflectedType?.Name} / {method?.Name} - {message}";
 		}
 	}
 }

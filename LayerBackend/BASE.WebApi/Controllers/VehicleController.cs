@@ -21,7 +21,7 @@ namespace BASE.WebApi.Controllers
 				return Ok(_vehicleService.GetAll());
 			} catch(Exception ex)
 			{
-				LogError(ex.Message);
+				Log(ex.Message, LogLevel.Error);
 				return BadRequest(ex.Message);
 			}
 		}
@@ -34,7 +34,7 @@ namespace BASE.WebApi.Controllers
 				return Ok(_vehicleService.Add(addModel));
 			} catch(Exception ex)
 			{
-				LogError(ex.Message);
+				Log(ex.Message, LogLevel.Error);
 				return BadRequest(ex.Message);
 			}
 		}
