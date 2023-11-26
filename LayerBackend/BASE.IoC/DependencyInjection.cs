@@ -2,7 +2,6 @@
 using BASE.AppCore.Mappers;
 using BASE.AppCore.Services;
 using BASE.AppInfrastructure.Context;
-using BASE.AppInfrastructure.Entities;
 using BASE.AppInfrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BASE.IoC
 {
-	public static class DependencyInjection
+    public static class DependencyInjection
 	{
 
 		public static void ConfigureDBContext(IServiceCollection service, IConfiguration configuration)
@@ -37,14 +36,10 @@ namespace BASE.IoC
 			services.AddAutoMapper(typeof(BusinessProfile));
 
 			// SERVICES
-			//services.AddScoped(typeof(IBaseRepository<VehicleType, int>), typeof(BaseRepository<VehicleType, int>));
-			//services.AddScoped(typeof(IBaseRepository<VehicleType, int>), typeof(VehicleRepository));
-			//services.AddScoped<IBaseRepository<VehicleType, int>, VehicleRepository>();
-			//services.AddScoped<IBaseRepository<VehicleType, int>, BaseRepository<VehicleType, int>>();
 			services.AddScoped<IVehicleRepository, VehicleRepository>();
+			services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
 			services.AddScoped<IVehicleService, VehicleService>();
-
-
+			services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 		}
 	}
 }

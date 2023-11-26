@@ -1,9 +1,9 @@
-using BASE.AppCore.Services;
+using BASE.AppCore.Services.Vehicle;
 using BASE.WebApi.Controllers;
 
 namespace BASE.WebApiTest
 {
-	public class UnitTest1
+    public class UnitTest1
 	{
 		[Fact]
 		public void Test1()

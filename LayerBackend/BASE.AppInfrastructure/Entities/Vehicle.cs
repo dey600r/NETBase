@@ -1,6 +1,4 @@
-﻿
-
-namespace BASE.AppInfrastructure.Entities
+﻿namespace BASE.AppInfrastructure.Entities
 {
 	public class Vehicle : BaseEntity<int>
 	{

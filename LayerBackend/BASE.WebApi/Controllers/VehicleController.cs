@@ -1,11 +1,11 @@
-﻿using BASE.AppCore.Services;
-using BASE.Common.Dtos;
+﻿using BASE.AppCore.Services.Vehicle;
+using BASE.Common.Dtos.Vehicle;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers
 {
-	public class VehicleController : BaseController
+    public class VehicleController : BaseController
 	{
 		IVehicleService _vehicleService;
 

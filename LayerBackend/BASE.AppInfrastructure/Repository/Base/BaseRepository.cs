@@ -100,7 +100,9 @@ namespace BASE.AppInfrastructure.Repository
 				x.GetType().GetProperty(column).GetValue(x, null).Equals(value));
         }
 
-		public TEntity GetById(TId id) => GetAll(x => x.Id.Equals(id)).FirstOrDefault();
+		public TEntity GetById(TId id) => GetByIds(new List<TId>() { id }).FirstOrDefault();
+
+		public IEnumerable<TEntity> GetByIds(IEnumerable<TId> ids) => GetAll(x => ids.Contains(x.Id));
 
 		public TEntity Update(TEntity entity) => Update(new List<TEntity>() { entity }).FirstOrDefault();
 
@@ -109,7 +111,11 @@ namespace BASE.AppInfrastructure.Repository
 			if (entities == null || !entities.Any())
 				throw new DataBaseException("No data to update");
 
-			List<TEntity> results = new List<TEntity>();
+            var entitiesDB = GetByIds(entities.Select(x => x.Id));
+            if (entitiesDB.Any(x => entities.Any(y => y.CreatedDate < x.CreatedDate)))
+                throw new ConcurrencyDataBaseException("Creation date higher than the new one");
+
+			var results = new List<TEntity>();
 			foreach (TEntity entity in entities)
             {
                 entity.CreatedUser = Constants.USER_UNKNOWN_AUDIT;

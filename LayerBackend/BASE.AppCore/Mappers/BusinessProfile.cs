@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using BASE.AppInfrastructure.Entities;
-using BASE.Common.Dtos;
+using BASE.Common.Dtos.Vehicle;
 
 namespace BASE.AppCore.Mappers
 {
-	public class BusinessProfile : Profile
+    public class BusinessProfile : Profile
 	{
 		public BusinessProfile() { 
 			CreateMap<VehicleType, VehicleTypeModel>()
