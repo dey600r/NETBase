@@ -27,8 +27,8 @@ namespace BASE.WebApi.Controllers
 			switch (level)
 			{
 				case LogLevel.Information: _logger.LogInformation(showMessage); break;
-				case LogLevel.Error: _logger.LogError(showMessage); break;
 				case LogLevel.Warning: _logger.LogWarning(showMessage); break;
+				case LogLevel.Error: _logger.LogError(showMessage); break;
 				default: _logger.LogCritical(showMessage); break;
 			}
 		}

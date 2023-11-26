@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BASE.AppInfrastructure.Context.Configurations
 {
-	public class ConfigurationVehicle : IEntityTypeConfiguration<Vehicle>
+	public class ConfigurationVehicle : ConfigurationBase<Vehicle>
 	{
-		public void Configure(EntityTypeBuilder<Vehicle> builder)
+		public override void Configure(EntityTypeBuilder<Vehicle> builder)
 		{
+			base.Configure(builder);
+
 			builder.Property(b => b.Model).IsRequired();
 			builder.Property(b => b.Brand).IsRequired();
 			builder.Property(b => b.Km).IsRequired();

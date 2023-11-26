@@ -4,10 +4,12 @@ using BASE.AppInfrastructure.Entities;
 
 namespace BASE.AppInfrastructure.Context.Configurations
 {
-	public class ConfigurationVehicleType : IEntityTypeConfiguration<VehicleType>
+	public class ConfigurationVehicleType : ConfigurationBase<VehicleType>
 	{
-		public void Configure(EntityTypeBuilder<VehicleType> builder)
+		public override void Configure(EntityTypeBuilder<VehicleType> builder)
 		{
+			base.Configure(builder);
+
 			builder.Property(b => b.Code).IsRequired();
 			builder.Property(b => b.Description).IsRequired();
 		}

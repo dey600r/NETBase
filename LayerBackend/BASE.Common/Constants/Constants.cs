@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BASE.Common.Constants
+﻿namespace BASE.Common.Constants
 {
 	public static class Constants
 	{
@@ -53,5 +47,7 @@ namespace BASE.Common.Constants
         public const string CONFIGURATION_NAME_PRODUCTION = "PRODUCTION";
         public const string CONFIGURATION_DESCRIPTION_PRODUCTION = "PRODUCTION_SETUP";
 
+        public const string USER_UNKNOWN_AUDIT = "UserUnknown";
+        public static DateTime DATE_AUDIT = new DateTime(2023, 8, 1);
 	}
 }

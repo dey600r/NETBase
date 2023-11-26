@@ -1,69 +1,124 @@
 ﻿using BASE.AppInfrastructure.Context;
 using BASE.AppInfrastructure.Entities;
-using BASE.Common.Dtos;
+using BASE.Common.Constants;
+using BASE.Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace BASE.AppInfrastructure.Repository
 {
-    public class BaseRepository<TEntity, TId> : BaseDisposable, IBaseRepository<TEntity, TId> where TEntity : class, IBaseEntity<TId>, new()
+    public class BaseRepository<TEntity, TId> : BaseDisposable, 
+                                                IBaseRepository<TEntity, TId> where TEntity : class, IBaseEntity<TId>, new()
                                                                                 where TId : struct
     {
         protected readonly DBContext _dbContext;
+
         public BaseRepository(DBContext dbContext) 
         {
             _dbContext = dbContext;
         }
 
-        public TEntity Add(TEntity entity)
+        public TEntity Add(TEntity entity) => Add(new List<TEntity>() { entity }).FirstOrDefault();
+
+        public IEnumerable<TEntity> Add(IEnumerable<TEntity> entities)
         {
-            var result = _dbContext.Add(entity);
+            try {
+				if (entities == null || !entities.Any())
+					throw new DataBaseException("No data to add");
+
+				List<TEntity> results = new List<TEntity>();
+			    foreach(TEntity item in entities)
+                {
+                    item.CreatedUser = Constants.USER_UNKNOWN_AUDIT;
+                    item.CreatedDate = DateTime.UtcNow;
+                    results.Add(_dbContext.Add(item).Entity);
+                }
+			    _dbContext.SaveChanges();
+			    return results;
+		    } catch(Exception ex)
+                {
+                    throw new DataBaseException("Adding", ex);
+	        }
+        }
+
+        public bool Delete(TId id) => Delete(new List<TId>() { id });
+
+		public bool Delete(TEntity entity) => Delete(new List<TEntity>() { entity });
+
+		public bool DeleteByColumn<TValue>(string column, TValue value)
+        {
+            try
+            {
+                var itemsToDelete = GetByColumn(column, value);
+                return Delete(itemsToDelete);
+            } catch(Exception ex)
+            {
+                throw new DataBaseException("DeletingByColumn", ex);
+            }
+        }
+
+        public bool Delete(IEnumerable<TId> ids)
+        {
+            try
+            {
+                var itemsToDelete = GetAll(x => ids.Contains(x.Id));
+                return Delete(itemsToDelete);
+            } catch(Exception ex)
+            {
+                throw new DataBaseException("Deleting", ex);
+            }
+        }
+
+		public bool Delete(IEnumerable<TEntity> entities)
+		{
+			try
+			{
+                if(entities == null || !entities.Any())
+					throw new DataBaseException("No data to delete");
+
+				foreach (var item in entities)
+					_dbContext.Remove(item);
+				_dbContext.SaveChanges();
+				return true;
+			}
+			catch (Exception ex)
+            {
+				throw new DataBaseException("Deleting", ex);
+            }
+		}
+
+		public IQueryable<TEntity> GetAll() =>_dbContext.Set<TEntity>().AsNoTracking().AsQueryable();
+
+		public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate) => GetAll().Where(predicate).AsNoTracking().AsQueryable();
+
+		public IQueryable<TEntity> GetByColumn<TValue>(string column, TValue value)
+        {
+            return GetAll(x => 
+                x.GetType().GetProperty(column) != null &&
+				x.GetType().GetProperty(column).GetValue(x, null) != null &&
+				x.GetType().GetProperty(column).GetValue(x, null).Equals(value));
+        }
+
+		public TEntity GetById(TId id) => GetAll(x => x.Id.Equals(id)).FirstOrDefault();
+
+		public TEntity Update(TEntity entity) => Update(new List<TEntity>() { entity }).FirstOrDefault();
+
+        public IEnumerable<TEntity> Update(IEnumerable<TEntity> entities)
+        {
+			if (entities == null || !entities.Any())
+				throw new DataBaseException("No data to update");
+
+			List<TEntity> results = new List<TEntity>();
+			foreach (TEntity entity in entities)
+            {
+                entity.CreatedUser = Constants.USER_UNKNOWN_AUDIT;
+                entity.CreatedDate = DateTime.UtcNow;
+				results.Add(_dbContext.Update(entity).Entity);
+            }
             _dbContext.SaveChanges();
-            return result.Entity;
-        }
+            return results;
 
-        public IEnumerable<TEntity> Adds(IEnumerable<TEntity> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(TId id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteByColumn(string column, TId value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Deletes(IEnumerable<TId> id)
-        {
-            throw new NotImplementedException();
-        }
-
-		public IEnumerable<TEntity> GetAll()
-        {
-            return _dbContext.Set<TEntity>().AsNoTracking();
-        }
-
-        public IEnumerable<TEntity> GetByColumn(string column, TId value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity GetById(TId id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity Update(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TEntity> Updates(IEnumerable<TEntity> entity)
-        {
-            throw new NotImplementedException();
-        }
+		}
     }
 }

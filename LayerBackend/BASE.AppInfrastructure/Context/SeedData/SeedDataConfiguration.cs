@@ -13,7 +13,9 @@ namespace BASE.AppInfrastructure.Context.SeedData
 				Id = 1, 
 				Name = Constants.CONFIGURATION_NAME_PRODUCTION, 
 				Description = Constants.CONFIGURATION_DESCRIPTION_PRODUCTION,
-				Master = true
+				Master = true,
+				CreatedUser = Constants.USER_UNKNOWN_AUDIT,
+				CreatedDate = Constants.DATE_AUDIT
 			});
 		}
 	}
