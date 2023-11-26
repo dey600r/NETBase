@@ -3,21 +3,14 @@ using BASE.AppInfrastructure.Entities;
 using BASE.Common.Constants;
 using BASE.Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace BASE.AppInfrastructure.Repository
 {
-    public class BaseRepository<TEntity, TId> : BaseDisposable, 
+    public class BaseRepository<TEntity, TId> : BaseReaderRepository<TEntity, TId>, 
                                                 IBaseRepository<TEntity, TId> where TEntity : class, IBaseEntity<TId>, new()
                                                                                 where TId : struct
     {
-        protected readonly DBContext _dbContext;
-
-        public BaseRepository(DBContext dbContext) 
-        {
-            _dbContext = dbContext;
-        }
+        public BaseRepository(DBContext dbContext) : base(dbContext) { }
 
         public TEntity Add(TEntity entity) => Add(new List<TEntity>() { entity }).FirstOrDefault();
 
@@ -87,22 +80,6 @@ namespace BASE.AppInfrastructure.Repository
 				throw new DataBaseException("Deleting", ex);
             }
 		}
-
-		public IQueryable<TEntity> GetAll() =>_dbContext.Set<TEntity>().AsNoTracking().AsQueryable();
-
-		public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate) => GetAll().Where(predicate).AsNoTracking().AsQueryable();
-
-		public IQueryable<TEntity> GetByColumn<TValue>(string column, TValue value)
-        {
-            return GetAll(x => 
-                x.GetType().GetProperty(column) != null &&
-				x.GetType().GetProperty(column).GetValue(x, null) != null &&
-				x.GetType().GetProperty(column).GetValue(x, null).Equals(value));
-        }
-
-		public TEntity GetById(TId id) => GetByIds(new List<TId>() { id }).FirstOrDefault();
-
-		public IEnumerable<TEntity> GetByIds(IEnumerable<TId> ids) => GetAll(x => ids.Contains(x.Id));
 
 		public TEntity Update(TEntity entity) => Update(new List<TEntity>() { entity }).FirstOrDefault();
 

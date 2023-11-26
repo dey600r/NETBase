@@ -1,5 +1,4 @@
-using BASE.AppCore.Services.Vehicle;
-using BASE.WebApi.Controllers;
+using BASE.AppCore.Services;
 
 namespace BASE.WebApiTest
 {

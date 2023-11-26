@@ -4,7 +4,7 @@ using BASE.Common.Dtos;
 
 namespace BASE.AppCore.Services
 {
-    public interface IVehicleService : IBaseService<VehicleModel, VehicleType, int>
+    public interface IVehicleService : IBaseService<VehicleModel, Vehicle, int>
     {
     }
 }

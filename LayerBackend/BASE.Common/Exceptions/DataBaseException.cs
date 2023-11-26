@@ -11,7 +11,7 @@
 		}
 
 		public DataBaseException(string message, Exception ex)
-			: base($"DATABASE ERROR: {message}", ex)
+			: base($"DATABASE ERROR: {message} - {ex.Message}", ex)
 		{
 
 		}
