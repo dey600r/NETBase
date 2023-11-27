@@ -49,5 +49,7 @@
 
         public const string USER_UNKNOWN_AUDIT = "UserUnknown";
         public static DateTime DATE_AUDIT = new DateTime(2023, 8, 1);
+
+        public const string ENCRIPT_KEY = "05A71BE530D0CB3F";
 	}
 }

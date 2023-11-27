@@ -3,9 +3,12 @@ using BASE.AppCore.Mappers;
 using BASE.AppCore.Services;
 using BASE.AppInfrastructure.Context;
 using BASE.AppInfrastructure.Repository;
+using BASE.Common.Constants;
+using BASE.Common.Helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace BASE.IoC
 {
@@ -14,18 +17,35 @@ namespace BASE.IoC
 
 		public static void ConfigureDBContext(IServiceCollection service, IConfiguration configuration)
 		{
+			var secrets = Boolean.Parse(configuration.GetConnectionString("Secrets"));
+
+			string connectionString = string.Empty;
+			if (secrets)
+				connectionString = configuration["ConnectionString:SqlServer"];
+			else
+				connectionString = configuration.GetConnectionString("SqlServer");
+
+			if (Boolean.Parse(configuration.GetConnectionString("Encripted")))
+				connectionString = CommonHelper.Decrypt(connectionString, Constants.ENCRIPT_KEY);
+			
 			service.AddDbContext<DBContext>(options =>
-				options.UseSqlServer(configuration.GetConnectionString("SqlServer")),
+				options.UseSqlServer(connectionString),
 				ServiceLifetime.Scoped
 			);
 		}
 
-		public static void ConfigureDBMigration(IServiceProvider service)
+		public static void ConfigureDBMigration(IServiceProvider service, ILogger logger)
 		{
-			using (var scope = service.CreateScope())
+			try
 			{
-				var dataContext = scope.ServiceProvider.GetRequiredService<DBContext>();
-				dataContext.Database.Migrate();
+				using (var scope = service.CreateScope())
+				{
+					var dataContext = scope.ServiceProvider.GetRequiredService<DBContext>();
+					dataContext.Database.Migrate();
+				}
+			} catch(Exception ex)
+			{
+				logger.LogError($"ERROR MIGRATING DB: {ex.Message}");
 			}
 		}
 

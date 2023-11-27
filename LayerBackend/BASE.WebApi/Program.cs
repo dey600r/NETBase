@@ -38,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-DependencyInjection.ConfigureDBMigration(app.Services);
+DependencyInjection.ConfigureDBMigration(app.Services, logger);
 
 app.Run();
