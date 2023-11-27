@@ -25,7 +25,8 @@ namespace BASE.AppInfrastructure.Repository
                 {
                     item.CreatedUser = Constants.USER_UNKNOWN_AUDIT;
                     item.CreatedDate = DateTime.UtcNow;
-                    results.Add(_dbContext.Add(item).Entity);
+					_dbContext.Entry(item).State = EntityState.Added;
+					results.Add(_dbContext.Set<TEntity>().Add(item).Entity);
                 }
 			    _dbContext.SaveChanges();
 			    return results;
