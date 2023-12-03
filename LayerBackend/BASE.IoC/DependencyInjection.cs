@@ -8,7 +8,7 @@ using BASE.Common.Helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace BASE.IoC
 {
@@ -34,7 +34,7 @@ namespace BASE.IoC
 			);
 		}
 
-		public static void ConfigureDBMigration(IServiceProvider service, ILogger logger)
+		public static void ConfigureDBMigration(IServiceProvider service, Logger logger)
 		{
 			try
 			{
@@ -45,7 +45,7 @@ namespace BASE.IoC
 				}
 			} catch(Exception ex)
 			{
-				logger.LogError($"ERROR MIGRATING DB: {ex.Message}");
+				logger.Error($"ERROR MIGRATING DB: {ex.Message}");
 			}
 		}
 
