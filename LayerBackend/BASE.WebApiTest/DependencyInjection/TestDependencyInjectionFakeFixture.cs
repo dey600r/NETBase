@@ -1,45 +1,37 @@
-﻿using Autofac.Core;
-using BASE.AppCore.Mappers;
+﻿using BASE.AppCore.Mappers;
 using BASE.AppCore.Services;
 using BASE.AppInfrastructure.Context;
-using BASE.AppInfrastructure.Entities;
 using BASE.AppInfrastructure.Repository;
 using BASE.Common.Constants;
+using BASE.WebApi.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using NLog.Fluent;
-using System.Reflection.Metadata;
-using Xunit.Abstractions;
+using Microsoft.Extensions.Logging;
+using NLog.Web;
+using NLog;
 using Xunit.Microsoft.DependencyInjection;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
-using Xunit.Sdk;
+using BASE.WebApiTest.DependencyInjection.Moq;
+using BASE.WebApiTest.DependencyInjection.Fake;
 
-namespace BASE.WebApiTest
+namespace BASE.WebApiTest.DependencyInjection
 {
-	public class TestFixture : TestBedFixture, IDisposable
+	public class TestDependencyInjectionFakeFixture : TestBedFixture
 	{
-		public TestFixture()
+		public TestDependencyInjectionFakeFixture()
 		{
+			// Only called once before all tests
 		}
 
 		protected override void AddServices(IServiceCollection services, IConfiguration? configuration)
 		{
-
-			services.AddDbContext<DBContext>(options =>
-				options.UseInMemoryDatabase(databaseName: Constants.MOQ_DATABASE)
-				.ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning)),
-				ServiceLifetime.Scoped
-			);
-
+			// CONFIGURE AUTOMAPPER
 			services.AddAutoMapper(typeof(BusinessProfile));
 
-			services.AddScoped<IVehicleRepository, VehicleRepository>();
-			services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
-			services.AddScoped<IVehicleService, VehicleService>();
-			services.AddScoped<IVehicleTypeService, VehicleTypeService>();
+			// CONFIGURE SERVICES
+			services.AddScoped<IVehicleFakeService, VehicleFakeService>();
 		}
 
 		protected override ValueTask DisposeAsyncCore()
@@ -59,7 +51,7 @@ namespace BASE.WebApiTest
 
 		public void Dispose()
 		{
-			// Do "global" teardown here; Only called once.
+			// Only called once after all tests
 		}
 	}
 }

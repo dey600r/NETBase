@@ -21,7 +21,7 @@ builder.Logging.SetMinimumLevel(LogLevel.Trace);
 builder.Host.UseNLog();
 
 DependencyInjection.ConfigureDBContext(builder.Services, builder.Configuration);
-DependencyInjection.AddMyDependencyGroup(builder.Services);
+DependencyInjection.AddMyDependencyGroup(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 

@@ -18,7 +18,7 @@ namespace BASE.WebApi.Controllers
         {
             try
             {
-                return Ok(_vehicleService.GetAll());
+                return Ok(_vehicleService.GetAll().ToList());
             }
             catch (Exception ex)
             {
@@ -27,7 +27,22 @@ namespace BASE.WebApi.Controllers
             }
         }
 
-        [HttpPost]
+		[HttpGet]
+		[Route("testing")]
+		public ActionResult<IEnumerable<VehicleModel>> Testing()
+		{
+			try
+			{
+				return Ok(_vehicleService.GetVehicles().ToList());
+			}
+			catch (Exception ex)
+			{
+				Log(ex.Message, LogLevel.Error);
+				return BadRequest(ex.Message);
+			}
+		}
+
+		[HttpPost]
         public ActionResult<VehicleModel> Add(VehicleModel addModel)
         {
             try

@@ -3,7 +3,7 @@ using BASE.AppInfrastructure.Entities;
 using BASE.AppInfrastructure.Repository;
 using BASE.Common.Dtos;
 
-namespace BASE.AppCore.Services.Base
+namespace BASE.AppCore.Services
 {
 	public class BaseService<TModel, TEntity, TId> : BaseReaderService<TModel,TEntity, TId>, 
 													 IBaseService<TModel, TEntity, TId>

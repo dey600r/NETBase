@@ -20,12 +20,12 @@ namespace BASE.AppCore.Services
 			_baseRepository = baseRepository;
 		}
 
-		public IQueryable<TModel> GetAll() => _baseRepository.GetAll().Select(x => _mapper.Map<TModel>(x));
+		public IEnumerable<TModel> GetAll() => _baseRepository.GetAll().Select(x => _mapper.Map<TModel>(x));
 
-		public IQueryable<TModel> GetAll(Expression<Func<TEntity, bool>> predicate) =>
+		public IEnumerable<TModel> GetAll(Expression<Func<TEntity, bool>> predicate) =>
 			_baseRepository.GetAll(predicate).Select(x => _mapper.Map<TModel>(x));
 
-		public IQueryable<TModel> GetByColumn<TValue>(string column, TValue value) =>
+		public IEnumerable<TModel> GetByColumn<TValue>(string column, TValue value) =>
 			_baseRepository.GetByColumn(column, value).Select(x => _mapper.Map<TModel>(x));
 
 		public TModel GetById(TId id) => _mapper.Map<TModel>(_baseRepository.GetById(id));

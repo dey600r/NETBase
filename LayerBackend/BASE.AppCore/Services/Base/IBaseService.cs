@@ -1,8 +1,7 @@
 ﻿using BASE.AppInfrastructure.Entities;
 using BASE.Common.Dtos;
-using System.Linq.Expressions;
 
-namespace BASE.AppCore.Services.Base
+namespace BASE.AppCore.Services
 {
 	public interface IBaseService<TModel, TEntity, TId> : IBaseReaderService<TModel, TEntity, TId>, IDisposable
 															where TModel : class, IBaseModel<TId>, new()

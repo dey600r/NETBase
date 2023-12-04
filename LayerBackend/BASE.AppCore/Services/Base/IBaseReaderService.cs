@@ -9,10 +9,10 @@ namespace BASE.AppCore.Services
 															where TEntity : class, IBaseEntity<TId>, new()
 															where TId : struct
 	{
-		public IQueryable<TModel> GetAll();
-		public IQueryable<TModel> GetAll(Expression<Func<TEntity, bool>> predicate);
+		public IEnumerable<TModel> GetAll();
+		public IEnumerable<TModel> GetAll(Expression<Func<TEntity, bool>> predicate);
 		public TModel GetById(TId id);
 		public IEnumerable<TModel> GetByIds(IEnumerable<TId> ids);
-		public IQueryable<TModel> GetByColumn<TValue>(string column, TValue value);
+		public IEnumerable<TModel> GetByColumn<TValue>(string column, TValue value);
 	}
 }

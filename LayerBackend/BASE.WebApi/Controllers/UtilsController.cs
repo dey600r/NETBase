@@ -27,7 +27,7 @@ namespace BASE.WebApi.Controllers
 		}
 
 		[HttpGet]
-		[Route("/decript")]
+		[Route("decript")]
 		public ActionResult<string> Decript(string text)
 		{
 			try

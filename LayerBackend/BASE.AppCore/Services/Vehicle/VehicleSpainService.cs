@@ -1,28 +1,30 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using BASE.AppInfrastructure.Entities;
 using BASE.AppInfrastructure.Repository;
+using BASE.Common.Constants;
 using BASE.Common.Dtos;
 
 namespace BASE.AppCore.Services
 {
-    public class VehicleService : BaseService<VehicleModel, Vehicle, int>, IVehicleService
-    {
-        public VehicleService(IVehicleRepository vehicleRepository, IMapper mapper) : base(mapper, vehicleRepository)
-        {
-        }
-
-		public IEnumerable<VehicleModel> GetVehicles()
+	public class VehicleSpainService : BaseService<VehicleModel, Vehicle, int>, IVehicleSpainService
+	{
+		public VehicleSpainService(IVehicleRepository vehicleRepository, IMapper mapper) : base(mapper, vehicleRepository)
 		{
+		}
+
+		public IEnumerable<VehicleModel> GetVehicles() {
+		
 			_baseRepository.Add(new List<Vehicle>()
 			{
 				new Vehicle
 				{
-					Brand = "Honda",
-					Model = "CBR",
-					Km = 50000,
-					Year = 2008,
+					Brand = "Yamaha",
+					Model = "R6",
+					Km = 100000,
+					Year = 2006,
 					DateKms = DateTime.UtcNow,
-					KmsPerMonth = 100,
+					KmsPerMonth = 600,
 					Active = true,
 					IdVehicleType = 1,
 					VehicleType = new VehicleType() { Id = 1 },
@@ -31,12 +33,12 @@ namespace BASE.AppCore.Services
 				},
 				new Vehicle
 				{
-					Brand = "Triumph",
-					Model = "Tiger 1200",
-					Km = 10000,
+					Brand = "Kawasaki",
+					Model = "Ninja 1000 sx",
+					Km = 30000,
 					Year = 2021,
 					DateKms = DateTime.UtcNow,
-					KmsPerMonth = 200,
+					KmsPerMonth = 600,
 					Active = true,
 					IdVehicleType = 1,
 					VehicleType = new VehicleType() { Id = 1 },
@@ -45,7 +47,7 @@ namespace BASE.AppCore.Services
 				}
 			});
 
-			return _baseRepository.GetAll(x => x.KmsPerMonth >= 100).Select(x => _mapper.Map<VehicleModel>(x)).ToList();
+			return _baseRepository.GetAll(x => x.Brand == "Yamaha").Select(x => _mapper.Map<VehicleModel>(x)).ToList();
 		}
 	}
 }

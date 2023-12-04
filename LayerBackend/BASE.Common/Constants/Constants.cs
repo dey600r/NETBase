@@ -53,5 +53,8 @@
         public const string ENCRIPT_KEY = "05A71BE530D0CB3F";
 
         public const string MOQ_DATABASE = "MoqBaseDB";
+		public const string MOQ_USER_DATABASE = "USER_TEST";
+
+        public const string CONFIG_SCENARY_COUNTRY_SPAIN = "Spain";
 	}
 }

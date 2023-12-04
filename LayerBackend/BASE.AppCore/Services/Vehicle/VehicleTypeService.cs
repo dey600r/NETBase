@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BASE.AppCore.Services.Base;
 using BASE.AppInfrastructure.Entities;
 using BASE.AppInfrastructure.Repository;
 using BASE.Common.Dtos;

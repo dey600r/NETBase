@@ -4,6 +4,7 @@ using BASE.AppCore.Services;
 using BASE.AppInfrastructure.Context;
 using BASE.AppInfrastructure.Repository;
 using BASE.Common.Constants;
+using BASE.Common.Dtos.Utils;
 using BASE.Common.Helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -50,16 +51,23 @@ namespace BASE.IoC
 		}
 
 		public static void AddMyDependencyGroup(
-			 this IServiceCollection services)
+			 this IServiceCollection services, IConfiguration configuration)
 		{
+			var config = configuration.GetSection("ConfigEnvironment").Get<ConfigSettings>();
 			// AUTOMAPPER
 			services.AddAutoMapper(typeof(BusinessProfile));
 
 			// SERVICES
 			services.AddScoped<IVehicleRepository, VehicleRepository>();
 			services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
-			services.AddScoped<IVehicleService, VehicleService>();
 			services.AddScoped<IVehicleTypeService, VehicleTypeService>();
+
+			// CONFIG SERVICES DEPENDING ON THE COUNTRY
+			if(config.Country == Constants.CONFIG_SCENARY_COUNTRY_SPAIN)
+				services.AddScoped<IVehicleService, VehicleSpainService>();
+			else
+				services.AddScoped<IVehicleService, VehicleService>();
+
 		}
 	}
 }
