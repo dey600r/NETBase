@@ -1,4 +1,4 @@
-﻿using BASE.AppInfrastructure.Entities;
+﻿using BASE.AppInfrastructure.Entities.Core;
 using BASE.Common.Dtos;
 
 namespace BASE.AppCore.Services

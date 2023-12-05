@@ -56,5 +56,7 @@
 		public const string MOQ_USER_DATABASE = "USER_TEST";
 
         public const string CONFIG_SCENARY_COUNTRY_SPAIN = "Spain";
+
+        public const string CORS_RULE = "CorsRule";
 	}
 }

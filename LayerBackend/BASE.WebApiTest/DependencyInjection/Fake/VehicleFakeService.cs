@@ -1,11 +1,11 @@
-﻿using BASE.AppInfrastructure.Entities;
+﻿using BASE.AppInfrastructure.Entities.Core;
 using BASE.Common.Dtos;
 using BASE.WebApiTest.DependencyInjection.Moq;
 using System.Linq.Expressions;
 
 namespace BASE.WebApiTest.DependencyInjection.Fake
 {
-	public class VehicleFakeService : IVehicleFakeService
+    public class VehicleFakeService : IVehicleFakeService
 	{
 		public VehicleModel Add(VehicleModel model)
 		{
@@ -68,6 +68,11 @@ namespace BASE.WebApiTest.DependencyInjection.Fake
 		}
 
 		public IEnumerable<VehicleModel> GetByIds(IEnumerable<int> ids)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<VehicleModel> GetVehicles()
 		{
 			throw new NotImplementedException();
 		}

@@ -1,10 +1,10 @@
-﻿using BASE.AppInfrastructure.Entities;
+﻿using BASE.AppInfrastructure.Entities.Core;
 using BASE.Common.Constants;
 using Microsoft.EntityFrameworkCore;
 
 namespace BASE.AppInfrastructure.Context.SeedData
 {
-	public static class SeedDataConfiguration
+    public static class SeedDataConfiguration
 	{
 		public static void Seed(ModelBuilder modelBuilder)
 		{

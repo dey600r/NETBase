@@ -1,10 +1,10 @@
-﻿using BASE.AppInfrastructure.Entities;
+﻿using BASE.AppInfrastructure.Entities.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BASE.AppInfrastructure.Context.Configurations
 {
-	public class ConfigurationVehicle : ConfigurationBase<Vehicle>
+    public class ConfigurationVehicle : ConfigurationBase<Vehicle>
 	{
 		public override void Configure(EntityTypeBuilder<Vehicle> builder)
 		{

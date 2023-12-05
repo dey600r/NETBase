@@ -1,14 +1,16 @@
 ﻿using BASE.AppCore.Services;
+using BASE.AppCore.Services.Security;
 using BASE.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers
 {
-    public class VehicleController : BaseController
+    public class VehicleController : BaseAuthorizeController
     {
         IVehicleService _vehicleService;
 
-        public VehicleController(IVehicleService vehicleService, ILogger<BaseController> logger) : base(logger)
+        public VehicleController(IVehicleService vehicleService, ILogger<BaseController> logger, IJwtGenerator jwtGenerator) : base(logger, jwtGenerator)
         {
             _vehicleService = vehicleService;
         }

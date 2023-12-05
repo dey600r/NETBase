@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BASE.AppCore.Services.Security;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Diagnostics.Eventing.Reader;
 using System.Reflection;
@@ -10,9 +11,11 @@ namespace BASE.WebApi.Controllers
 	public class BaseController : Controller
 	{
 		private readonly ILogger<BaseController> _logger;
+		private readonly IJwtGenerator _jwtGenerator;
 		
-		public BaseController(ILogger<BaseController> logger) { 
+		public BaseController(ILogger<BaseController> logger, IJwtGenerator jwtGenerator) { 
 			_logger = logger;
+			_jwtGenerator = jwtGenerator;
 		}
 
 		public override void OnActionExecuting(ActionExecutingContext context)
@@ -36,7 +39,7 @@ namespace BASE.WebApi.Controllers
 		private string GetMessage(string message)
 		{
 			MethodBase method = MethodBase.GetCurrentMethod();
-			return $"{method?.ReflectedType?.Name} / {method?.Name} - {message}";
+			return $"{method?.ReflectedType?.Name} / {method?.Name} - {_jwtGenerator.GetUserSesion()} - {message}";
 		}
 	}
 }

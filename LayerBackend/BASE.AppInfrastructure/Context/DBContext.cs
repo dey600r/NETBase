@@ -1,11 +1,12 @@
 ﻿using BASE.AppInfrastructure.Context.SeedData;
-using BASE.AppInfrastructure.Entities;
+using BASE.AppInfrastructure.Entities.Core;
+using BASE.AppInfrastructure.Entities.Security;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace BASE.AppInfrastructure.Context
 {
-	public class DBContext : DbContext
+    public class DBContext : IdentityDbContext<User, Role, int>
 	{
 		public DBContext(DbContextOptions<DBContext> options) : base(options)
 		{

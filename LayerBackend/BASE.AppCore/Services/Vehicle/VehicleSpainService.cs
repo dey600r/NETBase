@@ -1,13 +1,14 @@
 ﻿
 using AutoMapper;
 using BASE.AppInfrastructure.Entities;
+using BASE.AppInfrastructure.Entities.Core;
 using BASE.AppInfrastructure.Repository;
 using BASE.Common.Constants;
 using BASE.Common.Dtos;
 
 namespace BASE.AppCore.Services
 {
-	public class VehicleSpainService : BaseService<VehicleModel, Vehicle, int>, IVehicleSpainService
+    public class VehicleSpainService : BaseService<VehicleModel, Vehicle, int>, IVehicleSpainService
 	{
 		public VehicleSpainService(IVehicleRepository vehicleRepository, IMapper mapper) : base(mapper, vehicleRepository)
 		{

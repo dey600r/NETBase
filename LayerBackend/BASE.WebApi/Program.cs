@@ -1,3 +1,4 @@
+using BASE.Common.Constants;
 using BASE.IoC;
 using NLog;
 using NLog.Web;
@@ -13,7 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+DependencyInjection.ConfigureSwagger(builder.Services);
 
 // NLog: Setup NLog for Dependency injection
 builder.Logging.ClearProviders();
@@ -21,7 +23,9 @@ builder.Logging.SetMinimumLevel(LogLevel.Trace);
 builder.Host.UseNLog();
 
 DependencyInjection.ConfigureDBContext(builder.Services, builder.Configuration);
+DependencyInjection.ConfigureJWT(builder.Services, builder.Configuration);
 DependencyInjection.AddMyDependencyGroup(builder.Services, builder.Configuration);
+DependencyInjection.ConfigureCORS(builder.Services);
 
 var app = builder.Build();
 
@@ -32,8 +36,13 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors(Constants.CORS_RULE);
 
+// HABILITAR PARA UTILIZAR EL HTTPCONTEXT CLAIMS (TOKEN)
+app.UseAuthentication();
+// HABILITAR PARA EL LOGIN
 app.UseAuthorization();
 
 app.MapControllers();

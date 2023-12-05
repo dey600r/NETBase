@@ -1,4 +1,4 @@
-﻿using BASE.AppInfrastructure.Entities;
+﻿using BASE.AppInfrastructure.Entities.Core;
 using BASE.Common.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BASE.AppInfrastructure.Context.SeedData
 {
-	public static class SeedDataVehicleType
+    public static class SeedDataVehicleType
 	{
 		public static void Seed(ModelBuilder modelBuilder)
 		{
