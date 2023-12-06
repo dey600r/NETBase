@@ -19,7 +19,6 @@ namespace BASE.AppInfrastructure.Context
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			
-			//optionsBuilder.EnableSensitiveDataLogging().UseSqlServer(@"Server=(localdb)\\mssqllocaldb;Database=BaseDB;Trusted_Connection=True;");
 			base.OnConfiguring(optionsBuilder);
 		}
 

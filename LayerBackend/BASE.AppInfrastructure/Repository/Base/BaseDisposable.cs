@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace BASE.AppInfrastructure.Repository
 {

@@ -1,8 +1,7 @@
 ﻿using BASE.AppInfrastructure.Context;
-using BASE.AppInfrastructure.Entities;
+using BASE.AppInfrastructure.Entities.Core;
 using BASE.Common.Constants;
 using BASE.Common.Dtos;
-using Microsoft.EntityFrameworkCore;
 
 namespace BASE.WebApiTest.DependencyInjection.Moq
 {
@@ -26,7 +25,7 @@ namespace BASE.WebApiTest.DependencyInjection.Moq
                     Active = true,
                     IdVehicleType = 1,
                     IdConfiguration = 1,
-                    CreatedUser = Constants.MOQ_USER_DATABASE,
+                    CreatedUser = ConstantsSecurity.MOQ_USER_DATABASE,
                     CreatedDate = DateTime.UtcNow
                 }
             );

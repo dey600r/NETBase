@@ -1,7 +1,6 @@
 ﻿using BASE.AppCore.Services.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Diagnostics.Eventing.Reader;
 using System.Reflection;
 
 namespace BASE.WebApi.Controllers

@@ -1,0 +1,11 @@
+ADD MIGRATION: 
+dotnet ef migrations add AddRoleAndAdminData --startup-project ..\BASE.WebApi\BASE.WebApi.csproj
+
+LIST MIGRATION:
+dotnet ef migrations list --startup-project ..\BASE.WebApi\BASE.WebApi.csproj
+
+REMOVE MIGRATION:
+dotnet ef migrations remove --startup-project ..\BASE.WebApi\BASE.WebApi.csproj
+
+UPDATE DATABASE:
+dotnet ef database update 20231204172853_AddUserRoleIdentity --startup-project ..\BASE.WebApi\BASE.WebApi.csproj

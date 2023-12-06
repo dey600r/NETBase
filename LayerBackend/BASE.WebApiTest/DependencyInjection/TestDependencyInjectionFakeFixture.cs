@@ -1,19 +1,8 @@
 ﻿using BASE.AppCore.Mappers;
-using BASE.AppCore.Services;
-using BASE.AppInfrastructure.Context;
-using BASE.AppInfrastructure.Repository;
-using BASE.Common.Constants;
-using BASE.WebApi.Controllers;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using NLog.Web;
-using NLog;
 using Xunit.Microsoft.DependencyInjection;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
-using BASE.WebApiTest.DependencyInjection.Moq;
 using BASE.WebApiTest.DependencyInjection.Fake;
 
 namespace BASE.WebApiTest.DependencyInjection
@@ -32,6 +21,8 @@ namespace BASE.WebApiTest.DependencyInjection
 
 			// CONFIGURE SERVICES
 			services.AddScoped<IVehicleFakeService, VehicleFakeService>();
+
+			services.AddHttpContextAccessor();
 		}
 
 		protected override ValueTask DisposeAsyncCore()

@@ -1,5 +1,5 @@
-﻿using BASE.Common.Constants;
-using BASE.Common.Dtos;
+﻿using BASE.AppCore.Services.Security;
+using BASE.Common.Constants;
 using BASE.Common.Helper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +7,7 @@ namespace BASE.WebApi.Controllers
 {
 	public class UtilsController : BaseController
 	{
-		public UtilsController(ILogger<BaseController> logger) : base(logger)
+		public UtilsController(ILogger<BaseController> logger, IJwtGenerator jwtGenerator) : base(logger, jwtGenerator)
 		{
 		}
 
@@ -17,7 +17,7 @@ namespace BASE.WebApi.Controllers
 		{
 			try
 			{
-				return Ok(CommonHelper.Encrypt(text, Constants.ENCRIPT_KEY));
+				return Ok(CommonHelper.Encrypt(text, ConstantsSecurity.ENCRIPT_KEY));
 			}
 			catch (Exception ex)
 			{
@@ -32,7 +32,7 @@ namespace BASE.WebApi.Controllers
 		{
 			try
 			{
-				return Ok(CommonHelper.Decrypt(text, Constants.ENCRIPT_KEY));
+				return Ok(CommonHelper.Decrypt(text, ConstantsSecurity.ENCRIPT_KEY));
 			}
 			catch (Exception ex)
 			{

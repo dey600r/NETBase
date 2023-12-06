@@ -1,10 +1,13 @@
 ﻿using BASE.AppCore.Services;
 using BASE.AppCore.Services.Security;
+using BASE.Common.Constants;
 using BASE.Common.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers.Vehicle
 {
+	[Authorize(Policy = ConstantsSecurity.READ_WRITE_POLICY)]
 	public class VehicleTypeController : BaseAuthorizeController
 	{
 		IVehicleTypeService _vehicleTypeService;

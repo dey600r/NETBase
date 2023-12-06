@@ -1,4 +1,5 @@
 using BASE.AppCore.Services;
+using BASE.AppCore.Services.Security;
 using BASE.Common.Dtos;
 using BASE.WebApi.Controllers;
 using BASE.WebApiTest.DependencyInjection;
@@ -42,9 +43,10 @@ namespace BASE.WebApiTest.UnitTest
         public void TestVehicleControllerGet()
         {
             var vehicleService = _fixture.GetService<IVehicleService>(_testOutputHelper);
-            var logger = new Mock<ILogger<BaseController>>();
+			var jwtService = _fixture.GetService<IJwtGenerator>(_testOutputHelper);
+			var logger = new Mock<ILogger<BaseController>>();
 
-            var vehicleController = new VehicleController(vehicleService, logger.Object);
+            var vehicleController = new VehicleController(vehicleService, logger.Object, jwtService);
 
             var result = vehicleController?.Get().Result as OkObjectResult;
 

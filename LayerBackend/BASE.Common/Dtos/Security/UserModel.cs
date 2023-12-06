@@ -8,5 +8,7 @@
 		public string LastName { get; set; }
 		public string Country { get; set; }
 		public string Token { get; set; }
+
+		public string Role { get; set; }
 	}
 }

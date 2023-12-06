@@ -1,3 +1,4 @@
+using Autofac.Core;
 using BASE.Common.Constants;
 using BASE.IoC;
 using NLog;
@@ -27,6 +28,8 @@ DependencyInjection.ConfigureJWT(builder.Services, builder.Configuration);
 DependencyInjection.AddMyDependencyGroup(builder.Services, builder.Configuration);
 DependencyInjection.ConfigureCORS(builder.Services);
 
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,7 +41,7 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors(Constants.CORS_RULE);
+app.UseCors(ConstantsSecurity.CORS_RULE);
 
 // HABILITAR PARA UTILIZAR EL HTTPCONTEXT CLAIMS (TOKEN)
 app.UseAuthentication();
@@ -47,6 +50,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-DependencyInjection.ConfigureDBMigration(app.Services, logger);
+await DependencyInjection.ConfigureDBMigration(app.Services, logger);
 
 app.Run();

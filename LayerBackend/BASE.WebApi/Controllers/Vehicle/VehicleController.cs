@@ -1,11 +1,13 @@
 ﻿using BASE.AppCore.Services;
 using BASE.AppCore.Services.Security;
+using BASE.Common.Constants;
 using BASE.Common.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers
 {
+    [Authorize(Policy = ConstantsSecurity.SUPER_ADMIN_POLICY)]
     public class VehicleController : BaseAuthorizeController
     {
         IVehicleService _vehicleService;

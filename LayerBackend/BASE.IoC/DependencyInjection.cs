@@ -1,22 +1,18 @@
-﻿
-using Autofac.Core;
-using BASE.AppCore.Mappers;
+﻿using BASE.AppCore.Mappers;
 using BASE.AppCore.Services;
 using BASE.AppCore.Services.Security;
 using BASE.AppInfrastructure.Context;
 using BASE.AppInfrastructure.Entities.Security;
 using BASE.AppInfrastructure.Repository;
+using BASE.AppInfrastructure.Repository.Security;
 using BASE.Common.Constants;
 using BASE.Common.Dtos.Utils;
 using BASE.Common.Helper;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog;
@@ -76,13 +72,16 @@ namespace BASE.IoC
 				connectionString = configuration.GetConnectionString("SqlServer"); // APPSETINGS
 
 			if (Boolean.Parse(configuration.GetConnectionString("Encripted"))) // ENCRIPTED
-				connectionString = CommonHelper.Decrypt(connectionString, Constants.ENCRIPT_KEY);
+				connectionString = CommonHelper.Decrypt(connectionString, ConstantsSecurity.ENCRIPT_KEY);
 
 			// CONFIG CONTEXT
 			service.AddDbContext<DBContext>(options =>
 				options.UseSqlServer(connectionString),
 				ServiceLifetime.Scoped
-			);
+			).AddIdentityCore<User>() // USERS & ROLES
+			.AddRoles<Role>()
+			.AddEntityFrameworkStores<DBContext>()
+			.AddSignInManager<SignInManager<User>>();
 		}
 
 		/// <summary>
@@ -95,16 +94,13 @@ namespace BASE.IoC
 			var config = configuration.GetSection("Jwt").Get<JwtSettings>();
 			service.AddSingleton(config);
 
-			// SECURITY
-			var builder = service.AddIdentityCore<User>();
-			var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
-			identityBuilder.AddEntityFrameworkStores<DBContext>();
-			identityBuilder.AddSignInManager<SignInManager<User>>();
-			builder.Services.TryAddSingleton<ISystemClock, SystemClock>(); // AÑADIR UN RELOJ PAR LA EXPIRACION DEL TOKEN
-
 			// JWT
 			service.AddHttpContextAccessor()
-				.AddAuthorization()
+				.AddAuthorization(options =>
+				{
+					options.AddPolicy(ConstantsSecurity.SUPER_ADMIN_POLICY, policy => policy.RequireRole(ConstantsSecurity.ADMIN_ROLE_NAME));
+					options.AddPolicy(ConstantsSecurity.READ_WRITE_POLICY, policy => policy.RequireRole(ConstantsSecurity.CUSTOMER_ROLE_NAME));
+				})
 				.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 				.AddJwtBearer(options =>
 				{
@@ -119,8 +115,6 @@ namespace BASE.IoC
 						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Key))
 					};
 				});
-
-			
 		}
 
 		/// <summary>
@@ -138,18 +132,17 @@ namespace BASE.IoC
 			// AUTOMAPPER
 			service.AddAutoMapper(typeof(BusinessProfile));
 
-			// SERVICES
+			// REPOSITORIES
 			service.AddScoped<IVehicleRepository, VehicleRepository>();
 			service.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
-			service.AddScoped<IVehicleTypeService, VehicleTypeService>();
+			service.AddScoped<ISecurityRepository, SecurityRepository>();
 
-			// CONFIG SERVICES DEPENDING ON THE COUNTRY
-			if(config.Country == Constants.CONFIG_SCENARY_COUNTRY_SPAIN)
+			// SERVICES
+			service.AddScoped<IVehicleTypeService, VehicleTypeService>();
+			if (config.Country == ConstantsSecurity.CONFIG_SCENARY_COUNTRY_SPAIN)
 				service.AddScoped<IVehicleService, VehicleSpainService>();
 			else
 				service.AddScoped<IVehicleService, VehicleService>();
-
-			// SECURITY
 			service.AddScoped<ISecurityService, SecurityService>();
 			service.AddScoped<IJwtGenerator, JwtGenerator>();
 		}
@@ -162,7 +155,7 @@ namespace BASE.IoC
 		{
 			service.AddCors(opt =>
 			{
-				opt.AddPolicy(name: Constants.CORS_RULE, rule =>
+				opt.AddPolicy(name: ConstantsSecurity.CORS_RULE, rule =>
 				{
 					rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
 				});
@@ -174,7 +167,7 @@ namespace BASE.IoC
 		/// </summary>
 		/// <param name="service"></param>
 		/// <param name="logger"></param>
-		public static void ConfigureDBMigration(IServiceProvider service, Logger logger)
+		public async static Task ConfigureDBMigration(IServiceProvider service, Logger logger)
 		{
 			try
 			{

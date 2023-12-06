@@ -25,17 +25,18 @@ namespace BASE.AppCore.Services.Security
 		public string GetUserSesion()
 		{
 			var userName = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == nameof(User.UserName));
-			return (userName == null ? Constants.USER_UNKNOWN_AUDIT : userName.Value);
+			return (userName == null ? ConstantsSecurity.USER_UNKNOWN_AUDIT : userName.Value);
 		}
 
-		public string CreateToken(User newUser)
+		public string CreateToken(User newUser, Role role)
 		{
 			var claims = new List<Claim>
 			{
 				new Claim(nameof(newUser.UserName), newUser.UserName),
 				new Claim(nameof(newUser.FirstName), newUser.FirstName),
 				new Claim(nameof(newUser.LastName), newUser.LastName),
-				new Claim(nameof(newUser.Country), newUser.Country)
+				new Claim(nameof(newUser.Country), newUser.Country),
+				new Claim(ClaimTypes.Role, role.Name)
 			};
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Key));
@@ -47,7 +48,7 @@ namespace BASE.AppCore.Services.Security
 				Audience = _jwtConfig.Audience,
 				Issuer = _jwtConfig.Issuer,
 				Expires = DateTime.Now.AddDays(1),
-				SigningCredentials = credential
+				SigningCredentials = credential,
 			};
 
 			var tokenHandler = new JwtSecurityTokenHandler();

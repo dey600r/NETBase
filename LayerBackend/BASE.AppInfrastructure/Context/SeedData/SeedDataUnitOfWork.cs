@@ -1,10 +1,4 @@
-﻿using BASE.AppInfrastructure.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BASE.AppInfrastructure.Context.SeedData
 {
@@ -14,6 +8,7 @@ namespace BASE.AppInfrastructure.Context.SeedData
 		{
 			SeedDataVehicleType.Seed(modelBuilder);
 			SeedDataConfiguration.Seed(modelBuilder);
+			SeedDataRole.Seed(modelBuilder);
 		}
 	}
 }

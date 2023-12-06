@@ -1,9 +1,7 @@
 ﻿
 using AutoMapper;
-using BASE.AppInfrastructure.Entities;
 using BASE.AppInfrastructure.Entities.Core;
 using BASE.AppInfrastructure.Repository;
-using BASE.Common.Constants;
 using BASE.Common.Dtos;
 
 namespace BASE.AppCore.Services

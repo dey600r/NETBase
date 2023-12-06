@@ -23,7 +23,7 @@ namespace BASE.AppInfrastructure.Repository
 				List<TEntity> results = new List<TEntity>();
 			    foreach(TEntity item in entities)
                 {
-                    item.CreatedUser = Constants.USER_UNKNOWN_AUDIT;
+                    item.CreatedUser = ConstantsSecurity.USER_UNKNOWN_AUDIT;
                     item.CreatedDate = DateTime.UtcNow;
 					_dbContext.Entry(item).State = EntityState.Added;
 					results.Add(_dbContext.Set<TEntity>().Add(item).Entity);
@@ -96,7 +96,7 @@ namespace BASE.AppInfrastructure.Repository
 			var results = new List<TEntity>();
 			foreach (TEntity entity in entities)
             {
-                entity.CreatedUser = Constants.USER_UNKNOWN_AUDIT;
+                entity.CreatedUser = ConstantsSecurity.USER_UNKNOWN_AUDIT;
                 entity.CreatedDate = DateTime.UtcNow;
 				results.Add(_dbContext.Update(entity).Entity);
             }

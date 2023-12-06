@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
 using BASE.AppInfrastructure.Entities.Core;
 
 namespace BASE.AppInfrastructure.Context.Configurations
