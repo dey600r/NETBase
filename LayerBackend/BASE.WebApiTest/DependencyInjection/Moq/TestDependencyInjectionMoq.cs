@@ -12,7 +12,6 @@ namespace BASE.WebApiTest.DependencyInjection.Moq
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-
             context.AddRange(
                 new Vehicle
                 {
@@ -23,8 +22,8 @@ namespace BASE.WebApiTest.DependencyInjection.Moq
                     DateKms = DateTime.UtcNow,
                     KmsPerMonth = 600,
                     Active = true,
-                    IdVehicleType = 1,
-                    IdConfiguration = 1,
+                    VehicleTypeId = 1,
+					ConfigurationId = 1,
                     CreatedUser = ConstantsSecurity.MOQ_USER_DATABASE,
                     CreatedDate = DateTime.UtcNow
                 }

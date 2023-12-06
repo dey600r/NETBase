@@ -1,11 +1,13 @@
 ﻿using BASE.AppCore.Services.Security;
 using BASE.Common.Constants;
 using BASE.Common.Helper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers
 {
-	public class UtilsController : BaseController
+	[Authorize(Policy = ConstantsSecurity.SUPER_ADMIN_POLICY)]
+	public class UtilsController : BaseAuthorizeController
 	{
 		public UtilsController(ILogger<BaseController> logger, IJwtGenerator jwtGenerator) : base(logger, jwtGenerator)
 		{

@@ -98,8 +98,9 @@ namespace BASE.IoC
 			service.AddHttpContextAccessor()
 				.AddAuthorization(options =>
 				{
-					options.AddPolicy(ConstantsSecurity.SUPER_ADMIN_POLICY, policy => policy.RequireRole(ConstantsSecurity.ADMIN_ROLE_NAME));
-					options.AddPolicy(ConstantsSecurity.READ_WRITE_POLICY, policy => policy.RequireRole(ConstantsSecurity.CUSTOMER_ROLE_NAME));
+					options.AddPolicy(ConstantsSecurity.SUPER_ADMIN_POLICY, policy => policy.RequireRole(ConstantsSecurity.ADMIN_ROLE_NAME , ConstantsSecurity.MANAGER_ROLE_NAME));
+					options.AddPolicy(ConstantsSecurity.READ_WRITE_POLICY, policy => policy.RequireRole(ConstantsSecurity.MANAGER_ROLE_NAME));
+					options.AddPolicy(ConstantsSecurity.READ_POLICY, policy => policy.RequireRole(ConstantsSecurity.CUSTOMER_ROLE_NAME));
 				})
 				.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 				.AddJwtBearer(options =>

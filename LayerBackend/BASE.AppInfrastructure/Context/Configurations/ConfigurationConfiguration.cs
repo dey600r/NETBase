@@ -14,7 +14,6 @@ namespace BASE.AppInfrastructure.Context.Configurations
 			builder.Property(b => b.Description).IsRequired();
 			builder.Property(b => b.Master).IsRequired().HasDefaultValue(false);
 
-			//builder.HasMany(b => b.Vehicles).WithOne(b => b.Configuration).HasForeignKey(b => b.IdConfiguration).IsRequired();
 		}
 	}
 }

@@ -22,16 +22,21 @@
 
 		// ROLES
 		public const string ADMIN_ROLE_NAME = "admin";
+		public const string MANAGER_ROLE_NAME = "manager";
 		public const string CUSTOMER_ROLE_NAME = "customer";
 
-		// USER ADMIN
+		// USER
 		public const string ADMIN_USER_NAME = "admin";
 		public const string ADMIN_USER_EMAIL = "admin@example.com";
 		public const string ADMIN_USER_PWD = "xLTL5lzoqQxoeSCo9X1xWNL1YIRZSfQRxzvDYQfW2y0=";
+		public const string MANAGER_USER_NAME = "manager";
+		public const string MANAGER_USER_EMAIL = "manager@example.com";
+		public const string MANAGER_USER_PWD = "xLTL5lzoqQxoeSCo9X1xWNL1YIRZSfQRxzvDYQfW2y0=";
 
 		// SECURITY POLICIES
 		public const string SUPER_ADMIN_POLICY = "AdministratorPolicy";
 		public const string READ_WRITE_POLICY = "Reader&WriterPolicy";
+		public const string READ_POLICY = "ReaderPolicy";
 
 	}
 }

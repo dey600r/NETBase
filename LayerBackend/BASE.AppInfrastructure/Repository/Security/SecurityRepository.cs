@@ -12,7 +12,7 @@ namespace BASE.AppInfrastructure.Repository.Security
 			_dbContext = dbContext;
 		}
 
-		public Role GetUserRole(string userNameOrEmail)
+		public List<Role> GetUserRole(string userNameOrEmail)
 		{
 			return (from u in _dbContext.Users
 					let r = (from ur in _dbContext.UserRoles
@@ -20,7 +20,7 @@ namespace BASE.AppInfrastructure.Repository.Security
 							 where ur.UserId == u.Id
 							 select ro).ToList()
 					where u.Email == userNameOrEmail || u.UserName == userNameOrEmail
-					select r.FirstOrDefault()).FirstOrDefault();
+					select r).FirstOrDefault();
 		}
 
 	}

@@ -1,4 +1,6 @@
-﻿namespace BASE.AppInfrastructure.Entities.Core
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BASE.AppInfrastructure.Entities.Core
 {
     public class Vehicle : BaseEntity<int>
     {
@@ -6,8 +8,8 @@
         public string Brand { get; set; }
         public int Year { get; set; }
         public int Km { get; set; }
-        public int IdConfiguration { get; set; }
-        public int IdVehicleType { get; set; }
+        public int ConfigurationId { get; set; }
+		public int VehicleTypeId { get; set; }
         public int KmsPerMonth { get; set; }
         public DateTime DateKms { get; set; }
         public DateTime DatePurchase { get; set; }

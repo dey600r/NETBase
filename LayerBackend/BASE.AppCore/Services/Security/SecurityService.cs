@@ -33,10 +33,10 @@ namespace BASE.AppCore.Services.Security
 
 		private UserModel GetUser(User user)
 		{
-			var role = _securityRepository.GetUserRole(user.Email);
+			var roles = _securityRepository.GetUserRole(user.Email);
 			var userDTO = _mapper.Map<User, UserModel>(user);
-			userDTO.Token = _jwtGenerator.CreateToken(user, role);
-			userDTO.Role = role.Name;
+			userDTO.Token = _jwtGenerator.CreateToken(user, roles);
+			userDTO.Role = roles.Select(x => x.Name).ToList();
 			return userDTO;
 		}
 

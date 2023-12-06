@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BASE.AppInfrastructure.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231206091058_AddRoleAndAdminData")]
-    partial class AddRoleAndAdminData
+    [Migration("20231206193558_CreateInitDB")]
+    partial class CreateInitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,12 +96,6 @@ namespace BASE.AppInfrastructure.Migrations
 
                     b.Property<DateTime>("DatePurchase")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdConfiguration")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVehicleType")
-                        .HasColumnType("int");
 
                     b.Property<int>("Km")
                         .HasColumnType("int");
@@ -228,6 +222,14 @@ namespace BASE.AppInfrastructure.Migrations
                         {
                             Id = 2,
                             ConcurrencyStamp = "00:00:00",
+                            Description = "manager",
+                            Name = "manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "00:00:00",
                             Description = "customer",
                             Name = "customer",
                             NormalizedName = "CUSTOMER"
@@ -327,10 +329,28 @@ namespace BASE.AppInfrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAELlfB4C90INEwNyAfHJ6M3z9f+F9I47nE0hQ6/jumscmpneADtTg82RGWp9J4gKWYg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIO8v1KfLpRwlLR/ZI+noOYi8vp3IXgbQrrC5LXvELpDuxlKmFsrhcQxZiuAt/AwVA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "00:00:00",
+                            Country = "All",
+                            Email = "manager@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "manager",
+                            LastName = "manager",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MANAGER@EXAMPLE.COM",
+                            NormalizedUserName = "MANAGER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIO8v1KfLpRwlLR/ZI+noOYi8vp3IXgbQrrC5LXvELpDuxlKmFsrhcQxZiuAt/AwVA==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "manager"
                         });
                 });
 
@@ -422,6 +442,21 @@ namespace BASE.AppInfrastructure.Migrations
                         {
                             UserId = 1,
                             RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
                         });
                 });
 

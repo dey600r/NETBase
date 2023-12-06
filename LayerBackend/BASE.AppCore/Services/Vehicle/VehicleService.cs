@@ -24,10 +24,10 @@ namespace BASE.AppCore.Services
 					DateKms = DateTime.UtcNow,
 					KmsPerMonth = 100,
 					Active = true,
-					IdVehicleType = 1,
-					VehicleType = new VehicleType() { Id = 1 },
-					IdConfiguration = 1,
-					Configuration = new Configuration() { Id = 1 }
+					VehicleTypeId = 1,
+					//VehicleType = new VehicleType() { Id = 1 },
+					ConfigurationId = 1,
+					//Configuration = new Configuration() { Id = 1 }
 				},
 				new Vehicle
 				{
@@ -38,10 +38,10 @@ namespace BASE.AppCore.Services
 					DateKms = DateTime.UtcNow,
 					KmsPerMonth = 200,
 					Active = true,
-					IdVehicleType = 1,
-					VehicleType = new VehicleType() { Id = 1 },
-					IdConfiguration = 1,
-					Configuration = new Configuration() { Id = 1 }
+					VehicleTypeId = 1,
+					//VehicleType = new VehicleType() { Id = 1 },
+					ConfigurationId = 1,
+					//Configuration = new Configuration() { Id = 1 }
 				}
 			});
 

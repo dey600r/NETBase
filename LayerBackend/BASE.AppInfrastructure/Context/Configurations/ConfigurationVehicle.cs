@@ -1,4 +1,5 @@
 ﻿using BASE.AppInfrastructure.Entities.Core;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BASE.AppInfrastructure.Context.Configurations
@@ -17,8 +18,8 @@ namespace BASE.AppInfrastructure.Context.Configurations
 			builder.Property(b => b.DateKms).IsRequired();
 			builder.Property(b => b.Active).IsRequired();
 
-			builder.HasOne(b => b.Configuration).WithMany().IsRequired().HasForeignKey(b => b.IdConfiguration);
-			builder.HasOne(b => b.VehicleType).WithMany().HasForeignKey(b => b.IdVehicleType).IsRequired();
+			builder.HasOne(b => b.Configuration).WithMany(b => b.Vehicles).HasForeignKey(b => b.ConfigurationId).IsRequired();
+			builder.HasOne(b => b.VehicleType).WithMany(b => b.Vehicles).HasForeignKey(b => b.VehicleTypeId).IsRequired();
 		}
 	}
 }

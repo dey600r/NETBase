@@ -4,7 +4,7 @@ namespace BASE.AppCore.Services.Security
 {
 	public interface IJwtGenerator
 	{
-		public string CreateToken(User newUser, Role role);
+		public string CreateToken(User newUser, List<Role> role);
 		public string GetUserSesion();
 	}
 }

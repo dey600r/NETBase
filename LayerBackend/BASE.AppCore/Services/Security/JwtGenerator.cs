@@ -28,16 +28,17 @@ namespace BASE.AppCore.Services.Security
 			return (userName == null ? ConstantsSecurity.USER_UNKNOWN_AUDIT : userName.Value);
 		}
 
-		public string CreateToken(User newUser, Role role)
+		public string CreateToken(User newUser, List<Role> role)
 		{
 			var claims = new List<Claim>
 			{
 				new Claim(nameof(newUser.UserName), newUser.UserName),
 				new Claim(nameof(newUser.FirstName), newUser.FirstName),
 				new Claim(nameof(newUser.LastName), newUser.LastName),
-				new Claim(nameof(newUser.Country), newUser.Country),
-				new Claim(ClaimTypes.Role, role.Name)
+				new Claim(nameof(newUser.Country), newUser.Country)
 			};
+
+			role.ForEach(x => claims.Add(new Claim(ClaimTypes.Role, x.Name)));
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfig.Key));
 			var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

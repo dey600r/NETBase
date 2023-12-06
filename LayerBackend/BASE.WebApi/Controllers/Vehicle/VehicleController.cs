@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers
 {
-    [Authorize(Policy = ConstantsSecurity.SUPER_ADMIN_POLICY)]
+    [Authorize(Policy = ConstantsSecurity.READ_WRITE_POLICY)]
     public class VehicleController : BaseAuthorizeController
     {
         IVehicleService _vehicleService;
