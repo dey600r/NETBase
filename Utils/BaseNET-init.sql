@@ -1,32 +1,36 @@
 ﻿USE BaseDB;  
 GO  
-CREATE PROCEDURE dbo.InitDB   
-    @num_iteration integer
+CREATE OR ALTER PROCEDURE dbo.InitDB   
+    @iterations integer
 AS   
-
-    SET NOCOUNT ON;  
-    SELECT * 
-    FROM dbo.Vehicles  
-    WHERE Brand = @Brand;  
-
-    --DECLARE @num_iteration INTEGER;
-    --SET @num_iteration = 0;
-    WHILE @num_iteration < 100 
+    DECLARE @num_iteration INTEGER;
+    SET @num_iteration = 0;
+    WHILE @num_iteration < @iterations 
     BEGIN  
+        SET NOCOUNT ON; 
+        INSERT INTO [dbo].[Configuration] (
+            [Name], [Description], [Master], 
+            [CreatedUser], [CreatedDate]) VALUES 
+            (
+                CONCAT(N'CONFIGURATION', @num_iteration),
+                CONCAT(N'PRODUCTION_SETUP', @num_iteration), 1, N'UserUnknown', N'2023-08-01 00:00:00');
 
         INSERT INTO [dbo].[Vehicles] (
-            [Model], [Brand], [Year], [Km], [IdConfiguration], 
-            [IdVehicleType], [KmsPerMonth], [DateKms], [DatePurchase], 
+            [Model], [Brand], [Year], [Km], 
+            [KmsPerMonth], [DateKms], [DatePurchase], 
             [Active], [ConfigurationId], [VehicleTypeId], [CreatedDate], [CreatedUser]) VALUES 
             (
-                N'Model'+@num_iteration, 
-                N'Honda'+@num_iteration, 
+                CONCAT(N'Model', @num_iteration), 
+                CONCAT(N'Honda', @num_iteration), 
                 2008, 10000 + @num_iteration, 
-                1, RAND(3), RAND(1000), 
-            GETDATE(), GETDATE(), 1, 1, 1, 
-            N'2023-12-04 10:24:51', N'UserUnknown')
+                FLOOR(RAND()*(1000-100+1))+100, GETDATE(), GETDATE(), 1, 
+                FLOOR(RAND()*(@num_iteration-1+1))+1, 
+                FLOOR(RAND()*(3-1+1))+1, 
+                GETDATE(), N'UserUnknown');
+
+        SET @num_iteration += 1;
     END  
 GO  
 
-
-EXECUTE dbo.InitDB N'Yamaha'
+EXECUTE dbo.InitDB 100000
+select * from dbo.Vehicles
