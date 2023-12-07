@@ -8,7 +8,7 @@ namespace BASE.WebApi.Controllers.Security
 	{
 		private readonly ISecurityService _securityService;
 
-		public SecurityController(ILogger<BaseController> logger, ISecurityService securityService, IJwtGenerator jwtGenerator) : base(logger, jwtGenerator)
+		public SecurityController(ILogger<BaseController> logger, ISecurityService securityService, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
 		{
 			_securityService = securityService;
 		}

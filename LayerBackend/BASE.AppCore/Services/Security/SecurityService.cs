@@ -4,6 +4,8 @@ using BASE.AppInfrastructure.Entities.Security;
 using BASE.AppInfrastructure.Repository.Security;
 using BASE.Common.Constants;
 using BASE.Common.Dtos.Security;
+using BASE.Common.Helper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,9 +20,10 @@ namespace BASE.AppCore.Services.Security
 		private readonly IJwtGenerator _jwtGenerator;
 		private readonly SignInManager<User> _signInManager;
 		private readonly ISecurityRepository _securityRepository;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 
 		public SecurityService(DBContext dBContext, UserManager<User> userManager, IMapper mapper, IJwtGenerator jwtGenerator, 
-			SignInManager<User> signInManager, RoleManager<Role> roleManager, ISecurityRepository securityRepository) 
+			SignInManager<User> signInManager, RoleManager<Role> roleManager, ISecurityRepository securityRepository, IHttpContextAccessor httpContextAccessor) 
 		{
 			_dbContext = dBContext;
 			_userManager = userManager;
@@ -29,6 +32,7 @@ namespace BASE.AppCore.Services.Security
 			_jwtGenerator = jwtGenerator;
 			_signInManager = signInManager;
 			_securityRepository = securityRepository;
+			_httpContextAccessor = httpContextAccessor;
 		}
 
 		private UserModel GetUser(User user)
@@ -57,7 +61,7 @@ namespace BASE.AppCore.Services.Security
 
 		public async Task<UserModel> GetCurrentUser()
 		{
-			var user = await _userManager.FindByNameAsync(_jwtGenerator.GetUserSesion());
+			var user = await _userManager.FindByNameAsync(CommonHelper.GetUserSesion(_httpContextAccessor));
 			if (user != null)
 				return GetUser(user);
 

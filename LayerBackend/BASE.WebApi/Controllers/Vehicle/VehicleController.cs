@@ -12,7 +12,7 @@ namespace BASE.WebApi.Controllers
     {
         IVehicleService _vehicleService;
 
-        public VehicleController(IVehicleService vehicleService, ILogger<BaseController> logger, IJwtGenerator jwtGenerator) : base(logger, jwtGenerator)
+        public VehicleController(IVehicleService vehicleService, ILogger<BaseController> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
         {
             _vehicleService = vehicleService;
         }

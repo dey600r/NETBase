@@ -3,6 +3,7 @@ using BASE.Common.Dtos;
 using BASE.WebApi.Controllers;
 using BASE.WebApiTest.DependencyInjection;
 using BASE.WebApiTest.DependencyInjection.Fake;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -32,10 +33,10 @@ namespace BASE.WebApiTest.UnitTest
 		public void TestVehicleFakeControllerGet()
 		{
 			var vehicleService = _fixture.GetService<IVehicleFakeService>(_testOutputHelper);
-			var jwtService = _fixture.GetService<IJwtGenerator>(_testOutputHelper);
+			var httpContext = _fixture.GetService<IHttpContextAccessor>(_testOutputHelper);
 			var logger = new Mock<ILogger<BaseController>>();
 
-			var vehicleController = new VehicleController(vehicleService, logger.Object, jwtService);
+			var vehicleController = new VehicleController(vehicleService, logger.Object, httpContext);
 
 			var result = vehicleController?.Get().Result as OkObjectResult;
 

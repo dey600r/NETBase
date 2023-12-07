@@ -1,10 +1,19 @@
-﻿using System.Security.Cryptography;
+﻿using BASE.Common.Constants;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BASE.Common.Helper
 {
 	public static class CommonHelper
 	{
+		public static string GetUserSesion(IHttpContextAccessor httpContextAccessor)
+		{
+			var userName = httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == nameof(IdentityUser.UserName));
+			return (userName == null ? ConstantsSecurity.USER_UNKNOWN_AUDIT : userName.Value);
+		}
+
 		public static string Encrypt(this string text, string key)
 		{
 			if (string.IsNullOrEmpty(key))

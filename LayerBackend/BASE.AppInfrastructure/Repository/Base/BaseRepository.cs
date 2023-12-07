@@ -2,6 +2,8 @@
 using BASE.AppInfrastructure.Entities;
 using BASE.Common.Constants;
 using BASE.Common.Exceptions;
+using BASE.Common.Helper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace BASE.AppInfrastructure.Repository
@@ -10,7 +12,11 @@ namespace BASE.AppInfrastructure.Repository
                                                 IBaseRepository<TEntity, TId> where TEntity : class, IBaseEntity<TId>, new()
                                                                                 where TId : struct
     {
-        public BaseRepository(DBContext dbContext) : base(dbContext) { }
+        protected readonly IHttpContextAccessor _contextAccessor;
+        public BaseRepository(DBContext dbContext, IHttpContextAccessor contextAccessor) : base(dbContext) 
+        {
+            _contextAccessor = contextAccessor;
+        }
 
         public TEntity Add(TEntity entity) => Add(new List<TEntity>() { entity }).FirstOrDefault();
 
@@ -23,7 +29,7 @@ namespace BASE.AppInfrastructure.Repository
 				List<TEntity> results = new List<TEntity>();
 			    foreach(TEntity item in entities)
                 {
-                    item.CreatedUser = ConstantsSecurity.USER_UNKNOWN_AUDIT;
+                    item.CreatedUser = CommonHelper.GetUserSesion(_contextAccessor);
                     item.CreatedDate = DateTime.UtcNow;
 					_dbContext.Entry(item).State = EntityState.Added;
 					results.Add(_dbContext.Set<TEntity>().Add(item).Entity);
@@ -96,8 +102,9 @@ namespace BASE.AppInfrastructure.Repository
 			var results = new List<TEntity>();
 			foreach (TEntity entity in entities)
             {
-                entity.CreatedUser = ConstantsSecurity.USER_UNKNOWN_AUDIT;
+                entity.CreatedUser = CommonHelper.GetUserSesion(_contextAccessor);
                 entity.CreatedDate = DateTime.UtcNow;
+				_dbContext.Entry(entity).State = EntityState.Modified;
 				results.Add(_dbContext.Update(entity).Entity);
             }
             _dbContext.SaveChanges();

@@ -9,7 +9,7 @@ namespace BASE.WebApi.Controllers
 	[Authorize(Policy = ConstantsSecurity.SUPER_ADMIN_POLICY)]
 	public class UtilsController : BaseAuthorizeController
 	{
-		public UtilsController(ILogger<BaseController> logger, IJwtGenerator jwtGenerator) : base(logger, jwtGenerator)
+		public UtilsController(ILogger<BaseController> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
 		{
 		}
 

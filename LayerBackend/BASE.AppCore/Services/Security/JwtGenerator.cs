@@ -14,18 +14,10 @@ namespace BASE.AppCore.Services.Security
 	public class JwtGenerator : IJwtGenerator
 	{
 		private readonly JwtSettings _jwtConfig;
-		private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public JwtGenerator(JwtSettings jwtConfig, IHttpContextAccessor httpContextAccessor) 
+		public JwtGenerator(JwtSettings jwtConfig) 
 		{
 			_jwtConfig = jwtConfig;
-			_httpContextAccessor = httpContextAccessor;
-		}
-
-		public string GetUserSesion()
-		{
-			var userName = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == nameof(User.UserName));
-			return (userName == null ? ConstantsSecurity.USER_UNKNOWN_AUDIT : userName.Value);
 		}
 
 		public string CreateToken(User newUser, List<Role> role)

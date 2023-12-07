@@ -12,6 +12,8 @@ using NLog.Web;
 using Xunit.Microsoft.DependencyInjection;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
 using BASE.WebApiTest.DependencyInjection.Moq;
+using BASE.WebApiTest.DependencyInjection.Fake;
+using Microsoft.AspNetCore.Http;
 
 namespace BASE.WebApiTest.DependencyInjection
 {
@@ -52,7 +54,8 @@ namespace BASE.WebApiTest.DependencyInjection
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 
-			services.AddHttpContextAccessor();
+            //services.AddHttpContextAccessor();
+            services.AddScoped<IHttpContextAccessor, HttpContextFakeAccessor>();
 		}
 
         protected override ValueTask DisposeAsyncCore()
