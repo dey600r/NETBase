@@ -6,12 +6,6 @@ namespace Microservice.Security.Core.Application.Utils.Helpers
 {
 	public static class CommonHelper
 	{
-		public static string GetUserSesion(IHttpContextAccessor httpContextAccessor)
-		{
-			var userName = httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == nameof(IdentityUser.UserName));
-			return (userName == null ? Constants.USER_UNKNOWN_AUDIT : userName.Value);
-		}
-
 		public static string Encrypt(this string text, string key)
 		{
 			if (string.IsNullOrEmpty(key))

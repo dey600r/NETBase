@@ -1,10 +1,15 @@
 ﻿using MediatR;
 using Microservice.Security.Core.Application.Dto;
 using Microservice.Security.Core.Application.Mediator.Command;
+using Microservice.Security.Core.Application.Mediator.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.Security.Controllers
 {
+	[Route("api/[controller]")]
+	[ApiController]
+	[Authorize]
 	public class SecurityController : Controller
 	{
 
@@ -18,9 +23,26 @@ namespace Microservice.Security.Controllers
 		}
 
 		[HttpPost("signup")]
-		public async Task<ActionResult<UserDto>> Registrar(SignUpCommandHandler.UserSignUp parmeters)
+		[AllowAnonymous]
+		public async Task<ActionResult<UserDto>> SignUp(SignUpCommandHandler.UserSignUp parameters)
 		{
-			return await _mediator.Send(parmeters);
+			_logger.LogInformation($"CALLING TO: {nameof(SecurityController.SignIn)}: {parameters.UserName}");
+			return await _mediator.Send(parameters);
+		}
+
+		[HttpPost("login")]
+		[AllowAnonymous]
+		public async Task<ActionResult<UserDto>> Login(LoginQueryHandler.UserLogin parameters)
+		{
+			_logger.LogInformation($"CALLING TO: {nameof(SecurityController.Login)}: {parameters.Email}");
+			return await _mediator.Send(parameters);
+		}
+
+		[HttpGet]
+		public async Task<ActionResult<UserDto>> GetCurrentUser()
+		{
+			_logger.LogInformation($"CALLING TO: {nameof(SecurityController.GetCurrentUser)}");
+			return await _mediator.Send(new CurrentUserQueryHandler.CurrentUser());
 		}
 	}
 }

@@ -89,7 +89,7 @@ namespace Microservice.Security.Core.Application.Mediator.Command
 											  where ur.UserId == u.Id
 											  select ro).ToList()
 									 where u.Email == request.Email || u.UserName == request.UserName
-									 select r).FirstOrDefault(); ;
+									 select r).FirstOrDefault();
 						var userDto = _mapper.Map<User, UserDto>(user);
 						userDto.Token = _jwtGenerator.CreateToken(user, roles);
 						userDto.Roles = roles.Select(x => x.Name).ToList();

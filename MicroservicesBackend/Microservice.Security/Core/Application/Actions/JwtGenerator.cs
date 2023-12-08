@@ -1,4 +1,4 @@
-﻿using Microservice.Security.Core.Application.Dto;
+﻿using Microservice.Security.Core.Application.Dto.Settings;
 using Microservice.Security.Core.Persistence.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Microservice.Security.Core.Application.Actions
 {
-	public class JwtGenerator : IJwtGenerator
+    public class JwtGenerator : IJwtGenerator
 	{
 		private readonly JwtSettings _jwtConfig;
 
@@ -34,6 +34,8 @@ namespace Microservice.Security.Core.Application.Actions
 			var tokenDescription = new SecurityTokenDescriptor
 			{
 				Subject = new ClaimsIdentity(claims),
+				Audience = _jwtConfig.Audience,
+				Issuer = _jwtConfig.Issuer,
 				Expires = DateTime.Now.AddDays(1),
 				SigningCredentials = credential
 			};

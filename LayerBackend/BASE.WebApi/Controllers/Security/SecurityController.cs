@@ -1,5 +1,6 @@
 ﻿using BASE.AppCore.Services.Security;
 using BASE.Common.Dtos.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers.Security
@@ -26,6 +27,7 @@ namespace BASE.WebApi.Controllers.Security
 		}
 
 		[HttpGet]
+		[Authorize]
 		public async Task<ActionResult<UserModel>> GetCurrentUser()
 		{
 			return await _securityService.GetCurrentUser();

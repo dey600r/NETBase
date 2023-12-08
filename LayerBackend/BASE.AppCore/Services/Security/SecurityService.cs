@@ -50,7 +50,7 @@ namespace BASE.AppCore.Services.Security
 			if (user == null)
 				user = await _userManager.FindByNameAsync(userLogin.Email);
 			if (user == null)
-				throw new Exception("The email doesn't exists");
+				throw new Exception("The email doesn't exist");
 
 			var result = await _signInManager.CheckPasswordSignInAsync(user, userLogin.Password, false);
 			if (result.Succeeded)

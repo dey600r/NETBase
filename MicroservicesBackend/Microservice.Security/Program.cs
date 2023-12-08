@@ -1,7 +1,7 @@
 
 using FluentValidation;
 using Microservice.Security.Core.Application.Actions;
-using Microservice.Security.Core.Application.Dto;
+using Microservice.Security.Core.Application.Dto.Settings;
 using Microservice.Security.Core.Application.Mapping;
 using Microservice.Security.Core.Persistence;
 using Microservice.Security.Core.Persistence.Entities;
@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using static Microservice.Security.Core.Application.Mediator.Command.SignUpCommandHandler;
 
@@ -19,7 +21,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+	opt.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseAPI", Version = "v1" });
+	opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { 
+		In = ParameterLocation.Header,
+		Description = "Please enter token",
+		Name = "Authorization",
+		Type = SecuritySchemeType.Http,
+		BearerFormat = "JWT",
+		Scheme = "bearer" });
+	opt.AddSecurityRequirement(new OpenApiSecurityRequirement { {
+							new OpenApiSecurityScheme {
+								Reference = new OpenApiReference {
+									Type = ReferenceType.SecurityScheme,
+									Id = "Bearer" } }, new string[] { }}});
+});
 
 // CONFIG CONTEXT
 builder.Services.AddDbContext<SecurityContext>(options =>
@@ -39,6 +56,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // SERVICES
 builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
+builder.Services.AddScoped<IUserSession, UserSession>();
 
 // FLUENT API
 builder.Services.AddScoped<IValidator<UserSignUp>, UserSignUpValidation>();
@@ -72,6 +90,9 @@ builder.Services.AddCors(opt => {
 	});
 });
 
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+
 
 // APPLICATION BUILT------------------------------------------------------------------------------------------------
 var app = builder.Build();
@@ -83,12 +104,13 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+app.UseRouting();
 app.UseCors("CorsRule");
 
 // HABILITAR PARA UTILIZAR EL HTTPCONTEXT CLAIMS (TOKEN)
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
