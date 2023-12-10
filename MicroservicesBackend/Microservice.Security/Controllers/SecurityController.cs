@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microservice.Security.Core.Application.Dto;
+using Microservice.Security.Core.Application.Mapping.Dto;
 using Microservice.Security.Core.Application.Mediator.Command;
 using Microservice.Security.Core.Application.Mediator.Query;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.Security.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	[Authorize]
 	public class SecurityController : Controller

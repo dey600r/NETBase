@@ -1,0 +1,63 @@
+{
+	"Routes": [
+		{
+			"DownstreamPathTemplate": "/api/security",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "44379"
+				}
+			],
+			"UpstreamPathTemplate": "/security",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/security/signup",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "44379"
+				}
+			],
+			"UpstreamPathTemplate": "/security/signup",
+			"UpstreamHttpMethod": [ "POST" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/security/login",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "44379"
+				}
+			],
+			"UpstreamPathTemplate": "/security/login",
+			"UpstreamHttpMethod": [ "POST" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/vehicle",
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": "44365"
+				}
+			],
+			"UpstreamPathTemplate": "/vehicle",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		}
+	],
+	"GlobalConfiguration": {
+		"BaseUrl": "https://localhost:44360"
+	}
+}

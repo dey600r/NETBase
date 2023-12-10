@@ -3,13 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.Security", "Microservice.Security\Microservice.Security.csproj", "{6D6421B5-D839-4AE7-8651-E184DCEDFD41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Security", "Microservice.Security\Microservice.Security.csproj", "{6D6421B5-D839-4AE7-8651-E184DCEDFD41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{2CE63AD4-FB6C-4BE0-AFDD-C187DDECA1C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{50131591-7C4F-4B2C-8B0A-8D718AB0B417}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{727D5A43-D46A-47FC-8128-CCDFAB78B8D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Gateway", "Microservice.Gateway\Microservice.Gateway.csproj", "{FF713FAE-F8DA-4333-9A35-898501CE525B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.VehicleApi", "Microservice.Vehicle\Microservice.VehicleApi.csproj", "{781D268C-F83F-43A0-9F15-BCA2CA142107}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.MaintenanceApi", "Microservice.Maintenance\Microservice.MaintenanceApi.csproj", "{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,12 +27,27 @@ Global
 		{6D6421B5-D839-4AE7-8651-E184DCEDFD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D6421B5-D839-4AE7-8651-E184DCEDFD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D6421B5-D839-4AE7-8651-E184DCEDFD41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF713FAE-F8DA-4333-9A35-898501CE525B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF713FAE-F8DA-4333-9A35-898501CE525B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF713FAE-F8DA-4333-9A35-898501CE525B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF713FAE-F8DA-4333-9A35-898501CE525B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{781D268C-F83F-43A0-9F15-BCA2CA142107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{781D268C-F83F-43A0-9F15-BCA2CA142107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{781D268C-F83F-43A0-9F15-BCA2CA142107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{781D268C-F83F-43A0-9F15-BCA2CA142107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6D6421B5-D839-4AE7-8651-E184DCEDFD41} = {2CE63AD4-FB6C-4BE0-AFDD-C187DDECA1C3}
+		{FF713FAE-F8DA-4333-9A35-898501CE525B} = {50131591-7C4F-4B2C-8B0A-8D718AB0B417}
+		{781D268C-F83F-43A0-9F15-BCA2CA142107} = {727D5A43-D46A-47FC-8128-CCDFAB78B8D6}
+		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D} = {727D5A43-D46A-47FC-8128-CCDFAB78B8D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11DE7B14-4BE5-4568-B4AD-EFAEFEA82F4D}

@@ -1,4 +1,4 @@
-﻿using Microservice.Security.Core.Application.Dto.Settings;
+﻿using Microservice.Security.Core.Application.Mapping.Dto.Settings;
 using Microservice.Security.Core.Persistence.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;

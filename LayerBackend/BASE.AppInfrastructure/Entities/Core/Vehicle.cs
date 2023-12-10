@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BASE.AppInfrastructure.Entities.Core
+﻿namespace BASE.AppInfrastructure.Entities.Core
 {
     public class Vehicle : BaseEntity<int>
     {

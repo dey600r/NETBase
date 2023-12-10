@@ -2,7 +2,7 @@
 using FluentValidation;
 using MediatR;
 using Microservice.Security.Core.Application.Actions;
-using Microservice.Security.Core.Application.Dto;
+using Microservice.Security.Core.Application.Mapping.Dto;
 using Microservice.Security.Core.Application.Utils;
 using Microservice.Security.Core.Persistence;
 using Microservice.Security.Core.Persistence.Entities;
@@ -42,17 +42,15 @@ namespace Microservice.Security.Core.Application.Mediator.Command
 			private readonly SecurityContext _context;
 			private readonly UserManager<User> _userManager;
 			private readonly RoleManager<Role> _roleManager;
-			private readonly IMapper _mapper;
-			private readonly IJwtGenerator _jwtGenerator;
+			private readonly IUserSession _userSession;
 
 			public UserSignUpHandler(SecurityContext context, UserManager<User> userManager, RoleManager<Role> roleManager,
-				IMapper mapper, IJwtGenerator jwtGenerator)
+				IUserSession userSession)
 			{
 				_context = context;
 				_userManager = userManager;
 				_roleManager = roleManager;
-				_mapper = mapper;
-				_jwtGenerator = jwtGenerator;
+				_userSession = userSession;
 			}
 
 			public async Task<UserDto> Handle(UserSignUp request, CancellationToken cancellationToken)
@@ -81,18 +79,9 @@ namespace Microservice.Security.Core.Application.Mediator.Command
 					{
 						var role = _roleManager.Roles.First(x => x.Name == Constants.CUSTOMER_ROLE_NAME);
 						var userDB = _userManager.Users.First(x => x.UserName == request.UserName);
-						_userManager.AddToRoleAsync(userDB, role.Name);
+						await _userManager.AddToRoleAsync(userDB, role.Name);
 
-						var roles = (from u in _context.Users
-									 let r = (from ur in _context.UserRoles
-											  join ro in _context.Roles on ur.RoleId equals ro.Id
-											  where ur.UserId == u.Id
-											  select ro).ToList()
-									 where u.Email == request.Email || u.UserName == request.UserName
-									 select r).FirstOrDefault();
-						var userDto = _mapper.Map<User, UserDto>(user);
-						userDto.Token = _jwtGenerator.CreateToken(user, roles);
-						userDto.Roles = roles.Select(x => x.Name).ToList();
+						var userDto = _userSession.GetUser(user);
 
 						dbContextTransaction.Commit();
 

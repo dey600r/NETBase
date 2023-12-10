@@ -2,7 +2,7 @@
 using FluentValidation;
 using MediatR;
 using Microservice.Security.Core.Application.Actions;
-using Microservice.Security.Core.Application.Dto;
+using Microservice.Security.Core.Application.Mapping.Dto;
 using Microservice.Security.Core.Persistence;
 using Microservice.Security.Core.Persistence.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +10,7 @@ using static Microservice.Security.Core.Application.Mediator.Query.LoginQueryHan
 
 namespace Microservice.Security.Core.Application.Mediator.Query
 {
-	public class LoginQueryHandler
+    public class LoginQueryHandler
 	{
 		public class UserLogin : IRequest<UserDto>
 		{
@@ -29,20 +29,15 @@ namespace Microservice.Security.Core.Application.Mediator.Query
 
 		public class UsuarioLoginHandler : IRequestHandler<UserLogin, UserDto>
 		{
-			private readonly SecurityContext _context;
 			private readonly UserManager<User> _userManager;
-			private readonly IMapper _mapper;
-			private readonly IJwtGenerator _jwtGenerator;
 			private readonly SignInManager<User> _signInManager;
+			private readonly IUserSession _userSession;
 
-			public UsuarioLoginHandler(SecurityContext context, UserManager<User> userManager, IMapper mapper, 
-				IJwtGenerator jwtGenerator, SignInManager<User> signInManager)
+			public UsuarioLoginHandler(UserManager<User> userManager, SignInManager<User> signInManager, IUserSession userSession)
 			{
-				_context = context;
 				_userManager = userManager;
-				_mapper = mapper;
-				_jwtGenerator = jwtGenerator;
 				_signInManager = signInManager;
+				_userSession = userSession;
 			}
 
 			public async Task<UserDto> Handle(UserLogin request, CancellationToken cancellationToken)
@@ -56,19 +51,7 @@ namespace Microservice.Security.Core.Application.Mediator.Query
 
 				var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 				if (result.Succeeded)
-				{
-					var roles = (from u in _context.Users
-								 let r = (from ur in _context.UserRoles
-										  join ro in _context.Roles on ur.RoleId equals ro.Id
-										  where ur.UserId == u.Id
-										  select ro).ToList()
-								 where u.Email == user.Email || u.UserName == user.UserName
-								 select r).FirstOrDefault();
-					var userDTO = _mapper.Map<User, UserDto>(user);
-					userDTO.Token = _jwtGenerator.CreateToken(user, roles);
-					userDTO.Roles = roles.Select(x => x.Name).ToList();
-					return userDTO;
-				}
+					return _userSession.GetUser(user);
 
 				throw new Exception("Login failed !!");
 			}

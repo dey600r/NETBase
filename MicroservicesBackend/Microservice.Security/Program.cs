@@ -1,18 +1,19 @@
 
 using FluentValidation;
 using Microservice.Security.Core.Application.Actions;
-using Microservice.Security.Core.Application.Dto.Settings;
 using Microservice.Security.Core.Application.Mapping;
+using Microservice.Security.Core.Application.Mapping.Dto.Settings;
 using Microservice.Security.Core.Persistence;
 using Microservice.Security.Core.Persistence.Entities;
+using Microservice.Security.Core.Persistence.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using static Microservice.Security.Core.Application.Mediator.Command.SignUpCommandHandler;
+using static Microservice.Security.Core.Application.Mediator.Query.LoginQueryHandler;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
-	opt.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseAPI", Version = "v1" });
+	opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice Security API", Version = "v1" });
 	opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { 
 		In = ParameterLocation.Header,
 		Description = "Please enter token",
@@ -57,9 +58,11 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 // SERVICES
 builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 builder.Services.AddScoped<IUserSession, UserSession>();
+builder.Services.AddScoped<IUserSessionRepository, UserSessionRepository>();
 
 // FLUENT API
 builder.Services.AddScoped<IValidator<UserSignUp>, UserSignUpValidation>();
+builder.Services.AddScoped<IValidator<UserLogin>, UserLoginValidation>();
 
 // CONFIG APPSETTING JWT
 var config = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();

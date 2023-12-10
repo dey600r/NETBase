@@ -94,7 +94,7 @@ namespace BASE.AppCore.Services.Security
 				{
 					var role = _roleManager.Roles.First(x => x.Name == ConstantsSecurity.CUSTOMER_ROLE_NAME);
 					var userDB = _userManager.Users.First(x => x.UserName == newUser.Username);
-					_userManager.AddToRoleAsync(userDB, role.Name);
+					await _userManager.AddToRoleAsync(userDB, role.Name);
 
 					dbContextTransaction.Commit();
 

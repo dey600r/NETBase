@@ -1,4 +1,4 @@
-﻿namespace Microservice.Security.Core.Application.Dto.Settings
+﻿namespace Microservice.Security.Core.Application.Mapping.Dto.Settings
 {
     public class JwtSettings
     {
