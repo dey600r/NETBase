@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.VehicleApi", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.MaintenanceApi", "Microservice.Maintenance\Microservice.MaintenanceApi.csproj", "{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Microservice.SettingApi", "Microservice.SettingApi\Microservice.SettingApi.njsproj", "{9007AB0E-6E65-4E4D-9231-F62A0E606201}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9007AB0E-6E65-4E4D-9231-F62A0E606201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9007AB0E-6E65-4E4D-9231-F62A0E606201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9007AB0E-6E65-4E4D-9231-F62A0E606201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9007AB0E-6E65-4E4D-9231-F62A0E606201}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{FF713FAE-F8DA-4333-9A35-898501CE525B} = {50131591-7C4F-4B2C-8B0A-8D718AB0B417}
 		{781D268C-F83F-43A0-9F15-BCA2CA142107} = {727D5A43-D46A-47FC-8128-CCDFAB78B8D6}
 		{EA91D77D-CA0E-45F7-8F8C-3A63C0F6304D} = {727D5A43-D46A-47FC-8128-CCDFAB78B8D6}
+		{9007AB0E-6E65-4E4D-9231-F62A0E606201} = {727D5A43-D46A-47FC-8128-CCDFAB78B8D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11DE7B14-4BE5-4568-B4AD-EFAEFEA82F4D}

@@ -57,6 +57,7 @@ builder.Services.AddAutoMapper(typeof(BusinessProfile));
 // REPOSITORIES
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
+builder.Services.AddScoped<IConfigurationRepository, ConfigurationRepository>();
 
 // SECURITY
 var config = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();

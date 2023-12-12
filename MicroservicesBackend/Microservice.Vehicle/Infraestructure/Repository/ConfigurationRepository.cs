@@ -5,20 +5,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.VehicleApi.Infraestructure.Repository
 {
-    public class VehicleRepository : IVehicleRepository
-    {
+	public class ConfigurationRepository : IConfigurationRepository
+	{
 		private readonly DBContext _dbContext;
 		private readonly IMapper _mapper;
 
-		public VehicleRepository(DBContext dbContext, IMapper mapper)
+		public ConfigurationRepository(DBContext dbContext, IMapper mapper)
 		{
 			_dbContext = dbContext;
 			_mapper = mapper;
 		}
 
-		public IEnumerable<VehicleModel> GetAll()
+		public IEnumerable<ConfigurationModel> GetAll()
 		{
-			return _dbContext.Vehicles.AsNoTracking().Select(x => _mapper.Map<VehicleModel>(x)).ToList();
+			return _dbContext.Configurations.AsNoTracking().Select(x => _mapper.Map<ConfigurationModel>(x)).ToList();
 		}
 	}
 }

@@ -15,7 +15,8 @@ namespace Microservice.VehicleApi.Core.Mapping
 				.ForPath(dest => dest.VehicleType, opt => opt.MapFrom(src => new VehicleType() { Id = src.VehicleTypeId }));
 			CreateMap<VehicleType, VehicleTypeModel>()
 				.ReverseMap().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
-
+			CreateMap<Configuration, ConfigurationModel>()
+				.ReverseMap().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 		}
 	}
 }

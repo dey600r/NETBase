@@ -1,18 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microservice.VehicleApi.Core.Dtos;
+using Microservice.VehicleApi.Infraestructure.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.VehicleApi.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class ConfigurationController : ControllerBase
+	public class ConfigurationController : BaseController
 	{
-		public ConfigurationController() { }
+		private readonly IConfigurationRepository _configurationRepository;
 
-		[HttpGet]
-		public ActionResult<string> Get()
+		public ConfigurationController(IConfigurationRepository configurationRepository)
 		{
-			return Ok("hola");
+			_configurationRepository = configurationRepository;
+		}
+
+		[HttpGet()]
+		public ActionResult<IEnumerable<ConfigurationModel>> GetAllVehicles()
+		{
+			return Ok(_configurationRepository.GetAll());
 		}
 	}
 }
