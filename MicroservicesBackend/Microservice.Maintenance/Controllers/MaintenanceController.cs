@@ -1,15 +1,14 @@
-﻿using Microservice.VehicleApi.Core.Dtos;
-using Microservice.VehicleApi.Infraestructure.Repository;
-using Microsoft.AspNetCore.Http;
+﻿using Microservice.MaintenanceApi.Core.Dtos;
+using Microservice.MaintenanceApi.Infraestructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Microservice.VehicleApi.Controllers
+namespace Microservice.MaintenanceApi.Controllers
 {
-	public class ConfigurationController : BaseController
+	public class MaintenanceController : BaseController
 	{
 		private readonly IConfigurationRepository _configurationRepository;
 
-		public ConfigurationController(IConfigurationRepository configurationRepository)
+		public MaintenanceController(IConfigurationRepository configurationRepository)
 		{
 			_configurationRepository = configurationRepository;
 		}

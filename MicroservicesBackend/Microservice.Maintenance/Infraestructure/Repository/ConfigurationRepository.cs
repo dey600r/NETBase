@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Microservice.VehicleApi.Core.Dtos;
-using Microservice.VehicleApi.Core.Helpers;
-using Microservice.VehicleApi.Infraestructure.Context;
-using Microservice.VehicleApi.Infraestructure.Entities;
+using Microservice.MaintenanceApi.Core.Dtos;
+using Microservice.MaintenanceApi.Core.Helpers;
+using Microservice.MaintenanceApi.Infraestructure.Context;
+using Microservice.MaintenanceApi.Infraestructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Microservice.VehicleApi.Infraestructure.Repository
+namespace Microservice.MaintenanceApi.Infraestructure.Repository
 {
 	public class ConfigurationRepository : IConfigurationRepository
 	{

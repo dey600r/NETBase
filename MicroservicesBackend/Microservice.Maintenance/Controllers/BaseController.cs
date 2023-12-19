@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Microservice.VehicleApi.Controllers
+namespace Microservice.MaintenanceApi.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]

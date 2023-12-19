@@ -15,7 +15,7 @@ namespace Microservice.VehicleApi.Controllers
 			_vehicleRepository = vehicleRepository;
 		}
 
-		[HttpGet("vehicle/type")]
+		[HttpGet("type")]
 		public ActionResult<IEnumerable<VehicleTypeModel>> GetAllVehicleTypes()
 		{
 			return Ok(_vehicleTypeRepository.GetAll());

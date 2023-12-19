@@ -1,6 +1,6 @@
-﻿using Microservice.VehicleApi.Core.Dtos;
+﻿using Microservice.MaintenanceApi.Core.Dtos;
 
-namespace Microservice.VehicleApi.Infraestructure.Repository
+namespace Microservice.MaintenanceApi.Infraestructure.Repository
 {
 	public interface IConfigurationRepository
 	{
