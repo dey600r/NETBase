@@ -82,6 +82,7 @@ builder.Services.AddAutoMapper(typeof(BusinessProfile));
 
 // REPOSITORIES
 builder.Services.AddScoped<IConfigurationRepository, ConfigurationRepository>();
+builder.Services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
 
 // SECURITY
 var config = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();

@@ -14,19 +14,14 @@ namespace Microservice.VehicleApi.Infraestructure.Repository
 		private readonly DBContext _dbContext;
 		private readonly IMapper _mapper;
 		private readonly IHttpContextAccessor _httpContextAccessor;
-		//private readonly IMessageService _messageService;
-		private readonly IBusControl _busControl;
 		private readonly IPublishEndpoint _publishEndpoint;
 
 		public ConfigurationRepository(DBContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, 
-			//IMessageService messageService, 
 			IBusControl busControl, IPublishEndpoint publishEndpoint)
 		{
 			_dbContext = dbContext;
 			_mapper = mapper;
 			_httpContextAccessor = httpContextAccessor;
-			//_messageService = messageService;
-			_busControl = busControl;
 			_publishEndpoint = publishEndpoint;
 		}
 
@@ -56,8 +51,37 @@ namespace Microservice.VehicleApi.Infraestructure.Repository
 				}
 				_dbContext.SaveChanges();
 
-
 				return results.Select(item => _mapper.Map<ConfigurationModel>(item));
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("AddingConfiguration", ex);
+			}
+		}
+
+		public MaintenanceElementModel Add(MaintenanceElement entity) => Add(new List<MaintenanceElement>() { entity }).FirstOrDefault();
+
+		public IEnumerable<MaintenanceElementModel> Add(IEnumerable<MaintenanceElement> entities)
+		{
+			try
+			{
+				if (entities == null || !entities.Any())
+					throw new Exception("No data to add configuration");
+
+				List<MaintenanceElement> results = new List<MaintenanceElement>();
+				foreach (MaintenanceElement item in entities)
+				{
+					var itemMapped = _mapper.Map<MaintenanceElement>(item);
+					if (string.IsNullOrEmpty(itemMapped.CreatedUser))
+						itemMapped.CreatedUser = CommonHelper.GetUserSesion(_httpContextAccessor);
+					itemMapped.CreatedDate = DateTime.UtcNow;
+					_dbContext.Entry(itemMapped).State = EntityState.Added;
+					results.Add(_dbContext.Set<MaintenanceElement>().Add(itemMapped).Entity);
+				}
+				_dbContext.SaveChanges();
+
+
+				return results.Select(item => _mapper.Map<MaintenanceElementModel>(item));
 			}
 			catch (Exception ex)
 			{

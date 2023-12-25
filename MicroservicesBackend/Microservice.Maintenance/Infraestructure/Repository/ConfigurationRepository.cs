@@ -38,7 +38,8 @@ namespace Microservice.MaintenanceApi.Infraestructure.Repository
 				foreach (Configuration item in entities)
 				{
 					var itemMapped = _mapper.Map<Configuration>(item);
-					itemMapped.CreatedUser = CommonHelper.GetUserSesion(_httpContextAccessor);
+					if (string.IsNullOrEmpty(itemMapped.CreatedUser))
+						itemMapped.CreatedUser = CommonHelper.GetUserSesion(_httpContextAccessor);
 					itemMapped.CreatedDate = DateTime.UtcNow;
 					_dbContext.Entry(itemMapped).State = EntityState.Added;
 					results.Add(_dbContext.Set<Configuration>().Add(itemMapped).Entity);

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microservice.Core.Events;
 using Microservice.VehicleApi.Core.Dtos;
+using Microservice.VehicleApi.Core.Dtos.Events;
 using Microservice.VehicleApi.Infraestructure.Entities;
 
 namespace Microservice.VehicleApi.Core.Mapping
@@ -18,8 +19,11 @@ namespace Microservice.VehicleApi.Core.Mapping
 				.ReverseMap().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 			CreateMap<Configuration, ConfigurationModel>()
 				.ReverseMap().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+			CreateMap<MaintenanceElement, MaintenanceElementModel>()
+				.ReverseMap().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
 			CreateMap<Configuration, MessageConfigurationEvent>();
+			CreateMap<MessageMaintenanceElementEvent, MaintenanceElement>();
 		}
 	}
 }

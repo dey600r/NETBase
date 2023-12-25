@@ -60,6 +60,8 @@ builder.Services.AddDbContext<DBContext>(options =>
 var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
 builder.Services.AddMassTransit(x =>
 {
+
+	x.AddConsumers(Assembly.GetEntryAssembly());
 	x.UsingRabbitMq((context, cfg) =>
 	{
 		cfg.Host(rabbitMQSettings.Host, rabbitMQSettings.VHost, h =>
@@ -73,6 +75,10 @@ builder.Services.AddMassTransit(x =>
 		});
 
 		cfg.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(rabbitMQSettings.ServiceName, false));
+		cfg.UseMessageRetry(b =>
+		{
+			b.Interval(3, TimeSpan.FromSeconds(5));
+		});
 
 	});
 });

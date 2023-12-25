@@ -6,13 +6,13 @@ using Microservice.MaintenanceApi.Infraestructure.Repository;
 
 namespace Microservice.MaintenanceApi.Core.Events
 {
-	public class MessageEventConsumer : IConsumer<MessageConfigurationEvent>
+	public class MessageConfigurationEventConsumer : IConsumer<MessageConfigurationEvent>
 	{
 		private readonly IConfigurationRepository _configurationRepository;
-		private readonly ILogger<MessageEventConsumer> _logger;
+		private readonly ILogger<MessageConfigurationEventConsumer> _logger;
 		private readonly IMapper _mapper;
 
-		public MessageEventConsumer(IConfigurationRepository configuration, ILogger<MessageEventConsumer> logger, IMapper mapper) 
+		public MessageConfigurationEventConsumer(IConfigurationRepository configuration, ILogger<MessageConfigurationEventConsumer> logger, IMapper mapper) 
 		{
 			_configurationRepository = configuration;
 			_logger = logger;
