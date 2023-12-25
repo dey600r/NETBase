@@ -19,10 +19,5 @@ namespace Microservice.MaintenanceApi.Controllers
 			return Ok(_configurationRepository.GetAll());
 		}
 
-		[HttpPost]
-		public ActionResult<IEnumerable<ConfigurationModel>> AddConfiguration(ConfigurationModel entity)
-		{
-			return Ok(_configurationRepository.Add(entity));
-		}
 	}
 }

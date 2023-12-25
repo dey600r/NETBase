@@ -8,6 +8,8 @@ namespace Microservice.VehicleApi.Infraestructure.Context.SeedData
 		{
 			SeedDataVehicleType.Seed(modelBuilder);
 			SeedDataConfiguration.Seed(modelBuilder);
+			SeedDataOperationType.Seed(modelBuilder);
+			SeedDataMaintenanceElement.Seed(modelBuilder);
 		}
 	}
 }

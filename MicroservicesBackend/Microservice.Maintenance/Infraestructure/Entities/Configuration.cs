@@ -8,5 +8,7 @@ namespace Microservice.MaintenanceApi.Infraestructure.Entities
         public string Description { get; set; }
         public bool Master { get; set; }
 
+        public virtual ICollection<ConfigurationMaintenance> ConfigurationMaintenances { get; set; }
+
     }
 }

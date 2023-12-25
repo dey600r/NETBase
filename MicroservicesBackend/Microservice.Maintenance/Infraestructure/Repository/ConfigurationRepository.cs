@@ -25,9 +25,9 @@ namespace Microservice.MaintenanceApi.Infraestructure.Repository
 			return _dbContext.Configurations.AsNoTracking().Select(x => _mapper.Map<ConfigurationModel>(x)).ToList();
 		}
 
-		public ConfigurationModel Add(ConfigurationModel entity) => Add(new List<ConfigurationModel>() { entity }).FirstOrDefault();
+		public ConfigurationModel Add(Configuration entity) => Add(new List<Configuration>() { entity }).FirstOrDefault();
 
-		public IEnumerable<ConfigurationModel> Add(IEnumerable<ConfigurationModel> entities)
+		public IEnumerable<ConfigurationModel> Add(IEnumerable<Configuration> entities)
 		{
 			try
 			{
@@ -35,7 +35,7 @@ namespace Microservice.MaintenanceApi.Infraestructure.Repository
 					throw new Exception("No data to add configuration");
 
 				List<Configuration> results = new List<Configuration>();
-				foreach (ConfigurationModel item in entities)
+				foreach (Configuration item in entities)
 				{
 					var itemMapped = _mapper.Map<Configuration>(item);
 					itemMapped.CreatedUser = CommonHelper.GetUserSesion(_httpContextAccessor);

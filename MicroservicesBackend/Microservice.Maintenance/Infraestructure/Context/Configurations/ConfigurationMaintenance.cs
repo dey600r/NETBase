@@ -18,7 +18,7 @@ namespace Microservice.MaintenanceApi.Infraestructure.Context.Configurations
 			builder.Property(b => b.ToKm).IsRequired();
 			builder.Property(b => b.Master).IsRequired().HasDefaultValue(false);
 
-			builder.HasOne(b => b.MaintenanceFreq).WithMany(b => b.Maintenances).HasForeignKey(b => b.MaintenanceFrecId).IsRequired();
+			builder.HasOne(b => b.MaintenanceFreq).WithMany(b => b.Maintenances).HasForeignKey(b => b.MaintenanceFreqId).IsRequired();
 		}
 	}
 }

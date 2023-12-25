@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microservice.Core.Events;
 using Microservice.MaintenanceApi.Core.Dtos;
 using Microservice.MaintenanceApi.Infraestructure.Entities;
 
@@ -10,6 +11,7 @@ namespace Microservice.MaintenanceApi.Core.Mapping
 		{
 			CreateMap<Configuration, ConfigurationModel>()
 				.ReverseMap().ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+			CreateMap<MessageConfigurationEvent, Configuration>();
 		}
 	}
 }

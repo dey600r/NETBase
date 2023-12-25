@@ -64,6 +64,54 @@ namespace Microservice.MaintenanceApi.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.ConfigurationMaintenance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ConfigurationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MaintenanceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConfigurationId");
+
+                    b.HasIndex("MaintenanceId");
+
+                    b.ToTable("ConfigurationMaintenance");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConfigurationId = 1,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            MaintenanceId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConfigurationId = 1,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            MaintenanceId = 2
+                        });
+                });
+
             modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.Maintenance", b =>
                 {
                     b.Property<int>("Id")
@@ -92,9 +140,6 @@ namespace Microservice.MaintenanceApi.Migrations
                     b.Property<int>("Km")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaintenanceFrecId")
-                        .HasColumnType("int");
-
                     b.Property<int>("MaintenanceFreqId")
                         .HasColumnType("int");
 
@@ -115,6 +160,98 @@ namespace Microservice.MaintenanceApi.Migrations
                     b.HasIndex("MaintenanceFreqId");
 
                     b.ToTable("Maintenance");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            Description = "FIRST_REVIEW",
+                            FromKm = 0,
+                            Init = true,
+                            Km = 1000,
+                            MaintenanceFreqId = 1,
+                            Master = true,
+                            Time = 6,
+                            ToKm = 0,
+                            Wear = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            Description = "CHANGE_WHEEL",
+                            FromKm = 0,
+                            Init = false,
+                            Km = 30000,
+                            MaintenanceFreqId = 2,
+                            Master = true,
+                            Time = 36,
+                            ToKm = 0,
+                            Wear = true
+                        });
+                });
+
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceElement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Master")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaintenanceElement");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            Description = "CHANGE_FRONT_WHEEL",
+                            Master = true,
+                            Name = "FRONT_WHEEL"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            Description = "CHANGE_BACK_WHEEL",
+                            Master = true,
+                            Name = "BACK_WHEEL"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            Description = "CHANGE_ENGINE_OIL",
+                            Master = true,
+                            Name = "ENGINE_OIL"
+                        });
                 });
 
             modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceFreq", b =>
@@ -163,6 +300,81 @@ namespace Microservice.MaintenanceApi.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceMaintenanceElement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MaintenanceElementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaintenanceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaintenanceElementId");
+
+                    b.HasIndex("MaintenanceId");
+
+                    b.ToTable("MaintenanceMaintenanceElement");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            MaintenanceElementId = 3,
+                            MaintenanceId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            MaintenanceElementId = 1,
+                            MaintenanceId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2023, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedUser = "UserUnknown",
+                            MaintenanceElementId = 3,
+                            MaintenanceId = 2
+                        });
+                });
+
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.ConfigurationMaintenance", b =>
+                {
+                    b.HasOne("Microservice.MaintenanceApi.Infraestructure.Entities.Configuration", "Configuration")
+                        .WithMany("ConfigurationMaintenances")
+                        .HasForeignKey("ConfigurationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microservice.MaintenanceApi.Infraestructure.Entities.Maintenance", "Maintenance")
+                        .WithMany("ConfigurationMaintenances")
+                        .HasForeignKey("MaintenanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Configuration");
+
+                    b.Navigation("Maintenance");
+                });
+
             modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.Maintenance", b =>
                 {
                     b.HasOne("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceFreq", "MaintenanceFreq")
@@ -172,6 +384,42 @@ namespace Microservice.MaintenanceApi.Migrations
                         .IsRequired();
 
                     b.Navigation("MaintenanceFreq");
+                });
+
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceMaintenanceElement", b =>
+                {
+                    b.HasOne("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceElement", "MaintenanceElement")
+                        .WithMany("MaintenanceMaintenanceElements")
+                        .HasForeignKey("MaintenanceElementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microservice.MaintenanceApi.Infraestructure.Entities.Maintenance", "Maintenance")
+                        .WithMany("MaintenanceMaintenanceElements")
+                        .HasForeignKey("MaintenanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Maintenance");
+
+                    b.Navigation("MaintenanceElement");
+                });
+
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.Configuration", b =>
+                {
+                    b.Navigation("ConfigurationMaintenances");
+                });
+
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.Maintenance", b =>
+                {
+                    b.Navigation("ConfigurationMaintenances");
+
+                    b.Navigation("MaintenanceMaintenanceElements");
+                });
+
+            modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceElement", b =>
+                {
+                    b.Navigation("MaintenanceMaintenanceElements");
                 });
 
             modelBuilder.Entity("Microservice.MaintenanceApi.Infraestructure.Entities.MaintenanceFreq", b =>

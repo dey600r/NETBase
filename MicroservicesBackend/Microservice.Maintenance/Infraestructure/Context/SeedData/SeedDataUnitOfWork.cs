@@ -8,6 +8,10 @@ namespace Microservice.MaintenanceApi.Infraestructure.Context.SeedData
 		{
 			SeedDataConfiguration.Seed(modelBuilder);
 			SeedDataMaintenanceFreq.Seed(modelBuilder);
+			SeedDataMaintenanceElement.Seed(modelBuilder);
+			SeedDataMaintenance.Seed(modelBuilder);
+			SeedDataConfigurationMaintenance.Seed(modelBuilder);
+			SeedDataMaintenanceMaintenanceElement.Seed(modelBuilder);
 		}
 	}
 }

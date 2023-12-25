@@ -11,18 +11,18 @@ namespace Microservice.MaintenanceApi.Infraestructure.Context.SeedData
 			modelBuilder.Entity<MaintenanceFreq>().HasData(new MaintenanceFreq
 			{
 				Id = 1,
-				Code = Constants.MAINTENANCE_FREQ_ONCE_CODE,
-				Description = Constants.MAINTENANCE_FREQ_ONCE_DESC,
-				CreatedUser = Constants.USER_UNKNOWN_AUDIT,
-				CreatedDate = Constants.DATE_AUDIT
+				Code = AppConstants.MAINTENANCE_FREQ_ONCE_CODE,
+				Description = AppConstants.MAINTENANCE_FREQ_ONCE_DESC,
+				CreatedUser = AppConstants.USER_UNKNOWN_AUDIT,
+				CreatedDate = AppConstants.DATE_AUDIT
 			});
 			modelBuilder.Entity<MaintenanceFreq>().HasData(new MaintenanceFreq
 			{
 				Id = 2,
-				Code = Constants.MAINTENANCE_FREQ_CALENDAR_CODE,
-				Description = Constants.MAINTENANCE_FREQ_CALENDAR_DESC,
-				CreatedUser = Constants.USER_UNKNOWN_AUDIT,
-				CreatedDate = Constants.DATE_AUDIT
+				Code = AppConstants.MAINTENANCE_FREQ_CALENDAR_CODE,
+				Description = AppConstants.MAINTENANCE_FREQ_CALENDAR_DESC,
+				CreatedUser = AppConstants.USER_UNKNOWN_AUDIT,
+				CreatedDate = AppConstants.DATE_AUDIT
 			});
 		}
 	}

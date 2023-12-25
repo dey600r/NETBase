@@ -1,4 +1,5 @@
 ﻿
+using Microservice.VehicleApi.Core.Constants;
 using Microsoft.AspNetCore.Identity;
 
 namespace Microservice.VehicleApi.Core.Helpers
@@ -8,7 +9,7 @@ namespace Microservice.VehicleApi.Core.Helpers
 		public static string GetUserSesion(IHttpContextAccessor httpContextAccessor)
 		{
 			var userName = httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == nameof(IdentityUser.UserName));
-			return (userName == null ? Constants.Constants.USER_UNKNOWN_AUDIT : userName.Value);
+			return (userName == null ? AppConstants.USER_UNKNOWN_AUDIT : userName.Value);
 		}
 	}
 }

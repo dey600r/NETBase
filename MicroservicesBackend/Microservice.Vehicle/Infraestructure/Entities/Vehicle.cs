@@ -17,5 +17,6 @@ namespace Microservice.VehicleApi.Infraestructure.Entities
 
         public virtual Configuration Configuration { get; set; }
         public virtual VehicleType VehicleType { get; set; }
+        public virtual ICollection<Operation> Operations { get; set; }
     }
 }

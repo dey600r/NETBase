@@ -1,4 +1,5 @@
 
+using MassTransit;
 using Microservice.VehicleApi.Core.Constants;
 using Microservice.VehicleApi.Core.Dtos.Utils;
 using Microservice.VehicleApi.Core.Mapping;
@@ -8,6 +9,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
+using System;
+using System.Reflection;
+using System.Security.Authentication;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,6 +56,27 @@ builder.Services.AddDbContext<DBContext>(options =>
 	ServiceLifetime.Scoped
 );
 
+// MASS TRANSIG - RABBITMQ
+var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
+builder.Services.AddMassTransit(x =>
+{
+	x.UsingRabbitMq((context, cfg) =>
+	{
+		cfg.Host(rabbitMQSettings.Host, rabbitMQSettings.VHost, h =>
+		{
+			h.Username(rabbitMQSettings.User);
+			h.Password(rabbitMQSettings.Pwd);
+			//h.UseSsl(s =>
+			//{
+			//	s.Protocol = SslProtocols.Tls12;
+			//});
+		});
+
+		cfg.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(rabbitMQSettings.ServiceName, false));
+
+	});
+});
+
 // AUTOMAPPER
 builder.Services.AddAutoMapper(typeof(BusinessProfile));
 
@@ -81,7 +107,7 @@ builder.Services.AddHttpContextAccessor()
 // CORS
 builder.Services.AddCors(opt =>
 {
-	opt.AddPolicy(name: Constants.CORS_RULE, rule =>
+	opt.AddPolicy(name: AppConstants.CORS_RULE, rule =>
 	{
 		rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
 	});
@@ -102,7 +128,7 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors(Constants.CORS_RULE);
+app.UseCors(AppConstants.CORS_RULE);
 
 // HABILITAR PARA UTILIZAR EL HTTPCONTEXT CLAIMS (TOKEN)
 app.UseAuthentication();

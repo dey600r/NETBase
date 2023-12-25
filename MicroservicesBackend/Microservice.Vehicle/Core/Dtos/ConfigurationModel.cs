@@ -8,4 +8,5 @@ namespace Microservice.VehicleApi.Core.Dtos
 		public string Description { get; set; }
 		public bool Master { get; set; }
 	}
+
 }

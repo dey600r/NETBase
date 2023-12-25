@@ -11,11 +11,11 @@ namespace Microservice.MaintenanceApi.Infraestructure.Context.SeedData
 			modelBuilder.Entity<Configuration>().HasData(new Configuration
 			{ 
 				Id = 1, 
-				Name = Constants.CONFIGURATION_NAME_PRODUCTION, 
-				Description = Constants.CONFIGURATION_DESCRIPTION_PRODUCTION,
+				Name = AppConstants.CONFIGURATION_NAME_PRODUCTION, 
+				Description = AppConstants.CONFIGURATION_DESCRIPTION_PRODUCTION,
 				Master = true,
-				CreatedUser = Constants.USER_UNKNOWN_AUDIT,
-				CreatedDate = Constants.DATE_AUDIT
+				CreatedUser = AppConstants.USER_UNKNOWN_AUDIT,
+				CreatedDate = AppConstants.DATE_AUDIT
 			});
 		}
 	}

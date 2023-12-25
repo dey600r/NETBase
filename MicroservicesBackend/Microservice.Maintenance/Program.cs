@@ -1,6 +1,8 @@
 
+using MassTransit;
 using Microservice.MaintenanceApi.Core.Constants;
 using Microservice.MaintenanceApi.Core.Dtos.Utils;
+using Microservice.MaintenanceApi.Core.Events;
 using Microservice.MaintenanceApi.Core.Mapping;
 using Microservice.MaintenanceApi.Infraestructure.Context;
 using Microservice.MaintenanceApi.Infraestructure.Repository;
@@ -8,6 +10,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,6 +55,28 @@ builder.Services.AddDbContext<DBContext>(options =>
 	ServiceLifetime.Scoped
 );
 
+// MASS TRANSIG - RABBITMQ
+var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
+builder.Services.AddMassTransit(x =>
+{
+	//x.AddConsumer<MessageEventConsumer>();
+	x.AddConsumers(Assembly.GetEntryAssembly());
+	x.UsingRabbitMq((context, cfg) =>
+	{
+		cfg.Host(rabbitMQSettings.Host, rabbitMQSettings.VHost, h =>
+		{
+			h.Username(rabbitMQSettings.User);
+			h.Password(rabbitMQSettings.Pwd);
+		});
+
+		cfg.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(rabbitMQSettings.ServiceName, false));
+		cfg.UseMessageRetry(b =>
+		{
+			b.Interval(3, TimeSpan.FromSeconds(5));
+		});
+	});
+});
+
 // AUTOMAPPER
 builder.Services.AddAutoMapper(typeof(BusinessProfile));
 
@@ -79,7 +105,7 @@ builder.Services.AddHttpContextAccessor()
 // CORS
 builder.Services.AddCors(opt =>
 {
-	opt.AddPolicy(name: Constants.CORS_RULE, rule =>
+	opt.AddPolicy(name: AppConstants.CORS_RULE, rule =>
 	{
 		rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
 	});
@@ -100,7 +126,7 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors(Constants.CORS_RULE);
+app.UseCors(AppConstants.CORS_RULE);
 
 // HABILITAR PARA UTILIZAR EL HTTPCONTEXT CLAIMS (TOKEN)
 app.UseAuthentication();
