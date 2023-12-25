@@ -16,17 +16,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-DependencyInjection.ConfigureSwagger(builder.Services);
+builder.Services.AddSwaggerExtensionConfiguration();
 
 // NLog: Setup NLog for Dependency injection
 builder.Logging.ClearProviders();
 builder.Logging.SetMinimumLevel(LogLevel.Trace);
 builder.Host.UseNLog();
 
-DependencyInjection.ConfigureDBContext(builder.Services, builder.Configuration);
-DependencyInjection.ConfigureJWT(builder.Services, builder.Configuration);
-DependencyInjection.AddMyDependencyGroup(builder.Services, builder.Configuration);
-DependencyInjection.ConfigureCORS(builder.Services);
+builder.Services.AddDBContextExtensionConfiguration(builder.Configuration);
+builder.Services.AddJWTExtensionConfiguration(builder.Configuration);
+builder.Services.AddAppDependenciesExcensionConfiguration(builder.Configuration);
+builder.Services.AddCORSExtensionConfiguration();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
@@ -50,6 +50,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await DependencyInjection.ConfigureDBMigration(app.Services, logger);
+app.Services.ConfigureDBMigration(logger);
 
 app.Run();

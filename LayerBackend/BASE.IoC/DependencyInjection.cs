@@ -26,7 +26,7 @@ namespace BASE.IoC
 		/// CONFIGURE SWAGGER WITH AUTHORIZATION
 		/// </summary>
 		/// <param name="service"></param>
-		public static void ConfigureSwagger(IServiceCollection service)
+		public static IServiceCollection AddSwaggerExtensionConfiguration(this IServiceCollection service)
 		{
 			service.AddSwaggerGen(opt => {
 				opt.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseAPI", Version = "v1" });
@@ -53,6 +53,8 @@ namespace BASE.IoC
 						}
 					});
 				});
+
+			return service;
 		}
 
 		/// <summary>
@@ -60,7 +62,7 @@ namespace BASE.IoC
 		/// </summary>
 		/// <param name="service"></param>
 		/// <param name="configuration"></param>
-		public static void ConfigureDBContext(IServiceCollection service, IConfiguration configuration)
+		public static IServiceCollection AddDBContextExtensionConfiguration(this IServiceCollection service, IConfiguration configuration)
 		{
 			// CONFIG CONNECTION STRING
 			var secrets = Boolean.Parse(configuration.GetConnectionString("Secrets"));
@@ -82,6 +84,8 @@ namespace BASE.IoC
 			.AddRoles<Role>()
 			.AddEntityFrameworkStores<DBContext>()
 			.AddSignInManager<SignInManager<User>>();
+
+			return service;
 		}
 
 		/// <summary>
@@ -89,7 +93,7 @@ namespace BASE.IoC
 		/// </summary>
 		/// <param name="service"></param>
 		/// <param name="configuration"></param>
-		public static void ConfigureJWT(IServiceCollection service, IConfiguration configuration) {
+		public static IServiceCollection AddJWTExtensionConfiguration(this IServiceCollection service, IConfiguration configuration) {
 
 			var config = configuration.GetSection("Jwt").Get<JwtSettings>();
 			service.AddSingleton(config);
@@ -116,6 +120,8 @@ namespace BASE.IoC
 						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Key))
 					};
 				});
+
+			return service;
 		}
 
 		/// <summary>
@@ -123,8 +129,7 @@ namespace BASE.IoC
 		/// </summary>
 		/// <param name="services"></param>
 		/// <param name="configuration"></param>
-		public static void AddMyDependencyGroup(
-			 this IServiceCollection service, IConfiguration configuration)
+		public static IServiceCollection AddAppDependenciesExcensionConfiguration(this IServiceCollection service, IConfiguration configuration)
 		{
 			// Get Config Environment from appsetings
 			var config = configuration.GetSection("ConfigEnvironment").Get<ConfigSettings>();
@@ -146,13 +151,15 @@ namespace BASE.IoC
 				service.AddScoped<IVehicleService, VehicleService>();
 			service.AddScoped<ISecurityService, SecurityService>();
 			service.AddScoped<IJwtGenerator, JwtGenerator>();
+
+			return service;
 		}
 
 		/// <summary>
 		/// CONFIGURE RULE CORS
 		/// </summary>
 		/// <param name="service"></param>
-		public static void ConfigureCORS(IServiceCollection service)
+		public static IServiceCollection AddCORSExtensionConfiguration(this IServiceCollection service)
 		{
 			service.AddCors(opt =>
 			{
@@ -161,6 +168,8 @@ namespace BASE.IoC
 					rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
 				});
 			});
+
+			return service;
 		}
 
 		/// <summary>
@@ -168,7 +177,7 @@ namespace BASE.IoC
 		/// </summary>
 		/// <param name="service"></param>
 		/// <param name="logger"></param>
-		public async static Task ConfigureDBMigration(IServiceProvider service, Logger logger)
+		public static void ConfigureDBMigration(this IServiceProvider service, Logger logger)
 		{
 			try
 			{

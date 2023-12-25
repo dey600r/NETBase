@@ -1,13 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
 using BASE.AppInfrastructure.Entities.Security;
 using BASE.Common.Helper;
-using BASE.Common.Dtos.Utils;
 using BASE.Common.Constants;
-using BASE.AppInfrastructure.Entities.Core;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace BASE.AppInfrastructure.Context.SeedData
 {

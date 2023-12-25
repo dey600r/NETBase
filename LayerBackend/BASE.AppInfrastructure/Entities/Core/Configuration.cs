@@ -7,5 +7,6 @@
         public bool Master { get; set; }
 
         public virtual ICollection<Vehicle> Vehicles { get; set; }
-    }
+		public virtual ICollection<ConfigurationMaintenance> ConfigurationMaintenances { get; set; }
+	}
 }

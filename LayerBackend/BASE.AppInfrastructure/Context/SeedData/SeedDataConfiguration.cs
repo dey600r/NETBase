@@ -11,8 +11,8 @@ namespace BASE.AppInfrastructure.Context.SeedData
 			modelBuilder.Entity<Configuration>().HasData(new Configuration
 			{ 
 				Id = 1, 
-				Name = Constants.CONFIGURATION_NAME_PRODUCTION, 
-				Description = Constants.CONFIGURATION_DESCRIPTION_PRODUCTION,
+				Name = ConstantsApp.CONFIGURATION_NAME_PRODUCTION, 
+				Description = ConstantsApp.CONFIGURATION_DESCRIPTION_PRODUCTION,
 				Master = true,
 				CreatedUser = ConstantsSecurity.USER_UNKNOWN_AUDIT,
 				CreatedDate = ConstantsSecurity.DATE_AUDIT

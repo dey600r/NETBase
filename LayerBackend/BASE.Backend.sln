@@ -21,6 +21,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9065DCF1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BASE.WebApiTest", "BASE.WebApiTest\BASE.WebApiTest.csproj", "{A00D6357-F273-497A-B73E-23589BB3EF9F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{B8C44367-3E7D-48CB-ADB1-84606B1CB935}"
+	ProjectSection(SolutionItems) = preProject
+		..\Utils\BaseNET-init.sql = ..\Utils\BaseNET-init.sql
+		..\Utils\Ef-CommandLine.txt = ..\Utils\Ef-CommandLine.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
