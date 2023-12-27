@@ -2,6 +2,29 @@ version: '3.4'
 
 name: microservices-environment
 services:
+  mongo:
+    container_name: mongo-db
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - network_microservices
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    depends_on:
+      - mongo
+    networks:
+      - network_microservices
   rabbitmq: # login guest:guest
     container_name: rabbitmq
     image: rabbitmq:3-management
@@ -15,3 +38,8 @@ services:
     - "25672:25672"
     - "15671:15671"
     - "15672:15672"
+    networks:
+      - network_microservices
+
+networks:
+  network_microservices:
