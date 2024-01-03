@@ -9,7 +9,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", optional: false, reloadOnChange: true);
 // Add services to the container.
 
 //builder.Services.AddControllers();
@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice Gateway", Version = "v1" }));
 
 // CONFIG APPSETTING JWT
-var config = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
+var configJWT = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 //builder.Services.AddSingleton(config);
 
 // JWT
@@ -36,9 +36,9 @@ builder.Services
 			ValidateAudience = true,
 			ValidateLifetime = true,
 			ValidateIssuerSigningKey = true,
-			ValidIssuer = config.Issuer,
-			ValidAudience = config.Audience,
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Key))
+			ValidIssuer = configJWT.Issuer,
+			ValidAudience = configJWT.Audience,
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configJWT.Key))
 		};
 	});
 

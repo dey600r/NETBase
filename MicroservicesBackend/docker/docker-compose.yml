@@ -1,0 +1,88 @@
+version: "3.4"
+
+name: microservices-environment
+services:
+
+  microservice-gateway:
+    container_name: microservice-gateway
+    hostname: "microservice-gateway"
+    image: microservice-gateway
+    build: ../Microservice.Gateway
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+    ports:
+      - "3400:8080"
+      - "3401:8081"
+    networks:
+      - network_microservices
+
+  microservice-security-api:
+    container_name: microservice-security-api
+    hostname: "microservice-security-api"
+    image: microservice-security-api
+    build: ../Microservice.SecurityApi
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+    ports:
+      - "3500:8080"
+      - "3501:8081"
+    depends_on:  
+     - sqlserver-db 
+    networks:
+      - network_microservices
+
+  sqlserver-db:
+    container_name: sqlserver-db
+    hostname: "sqlserver-db"
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "PassWord123?"
+      ACCEPT_EULA: "Y"
+    networks:
+      - network_microservices
+
+  # mongo:
+  #   container_name: mongo-db
+  #   image: mongo
+  #   ports:
+  #     - 27017:27017
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   networks:
+  #     - network_microservices
+
+  # mongo-express:
+  #   container_name: mongo-express
+  #   image: mongo-express
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: example
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  #   depends_on:
+  #     - mongo
+  #   networks:
+  #     - network_microservices
+
+  # rabbitmq: # login guest:guest
+  #   container_name: rabbitmq
+  #   image: rabbitmq:3-management
+  #   hostname: "rabbitmq"
+  #   labels:
+  #     NAME: "rabbitmq"
+  #   ports:
+  #   - "4369:4369"
+  #   - "5671:5671"
+  #   - "5672:5672"
+  #   - "25672:25672"
+  #   - "15671:15671"
+  #   - "15672:15672"
+  #   networks:
+  #     - network_microservices
+
+networks:
+  network_microservices:

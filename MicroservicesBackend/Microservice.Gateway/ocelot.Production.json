@@ -1,0 +1,207 @@
+{
+	"Routes": [
+		{
+			"DownstreamPathTemplate": "/api/security",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-security-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/security",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/security/signup",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-security-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/security/signup",
+			"UpstreamHttpMethod": [ "POST" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/security/login",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-security-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/security/login",
+			"UpstreamHttpMethod": [ "POST" ]
+		},
+		{
+			"DownstreamPathTemplate": "/api/vehicle",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-vehicle-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/vehicle",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/vehicle/type",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-vehicle-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/vehicle/type",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/configuration",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-vehicle-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/configuration",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/configuration",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-vehicle-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/configuration",
+			"UpstreamHttpMethod": [ "POST" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/maintenance/configuration",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-maintenance-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/maintenance/configuration",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/maintenance/maintenance-element",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-maintenance-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/maintenance/maintenance-element",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/maintenance/maintenance-element",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-maintenance-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/maintenance/maintenance-element",
+			"UpstreamHttpMethod": [ "POST" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/settings/get-all",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-setting-api",
+					"Port": "3000"
+				}
+			],
+			"UpstreamPathTemplate": "/settings/get-all",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/settings/get",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-setting-api",
+					"Port": "3000"
+				}
+			],
+			"UpstreamPathTemplate": "/settings/get",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
+			"DownstreamPathTemplate": "/api/settings/add",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-setting-api",
+					"Port": "3000"
+				}
+			],
+			"UpstreamPathTemplate": "/settings/add",
+			"UpstreamHttpMethod": [ "POST" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		}
+	],
+	"GlobalConfiguration": {
+		"BaseUrl": "http://localhost:3400"
+	}
+}
