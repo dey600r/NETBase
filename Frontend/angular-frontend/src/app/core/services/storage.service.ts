@@ -10,6 +10,14 @@ export class StorageService {
   }
 
   getData(key: string): string | null {
-    return localStorage.getItem(key);
+    try {
+      return localStorage.getItem(key);
+    } catch(e) {
+      return null;
+    }
+  }
+
+  removeData(key: string): void {
+    localStorage.removeItem(key);
   }
 }

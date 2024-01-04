@@ -1,5 +1,6 @@
 export class UrlConstants {
     static URL_API_LOGIN: string = '/security/login';
+    static URL_API_SIGNUP: string = '/security/signup';
     static URL_API_USER: string = '/security';
 
     static URL_LOGIN: string ='login';

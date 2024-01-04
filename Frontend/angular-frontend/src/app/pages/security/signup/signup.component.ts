@@ -7,41 +7,39 @@ import { SecurityService, MaterialService } from '@services/index';
 import { IUserModel } from '@models/index';
 
 @Component({
-  selector: 'app-login.component',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class LoginComponent {
+export class SignupComponent {
+
   form: FormGroup = this.formBuilder.group({
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
+    location: ['', [Validators.required]],
+    userName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
-
+  
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private securityService: SecurityService,
-    private materialService: MaterialService) {
-  }
-    
-  ngOnInit(): void {}
+    private materialService: MaterialService){}
   
-  login(event: Event): any {
+  signup(event: Event): any {
     event.preventDefault();
     if (this.form.valid) {
       const value = this.form.value;
-      this.securityService.login(value.email, value.password).then((user: IUserModel) => {
+      this.securityService.signup(value.firstName, value.lastName, value.location, value.userName, value.email, value.password).then((user: IUserModel) => {
         if (user) {
           this.securityService.setUser(user);
           this.router.navigateByUrl(`/${UrlConstants.URL_HOME}`);
         }
       }).catch(err => {
         this.materialService.openSnackBar(err);
-        console.error(`ERROR login: ${err}`);
+        console.error(`ERROR SignUp: ${err}`);
       });
     }
-  }
-
-  navigateToSignup(): void {
-    this.router.navigateByUrl(`/${UrlConstants.URL_SIGNUP}`);
   }
 }

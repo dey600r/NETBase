@@ -1,0 +1,25 @@
+<p>
+    <mat-toolbar color="primary">
+      <app-menu></app-menu>
+      <span>My App</span>
+      <span class="example-spacer"></span>
+      <span class="user-text">{{ userName }}</span>
+      <button mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menuAccount" aria-label="icon accoung">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+</p>
+
+<mat-menu #menuAccount="matMenu">
+  <button mat-menu-item>
+    <mat-icon>location_on</mat-icon>
+    <span>{{userLocation}}</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>accessibility</mat-icon>
+    <span>{{userRole}}</span>
+  </button>
+</mat-menu>

@@ -8,11 +8,18 @@ import { SecurityService } from '@services/index';
 })
 export class HomeComponent {
 
-  constructor(private securityService: SecurityService) {
+  userName: string = '';
 
+  constructor(private securityService: SecurityService) {
   }
 
   ngOnInit(): void {
-    this.securityService.user().then(user => console.log(user)).catch(err => console.error(err));
+    this.securityService.user()
+      .then(user => this.userName = `${user.firstName} ${user.lastName}`)
+      .catch(err => console.error(err));
+  }
+
+  logout(): void {
+    this.securityService.logout();
   }
 }

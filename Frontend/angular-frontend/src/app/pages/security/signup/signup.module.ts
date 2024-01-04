@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
-import { LoginRoutingModule } from './login-routing.module';
+import { SignupComponent } from './signup.component';
+import { SignupRoutingModule } from './signup-routing.module';
 import { MaterialModule } from '@modules/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexLayoutServerModule } from '@angular/flex-layout/server';
@@ -12,11 +12,11 @@ import { SecurityService } from '@services/index';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    SignupComponent
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule,
+    SignupRoutingModule,
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
@@ -25,11 +25,11 @@ import { SecurityService } from '@services/index';
     FlexLayoutServerModule
   ],
   exports: [
-    LoginComponent
+    SignupComponent
   ],
   providers: [
     SecurityService
   ],
   schemas :[ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class LoginModule { }
+export class SignupModule { }
