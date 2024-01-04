@@ -6,6 +6,7 @@ using Microservice.Security.Core.Application.Mapping.Dto.Settings;
 using Microservice.Security.Core.Persistence;
 using Microservice.Security.Core.Persistence.Entities;
 using Microservice.Security.Core.Persistence.Repository;
+using Microservice.SecurityApi.Core.Application.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -99,6 +100,8 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // APPLICATION BUILT------------------------------------------------------------------------------------------------
 var app = builder.Build();
+
+app.UseMiddleware<GlobalRequestExceptionHandler>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

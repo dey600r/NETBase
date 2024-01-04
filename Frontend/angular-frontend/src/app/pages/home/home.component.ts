@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SecurityService } from '@services/index';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  constructor(private securityService: SecurityService) {
+
+  }
+
+  ngOnInit(): void {
+    this.securityService.user().then(user => console.log(user)).catch(err => console.error(err));
+  }
 }
