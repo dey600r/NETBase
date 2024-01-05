@@ -9,7 +9,7 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: '',
+        path: UrlConstants.URL_HOME,
         loadChildren: () => import('./pages/home/pages.module').then(mod => mod.PagesModule),
         canActivate: [AuthGuard]
     },

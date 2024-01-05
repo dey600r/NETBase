@@ -1,1 +1,7 @@
-<app-header></app-header>
+<mat-drawer-container class="example-container" [hasBackdrop]="true" autosize>
+    <app-header [drawer]="drawer"></app-header>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <app-menu [drawer]="drawer"></app-menu>
+    </mat-drawer>
+    <router-outlet></router-outlet>
+</mat-drawer-container>

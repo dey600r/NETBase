@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
+import { UrlConstants } from '@utils/index';
 import { SecurityService } from '@services/index';
 
 @Component({
@@ -7,12 +10,15 @@ import { SecurityService } from '@services/index';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+  @Input() drawer: MatDrawer | null = null;
   
   userName: string = '';
   userLocation: string = '';
   userRole: string = '';
 
-  constructor(private securityService: SecurityService) {
+  constructor(private securityService: SecurityService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,5 +33,9 @@ export class HeaderComponent {
 
   logout(): void {
     this.securityService.logout();
+  }
+
+  navigateToHome(): void {
+    this.router.navigateByUrl(`/${UrlConstants.URL_HOME}`);
   }
 }

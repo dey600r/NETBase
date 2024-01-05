@@ -1,18 +1,16 @@
-<button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+<button mat-menu-item (click)="navigateToHome()">
+  <mat-icon>home</mat-icon>
+  <span>Home</span>
 </button>
-
-<mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>dialpad</mat-icon>
-      <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-      <mat-icon>voicemail</mat-icon>
-      <span>Check voice mail</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon>
-      <span>Disable alerts</span>
-    </button>
-</mat-menu>
+<button mat-menu-item>
+  <mat-icon>motorcycle</mat-icon>
+  <span>Vehicles</span>
+</button>
+<button mat-menu-item>
+  <mat-icon>gavel</mat-icon>
+  <span>Maintenances</span>
+</button>
+<button mat-menu-item (click)="navigateToSetting()">
+  <mat-icon>settings_applications</mat-icon>
+  <span>Settings</span>
+</button>

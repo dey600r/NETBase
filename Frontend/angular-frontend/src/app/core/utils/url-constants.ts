@@ -6,4 +6,5 @@ export class UrlConstants {
     static URL_LOGIN: string ='login';
     static URL_SIGNUP: string ='signup';
     static URL_HOME: string ='home';
+    static URL_SETTING: string ='setting';
 }

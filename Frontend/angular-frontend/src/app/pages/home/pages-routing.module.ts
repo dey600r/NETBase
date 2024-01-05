@@ -1,9 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { AuthGuard } from '@app/core/guards/user.guard';
+import { UrlConstants } from '@app/core/utils';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent }
+  { 
+    path: '', 
+    component: HomeComponent,
+    children: [
+      {
+        path: UrlConstants.URL_SETTING,
+        loadChildren: () => import('./setting/setting.module').then(mod => mod.SettingModule),
+        canActivate: [AuthGuard]
+      }
+    ]
+  }  
 ];
 
 @NgModule({

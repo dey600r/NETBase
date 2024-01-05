@@ -1,7 +1,13 @@
 <p>
     <mat-toolbar color="primary">
-      <app-menu></app-menu>
-      <span>My App</span>
+      <div class="example-sidenav-content">
+        <button type="button" mat-icon-button (click)="drawer?.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <button type="button" mat-icon-button (click)="navigateToHome()">
+        <span>Front Microservices Exmple</span>
+      </button>
       <span class="example-spacer"></span>
       <span class="user-text">{{ userName }}</span>
       <button mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menuAccount" aria-label="icon accoung">
