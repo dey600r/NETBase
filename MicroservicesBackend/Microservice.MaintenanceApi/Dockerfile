@@ -3,25 +3,25 @@
 #Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
 #For more information, please see https://aka.ms/containercompat
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-1809 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Microservice.Maintenance/Microservice.Maintenance.csproj", "Microservice.Maintenance/"]
-RUN dotnet restore "./Microservice.Maintenance/./Microservice.Maintenance.csproj"
-COPY . .
-WORKDIR "/src/Microservice.Maintenance"
-RUN dotnet build "./Microservice.Maintenance.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+COPY ["Microservice.MaintenanceApi.csproj", "Microservice.MaintenanceApi/"]
+RUN dotnet restore "./Microservice.MaintenanceApi/./Microservice.MaintenanceApi.csproj"
+COPY . ./Microservice.MaintenanceApi
+WORKDIR "/src/Microservice.MaintenanceApi"
+RUN dotnet build "./Microservice.MaintenanceApi.csproj" -c %BUILD_CONFIGURATION% -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Microservice.Maintenance.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Microservice.MaintenanceApi.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Microservice.Maintenance.dll"]
+ENTRYPOINT ["dotnet", "Microservice.MaintenanceApi.dll"]

@@ -1,7 +1,5 @@
 import jwt from 'jsonwebtoken';
-import * as config from '../assets/config.json';
-import * as forge from 'node-forge';
-import * as crypto from 'crypto';
+import * as config from '../../assets/config.json';
 import { IConfigJWT, IConfigServer } from './models/utils/config-setting.model';
 
 export default class Token {

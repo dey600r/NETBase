@@ -5,11 +5,15 @@ import Server from './core/server';
 import settings from './routes/settings';
 import crypto from './routes/crypto';
 
-import * as config from './assets/config.json';
+import * as config from '../assets/config.json';
+import * as configProd from '../assets/config.production.json';
 import { IConfigServer } from './core/models/utils/config-setting.model';
 import Cypher from './core/encrypter';
 
-const cfg: IConfigServer = config as IConfigServer; 
+let cfg: IConfigServer = config as IConfigServer; 
+if (process.env.NODE_ENV === 'production') {
+    cfg = configProd as IConfigServer;
+}
 
 const serverApp = new Server(cfg.expressSettings.host, cfg.expressSettings.port);
 

@@ -30,31 +30,35 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="app.ts" />
-    <None Include="routes\settings.ts" />
-    <Content Include="assets\config.json" />
+    <None Include="src\server\app.ts" />
+    <None Include="src\server\routes\settings.ts" />
+    <Content Include="src\assets\config.json" />
+    <Content Include="Dockerfile" />
+    <Content Include="src\assets\config.production.json" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
-    <Folder Include="core\" />
-    <Folder Include="core\models\" />
-    <Folder Include="core\models\schemas\" />
-    <Folder Include="core\models\utils\" />
-    <Folder Include="core\middlewares\" />
-    <Folder Include="routes\" />
+    <Folder Include="src\assets\" />
+    <Folder Include="src\server\core\" />
+    <Folder Include="src\server\core\models\" />
+    <Folder Include="src\server\core\models\schemas\" />
+    <Folder Include="src\server\core\models\utils\" />
+    <Folder Include="src\server\core\middlewares\" />
+    <Folder Include="src\" />
+    <Folder Include="src\server\" />
+    <Folder Include="src\server\routes\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="core\encrypter.ts" />
-    <TypeScriptCompile Include="core\middlewares\authentication.ts" />
-    <TypeScriptCompile Include="core\models\schemas\setting.model.ts" />
-    <TypeScriptCompile Include="core\models\utils\config-setting.model.ts" />
-    <TypeScriptCompile Include="core\server.ts" />
-    <TypeScriptCompile Include="core\setting-repository.ts" />
-    <TypeScriptCompile Include="core\token.ts" />
-    <TypeScriptCompile Include="routes\crypto.ts" />
+    <TypeScriptCompile Include="src\server\core\encrypter.ts" />
+    <TypeScriptCompile Include="src\server\core\middlewares\authentication.ts" />
+    <TypeScriptCompile Include="src\server\core\models\schemas\setting.model.ts" />
+    <TypeScriptCompile Include="src\server\core\models\utils\config-setting.model.ts" />
+    <TypeScriptCompile Include="src\server\core\server.ts" />
+    <TypeScriptCompile Include="src\server\core\setting-repository.ts" />
+    <TypeScriptCompile Include="src\server\core\token.ts" />
+    <TypeScriptCompile Include="src\server\routes\crypto.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
