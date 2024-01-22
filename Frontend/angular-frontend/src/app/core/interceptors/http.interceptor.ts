@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 export class APIInterceptor implements HttpInterceptor {
 
   private urlSecurized: string[] = [
-    UrlConstants.URL_API_USER
+    UrlConstants.URL_API_USER,
+    UrlConstants.URL_API_SETTING_GET_ALL
   ];
 
   constructor(private securityService: SecurityService,

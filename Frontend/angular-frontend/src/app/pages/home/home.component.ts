@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SecurityService } from '@services/index';
+import { SecurityService, SettingService } from '@services/index';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,8 @@ export class HomeComponent {
 
   userName: string = '';
 
-  constructor(private securityService: SecurityService) {
+  constructor(private securityService: SecurityService, private settingService: SettingService) {
+    this.settingService.getAllSettings().then(x => console.log('Data', x));
   }
 
   ngOnInit(): void {
