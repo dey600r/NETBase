@@ -25,5 +25,15 @@ export class MenuComponent {
     this.router.navigateByUrl(`/${UrlConstants.URL_HOME}/${UrlConstants.URL_SETTING}`);
     this.drawer?.close();
   }
+
+  navigateToVehicle(): void {
+    this.router.navigateByUrl(`/${UrlConstants.URL_HOME}/${UrlConstants.URL_VEHICLE}`);
+    this.drawer?.close();
+  }
+
+  navigateToMaintenance(): void {
+    this.router.navigateByUrl(`/${UrlConstants.URL_HOME}/${UrlConstants.URL_MAINTENANCE}`);
+    this.drawer?.close();
+  }
   
 }

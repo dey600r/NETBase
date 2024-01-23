@@ -13,6 +13,16 @@ const routes: Routes = [
         path: UrlConstants.URL_SETTING,
         loadChildren: () => import('./setting/setting.module').then(mod => mod.SettingModule),
         canActivate: [AuthGuard]
+      },
+      {
+        path: UrlConstants.URL_VEHICLE,
+        loadChildren: () => import('./vehicle/vehicle.module').then(mod => mod.VehicleModule),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: UrlConstants.URL_MAINTENANCE,
+        loadChildren: () => import('./maintenance/maintenance.module').then(mod => mod.MaintenanceModule),
+        canActivate: [AuthGuard]
       }
     ]
   }  
