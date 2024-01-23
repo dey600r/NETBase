@@ -12,12 +12,16 @@ import { DialogSettingAddComponent } from './dialog-setting-add/dialog-setting-a
 })
 export class SettingComponent {
   
-  displayedColumns: string[] = ['1', '2', '3', '4'];
+  displayedColumns: string[] = ['0', '1', '2', '3', '4', '6'];
   dataSource: ISettingModel[] = [];
 
   constructor(private settingService: SettingService,
-    private materialService: MaterialService,
-    public dialog: MatDialog) {
+              private materialService: MaterialService,
+              public dialog: MatDialog) {
+    this.loadSettings();
+  }
+
+  loadSettings() {
     this.settingService.getAllSettings().then(x => {
       if(x.ok) {
         this.dataSource = x.data;
@@ -27,14 +31,24 @@ export class SettingComponent {
     });
   }
 
-  openDialog() {
+  openDialog(index: number = -1) {
     let dialogRef = this.dialog.open(DialogSettingAddComponent, {
+      data: (index > -1 ? this.dataSource[index] : null),
       height: '400px',
       width: '600px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      if(result) {
+        this.settingService.addSetting(result).then(result => {
+          if(result.ok) {
+            this.materialService.openSnackBar('Setting saved succesfully!!');
+            this.loadSettings();
+          } else {
+            this.materialService.openSnackBar('Error on server side');
+          }
+        })
+      }
     });
   }
 }

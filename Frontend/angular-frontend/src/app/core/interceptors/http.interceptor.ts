@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
 
-  private urlSecurized: string[] = [
-    UrlConstants.URL_API_USER,
-    UrlConstants.URL_API_SETTING_GET_ALL
+  private urlNotSecurized: string[] = [
+    UrlConstants.URL_API_LOGIN,
+    UrlConstants.URL_SIGNUP
   ];
 
   constructor(private securityService: SecurityService,
@@ -24,7 +24,7 @@ export class APIInterceptor implements HttpInterceptor {
     let header: any = {
       'Content-Type': 'application/json'
     };
-    if(this.urlSecurized.some(x => req.url.endsWith(x))) {
+    if(!this.urlNotSecurized.some(x => req.url.endsWith(x))) {
       header['Authorization'] = `Bearer ${this.securityService.getUser()?.token}`;
     }
 
