@@ -7,9 +7,11 @@ export class UrlConstants {
     // VEHICLE
     static URL_API_CONFIGURATION_GET_ALL: string = '/configuration';
     static URL_API_VEHICLE_TYPE_GET_ALL: string = '/vehicle/type';
+    static URL_API_VEHICLE_MAINTENANCE_ELEMENT_GET_ALL: string = '/vehicle/maintenance-element';
 
     // MAINTENANCE
     static URL_API_MAINTENANCE_CONFIGURATION_GET_ALL: string = '/maintenance/configuration';
+    static URL_API_MAINTENANCE_ELEMENT_GET_ALL: string = '/maintenance/maintenance-element';
 
     // SETTINGS
     static URL_API_SETTING_GET_ALL: string = '/settings/get-all';

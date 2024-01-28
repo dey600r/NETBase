@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IConfigurationModel, IVehicleTypeModel } from '@models/index';
+import { IConfigurationModel, IMaintenanceElementModel, IVehicleTypeModel } from '@models/index';
 import { MaterialService, VehicleService } from '@services/index';
 import { DialogConfigurationAddComponent } from './dialog-configuration-add/dialog-configuration-add.component';
 
@@ -14,6 +14,9 @@ export class VehicleComponent {
   displayedColumnsConfiguration: string[] = ['0', '1', '2', '3', '4', '5', '6'];
   dataSourceConfiguration: IConfigurationModel[] = [];
 
+  displayedColumnsMaintenanceElement: string[] = ['1', '2', '3', '4'];
+  dataSourceMaintenanceElement: IMaintenanceElementModel[] = [];
+
   displayedColumnsVehicleType: string[] = ['1', '2', '3', '4'];
   dataSourceVehicleType: IVehicleTypeModel[] = [];
 
@@ -21,11 +24,16 @@ export class VehicleComponent {
               private materialService: MaterialService,
               private dialog: MatDialog) {
     this.loadAllVehicleType();
+    this.loadAllMaintenanceElement();
     this.loadAllConfiguration();
   }
               
   loadAllVehicleType() {
     this.vehicleService.getAllVehicleType().then(x => this.dataSourceVehicleType = x);              
+  }
+
+  loadAllMaintenanceElement() {
+    this.vehicleService.getAllMaintenanceElmenet().then(x => this.dataSourceMaintenanceElement = x);
   }
 
   loadAllConfiguration() {
@@ -43,7 +51,7 @@ export class VehicleComponent {
       if(result) {
         this.vehicleService.addConfiguration(result).then(result => {
           if(result) {
-            this.materialService.openSnackBar('Setting saved succesfully!!');
+            this.materialService.openSnackBar('Configuration saved succesfully!!');
             this.loadAllConfiguration();
           }
         }).catch(err => {

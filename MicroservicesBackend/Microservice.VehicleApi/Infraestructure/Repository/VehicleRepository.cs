@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microservice.VehicleApi.Core.Dtos;
 using Microservice.VehicleApi.Infraestructure.Context;
+using Microservice.VehicleApi.Infraestructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.VehicleApi.Infraestructure.Repository
@@ -19,6 +20,11 @@ namespace Microservice.VehicleApi.Infraestructure.Repository
 		public IEnumerable<VehicleModel> GetAll()
 		{
 			return _dbContext.Vehicles.AsNoTracking().Select(x => _mapper.Map<VehicleModel>(x)).ToList();
+		}
+
+		public IEnumerable<MaintenanceElementModel> GetAllMaintenanceElement()
+		{
+			return _dbContext.MaintenanceElement.AsNoTracking().Select(x => _mapper.Map<MaintenanceElementModel>(x)).ToList();
 		}
 	}
 }

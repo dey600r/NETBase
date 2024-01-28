@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { IConfigurationModel, IVehicleTypeModel } from '@models/index';
+import { IConfigurationModel, IMaintenanceElementModel, IVehicleTypeModel } from '@models/index';
 import { UrlConstants } from '@utils/index';
 
 @Injectable({
@@ -20,5 +20,9 @@ export class VehicleService {
 
   addConfiguration(conf: IConfigurationModel) {
     return this.httpService.post<IConfigurationModel, IConfigurationModel>(UrlConstants.URL_API_CONFIGURATION_GET_ALL, conf);
+  }
+
+  getAllMaintenanceElmenet(): Promise<IMaintenanceElementModel[]> {
+    return this.httpService.get<IMaintenanceElementModel[]>(UrlConstants.URL_API_VEHICLE_MAINTENANCE_ELEMENT_GET_ALL);
   }
 }

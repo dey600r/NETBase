@@ -57,6 +57,22 @@
 			}
 		},
 		{
+			"DownstreamPathTemplate": "/api/vehicle/maintenance-element",
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "microservice-vehicle-api",
+					"Port": "8080"
+				}
+			],
+			"UpstreamPathTemplate": "/vehicle/maintenance-element",
+			"UpstreamHttpMethod": [ "GET" ],
+			"AuthenticationOptions": {
+				"AuthenticationProviderKey": "Bearer",
+				"AllowedScopes": []
+			}
+		},
+		{
 			"DownstreamPathTemplate": "/api/vehicle/type",
 			"DownstreamScheme": "http",
 			"DownstreamHostAndPorts": [

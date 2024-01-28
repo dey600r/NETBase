@@ -26,5 +26,11 @@ namespace Microservice.VehicleApi.Controllers
 		{
 			return Ok(_vehicleRepository.GetAll());
 		}
+
+		[HttpGet("maintenance-element")]
+		public ActionResult<IEnumerable<VehicleTypeModel>> GetAllMaintenanceElement()
+		{
+			return Ok(_vehicleRepository.GetAllMaintenanceElement());
+		}
 	}
 }
