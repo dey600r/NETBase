@@ -1,14 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ISettingModel } from '@app/core/models';
-import { MaterialModule } from '@app/shared/modules/material.module';
+import { ISettingModel } from '@models/index';
+import { MaterialModule } from '@modules/material.module';
 
 @Component({
   selector: 'app-dialog-setting-add',
   standalone: true,
   imports: [
-    FormsModule,
     MaterialModule,
     ReactiveFormsModule
   ],
@@ -16,14 +15,14 @@ import { MaterialModule } from '@app/shared/modules/material.module';
   styleUrl: './dialog-setting-add.component.scss'
 })
 export class DialogSettingAddComponent {
+  
+  key: FormControl = new FormControl('', [Validators.required]);
+  value: FormControl = new FormControl('', [Validators.required]);
 
-  form: FormGroup = this.formBuilder.group({
-    key: ['', [Validators.required]],
-    value: ['', [Validators.required]],
+  form: FormGroup = this.formBuilder.group({ 
+    key: this.key, 
+    value: this.value 
   });
-
-  key: FormControl = new FormControl('');
-  value: FormControl = new FormControl('');
   
   constructor(private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<DialogSettingAddComponent>,

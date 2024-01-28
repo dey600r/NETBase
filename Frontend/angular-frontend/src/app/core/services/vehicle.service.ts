@@ -17,4 +17,8 @@ export class VehicleService {
   getAllConfiguration(): Promise<IConfigurationModel[]> {
     return this.httpService.get<IConfigurationModel[]>(UrlConstants.URL_API_CONFIGURATION_GET_ALL);
   }
+
+  addConfiguration(conf: IConfigurationModel) {
+    return this.httpService.post<IConfigurationModel, IConfigurationModel>(UrlConstants.URL_API_CONFIGURATION_GET_ALL, conf);
+  }
 }

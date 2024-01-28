@@ -1,13 +1,13 @@
 
 
-<form [formGroup]="form" class="login-form align-items-center" fxLayout="column" (ngSubmit)="save($event)">
+<form [formGroup]="form" class="login-form align-items-center" fxLayout="column" (submit)="save($event)">
   <mat-toolbar color="primary">
     <h1 mat-dialog-title class="dialog-header-title">Add Setting</h1>
   </mat-toolbar>
   <div mat-dialog-content class="dialog-body">
     <mat-form-field appearance="outline" class="dialog-body-input">
       <mat-label>Key</mat-label>
-      <input matInput placeholder="Type your key" type="text" [formControl]="key" formControlName='key'>
+      <input matInput placeholder="Type your key" type="text" [formControl]="key" formControlName="key">
       <mat-icon matPrefix>vpn_key</mat-icon>
       <mat-error *ngIf="form.controls['key'].hasError('required')">
         Key is <strong>required</strong>
@@ -15,7 +15,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" class="dialog-body-input">
       <mat-label>Value</mat-label>
-      <input matInput placeholder="Type your value" type="text" [formControl]="value" formControlName='value'>
+      <input matInput placeholder="Type your value" type="text" [formControl]="value" formControlName="value">
       <mat-icon matPrefix>settings</mat-icon>
       <mat-error *ngIf="form.controls['value'].hasError('required')">
         Value is <strong>required</strong>
