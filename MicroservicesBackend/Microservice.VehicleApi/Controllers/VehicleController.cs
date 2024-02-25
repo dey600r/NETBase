@@ -1,9 +1,11 @@
 ﻿using Microservice.VehicleApi.Core.Dtos;
 using Microservice.VehicleApi.Infraestructure.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.VehicleApi.Controllers
 {
+	[Authorize(Roles = "frontend-admin")]
 	public class VehicleController : BaseController
 	{
 		private readonly IVehicleTypeRepository _vehicleTypeRepository;

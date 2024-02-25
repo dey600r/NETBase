@@ -1,0 +1,50 @@
+.full-width {
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+.siginup-card {
+    min-height: 80vh;
+    animation: fadein 1s ease-in-out;
+}
+
+.siginup-content {
+    animation: fadein 1.5s ease-in-out;
+    min-height: 100%;
+    height: 80vh;
+}
+
+.siginup-header {
+    font-size: 2.5rem;
+    color: #0c1066;
+    letter-spacing: 0.2rem;
+    font-weight: bold;
+    animation: fadein 1.75s ease-in-out;
+    padding-bottom: 35px;
+}
+
+.siginup-form {
+    width: 80%;
+}
+
+.forgot-link {
+    margin-top: 1rem;
+    text-decoration: none;
+    color: #ff3a82;
+    margin-left: 1rem;
+}
+  
+.siginup-button{
+    font-weight: 100;
+    width:190px;
+    font-size: 1.1rem;
+}
+  
+@media screen and (max-width: 959px) {
+  .siginup-aside {
+      display: none;
+    }
+  .container-fluid {
+    width: 100%;
+  }
+}

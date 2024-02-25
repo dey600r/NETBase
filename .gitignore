@@ -397,3 +397,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Frontend/angular-frontend-keycloak/.vscode
+/Frontend/angular-frontend-ssr/.vscode

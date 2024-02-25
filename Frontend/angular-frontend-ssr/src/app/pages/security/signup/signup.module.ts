@@ -1,0 +1,35 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SignupComponent } from './signup.component';
+import { SignupRoutingModule } from './signup-routing.module';
+import { MaterialModule } from '@modules/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutServerModule } from '@angular/flex-layout/server';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { SecurityService } from '@services/index';
+
+@NgModule({
+  declarations: [
+    SignupComponent
+  ],
+  imports: [
+    CommonModule,
+    SignupRoutingModule,
+    MaterialModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FlexLayoutServerModule
+  ],
+  exports: [
+    SignupComponent
+  ],
+  providers: [
+    SecurityService
+  ],
+  schemas :[ CUSTOM_ELEMENTS_SCHEMA ]
+})
+export class SignupModule { }
