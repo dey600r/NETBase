@@ -9,23 +9,15 @@ export default class Token {
     constructor() { }
 
     static verifyToken(userToken: string) {
-
         return new Promise((resolve, reject) => {
-
             jwt.verify(userToken, this.configJWT.key, (err, decoded) => {
-
                 if (err) {
                     reject();
                 } else {
                     resolve(decoded);
                 }
-
-
             })
-
         });
-
-
     }
 }
 

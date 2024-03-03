@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.VehicleApi.Controllers
 {
-	[Authorize(Roles = "frontend-admin")]
 	public class VehicleController : BaseController
 	{
 		private readonly IVehicleTypeRepository _vehicleTypeRepository;

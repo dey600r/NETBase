@@ -1,10 +1,7 @@
-using Microservice.Gateway.Utils;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using Microservice.Ioc;
 using Microsoft.OpenApi.Models;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,37 +14,13 @@ builder.Services.AddOcelot();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice Gateway", Version = "v1" }));
-
-// CONFIG APPSETTING JWT
-var configJWT = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
-//builder.Services.AddSingleton(config);
+builder.Services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice Gateway API", Version = "v1" }));
 
 // JWT
-builder.Services
-	.AddHttpContextAccessor()
-	.AddAuthorization()
-	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-	.AddJwtBearer(options =>
-	{
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateIssuer = true,
-			ValidateAudience = true,
-			ValidateLifetime = true,
-			ValidateIssuerSigningKey = true,
-			ValidIssuer = configJWT.Issuer,
-			ValidAudience = configJWT.Audience,
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configJWT.Key))
-		};
-	});
+builder.Services.AddSecurityExtensionConfiguration(builder.Configuration);
 
 // CORS
-builder.Services.AddCors(opt => {
-	opt.AddPolicy(name: "CorsRule", rule => {
-		rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
-	});
-});
+builder.Services.AddCORSExtensionConfiguration();
 
 
 // APP BUILT ----------------------------------------------------------------------------------------

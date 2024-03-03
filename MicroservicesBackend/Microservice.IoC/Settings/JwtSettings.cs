@@ -1,4 +1,4 @@
-﻿namespace Microservice.VehicleApi.Core.Dtos.Utils
+﻿namespace Microservice.IoC.Settings
 {
 	public class JwtSettings
 	{

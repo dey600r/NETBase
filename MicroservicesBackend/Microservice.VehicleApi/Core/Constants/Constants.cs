@@ -49,9 +49,6 @@
 		public const string USER_UNKNOWN_AUDIT = "UserUnknown";
 		public static DateTime DATE_AUDIT = new DateTime(2023, 8, 1);
 
-		// CORS
-		public const string CORS_RULE = "CorsRule";
-
-
+		
 	}
 }

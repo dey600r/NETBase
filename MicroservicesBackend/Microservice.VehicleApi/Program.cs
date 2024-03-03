@@ -1,5 +1,6 @@
 
-using Microservice.VehicleApi.Core.Constants;
+using Microservice.IoC.Utils;
+using Microservice.Ioc;
 using Microservice.VehicleApi.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,13 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-bool keycloakEnabled = builder.Configuration["keycloakEnabled"] == "true";
-
 // SWAGGER
-//if (keycloakEnabled)
-//	builder.Services.AddSwaggerKeycloakExtensionConfiguration(builder.Configuration);
-//else
-	builder.Services.AddSwaggerJWTExtensionConfiguration();
+builder.Services.AddSwaggerJWTExtensionConfiguration("Vechicle", "v1.0.0");
 
 // CONFIG CONTEXT
 builder.Services.AddDBContextExtensionConfiguration(builder.Configuration);
@@ -27,15 +23,10 @@ builder.Services.AddRabbitMqExtensionConfiguration(builder.Configuration);
 builder.Services.AddAppDependenciesExtensionConfiguration(builder.Configuration);
 
 // SECURITY
-if (keycloakEnabled)
-	builder.Services.AddKeycloakExtensionConfiguration(builder.Configuration);
-else
-	builder.Services.AddJWTExtensionConfiguration(builder.Configuration);
+builder.Services.AddSecurityExtensionConfiguration(builder.Configuration);
 
 // CORS
 builder.Services.AddCORSExtensionConfiguration();
-
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 
 // APP BUILT -----------------------------------------------------------------------------------------------
@@ -50,7 +41,7 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors(AppConstants.CORS_RULE);
+app.UseCors(SecurityConstants.CORS_RULE);
 
 // HABILITAR PARA UTILIZAR EL HTTPCONTEXT CLAIMS (TOKEN)
 app.UseAuthentication();

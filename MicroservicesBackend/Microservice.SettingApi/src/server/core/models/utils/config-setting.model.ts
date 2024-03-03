@@ -1,7 +1,9 @@
 export interface IConfigServer {
 	expressSettings: IConfigExpress;
 	jwtSettings: IConfigJWT;
+	keycloackSettings: IConfigKeycloak;
 	mongoSettings: IConfigMongo;
+	keycloakEnabled: boolean;
 }
 
 export interface IConfigExpress {
@@ -20,4 +22,12 @@ export interface IConfigMongo {
 	user: string;
 	pwd: string;
 
+}
+
+export interface IConfigKeycloak {
+	clientId: string;
+	bearerOnly: boolean;
+	serverUrl: string;
+	realm: string;
+	realmPublicKey: string;
 }

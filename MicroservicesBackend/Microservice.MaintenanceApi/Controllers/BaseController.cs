@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microservice.IoC.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.MaintenanceApi.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	[Authorize]
+	[Authorize(Policy = SecurityConstants.SUPER_ADMIN_POLICY)]
 	public class BaseController : ControllerBase
 	{
 

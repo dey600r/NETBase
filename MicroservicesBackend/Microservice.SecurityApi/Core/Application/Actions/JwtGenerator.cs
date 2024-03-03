@@ -1,7 +1,6 @@
-﻿using Microservice.Security.Core.Application.Mapping.Dto.Settings;
+﻿using Microservice.IoC.Settings;
 using Microservice.Security.Core.Persistence.Entities;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

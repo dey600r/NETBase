@@ -1,18 +1,10 @@
 
-using MassTransit;
 using Microservice.MaintenanceApi.Core.Constants;
-using Microservice.MaintenanceApi.Core.Dtos.Utils;
-using Microservice.MaintenanceApi.Core.Events;
 using Microservice.MaintenanceApi.Core.Mapping;
 using Microservice.MaintenanceApi.Infraestructure.Context;
 using Microservice.MaintenanceApi.Infraestructure.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using RabbitMQ.Client;
-using System.Reflection;
-using System.Text;
+using Microservice.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,32 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // SWAGGER
-builder.Services.AddSwaggerGen(opt => {
-	opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice Maintenance API", Version = "v1" });
-	opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-	{
-		In = ParameterLocation.Header,
-		Description = "Please enter token",
-		Name = "Authorization",
-		Type = SecuritySchemeType.Http,
-		BearerFormat = "JWT",
-		Scheme = "bearer"
-	});
-
-	opt.AddSecurityRequirement(new OpenApiSecurityRequirement {
-						{
-							new OpenApiSecurityScheme
-							{
-								Reference = new OpenApiReference
-								{
-									Type = ReferenceType.SecurityScheme,
-									Id = "Bearer"
-								}
-							},
-			new string[] { }
-		}
-	});
-});
+builder.Services.AddSwaggerJWTExtensionConfiguration("Maintenance", "v1.0.0");
 
 // CONFIG CONTEXT
 builder.Services.AddDbContext<DBContext>(options =>
@@ -56,26 +23,7 @@ builder.Services.AddDbContext<DBContext>(options =>
 );
 
 // MASS TRANSIG - RABBITMQ
-var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
-builder.Services.AddMassTransit(x =>
-{
-	//x.AddConsumer<MessageEventConsumer>();
-	x.AddConsumers(Assembly.GetEntryAssembly());
-	x.UsingRabbitMq((context, cfg) =>
-	{
-		cfg.Host(rabbitMQSettings.Host, rabbitMQSettings.VHost, h =>
-		{
-			h.Username(rabbitMQSettings.User);
-			h.Password(rabbitMQSettings.Pwd);
-		});
-
-		cfg.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(rabbitMQSettings.ServiceName, false));
-		cfg.UseMessageRetry(b =>
-		{
-			b.Interval(3, TimeSpan.FromSeconds(5));
-		});
-	});
-});
+builder.Services.AddRabbitMqExtensionConfiguration(builder.Configuration);
 
 // AUTOMAPPER
 builder.Services.AddAutoMapper(typeof(BusinessProfile));
@@ -85,34 +33,10 @@ builder.Services.AddScoped<IConfigurationRepository, ConfigurationRepository>();
 builder.Services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
 
 // SECURITY
-var config = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
-builder.Services.AddHttpContextAccessor()
-	.AddAuthorization()
-	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-	.AddJwtBearer(options =>
-	{
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateIssuer = true,
-			ValidateAudience = true,
-			ValidateLifetime = true,
-			ValidateIssuerSigningKey = true,
-			ValidIssuer = config.Issuer,
-			ValidAudience = config.Audience,
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Key))
-		};
-	});
+builder.Services.AddSecurityExtensionConfiguration(builder.Configuration);
 
 // CORS
-builder.Services.AddCors(opt =>
-{
-	opt.AddPolicy(name: AppConstants.CORS_RULE, rule =>
-	{
-		rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
-	});
-});
-
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddCORSExtensionConfiguration();
 
 
 // APP BUILT -----------------------------------------------------------------------------------------------

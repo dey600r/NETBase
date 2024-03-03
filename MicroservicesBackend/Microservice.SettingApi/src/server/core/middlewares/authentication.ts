@@ -1,8 +1,7 @@
-import { Response, Request, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import Token from '../token';
 
 export const validateToken = (req: any, res: Response, next: NextFunction) => {
-
     //let token: string = req.get('x-token') || '';
 
     //if (token === '') res.sendStatus(401);
@@ -11,14 +10,14 @@ export const validateToken = (req: any, res: Response, next: NextFunction) => {
     const bearerHeader = req.headers['authorization'];
     if (typeof bearerHeader !== undefined)
         token = bearerHeader.split(' ')[1];
-
     Token.verifyToken(token)
         .then((decoded: any) => {
             console.log('Decoded', decoded);
             req.user = decoded.UserName;
             next();
         })
-        .catch(err => {
+        .catch((err: any) => {
+            console.error('ERROR TOKEN VERIFICATION', err);
             res.sendStatus(401);
         });
     

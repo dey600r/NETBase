@@ -2,17 +2,13 @@
 using FluentValidation;
 using Microservice.Security.Core.Application.Actions;
 using Microservice.Security.Core.Application.Mapping;
-using Microservice.Security.Core.Application.Mapping.Dto.Settings;
 using Microservice.Security.Core.Persistence;
 using Microservice.Security.Core.Persistence.Entities;
 using Microservice.Security.Core.Persistence.Repository;
 using Microservice.SecurityApi.Core.Application.Exceptions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microservice.Ioc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text;
 using static Microservice.Security.Core.Application.Mediator.Command.SignUpCommandHandler;
 using static Microservice.Security.Core.Application.Mediator.Query.LoginQueryHandler;
 
@@ -23,22 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(opt =>
-{
-	opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice Security API", Version = "v1" });
-	opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { 
-		In = ParameterLocation.Header,
-		Description = "Please enter token",
-		Name = "Authorization",
-		Type = SecuritySchemeType.Http,
-		BearerFormat = "JWT",
-		Scheme = "bearer" });
-	opt.AddSecurityRequirement(new OpenApiSecurityRequirement { {
-							new OpenApiSecurityScheme {
-								Reference = new OpenApiReference {
-									Type = ReferenceType.SecurityScheme,
-									Id = "Bearer" } }, new string[] { }}});
-});
+builder.Services.AddSwaggerJWTExtensionConfiguration("Security", "v1.0.0");
 
 // CONFIG CONTEXT
 builder.Services.AddDbContext<SecurityContext>(options =>
@@ -65,36 +46,11 @@ builder.Services.AddScoped<IUserSessionRepository, UserSessionRepository>();
 builder.Services.AddScoped<IValidator<UserSignUp>, UserSignUpValidation>();
 builder.Services.AddScoped<IValidator<UserLogin>, UserLoginValidation>();
 
-// CONFIG APPSETTING JWT
-var config = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
-builder.Services.AddSingleton(config);
-
 // JWT
-builder.Services.AddHttpContextAccessor()
-	.AddAuthorization()
-	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-	.AddJwtBearer(options =>
-	{
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateIssuer = true,
-			ValidateAudience = true,
-			ValidateLifetime = true,
-			ValidateIssuerSigningKey = true,
-			ValidIssuer = config.Issuer,
-			ValidAudience = config.Audience,
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Key))
-		};
-	});
+builder.Services.AddJWTExtensionConfiguration(builder.Configuration);
 
 // CORS
-builder.Services.AddCors(opt => {
-	opt.AddPolicy(name: "CorsRule", rule => {
-		rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
-	});
-});
-
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddCORSExtensionConfiguration();
 
 
 
