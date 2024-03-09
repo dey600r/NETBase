@@ -15,7 +15,7 @@ export const routesKeycloack: Routes = [
         path: UrlConstants.URL_HOME,
         loadChildren: () => import('./pages/home/pages.module').then(mod => mod.PagesModule),
         canActivate: [AuthKeycloakGuard],
-        data: { roles: ["realm-admin"] }
+        data: { roles: ['admin', 'manager', 'customer'] }
   },
   {
         path: '**',
@@ -33,7 +33,7 @@ export const routesJWT: Routes = [
             path: UrlConstants.URL_HOME,
             loadChildren: () => import('./pages/home/pages.module').then(mod => mod.PagesModule),
             canActivate: [AuthGuard],
-            data: { roles: ["realm-admin"] }
+            data: { roles: ['admin', 'manager', 'customer'] }
       },
       {
             path: UrlConstants.URL_LOGIN,

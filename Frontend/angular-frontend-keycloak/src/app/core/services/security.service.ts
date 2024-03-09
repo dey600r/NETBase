@@ -8,8 +8,8 @@ import { IUserModel, ILoginModel, ISignupModel } from '@models/index';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakProfile } from 'keycloak-js';
-import { map } from 'rxjs';
 import { environment } from '@environments/environment';
+import { MaterialService } from './material.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class SecurityService {
   constructor(private httpService: HttpService,
     private storageService: StorageService,
     private keycloak: KeycloakService,
-    private router: Router) { }
+    private router: Router,
+    private materialService: MaterialService) { }
 
   login(email: string, password: string): Promise<IUserModel> {
     return this.httpService.post<ILoginModel, IUserModel>(UrlConstants.URL_API_LOGIN, { email, password });
@@ -68,7 +69,7 @@ export class SecurityService {
     this.storageService.removeData(AppConstants.LOCAL_STORAGE_USER);
   }
 
-  validateToken(): boolean {
+  validateToken(roles: string[]): boolean {
     let user: IUserModel | null = this.getUser();
 
     if(!user || !user.token) {
@@ -76,7 +77,20 @@ export class SecurityService {
       return false;
     }
     
-    return true;
+    return this.validateRoles(user.roles, roles);
+  }
+
+  validateRoles(rolesToken: string[], rolesPage: string[]): boolean {
+    // Allow the user to to proceed if no additional roles are required to access the route.
+    if (!(rolesPage instanceof Array) || rolesPage.length === 0) {
+      return true;
+    }
+
+    const validated = rolesPage.some((role) => rolesToken.includes(role));
+    if(!validated) {
+      this.materialService.openSnackBar('Unauthorized!!!');
+    }
+    return validated;
   }
 
   logout(): void {
@@ -86,7 +100,7 @@ export class SecurityService {
       });
     } else {
       this.clearUser();
-      this.router.navigateByUrl(UrlConstants.URL_API_LOGIN);
+      this.router.navigateByUrl(UrlConstants.URL_LOGIN);
     }
     
   }

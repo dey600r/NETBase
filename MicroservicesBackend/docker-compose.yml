@@ -7,7 +7,9 @@ services:
     container_name: microservice-gateway
     hostname: "microservice-gateway"
     image: microservice-gateway
-    build: ../Microservice.Gateway
+    build:
+      context: ./
+      dockerfile: Dockerfile-microservice-gateway
     environment:
       ASPNETCORE_ENVIRONMENT: "Production"
     ports:
@@ -20,7 +22,9 @@ services:
     container_name: microservice-security-api
     hostname: "microservice-security-api"
     image: microservice-security-api
-    build: ../Microservice.SecurityApi
+    build:
+      context: ./
+      dockerfile: Dockerfile-microservice-security
     environment:
       ASPNETCORE_ENVIRONMENT: "Production"
     ports:
@@ -35,7 +39,9 @@ services:
     container_name: microservice-vehicle-api
     hostname: "microservice-vehicle-api"
     image: microservice-vehicle-api
-    build: ../Microservice.VehicleApi
+    build:
+      context: ./
+      dockerfile: Dockerfile-microservice-vehicle
     environment:
       ASPNETCORE_ENVIRONMENT: "Production"
     ports:
@@ -51,7 +57,9 @@ services:
     container_name: microservice-maintenance-api
     hostname: "microservice-maintenance-api"
     image: microservice-maintenance-api
-    build: ../Microservice.MaintenanceApi
+    build: 
+      context: ./
+      dockerfile: Dockerfile-microservice-maintenance
     environment:
       ASPNETCORE_ENVIRONMENT: "Production"
     ports:
@@ -67,7 +75,9 @@ services:
     container_name: microservice-setting-api
     hostname: "microservice-setting-api"
     image: microservice-setting-api
-    build: ../Microservice.SettingApi
+    build:
+      context: ./
+      dockerfile: Dockerfile-microservice-setting
     environment:
       NODE_ENV: "production"
     ports:

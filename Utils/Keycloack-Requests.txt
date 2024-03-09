@@ -1,0 +1,10 @@
+---- POST WITH CURL TO KEYCLOAK-----
+curl -X POST http://localhost:8180/realms/microservices/protocol/openid-connect/token -H "Content-Type: application/x-www-form-urlencoded"  --data-urlencode "username=dey125r" --data-urlencode "password=Dj123??" --data-urlencode "grant_type=password" --data-urlencode "client_id=backend"
+curl -X POST http://keycloak:8180/realms/microservices/protocol/openid-connect/token -H "Content-Type: application/x-www-form-urlencoded"  --data-urlencode "username=dey125r" --data-urlencode "password=Dj123??" --data-urlencode "grant_type=password" --data-urlencode "client_id=backend"
+
+--- URL KEYCLOAK ------
+LOGIN -> http://localhost:8180/realms/microservices/protocol/openid-connect/token
+
+USER -> http://localhost:8180/realms/microservices/account
+
+TOKEN -> http://localhost:8180/realms/microservices/protocol/openid-connect/token

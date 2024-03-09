@@ -15,19 +15,19 @@ const routesKeycloack: Routes = [
         path: UrlConstants.URL_SETTING,
         loadChildren: () => import('./setting/setting.module').then(mod => mod.SettingModule),
         canActivate: [AuthKeycloakGuard],
-        data: { roles: ["realm-admin"] }
+        data: { roles: ['admin'] }
       },
       {
         path: UrlConstants.URL_VEHICLE,
         loadChildren: () => import('./vehicle/vehicle.module').then(mod => mod.VehicleModule),
         canActivate: [AuthKeycloakGuard],
-        data: { roles: ["frontend-admin"] }
+        data: { roles: ['admin'] }
       },
       {
         path: UrlConstants.URL_MAINTENANCE,
         loadChildren: () => import('./maintenance/maintenance.module').then(mod => mod.MaintenanceModule),
         canActivate: [AuthKeycloakGuard],
-        data: { roles: ["frontend-admin"] }
+        data: { roles: ['admin'] }
       }
     ]
   }  
@@ -42,19 +42,19 @@ const routesJWT: Routes = [
         path: UrlConstants.URL_SETTING,
         loadChildren: () => import('./setting/setting.module').then(mod => mod.SettingModule),
         canActivate: [AuthGuard],
-        data: { roles: ["realm-admin"] }
+        data: { roles: ['admin'] }
       },
       {
         path: UrlConstants.URL_VEHICLE,
         loadChildren: () => import('./vehicle/vehicle.module').then(mod => mod.VehicleModule),
         canActivate: [AuthGuard],
-        data: { roles: ["frontend-admin"] }
+        data: { roles: ['admin'] }
       },
       {
         path: UrlConstants.URL_MAINTENANCE,
         loadChildren: () => import('./maintenance/maintenance.module').then(mod => mod.MaintenanceModule),
         canActivate: [AuthGuard],
-        data: { roles: ["frontend-admin"] }
+        data: { roles: ['admin'] }
       }
     ]
   }  

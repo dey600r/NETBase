@@ -33,7 +33,6 @@
     <None Include="src\server\app.ts" />
     <None Include="src\server\routes\settings.ts" />
     <Content Include="src\assets\config.json" />
-    <Content Include="Dockerfile" />
     <Content Include="src\assets\config.production.json" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />

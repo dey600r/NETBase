@@ -4,8 +4,8 @@ export const environment = {
     keycloak: {
         enable: true,
         url: 'http://localhost:8180',
-        realm: 'test',
-        clientId: 'frontend',
+        realm: 'microservices',
+        clientId: 'backend',
         onLoad: 'login-required',
     }    
 };

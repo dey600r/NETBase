@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 import { IPermissionsService } from './auth.interface';
+import { SecurityService } from '@services/index';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AuthKeycloakGuard extends KeycloakAuthGuard implements IPermissions
   
   constructor(
     protected override readonly router: Router,
-    protected readonly keycloak: KeycloakService
+    protected readonly keycloak: KeycloakService,
+    private securityService: SecurityService
   ) {
     super(router, keycloak);
   }
@@ -26,15 +28,6 @@ export class AuthKeycloakGuard extends KeycloakAuthGuard implements IPermissions
       });
     }
 
-    // Get the roles required from the route.
-    const requiredRoles = route.data['roles'];
-
-    // Allow the user to to proceed if no additional roles are required to access the route.
-    if (!(requiredRoles instanceof Array) || requiredRoles.length === 0) {
-      return true;
-    }
-    
-    // Allow the user to proceed if all the required roles are present.
-    return requiredRoles.every((role) => this.roles.includes(role));
+    return this.securityService.validateRoles(this.roles, route.data['roles']);
   }
 }

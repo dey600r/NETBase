@@ -4,7 +4,7 @@ export const environment = {
   keycloak: {
     enable: true,
     url: 'http://localhost:8180',
-    realm: 'test',
+    realm: 'microservices',
     clientId: 'frontend',
     onLoad: 'login-required',
   }    

@@ -11,12 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{727D5A43-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Gateway", "Microservice.Gateway\Microservice.Gateway.csproj", "{FF713FAE-F8DA-4333-9A35-898501CE525B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dockers", "dockers", "{F4FE783A-81FA-4144-829C-7CC050BD5008}"
-	ProjectSection(SolutionItems) = preProject
-		docker\docker-compose.yml = docker\docker-compose.yml
-		docker\Dockerfile-Microservice-Maintenance = docker\Dockerfile-Microservice-Maintenance
-	EndProjectSection
-EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Microservice.SettingApi", "Microservice.SettingApi\Microservice.SettingApi.njsproj", "{B84F697B-AD49-4A97-95C5-CD5C5FC0E9DD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.VehicleApi", "Microservice.VehicleApi\Microservice.VehicleApi.csproj", "{7761D614-9C82-4D8E-B159-B2D7B1665818}"

@@ -11,7 +11,7 @@ export class AuthJWTGuard implements IPermissionsService {
     constructor( private securityService: SecurityService ) {}
 
     isAccessAllowed(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        return this.securityService.validateToken();
+        return this.securityService.validateToken(next.data['roles']);
     }
 }
   
