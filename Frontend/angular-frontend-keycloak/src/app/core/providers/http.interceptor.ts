@@ -36,6 +36,7 @@ export class APIInterceptor implements HttpInterceptor {
             .pipe(catchError((err: HttpErrorResponse, caught) => {
               switch(err.status) {
                 case 401:
+                case 403:
                   this.materialService.openSnackBar(err.statusText);
                   this.router.navigateByUrl(UrlConstants.URL_API_LOGIN);
                   break;

@@ -1,31 +1,23 @@
+import * as config from './core/middlewares/config';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
+import settings from './routes/settings';
+import crypto from './routes/crypto';
 import Server from './core/server';
 
-import * as config from '../assets/config.json';
-import * as configProd from '../assets/config.production.json';
 import { IConfigServer } from './core/models/utils/config-setting.model';
 import Cypher from './core/encrypter';
 
-
-let cfg: IConfigServer = config as IConfigServer;
-if (process.env.NODE_ENV === 'production') {
-    cfg = configProd as IConfigServer;
-}
+let cfg: IConfigServer = (config as any).config as IConfigServer;
 
 const serverApp = new Server(cfg.expressSettings.host, cfg.expressSettings.port);
 // KEYCLOAK
 if (cfg.keycloakEnabled) {
-    const session = require('express-session');
-    const Keycloak = require('keycloak-connect');
-
-    const memoryStore = new session.MemoryStore();
-    const keycloak = new Keycloak({ store: memoryStore }, cfg.keycloackSettings);
+    const keycloak = require('./core/middlewares/authentication-keycloak').keycloak;
     serverApp.app.use(keycloak.middleware());
 
-    module.exports = { keycloak: keycloak };
-    console.log('Keycloak initialized');
+    console.log('Keycloak initialized', cfg.keycloackSettings);
 }
 
 // Body parser
@@ -33,8 +25,7 @@ serverApp.app.use(bodyParser.urlencoded({ extended: true }));
 serverApp.app.use(bodyParser.json());
 
 
-import settings from './routes/settings';
-import crypto from './routes/crypto';
+
 
 // ROUTES
 serverApp.app.use('/api/settings', settings);
