@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BASE.WebApi.Controllers
 {
-	[Authorize(Policy = ConstantsSecurity.SUPER_ADMIN_POLICY)]
-	public class UtilsController : BaseAuthorizeController
-	{
+	//[Authorize(Policy = ConstantsSecurity.SUPER_ADMIN_POLICY)]
+	public class UtilsController : BaseController
+    {
 		public UtilsController(ILogger<BaseController> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)
 		{
 		}

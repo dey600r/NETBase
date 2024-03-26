@@ -44,10 +44,14 @@ namespace mvc_keycloak.Controllers
 				new DataModel() { name = "Ana", description = "buenos dias" }
 			};
 
-			return View(dataModels);
+            HttpContext.Session.SetString("TokenDavid", dataModels.ToString());
+            var token = HttpContext.Session.GetString("keycloak.cookie");
+
+
+            return View(dataModels);
 		}
 
-        [CustomeAuthorization("hola")]
+        [CustomeAuthorization("adios")]
         public IActionResult Privacy()
         {
             return View();
