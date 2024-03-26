@@ -25,9 +25,9 @@ export interface IConfigMongo {
 }
 
 export interface IConfigKeycloak {
-	clientId: string;
-	bearerOnly: boolean;
-	serverUrl: string;
-	realm: string;
-	realmPublicKey: string;
+	"realm": string;
+  	"auth-server-url": string;
+  	"ssl-required": string;
+  	"resource": string;
+  	"bearer-only": boolean;
 }
