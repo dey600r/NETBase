@@ -400,3 +400,4 @@ FodyWeavers.xsd
 /Frontend/angular-frontend-keycloak/.vscode
 /Frontend/angular-frontend-ssr/.vscode
 /MicroservicesBackend/Microservice.SettingApi/package-lock.json
+/MicroservicesBackend/Microservice.SettingApi/dist/assets/config.json
