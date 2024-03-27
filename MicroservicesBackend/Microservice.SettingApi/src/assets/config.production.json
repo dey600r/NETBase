@@ -9,8 +9,8 @@
 	"keycloackSettings": {
 		"realm": "microservices",
   		"auth-server-url": "http://keycloak:8180",
-  		"ssl-required": "external",
-  		"resource": "backend",
+  		"ssl-required": "none",
+  		"resource": "frontend",
   		"bearer-only": true
 	},
 	"mongoSettings": {

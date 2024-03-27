@@ -3,6 +3,18 @@ version: "3.4"
 name: microservices-environment
 services:
 
+  microservice-angular:
+    container_name: microservice-angular
+    hostname: "microservice-angular"
+    image: microservice-angular
+    build:
+      context: ./
+      dockerfile: Dockerfile-microservice-angular
+    ports:
+      - "3300:8080"
+    networks:
+      - network_microservices
+
   microservice-gateway:
     container_name: microservice-gateway
     hostname: "microservice-gateway"
@@ -109,7 +121,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-     - ./docker-configs/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+     - ./Utils/docker-configs/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - network_microservices
 
@@ -157,7 +169,7 @@ services:
       - --http-port=8180
       - --import-realm
     volumes:
-      - ./docker-configs/keycloak-realms:/opt/keycloak/data/import
+      - ./Utils/docker-configs/keycloak-realms:/opt/keycloak/data/import
     networks:
       - network_microservices
 
