@@ -17,6 +17,6 @@ RUN npm run build-prod && mv dist/angular-frontend-keycloak/* /home/node/app && 
 
 WORKDIR /home/node/app
 
-EXPOSE 8080
+EXPOSE 8080:8080
 
 CMD [ "http-server", "./" ]
