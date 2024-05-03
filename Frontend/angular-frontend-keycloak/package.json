@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build-prod": "ng build --configuration=production",
+    "build-openshift": "ng build --configuration=openshift --base-href=/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint -c .eslintrc.json --ext .ts ./src"

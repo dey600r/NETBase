@@ -69,6 +69,32 @@
               "namedChunks": true,
               "buildOptimizer": true
             },
+            "openshift": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.openshift.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "namedChunks": true,
+              "buildOptimizer": true
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -83,6 +109,9 @@
           "configurations": {
             "production": {
               "buildTarget": "angular-frontend:build:production"
+            },
+            "openshift": {
+              "buildTarget": "angular-frontend:build:openshift"
             },
             "development": {
               "buildTarget": "angular-frontend:build:development"
