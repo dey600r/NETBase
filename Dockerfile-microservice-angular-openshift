@@ -7,7 +7,7 @@ RUN npm install
 
 RUN echo "BUILD PROD"
 COPY --chown=node ./Frontend/angular-frontend-keycloak .
-RUN npm run build --prod
+RUN npm run build-openshift
 
 # Stage 2: Serve app with nginx server
 FROM nginxinc/nginx-unprivileged
