@@ -18,7 +18,7 @@ RUN dotnet restore "./Microservice.Gateway/./Microservice.Gateway.csproj"
 COPY ./MicroservicesBackend/Microservice.Gateway ./Microservice.Gateway
 COPY ./MicroservicesBackend/Microservice.IoC ./Microservice.Gateway
 WORKDIR "/src/Microservice.Gateway"
-RUN dotnet build "./Microservice.Gateway.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+RUN dotnet build "./Microservice.Gateway.csproj" -c %BUILD_CONFIGURATION% -o /app/build --property WarningLevel=0
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
