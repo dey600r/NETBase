@@ -89,11 +89,11 @@
                 }
               ],
               "outputHashing": "all",
-              "optimization": true,
-              "extractLicenses": true,
-              "sourceMap": false,
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
               "namedChunks": true,
-              "buildOptimizer": true
+              "buildOptimizer": false
             },
             "development": {
               "optimization": false,
