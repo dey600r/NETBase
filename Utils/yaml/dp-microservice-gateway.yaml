@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dp-microservices-gateway
+  namespace: microservices
+  labels:
+    app: microservices
+    app.kubernetes.io/part-of: microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservices
+  template:
+    metadata:
+      labels:
+        app: microservices
+    spec:
+      containers:
+        - name: microservice-gateway
+          image: image-registry.openshift-image-registry.svc:5000/microservices/is-microservice-gateway:latest
+          ports:
+            - name: gateway-port
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              ephemeral-storage: 8Gi
+            requests:
+              ephemeral-storage: 4Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

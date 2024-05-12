@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dp-frontend-docker
+  namespace: microservices
+  labels:
+    app: microservices
+    app.kubernetes.io/part-of: microservices
+spec:
+  selector:
+    matchLabels:
+      app:  microservices
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  microservices
+    spec:
+      containers:
+        - name: microservice-frontend-docker
+          image: dey125r/dey-frontend-microservices-openshift:latest
+          ports:
+            - name: frontend-port
+              containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+  triggers:
+    - type: "ImageChange"
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - microservice-frontend-docker
+        from:
+          kind: ImageStreamTag
+          name: is-frontend-docker:latest
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

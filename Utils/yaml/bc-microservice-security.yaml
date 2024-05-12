@@ -1,0 +1,34 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: bc-microservice-security
+  namespace: microservices
+  labels:
+    name: microservices
+    app.kubernetes.io/part-of: microservices
+spec:
+  resources:
+    limits:
+      ephemeral-storage: 4Gi
+    requests:
+      ephemeral-storage: 2Gi
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'is-microservice-security:latest'
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile-microservice-security-openshift
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/dey600r/NETBase.git'
+      ref: master
+  triggers:
+    - type: ConfigChange
+  runPolicy: Serial

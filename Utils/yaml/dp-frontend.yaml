@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dp-frontend
+  namespace: microservices
+  labels:
+    app: microservices
+    app.kubernetes.io/part-of: microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservices
+  template:
+    metadata:
+      labels:
+        app: microservices
+    spec:
+      containers:
+        - name: microservice-frontend
+          image: image-registry.openshift-image-registry.svc:5000/microservices/is-frontend:latest
+          ports:
+            - name: frontend-port
+              containerPort: 3000
+              protocol: TCP
+          resources:
+            limits:
+              ephemeral-storage: 8Gi
+            requests:
+              ephemeral-storage: 4Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
