@@ -3,6 +3,7 @@
 		{
 			"DownstreamPathTemplate": "/api/security",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-security-api.apps-crc.testing",
@@ -19,6 +20,7 @@
 		{
 			"DownstreamPathTemplate": "/api/security/signup",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-security-api.apps-crc.testing",
@@ -31,6 +33,7 @@
 		{
 			"DownstreamPathTemplate": "/api/security/login",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-security-api.apps-crc.testing",
@@ -43,6 +46,7 @@
 		{
 			"DownstreamPathTemplate": "/api/vehicle",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-vehicle-api.apps-crc.testing",
@@ -59,6 +63,7 @@
 		{
 			"DownstreamPathTemplate": "/api/vehicle/maintenance-element",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-vehicle-api.apps-crc.testing",
@@ -75,6 +80,7 @@
 		{
 			"DownstreamPathTemplate": "/api/vehicle/type",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-vehicle-api.apps-crc.testing",
@@ -91,6 +97,7 @@
 		{
 			"DownstreamPathTemplate": "/api/configuration",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-vehicle-api.apps-crc.testing",
@@ -107,6 +114,7 @@
 		{
 			"DownstreamPathTemplate": "/api/configuration",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-vehicle-api.apps-crc.testing",
@@ -123,6 +131,7 @@
 		{
 			"DownstreamPathTemplate": "/api/maintenance/configuration",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-maintenance-api.apps-crc.testing",
@@ -139,6 +148,7 @@
 		{
 			"DownstreamPathTemplate": "/api/maintenance/maintenance-element",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-maintenance-api.apps-crc.testing",
@@ -155,6 +165,7 @@
 		{
 			"DownstreamPathTemplate": "/api/maintenance/maintenance-element",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-maintenance-api.apps-crc.testing",
@@ -171,6 +182,7 @@
 		{
 			"DownstreamPathTemplate": "/api/settings/get-all",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-setting-api.apps-crc.testing",
@@ -187,6 +199,7 @@
 		{
 			"DownstreamPathTemplate": "/api/settings/get",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-setting-api.apps-crc.testing",
@@ -203,6 +216,7 @@
 		{
 			"DownstreamPathTemplate": "/api/settings/add",
 			"DownstreamScheme": "https",
+			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "microservice-setting-api.apps-crc.testing",
