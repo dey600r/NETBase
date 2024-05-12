@@ -27,6 +27,5 @@ RUN dotnet publish "./Microservice.SecurityApi.csproj" -c %BUILD_CONFIGURATION% 
 
 FROM base AS final
 WORKDIR /app
-ENV ASPNETCORE_ENVIRONMENT Openshift
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Microservice.SecurityApi.dll"]
