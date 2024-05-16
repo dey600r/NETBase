@@ -96,7 +96,7 @@ namespace BASE.AppInfrastructure.Repository
 				throw new DataBaseException("No data to update");
 
             var entitiesDB = GetByIds(entities.Select(x => x.Id));
-            if (entitiesDB.Any(x => entities.Any(y => y.CreatedDate < x.CreatedDate)))
+            if (entitiesDB.Any(x => entities.Any(y => y.Id.Equals(x.Id) && y.CreatedDate < x.CreatedDate)))
                 throw new ConcurrencyDataBaseException("Creation date higher than the new one");
 
 			var results = new List<TEntity>();

@@ -90,5 +90,37 @@ namespace BASE.WebApiTest.UnitTest
 			Assert.True(checkNewVehicle.CreatedUser == ConstantsSecurity.ADMIN_ROLE_NAME);
 			Assert.True(checkNewVehicle.Brand == "Honda");
 		}
-	}
+
+        [Fact]
+        public void TestVehicleControllerAddAndUpdate()
+        {
+            var vehicleRepository = _fixture.GetService<IVehicleRepository>(_testOutputHelper);
+
+            var result = vehicleRepository.Add(new Vehicle
+            {
+                Brand = "Honda",
+                Model = "CBR",
+                Km = 50000,
+                Year = 2008,
+                DateKms = DateTime.UtcNow,
+                KmsPerMonth = 100,
+                Active = true,
+                VehicleTypeId = 1,
+                ConfigurationId = 1,
+            });
+
+            Assert.True(result.Brand == "Honda");
+
+            result.Brand = "Yamaha";
+
+            result = vehicleRepository.Update(result);
+
+            Assert.True(result.Brand == "Yamaha");
+
+            var checkNewVehicle = vehicleRepository.GetById(result.Id);
+
+            Assert.True(checkNewVehicle.CreatedUser == ConstantsSecurity.ADMIN_ROLE_NAME);
+            Assert.True(checkNewVehicle.Brand == "Yamaha");
+        }
+    }
 }
