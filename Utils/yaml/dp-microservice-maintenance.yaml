@@ -20,7 +20,7 @@ spec:
         - name: microservice-maintenance
           image: image-registry.openshift-image-registry.svc:5000/microservices/is-microservice-maintenance:latest
           ports:
-            - name: maintenance-port
+            - name: maint-port
               containerPort: 8080
               protocol: TCP
           resources:

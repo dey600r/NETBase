@@ -25,4 +25,4 @@ spec:
     - name: maintenance-tcp
       protocol: TCP
       port: 3700
-      targetPort: maintenance-port
+      targetPort: maint-port
