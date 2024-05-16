@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: dp-frontend
+  name: dp-microservices-vehicle
   namespace: microservices
   labels:
     app: microservices
@@ -17,10 +17,10 @@ spec:
         app: microservices
     spec:
       containers:
-        - name: microservice-frontend
-          image: image-registry.openshift-image-registry.svc:5000/microservices/is-frontend:latest
+        - name: microservice-vehicle
+          image: image-registry.openshift-image-registry.svc:5000/microservices/is-microservice-vehicle:latest
           ports:
-            - name: frontend-port
+            - name: vehicle-port
               containerPort: 8080
               protocol: TCP
           resources:

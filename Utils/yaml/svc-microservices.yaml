@@ -18,3 +18,7 @@ spec:
       protocol: TCP
       port: 3500
       targetPort: security-port
+    - name: vehicle-tcp
+      protocol: TCP
+      port: 3600
+      targetPort: vehicle-port
