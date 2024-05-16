@@ -22,3 +22,7 @@ spec:
       protocol: TCP
       port: 3600
       targetPort: vehicle-port
+    - name: maintenance-tcp
+      protocol: TCP
+      port: 3700
+      targetPort: maintenance-port

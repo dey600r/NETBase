@@ -1,7 +1,7 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: bc-microservice-vehicle
+  name: bc-microservice-maintenance
   namespace: microservices
   labels:
     name: microservices
@@ -9,20 +9,20 @@ metadata:
 spec:
   resources:
     limits:
-      ephemeral-storage: 4Gi
+      ephemeral-storage: 8Gi
     requests:
-      ephemeral-storage: 2Gi
+      ephemeral-storage: 4Gi
   nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: 'is-microservice-vehicle:latest'
+      name: 'is-microservice-maintenance:latest'
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5
   strategy:
     type: Docker
     dockerStrategy:
-      dockerfilePath: Dockerfile-microservice-vehicle-openshift
+      dockerfilePath: Dockerfile-microservice-maintenance-openshift
   postCommit: {}
   source:
     type: Git
