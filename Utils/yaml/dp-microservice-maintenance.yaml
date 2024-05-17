@@ -6,6 +6,7 @@ metadata:
   labels:
     app: microservices
     app.kubernetes.io/part-of: microservices
+    app.openshift.io/runtime: dotnet
 spec:
   replicas: 1
   selector:
