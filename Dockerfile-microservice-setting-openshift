@@ -8,4 +8,4 @@ COPY ./MicroservicesBackend/Microservice.SettingApi/src/ .
 RUN chmod -R 777 ./
 RUN npm run build
 EXPOSE 3800
-CMD [ "npm", "start"]
+CMD [ "npm", "start", "--loglevel=verbose"]
