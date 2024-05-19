@@ -1,11 +1,10 @@
 FROM node:18.16.0-alpine3.17
-USER node
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 ENV NODE_ENV openshift
 COPY ./MicroservicesBackend/Microservice.SettingApi/package.json ./MicroservicesBackend/Microservice.SettingApi/package-lock.json ./MicroservicesBackend/Microservice.SettingApi/tsconfig.json .
 RUN npm install
-COPY --chown=node ./MicroservicesBackend/Microservice.SettingApi/src/ .
+COPY ./MicroservicesBackend/Microservice.SettingApi/src/ .
 RUN chmod -R 777 ./
 RUN npm run build
 EXPOSE 3800
