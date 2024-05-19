@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using MassTransit.Logging;
 using Microservice.IoC.Settings;
 using Microservice.IoC.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -6,7 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net.Security;
 using System.Reflection;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
 
@@ -206,18 +209,28 @@ namespace Microservice.Ioc
 			var rabbitMQSettings = configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
 			service.AddMassTransit(x =>
 			{
-
+			
 				x.AddConsumers(Assembly.GetEntryAssembly());
 				x.UsingRabbitMq((context, cfg) =>
 				{
-					cfg.Host(rabbitMQSettings.Host, rabbitMQSettings.VHost, h =>
+					cfg.Host(rabbitMQSettings.Host, (ushort)rabbitMQSettings.Port, rabbitMQSettings.VHost, h =>
 					{
 						h.Username(rabbitMQSettings.User);
 						h.Password(rabbitMQSettings.Pwd);
-						//h.UseSsl(s =>
-						//{
-						//	s.Protocol = SslProtocols.Tls12;
-						//});
+						if(rabbitMQSettings.SslOptionEnabled) {
+							h.UseSsl(s =>
+							{
+								//s.Certificate = System.Security.Cryptography.X509Certificates.X509CertificateCollection;
+								s.Protocol = SslProtocols.Tls12;
+								s.ServerName = rabbitMQSettings.Host;
+								//s.UseCertificateAsAuthenticationIdentity = true;
+								s.AllowPolicyErrors(SslPolicyErrors.RemoteCertificateNameMismatch);
+								s.AllowPolicyErrors(SslPolicyErrors.RemoteCertificateNotAvailable);
+								s.AllowPolicyErrors(SslPolicyErrors.RemoteCertificateChainErrors);
+								//s.AllowPolicyErrors(SslPolicyErrors.None);
+							});
+
+						}
 					});
 
 					cfg.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(rabbitMQSettings.ServiceName, false));

@@ -26,3 +26,7 @@ spec:
       protocol: TCP
       port: 3700
       targetPort: maint-port
+    - name: setting-tcp
+      protocol: TCP
+      port: 3800
+      targetPort: setting-port

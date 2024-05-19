@@ -1,0 +1,18 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: route-microservice-setting
+  namespace: microservices
+  labels:
+    app: microservices
+    app.kubernetes.io/part-of: microservices
+spec:
+  host: microservice-setting-api.apps-crc.testing
+  to:
+    kind: Service
+    name: svc-microservices
+  port:
+    targetPort: setting-tcp
+  tls:
+    termination: edge
+    wildcardPolicy: None

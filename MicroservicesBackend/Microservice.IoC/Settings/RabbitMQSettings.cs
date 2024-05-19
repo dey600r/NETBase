@@ -8,5 +8,6 @@
 		public string VHost { get; init; }
 		public string User { get; init; }
 		public string Pwd { get; init; }
+        public bool SslOptionEnabled { get; init; }
 	}
 }
