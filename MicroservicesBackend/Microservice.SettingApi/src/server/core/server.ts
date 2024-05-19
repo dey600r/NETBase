@@ -7,6 +7,7 @@ export default class Server {
     public hostName: string;
 
     constructor(hostname: string, port: number) {
+        console.log('Starting node server!!');
         this.app = express();
         this.hostName = hostname;
         this.port = port;
