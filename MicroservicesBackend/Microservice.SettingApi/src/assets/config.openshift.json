@@ -14,7 +14,7 @@
   		"bearer-only": true
 	},
 	"mongoSettings": {
-		"host": "mongodb-26-rhel7",
+		"host": "mongodb-26-rhel7.microservices.svc.cluster.local",
 		"port": 27017,
 		"db": "SettingDB",
 		"user": "appuser",

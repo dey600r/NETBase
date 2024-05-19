@@ -6,6 +6,6 @@ COPY ./MicroservicesBackend/Microservice.SettingApi/package.json ./Microservices
 RUN npm install
 COPY ./MicroservicesBackend/Microservice.SettingApi/src/ .
 RUN npm run build
-RUN sudo chown -R 1000690000:0 "./"
+RUN chown -R 1000690000:0 "./"
 EXPOSE 3800
 CMD [ "npm", "start"]
