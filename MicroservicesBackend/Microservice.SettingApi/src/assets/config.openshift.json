@@ -14,7 +14,7 @@
   		"bearer-only": true
 	},
 	"mongoSettings": {
-		"host": "mongo-db",
+		"host": "mongodb-26-rhel7",
 		"port": 27017,
 		"db": "SettingDB",
 		"user": "appuser",
