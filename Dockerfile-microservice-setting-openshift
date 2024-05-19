@@ -1,5 +1,4 @@
 FROM node:18.16.0-alpine3.17
-USER ROOT
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 ENV NODE_ENV openshift
