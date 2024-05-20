@@ -6,7 +6,7 @@ RUN chmod -R 777 ./
 ENV NODE_ENV openshift
 COPY ./MicroservicesBackend/Microservice.SettingApi/package.json ./MicroservicesBackend/Microservice.SettingApi/package-lock.json ./MicroservicesBackend/Microservice.SettingApi/tsconfig.json .
 RUN npm cache clean --force
-RUN npm install -g npm@9.8.1 --force
+RUN npm install -g npm@latest --force
 RUN npm i
 COPY ./MicroservicesBackend/Microservice.SettingApi/src/ .
 RUN npm run build
