@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Microservice.IoC.Helper;
 using Microservice.MaintenanceApi.Core.Dtos;
-using Microservice.MaintenanceApi.Core.Helpers;
 using Microservice.MaintenanceApi.Infraestructure.Context;
 using Microservice.MaintenanceApi.Infraestructure.Entities;
 using Microsoft.EntityFrameworkCore;

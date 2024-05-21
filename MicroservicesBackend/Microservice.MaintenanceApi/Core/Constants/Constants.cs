@@ -24,13 +24,6 @@
 		public const string MAINTENANCE_ELEMENT_ENGINE_OIL_NAME = "ENGINE_OIL";
 		public const string MAINTENANCE_ELEMENT_ENGINE_OIL_DESCRIPTION = "CHANGE_ENGINE_OIL";
 
-		// KEY
-		public const string ENCRIPT_KEY = "05A71BE530D0CB3F";
-
-		// AUDIT DATA
-		public const string USER_UNKNOWN_AUDIT = "UserUnknown";
-		public static DateTime DATE_AUDIT = new DateTime(2023, 8, 1);
-
 		// CORS
 		public const string CORS_RULE = "CorsRule";
 

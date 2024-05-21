@@ -1,7 +1,9 @@
 
 using Microservice.IoC.Utils;
 using Microservice.Ioc;
-using Microservice.VehicleApi.Ioc;
+using Microservice.VehicleApi.Infraestructure.Context;
+using Microservice.VehicleApi.Infraestructure.Repository;
+using Microservice.VehicleApi.Core.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,13 +16,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerJWTExtensionConfiguration("Vechicle", "v1.0.0");
 
 // CONFIG CONTEXT
-builder.Services.AddDBContextExtensionConfiguration(builder.Configuration);
+builder.Services.AddDBContextExtensionConfiguration<DBContext>(builder.Configuration);
 
 // MASS TRANSIG - RABBITMQ
 builder.Services.AddRabbitMqExtensionConfiguration(builder.Configuration);
 
-// INJECT SERVICES
-builder.Services.AddAppDependenciesExtensionConfiguration(builder.Configuration);
+// AUTOMAPPER
+builder.Services.AddAutoMapper(typeof(BusinessProfile));
+
+// REPOSITORIES
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
+builder.Services.AddScoped<IConfigurationRepository, ConfigurationRepository>();
 
 // SECURITY
 builder.Services.AddSecurityExtensionConfiguration(builder.Configuration);
@@ -49,7 +56,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Services.ConfigureDBMigration();
+app.Services.ConfigureDBMigration<DBContext>();
 
 app.Run();
 

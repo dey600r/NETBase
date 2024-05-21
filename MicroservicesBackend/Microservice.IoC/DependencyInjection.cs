@@ -1,10 +1,13 @@
 ﻿using MassTransit;
 using MassTransit.Logging;
+using Microservice.IoC.Helper;
 using Microservice.IoC.Settings;
 using Microservice.IoC.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Net.Security;
@@ -17,12 +20,46 @@ namespace Microservice.Ioc
 {
 	public static class DependencyInjection
 	{
-		/// <summary>
-		/// SWAGGER WITH JWT
-		/// </summary>
-		/// <param name="service"></param>
-		/// <returns></returns>
-		public static IServiceCollection AddSwaggerJWTExtensionConfiguration(this IServiceCollection service, string name, string version)
+
+		public static string GetConnectionString(IConfiguration configuration)
+		{
+            // CONFIG CONNECTION STRING
+            var secrets = Boolean.Parse(configuration.GetConnectionString("Secrets"));
+
+            string connectionString = string.Empty;
+            if (secrets)
+                connectionString = configuration["ConnectionString:SqlServer"]; // SECRETS
+            else
+                connectionString = configuration.GetConnectionString("SqlServer"); // APPSETINGS
+
+            if (Boolean.Parse(configuration.GetConnectionString("Encripted"))) // ENCRIPTED
+                connectionString = CommonHelper.Decrypt(connectionString, SecurityConstants.ENCRIPT_KEY);
+
+			return connectionString;
+        }
+
+        /// <summary>
+        /// Configure BD CONTEXT
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="configuration"></param>
+        public static IServiceCollection AddDBContextExtensionConfiguration<DBContext>(this IServiceCollection service, IConfiguration configuration) where DBContext : DbContext
+        {
+            // CONFIG CONTEXT
+            service.AddDbContext<DBContext>(options =>
+               options.UseSqlServer(GetConnectionString(configuration)),
+               ServiceLifetime.Scoped
+			);
+
+            return service;
+        }
+
+        /// <summary>
+        /// SWAGGER WITH JWT
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddSwaggerJWTExtensionConfiguration(this IServiceCollection service, string name, string version)
 		{
 			service.AddSwaggerGen(opt =>
 			{
@@ -244,5 +281,26 @@ namespace Microservice.Ioc
 
 			return service;
 		}
-	}
+
+        /// <summary>
+        /// CONFIGURE MIGRATION DB
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="logger"></param>
+        public static void ConfigureDBMigration<DBContext>(this IServiceProvider service) where DBContext : DbContext
+        {
+            try
+            {
+                using (var scope = service.CreateScope())
+                {
+                    var dataContext = scope.ServiceProvider.GetRequiredService<DBContext>();
+                    dataContext.Database.Migrate();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR MIGRATING DB: {ex.Message}");
+            }
+        }
+    }
 }

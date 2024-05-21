@@ -1,4 +1,5 @@
-﻿using Microservice.MaintenanceApi.Core.Constants;
+﻿using Microservice.IoC.Utils;
+using Microservice.MaintenanceApi.Core.Constants;
 using Microservice.MaintenanceApi.Infraestructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,8 +21,8 @@ namespace Microservice.MaintenanceApi.Infraestructure.Context.SeedData
 				FromKm = 0,
 				ToKm = 0,
 				Master = true,
-				CreatedUser = AppConstants.USER_UNKNOWN_AUDIT,
-				CreatedDate = AppConstants.DATE_AUDIT
+				CreatedUser = SecurityConstants.USER_UNKNOWN_AUDIT,
+				CreatedDate = SecurityConstants.DATE_AUDIT
 			});
 			modelBuilder.Entity<Maintenance>().HasData(new Maintenance
 			{
@@ -35,8 +36,8 @@ namespace Microservice.MaintenanceApi.Infraestructure.Context.SeedData
 				FromKm = 0,
 				ToKm = 0,
 				Master = true,
-				CreatedUser = AppConstants.USER_UNKNOWN_AUDIT,
-				CreatedDate = AppConstants.DATE_AUDIT
+				CreatedUser = SecurityConstants.USER_UNKNOWN_AUDIT,
+				CreatedDate = SecurityConstants.DATE_AUDIT
 			});
 		}
 	}

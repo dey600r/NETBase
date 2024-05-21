@@ -1,4 +1,5 @@
-﻿using Microservice.Security.Core.Application.Utils;
+﻿using Microservice.IoC.Utils;
+using Microservice.Security.Core.Application.Utils;
 using Microservice.Security.Core.Application.Utils.Helpers;
 using Microservice.Security.Core.Persistence.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -47,7 +48,7 @@ namespace Microservice.Security.Core.Persistence.Context.SeedData
 				EmailConfirmed = true
 			};
 			var password = new PasswordHasher<User>();
-			var hashed = password.HashPassword(user, CommonHelper.Decrypt(Constants.ADMIN_USER_PWD, Constants.ENCRIPT_KEY));
+			var hashed = password.HashPassword(user, CommonHelper.Decrypt(Constants.ADMIN_USER_PWD, SecurityConstants.ENCRIPT_KEY));
 			user.PasswordHash = hashed;
 			modelBuilder.Entity<User>().HasData(user);
 

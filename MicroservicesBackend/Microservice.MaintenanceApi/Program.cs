@@ -17,10 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerJWTExtensionConfiguration("Maintenance", "v1.0.0");
 
 // CONFIG CONTEXT
-builder.Services.AddDbContext<DBContext>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")),
-	ServiceLifetime.Scoped
-);
+builder.Services.AddDBContextExtensionConfiguration<DBContext>(builder.Configuration);
 
 // MASS TRANSIG - RABBITMQ
 builder.Services.AddRabbitMqExtensionConfiguration(builder.Configuration);
@@ -60,18 +57,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-try
-{
-	using (var scope = app.Services.CreateScope())
-	{
-		var dataContext = scope.ServiceProvider.GetRequiredService<DBContext>();
-		dataContext.Database.Migrate();
-	}
-}
-catch (Exception ex)
-{
-	Console.WriteLine($"ERROR MIGRATING DB: {ex.Message}");
-}
+app.Services.ConfigureDBMigration<DBContext>();
 
 app.Run();
 

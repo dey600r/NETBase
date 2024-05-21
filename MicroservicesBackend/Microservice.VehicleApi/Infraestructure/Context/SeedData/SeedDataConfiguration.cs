@@ -1,4 +1,5 @@
-﻿using Microservice.VehicleApi.Core.Constants;
+﻿using Microservice.IoC.Utils;
+using Microservice.VehicleApi.Core.Constants;
 using Microservice.VehicleApi.Infraestructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,8 +15,8 @@ namespace Microservice.VehicleApi.Infraestructure.Context.SeedData
 				Name = AppConstants.CONFIGURATION_NAME_PRODUCTION, 
 				Description = AppConstants.CONFIGURATION_DESCRIPTION_PRODUCTION,
 				Master = true,
-				CreatedUser = AppConstants.USER_UNKNOWN_AUDIT,
-				CreatedDate = AppConstants.DATE_AUDIT
+				CreatedUser = SecurityConstants.USER_UNKNOWN_AUDIT,
+				CreatedDate = SecurityConstants.DATE_AUDIT
 			});
 		}
 	}

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using Microservice.IoC.Utils;
 using Microservice.Security.Core.Application.Mapping.Dto;
-using Microservice.Security.Core.Application.Utils;
 using Microservice.Security.Core.Persistence.Entities;
 using Microservice.Security.Core.Persistence.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.Security.Core.Application.Actions
 {
@@ -26,7 +25,7 @@ namespace Microservice.Security.Core.Application.Actions
 		public string GetUserSession()
 		{
 			var user = _httpContextAccessor.HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == nameof(User.UserName));
-			return (user == null ? Constants.USER_UNKNOWN_AUDIT : user.Value);
+			return (user == null ? SecurityConstants.USER_UNKNOWN_AUDIT : user.Value);
 		}
 
 		public UserDto GetUser(User user)

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using MassTransit;
 using Microservice.Core.Events;
+using Microservice.IoC.Helper;
 using Microservice.VehicleApi.Core.Dtos;
-using Microservice.VehicleApi.Core.Helpers;
 using Microservice.VehicleApi.Infraestructure.Context;
 using Microservice.VehicleApi.Infraestructure.Entities;
 using Microsoft.EntityFrameworkCore;

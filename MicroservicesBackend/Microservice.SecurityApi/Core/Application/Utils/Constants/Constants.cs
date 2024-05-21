@@ -2,13 +2,6 @@
 {
 	public class Constants
 	{
-		// AUDIT DATA
-		public const string USER_UNKNOWN_AUDIT = "UserUnknown";
-		public static DateTime DATE_AUDIT = new DateTime(2023, 8, 1);
-
-		// KEY
-		public const string ENCRIPT_KEY = "05A71BE530D0CB3F";
-
 		// ROLES
 		public const string ADMIN_ROLE_NAME = "admin";
 		public const string CUSTOMER_ROLE_NAME = "customer";

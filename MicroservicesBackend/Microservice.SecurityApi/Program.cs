@@ -23,7 +23,7 @@ builder.Services.AddSwaggerJWTExtensionConfiguration("Security", "v1.0.0");
 
 // CONFIG CONTEXT
 builder.Services.AddDbContext<SecurityContext>(options =>
-		options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")),
+		options.UseSqlServer(DependencyInjection.GetConnectionString(builder.Configuration)),
 		ServiceLifetime.Scoped
 	)	
 	.AddIdentityCore<User>() // USERS & ROLES
@@ -77,17 +77,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 // MIGRATION DB
-try
-{
-	using (var scope = app.Services.CreateScope())
-	{
-		var dataContext = scope.ServiceProvider.GetRequiredService<SecurityContext>();
-		dataContext.Database.Migrate();
-	}
-}
-catch (Exception ex)
-{
-	Console.WriteLine("ERROR DATABASE MIGRATION: " + ex.Message);
-}
+app.Services.ConfigureDBMigration<SecurityContext>();
 
 app.Run();

@@ -1,6 +1,5 @@
 ﻿using Microservice.VehicleApi.Core.Dtos;
 using Microservice.VehicleApi.Infraestructure.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.VehicleApi.Controllers
