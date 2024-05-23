@@ -2,12 +2,12 @@
 	"Routes": [
 		{
 			"DownstreamPathTemplate": "/api/security",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-security-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "microservice-security",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/security",
@@ -19,12 +19,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/security/signup",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-security-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "microservice-security",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/security/signup",
@@ -32,12 +32,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/security/login",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-security-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "microservice-security",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/security/login",
