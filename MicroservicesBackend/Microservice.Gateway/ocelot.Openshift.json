@@ -6,8 +6,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-security",
-					"Port": "8080"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3500"
 				}
 			],
 			"UpstreamPathTemplate": "/security",
@@ -23,8 +23,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-security",
-					"Port": "8080"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3500"
 				}
 			],
 			"UpstreamPathTemplate": "/security/signup",
@@ -36,8 +36,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-security",
-					"Port": "8080"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3500"
 				}
 			],
 			"UpstreamPathTemplate": "/security/login",
