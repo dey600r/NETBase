@@ -45,12 +45,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/vehicle",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-vehicle-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3600"
 				}
 			],
 			"UpstreamPathTemplate": "/vehicle",
@@ -62,12 +62,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/vehicle/maintenance-element",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-vehicle-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3600"
 				}
 			],
 			"UpstreamPathTemplate": "/vehicle/maintenance-element",
@@ -79,12 +79,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/vehicle/type",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-vehicle-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3600"
 				}
 			],
 			"UpstreamPathTemplate": "/vehicle/type",
@@ -96,12 +96,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/configuration",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-vehicle-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3600"
 				}
 			],
 			"UpstreamPathTemplate": "/configuration",
@@ -113,12 +113,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/configuration",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-vehicle-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3600"
 				}
 			],
 			"UpstreamPathTemplate": "/configuration",
@@ -130,12 +130,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/maintenance/configuration",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-maintenance-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3700"
 				}
 			],
 			"UpstreamPathTemplate": "/maintenance/configuration",
@@ -147,12 +147,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/maintenance/maintenance-element",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-maintenance-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3700"
 				}
 			],
 			"UpstreamPathTemplate": "/maintenance/maintenance-element",
@@ -164,12 +164,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/maintenance/maintenance-element",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-maintenance-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3700"
 				}
 			],
 			"UpstreamPathTemplate": "/maintenance/maintenance-element",
@@ -181,12 +181,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/settings/get-all",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-setting-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3800"
 				}
 			],
 			"UpstreamPathTemplate": "/settings/get-all",
@@ -198,12 +198,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/settings/get",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-setting-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3800"
 				}
 			],
 			"UpstreamPathTemplate": "/settings/get",
@@ -215,12 +215,12 @@
 		},
 		{
 			"DownstreamPathTemplate": "/api/settings/add",
-			"DownstreamScheme": "https",
+			"DownstreamScheme": "http",
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "microservice-setting-api.apps-crc.testing",
-					"Port": "443"
+					"Host": "svc-microservices.microservices.svc.cluster.local",
+					"Port": "3800"
 				}
 			],
 			"UpstreamPathTemplate": "/settings/add",
@@ -232,6 +232,6 @@
 		}
 	],
 	"GlobalConfiguration": {
-		"BaseUrl": "https://microservice-gateway-api.apps-crc.testing"
+		"BaseUrl": "http://microservice-gateway-api.apps-crc.testing"
 	}
 }

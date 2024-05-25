@@ -14,7 +14,7 @@
   		"bearer-only": true
 	},
 	"mongoSettings": {
-		"host": "localhost",
+		"host": "mongo.microservices.svc.cluster.local",
 		"port": 27017,
 		"db": "SettingDB",
 		"user": "appuser",
