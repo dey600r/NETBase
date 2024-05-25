@@ -9,9 +9,9 @@ metadata:
 spec:
   resources:
     limits:
-      ephemeral-storage: 4Gi
+      ephemeral-storage: 8Gi
     requests:
-      ephemeral-storage: 2Gi
+      ephemeral-storage: 4Gi
   nodeSelector: null
   output:
     to:

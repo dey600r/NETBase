@@ -1,0 +1,13 @@
+kind: ResourceQuota
+apiVersion: v1
+metadata:
+  name: rq-microservices
+  namespace: microservices
+  labels:
+    app: microservices
+    app.kubernetes.io/part-of: microservices
+spec:
+  hard:
+    limits.ephemeral-storage: 48Gi
+    pods: '9'
+    requests.ephemeral-storage: 24Gi

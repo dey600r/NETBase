@@ -1,0 +1,22 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: is-rabbitmq
+  namespace: microservices
+  labels:
+    app: rabbitmq
+    app.kubernetes.io/component: rabbitmq
+    app.kubernetes.io/instance: rabbitmq
+    app.kubernetes.io/name: rabbitmq
+    app.kubernetes.io/part-of: microservices
+spec:
+  tags:
+    - name: 3-management
+      from:
+        kind: DockerImage
+        name: 'rabbitmq:3-management'
+      generation: 2
+      importPolicy:
+        importMode: Legacy
+      referencePolicy:
+        type: Local

@@ -250,7 +250,7 @@ namespace Microservice.Ioc
 				x.AddConsumers(Assembly.GetEntryAssembly());
 				x.UsingRabbitMq((context, cfg) =>
 				{
-					cfg.Host(rabbitMQSettings.Host, (ushort)rabbitMQSettings.Port, rabbitMQSettings.VHost, h =>
+					cfg.Host(rabbitMQSettings.Host, rabbitMQSettings.VHost, h =>
 					{
 						h.Username(rabbitMQSettings.User);
 						h.Password(rabbitMQSettings.Pwd);

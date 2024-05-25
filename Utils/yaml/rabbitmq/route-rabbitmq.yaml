@@ -1,0 +1,23 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: route-rabbitmq
+  namespace: microservices
+  labels:
+    app: rabbitmq
+    app.kubernetes.io/component: rabbitmq
+    app.kubernetes.io/instance: rabbitmq
+    app.kubernetes.io/name: rabbitmq
+    app.kubernetes.io/part-of: microservices
+spec:
+  host: rabbitmq-microservices.apps-crc.testing
+  to:
+    kind: Service
+    name: rabbitmq
+    weight: 100
+  port:
+    targetPort: 15672-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
