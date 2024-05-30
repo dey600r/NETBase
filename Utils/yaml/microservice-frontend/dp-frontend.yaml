@@ -22,7 +22,7 @@ spec:
           image: image-registry.openshift-image-registry.svc:5000/microservices/is-frontend:latest
           ports:
             - name: frontend-port
-              containerPort: 8080
+              containerPort: 3300
               protocol: TCP
           resources:
             limits:

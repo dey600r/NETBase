@@ -10,11 +10,7 @@ spec:
   selector:
     app: microservices
   ports:
-    - name: 80-tcp
+    - name: frontend-tcp
       protocol: TCP
-      port: 80
-      targetPort: 80
-    - name: 8080-tcp
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 3300
+      targetPort: frontend-port
