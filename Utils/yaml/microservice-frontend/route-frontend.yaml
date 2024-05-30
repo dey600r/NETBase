@@ -12,7 +12,7 @@ spec:
     kind: Service
     name: svc-frontend
   port:
-    targetPort: 8080-tcp
+    targetPort: frontend-tcp
   tls:
     termination: edge
     wildcardPolicy: None

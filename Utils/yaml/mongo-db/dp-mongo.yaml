@@ -23,10 +23,9 @@ spec:
         deployment: mongo
     spec:
       volumes:
-        - name: mongo-1
-          emptyDir: {}
-        - name: mongo-2
-          emptyDir: {}
+        - name: mongo-path
+          persistentVolumeClaim:
+            claimName: pvc-database
       containers:
         - name: mongo
           image: image-registry.openshift-image-registry.svc:5000/microservices/is-mongo:latest
@@ -41,9 +40,9 @@ spec:
               protocol: TCP
           imagePullPolicy: Always
           volumeMounts:
-            - name: mongo-1
+            - name: mongo-path
               mountPath: /data/configdb
-            - name: mongo-2
+            - name: mongo-path
               mountPath: /data/db
           terminationMessagePolicy: File
       restartPolicy: Always
