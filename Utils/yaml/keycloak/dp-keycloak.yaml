@@ -1,0 +1,58 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: keycloak
+  namespace: microservices
+  labels:
+    app: keycloak
+    app.kubernetes.io/component: keycloak
+    app.kubernetes.io/instance: keycloak
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/part-of: microservices
+    app.openshift.io/runtime: sso
+    app.openshift.io/runtime-namespace: microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+        deployment: keycloak
+    spec:
+      volumes:
+        - name: keycloak-path
+          persistentVolumeClaim:
+            claimName: pvc-database
+      containers:
+        - name: keycloak
+          image: image-registry.openshift-image-registry.svc:5000/microservices/keycloak:latest
+          env:
+            - name: KC_PROXY
+              value: edge
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: admin
+          securityContext:
+            privileged: false
+          ports:
+            - containerPort: 8180
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: keycloak-path
+              mountPath: /opt/keycloak/data
+          args:
+            - start-dev
+            - '--http-port=8180'
+      restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
