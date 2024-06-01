@@ -10,7 +10,7 @@ spec:
   host: microservice-frontend.apps-crc.testing
   to:
     kind: Service
-    name: svc-frontend
+    name: svc-microservices
   port:
     targetPort: frontend-tcp
   tls:
