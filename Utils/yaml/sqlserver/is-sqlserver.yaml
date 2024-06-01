@@ -1,0 +1,22 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: sql-server
+  namespace: microservices
+  labels:
+    app: sql-server
+    app.kubernetes.io/component: sql-server
+    app.kubernetes.io/instance: sql-server
+    app.kubernetes.io/name: sql-server
+    app.kubernetes.io/part-of: microservices
+spec:
+  tags:
+    - name: 2022-preview-ubuntu-22.04
+      from:
+        kind: DockerImage
+        name: 'mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04'
+      generation: 2
+      importPolicy:
+        importMode: Legacy
+      referencePolicy:
+        type: Local

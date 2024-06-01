@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sql-server
+  namespace: microservices
+  labels:
+    app: sql-server
+    app.kubernetes.io/component: sql-server
+    app.kubernetes.io/instance: sql-server
+    app.kubernetes.io/name: sql-server
+    app.kubernetes.io/part-of: microservices
+    app.openshift.io/runtime-version: 2022-preview-ubuntu-22.04
+spec:
+  selector:
+    app: sql-server
+    deployment: sql-server
+  ports:
+    - name: 1433-tcp
+      protocol: TCP
+      port: 1433
+      targetPort: 1433
+

@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sql-server
+  namespace: microservices
+  labels:
+    app: sql-server
+    app.kubernetes.io/component: sql-server
+    app.kubernetes.io/instance: sql-server
+    app.kubernetes.io/name: sql-server
+    app.kubernetes.io/part-of: microservices
+    app.openshift.io/runtime: mssql
+    app.openshift.io/runtime-namespace: microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sql-server
+  template:
+    metadata:
+      labels:
+        app: sql-server
+        deployment: sql-server
+    spec:
+      volumes:
+        - name: sqlserverdb
+          persistentVolumeClaim:
+            claimName: pvc-database
+      containers:
+        - name: sql-server
+          image: image-registry.openshift-image-registry.svc:5000/microservices/sql-server:latest
+          env:
+            - name: MSSQL_SA_PASSWORD
+              value: PassWord123?
+            - name: ACCEPT_EULA
+              value: 'Y'
+            - name: MSSQL_PID
+              value: Developer
+          securityContext: # ------ IMPORTANTE PRIVILEGIOS PARA LEVANTAR EL SQL SERVER DENTRO DEL POD
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+          ports:
+            - containerPort: 1433
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: sqlserverdb
+              mountPath: /var/opt/mssql
+          terminationMessagePolicy: File
+          terminationMessagePath: /dev/termination-log
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
