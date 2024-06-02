@@ -1,0 +1,1643 @@
+{
+	"info": {
+		"_postman_id": "c359f232-47eb-4e11-9a09-3fd064143cce",
+		"name": "NETBase",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12463563"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Microservices.Gateway-GetCurrentUser Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAyMTI0OTUzLCJleHAiOjE3MDIyMTEzNTMsImlhdCI6MTcwMjEyNDk1MywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.WfeObkKlPS9fC7XkOphlKPNpXYFkIZ7Yegviq2MN7yOklaIwHS9xG3vUzqmIcVjH4JtbOP9M46VJasIm6cusdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44360/security",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"security"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-Login Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"dey125r\",\r\n  \"password\": \"Dj123?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/security/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"security",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-SignUp Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"ana\",\r\n  \"lastName\": \"m\",\r\n  \"userName\": \"anam\",\r\n  \"location\": \"porzuna\",\r\n  \"email\": \"anam@gmail.com\",\r\n  \"password\": \"Dj123?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/security/signup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"security",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetVehicleType Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44360/vehicle",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetConfiguration Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44360/configuration",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddConfiguration Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"trumph\",\r\n  \"description\": \"trumph\",\r\n  \"master\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/configuration",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetVehicleType Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44360/vehicle/type",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"vehicle",
+								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetMaintenanceConfiguration Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44360/maintenance",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetMaintenanceElement Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44360/maintenance/maintenance-element",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"maintenance",
+								"maintenance-element"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddMaintenanceElement Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"brake\",\r\n  \"description\": \"brake\",\r\n  \"master\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/maintenance/maintenance-element",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"maintenance",
+								"maintenance-element"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetAllSettings Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44360/settings/get-all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"settings",
+								"get-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddSettings Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"configDistance\",\r\n    \"value\": \"KM\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/settings/add",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"settings",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetSettings Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44360/settings/get?key=configDistance",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"settings",
+								"get"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "configDistance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Setting-Encrypt Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/crpto/decrypt?key=5551ce8816b920ac75b63872be0b82c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"crpto",
+								"decrypt"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "5551ce8816b920ac75b63872be0b82c5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Keycloak",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "dey125r",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Dj123??",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "frontend",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "vCl9SfaTM5mJZgw6wndxWnG4IO8Lsx8K",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8180/realms/microservices/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"realms",
+								"microservices",
+								"protocol",
+								"openid-connect",
+								"token"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Keycloack",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJkRUtjRU0zcFhPbjZTZHVIMVJOSVp0Wmd2WWtRa3I5dU0yTXNuRGNQNXprIn0.eyJleHAiOjE3MDk0MDQwMDEsImlhdCI6MTcwOTQwMzcwMSwianRpIjoiMTIzNGIxZGEtMzM0YS00OTIxLTk0YjAtNGJlMDRhMDE0MzliIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy9taWNyb3NlcnZpY2VzIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjlhNDQxMzU2LTAxNWEtNDk2ZC04YWNlLWE3OWRjZjQzMWRmMCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiZDhjOTI4NjctZjFkZS00ZmFjLWIxMWUtZWU1MGVmY2RiMTE4IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsibWFuYWdlciIsImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwiYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsImN1c3RvbWVyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIGZyb250ZW5kLXNjb3BlIiwic2lkIjoiZDhjOTI4NjctZjFkZS00ZmFjLWIxMWUtZWU1MGVmY2RiMTE4IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJtYW5hZ2VyIiwiZGVmYXVsdC1yb2xlcy10ZXN0Iiwib2ZmbGluZV9hY2Nlc3MiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIiwiY3VzdG9tZXIiXSwibmFtZSI6IkRhdmlkIEppbWVuZXoiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkZXkxMjVyIiwiZ2l2ZW5fbmFtZSI6IkRhdmlkIiwiZmFtaWx5X25hbWUiOiJKaW1lbmV6IiwiZW1haWwiOiJkZXkxMjVyQGdtYWlsLmNvbSJ9.Zxt1tMiru_LjpVo5fKpKWARnDbVzRTqrdje64SO0eDx3z_nHOlHUnRGS2OAw_hIb7MGW9iuf-PzYdJIhPhO22WF_7gESYuT5A9H-Xk_WB9JfMY1bJff7NhMckGUXCEmvleglJXYqIVaRG4Vv59ZevEN--3ecVUgoPtYAWx9NeIOgVE650OEWpqksX2g-O_Zk_02Htga92Z6BSF-Eft3-M1Rqu_hBDXnIql6gdKWK5EP_jpT4kgVHMKxLeuzYl3nOyo325TpkL0u5EOMbXDBixoP0CEcxjAxb4ghVfCz0GVNAEuJwDgwm1CYGYuH_mrRiy79QDTH7T0Ova1WWl3Ys0Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8180/realms/microservices/account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"realms",
+								"microservices",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Keycloak",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/realms/microservices/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"realms",
+								"microservices",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Docker",
+			"item": [
+				{
+					"name": "Microservices.Gateway-GetCurrentUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAyMTI0OTUzLCJleHAiOjE3MDIyMTEzNTMsImlhdCI6MTcwMjEyNDk1MywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.WfeObkKlPS9fC7XkOphlKPNpXYFkIZ7Yegviq2MN7yOklaIwHS9xG3vUzqmIcVjH4JtbOP9M46VJasIm6cusdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44360/security",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"security"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"dey125r\",\r\n  \"password\": \"Dj123?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3400/security/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"security",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"ana\",\r\n  \"lastName\": \"m\",\r\n  \"userName\": \"anam\",\r\n  \"location\": \"porzuna\",\r\n  \"email\": \"anam@gmail.com\",\r\n  \"password\": \"Dj123?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/security/signup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"security",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetVehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjoiY3VzdG9tZXIiLCJuYmYiOjE3MDYwMzEwOTIsImV4cCI6MTcwNjExNzQ5MiwiaWF0IjoxNzA2MDMxMDkyLCJpc3MiOiJXZWJBcGlKd3QuY29tIiwiYXVkIjoibG9jYWxob3N0In0.S3nUHVgG-xKjS4TgAmh1OO7T-TOJrrKKWv2NgYqg5EYlSIaZg9VnkQ77j2cmRFL3E2YakkpjqV92DA7l3ynNXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/vehicle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetConfiguration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjoiY3VzdG9tZXIiLCJuYmYiOjE3MDYwMzEwOTIsImV4cCI6MTcwNjExNzQ5MiwiaWF0IjoxNzA2MDMxMDkyLCJpc3MiOiJXZWJBcGlKd3QuY29tIiwiYXVkIjoibG9jYWxob3N0In0.S3nUHVgG-xKjS4TgAmh1OO7T-TOJrrKKWv2NgYqg5EYlSIaZg9VnkQ77j2cmRFL3E2YakkpjqV92DA7l3ynNXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/configuration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddConfiguration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"trumph\",\r\n  \"description\": \"trumph\",\r\n  \"master\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/configuration",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetVehicleType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjoiY3VzdG9tZXIiLCJuYmYiOjE3MDYwMzEwOTIsImV4cCI6MTcwNjExNzQ5MiwiaWF0IjoxNzA2MDMxMDkyLCJpc3MiOiJXZWJBcGlKd3QuY29tIiwiYXVkIjoibG9jYWxob3N0In0.S3nUHVgG-xKjS4TgAmh1OO7T-TOJrrKKWv2NgYqg5EYlSIaZg9VnkQ77j2cmRFL3E2YakkpjqV92DA7l3ynNXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/vehicle/type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"vehicle",
+								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetMaintenanceConfiguration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/maintenance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetMaintenanceElement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjoiY3VzdG9tZXIiLCJuYmYiOjE3MDk3NDY2ODAsImV4cCI6MTcwOTgzMzA4MCwiaWF0IjoxNzA5NzQ2NjgwLCJpc3MiOiJXZWJBcGlKd3QuY29tIiwiYXVkIjoibG9jYWxob3N0In0.CyOerGBHilvo3SUvKGZULF6_Be0WSUE3FyVNJJqHymyh_zsdVTzI8ICEzCzTbT_05wabPjUXyRAvdnwA6wkoNg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/maintenance/maintenance-element",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"maintenance",
+								"maintenance-element"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddMaintenanceElement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"brake\",\r\n  \"description\": \"brake\",\r\n  \"master\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/maintenance/maintenance-element",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"maintenance",
+								"maintenance-element"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetAllSettings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjoiY3VzdG9tZXIiLCJuYmYiOjE3MDYwMzEwOTIsImV4cCI6MTcwNjExNzQ5MiwiaWF0IjoxNzA2MDMxMDkyLCJpc3MiOiJXZWJBcGlKd3QuY29tIiwiYXVkIjoibG9jYWxob3N0In0.S3nUHVgG-xKjS4TgAmh1OO7T-TOJrrKKWv2NgYqg5EYlSIaZg9VnkQ77j2cmRFL3E2YakkpjqV92DA7l3ynNXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3400/settings/get-all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"settings",
+								"get-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddSettings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"configDistance\",\r\n    \"value\": \"KM\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/settings/add",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"settings",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetSettings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44360/settings/get?key=configDistance",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"settings",
+								"get"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "configDistance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Setting-Encrypt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/crpto/decrypt?key=5551ce8816b920ac75b63872be0b82c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"crpto",
+								"decrypt"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "5551ce8816b920ac75b63872be0b82c5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Openshift",
+			"item": [
+				{
+					"name": "Microservices.Gateway-GetCurrentUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAyMTI0OTUzLCJleHAiOjE3MDIyMTEzNTMsImlhdCI6MTcwMjEyNDk1MywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.WfeObkKlPS9fC7XkOphlKPNpXYFkIZ7Yegviq2MN7yOklaIwHS9xG3vUzqmIcVjH4JtbOP9M46VJasIm6cusdw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/security",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"security"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"dey125r@gmail.com\",\r\n  \"password\": \"Dj123?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/security/login",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"security",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"ana\",\r\n  \"lastName\": \"m\",\r\n  \"userName\": \"anam\",\r\n  \"location\": \"porzuna\",\r\n  \"email\": \"anam@gmail.com\",\r\n  \"password\": \"Dj123?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/security/signup",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"security",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetVehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIxeDRyZkI4SEJ5RW5PTVpnX3dJMmJvZVJfTUl1N0s5eTMwNXBHaUpCRF84In0.eyJleHAiOjE3MTcyNzkyMTEsImlhdCI6MTcxNzI3ODkxMSwianRpIjoiNjNhMjM2YTEtZjc5ZC00MDUzLTkwNDQtYzA2ZDhkMThlODIwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy9taWNyb3NlcnZpY2VzIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImFkOTEwNTY2LTI0MzItNDExZC1hZjZiLTdjNjMyZjU2YmE0OCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwic2Vzc2lvbl9zdGF0ZSI6IjNhMWJhMmI2LWNiMzYtNGQ2Yy1hNzJjLWZlZjViNDdkNmM4YiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiIsImh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsibWFuYWdlciIsImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwiYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsImN1c3RvbWVyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJiYXNpY19hcHAgZW1haWwgcHJvZmlsZSBmcm9udGVuZC1zY29wZSIsInNpZCI6IjNhMWJhMmI2LWNiMzYtNGQ2Yy1hNzJjLWZlZjViNDdkNmM4YiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicm9sZXMiOlsibWFuYWdlciIsImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwiYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsImN1c3RvbWVyIl0sIm5hbWUiOiJEYXZpZCBKaW1lbmV6IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV5MTI1ciIsImdpdmVuX25hbWUiOiJEYXZpZCIsImZhbWlseV9uYW1lIjoiSmltZW5leiIsImVtYWlsIjoiZGV5MTI1ckBnbWFpbC5jb20ifQ.rrftVpsp_wENZ10OAA6yrx2HOU7_Q2TDHAoUSDqeXKj1CbCzwkLvLrQut2op_2SnvxK3pmxZ2buSEzPRTsWu-5mb1m9zrgcnBaCGqcJb3p0MpYt6g_er9gGmXnov27csFtmTztUEA51jdwFz-ZkUxWeD5v1Mj2ylqc40RDUuLuA_rIriR_GDmYaIeElk1fuAalCHM9peD1usXg0FY4i56dLOZX76u6chbNiQMXc6aMP5OFqceMkFlgwQkI7eeBTxnyq5eheaerjBUJZQHvUTStqhchlkVOKwuw60merAAAXN0X3b93XeCdYh46kpsGXz7Qv_4Gu9ZkonQJpVpx-Ong",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/vehicle",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetConfiguration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjpbImN1c3RvbWVyIiwiYWRtaW4iXSwibmJmIjoxNzE3MDA4MTIwLCJleHAiOjE3MTcwOTQ1MjAsImlhdCI6MTcxNzAwODEyMCwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.jYqnf5dX1Wu1ToHh6R2JlsePQXvkNLuXfRUFhJ-V7ASl0a9qV35QGuXQzceQ9vfW_rXht9bWLAra8xf84Izsuw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/configuration",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddConfiguration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjpbImN1c3RvbWVyIiwiYWRtaW4iXSwibmJmIjoxNzE3MDA4MTIwLCJleHAiOjE3MTcwOTQ1MjAsImlhdCI6MTcxNzAwODEyMCwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.jYqnf5dX1Wu1ToHh6R2JlsePQXvkNLuXfRUFhJ-V7ASl0a9qV35QGuXQzceQ9vfW_rXht9bWLAra8xf84Izsuw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"trumph\",\r\n  \"description\": \"trumph\",\r\n  \"master\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/configuration",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"configuration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetVehicleType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjoiY3VzdG9tZXIiLCJuYmYiOjE3MDYwMzEwOTIsImV4cCI6MTcwNjExNzQ5MiwiaWF0IjoxNzA2MDMxMDkyLCJpc3MiOiJXZWJBcGlKd3QuY29tIiwiYXVkIjoibG9jYWxob3N0In0.S3nUHVgG-xKjS4TgAmh1OO7T-TOJrrKKWv2NgYqg5EYlSIaZg9VnkQ77j2cmRFL3E2YakkpjqV92DA7l3ynNXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/vehicle/type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"vehicle",
+								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetMaintenanceConfiguration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNTQzMzc3LCJleHAiOjE3MDM2Mjk3NzcsImlhdCI6MTcwMzU0MzM3NywiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.EeTSG-JaLROXvXimV9RwHlz5ugVFrbdNiABheqXt8cwMEBcuFOu4xORBMaHUn9lWTvpVlmA53i3xMBGlhq-E2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/maintenance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetMaintenanceElement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjoiY3VzdG9tZXIiLCJuYmYiOjE3MDk3NDY2ODAsImV4cCI6MTcwOTgzMzA4MCwiaWF0IjoxNzA5NzQ2NjgwLCJpc3MiOiJXZWJBcGlKd3QuY29tIiwiYXVkIjoibG9jYWxob3N0In0.CyOerGBHilvo3SUvKGZULF6_Be0WSUE3FyVNJJqHymyh_zsdVTzI8ICEzCzTbT_05wabPjUXyRAvdnwA6wkoNg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/maintenance/maintenance-element",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"maintenance",
+								"maintenance-element"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddMaintenanceElement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjpbImN1c3RvbWVyIiwiYWRtaW4iXSwibmJmIjoxNzE3MDA4MTIwLCJleHAiOjE3MTcwOTQ1MjAsImlhdCI6MTcxNzAwODEyMCwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.jYqnf5dX1Wu1ToHh6R2JlsePQXvkNLuXfRUFhJ-V7ASl0a9qV35QGuXQzceQ9vfW_rXht9bWLAra8xf84Izsuw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"brake\",\r\n  \"description\": \"brake\",\r\n  \"master\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/maintenance/maintenance-element",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"maintenance",
+								"maintenance-element"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetAllSettings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJEYXZpZCIsIkxhc3ROYW1lIjoiSkciLCJyb2xlIjpbImN1c3RvbWVyIiwiYWRtaW4iXSwibmJmIjoxNzE3MDA4NjgyLCJleHAiOjE3MTcwOTUwODIsImlhdCI6MTcxNzAwODY4MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.rvHw5sKMJq4hJmAKRpuYDn4TXlQfTIsIRLpD4iEUQVx__gLrEedW_th3iTOgtA-mF1t0OcyrAFvyrq9PH63IEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg"
+							}
+						],
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/settings/get-all",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"settings",
+								"get-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-AddSettings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"configDistance\",\r\n    \"value\": \"KM\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44360/settings/add",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44360",
+							"path": [
+								"settings",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Gateway-GetSettings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImRleTEyNXIiLCJGaXJzdE5hbWUiOiJkZXkxMjVyIiwiTGFzdE5hbWUiOiJkZXkxMjVyIiwicm9sZSI6ImN1c3RvbWVyIiwibmJmIjoxNzAzNjMwNDYyLCJleHAiOjE3MDM3MTY4NjIsImlhdCI6MTcwMzYzMDQ2MiwiaXNzIjoiV2ViQXBpSnd0LmNvbSIsImF1ZCI6ImxvY2FsaG9zdCJ9.kcAlAT5ZtDe5GACd9MQ20mErgFWvX3rd-3LAWzxL0rrmbaZnLQ3ijp4Smu0tw04iTVw859k4J_XxmO3WNNmDWg",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://microservice-gateway-api.apps-crc.testing/settings/get?key=configDistance",
+							"protocol": "https",
+							"host": [
+								"microservice-gateway-api",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"settings",
+								"get"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "configDistance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Microservices.Setting-Encrypt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/crpto/decrypt?key=5551ce8816b920ac75b63872be0b82c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"crpto",
+								"decrypt"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "5551ce8816b920ac75b63872be0b82c5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Keycloak Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "dey125r",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Dj123??",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "frontend",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "vCl9SfaTM5mJZgw6wndxWnG4IO8Lsx8K",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://keycloak-microservices.apps-crc.testing/realms/microservices/protocol/openid-connect/token",
+							"protocol": "https",
+							"host": [
+								"keycloak-microservices",
+								"apps-crc",
+								"testing"
+							],
+							"path": [
+								"realms",
+								"microservices",
+								"protocol",
+								"openid-connect",
+								"token"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Keycloack Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJkRUtjRU0zcFhPbjZTZHVIMVJOSVp0Wmd2WWtRa3I5dU0yTXNuRGNQNXprIn0.eyJleHAiOjE3MDk0MDQwMDEsImlhdCI6MTcwOTQwMzcwMSwianRpIjoiMTIzNGIxZGEtMzM0YS00OTIxLTk0YjAtNGJlMDRhMDE0MzliIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTgwL3JlYWxtcy9taWNyb3NlcnZpY2VzIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjlhNDQxMzU2LTAxNWEtNDk2ZC04YWNlLWE3OWRjZjQzMWRmMCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJhY2tlbmQiLCJzZXNzaW9uX3N0YXRlIjoiZDhjOTI4NjctZjFkZS00ZmFjLWIxMWUtZWU1MGVmY2RiMTE4IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIvKiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsibWFuYWdlciIsImRlZmF1bHQtcm9sZXMtdGVzdCIsIm9mZmxpbmVfYWNjZXNzIiwiYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsImN1c3RvbWVyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIGZyb250ZW5kLXNjb3BlIiwic2lkIjoiZDhjOTI4NjctZjFkZS00ZmFjLWIxMWUtZWU1MGVmY2RiMTE4IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJtYW5hZ2VyIiwiZGVmYXVsdC1yb2xlcy10ZXN0Iiwib2ZmbGluZV9hY2Nlc3MiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIiwiY3VzdG9tZXIiXSwibmFtZSI6IkRhdmlkIEppbWVuZXoiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkZXkxMjVyIiwiZ2l2ZW5fbmFtZSI6IkRhdmlkIiwiZmFtaWx5X25hbWUiOiJKaW1lbmV6IiwiZW1haWwiOiJkZXkxMjVyQGdtYWlsLmNvbSJ9.Zxt1tMiru_LjpVo5fKpKWARnDbVzRTqrdje64SO0eDx3z_nHOlHUnRGS2OAw_hIb7MGW9iuf-PzYdJIhPhO22WF_7gESYuT5A9H-Xk_WB9JfMY1bJff7NhMckGUXCEmvleglJXYqIVaRG4Vv59ZevEN--3ecVUgoPtYAWx9NeIOgVE650OEWpqksX2g-O_Zk_02Htga92Z6BSF-Eft3-M1Rqu_hBDXnIql6gdKWK5EP_jpT4kgVHMKxLeuzYl3nOyo325TpkL0u5EOMbXDBixoP0CEcxjAxb4ghVfCz0GVNAEuJwDgwm1CYGYuH_mrRiy79QDTH7T0Ova1WWl3Ys0Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8180/realms/microservices/account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"realms",
+								"microservices",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Keycloak Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8180/realms/microservices/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8180",
+							"path": [
+								"realms",
+								"microservices",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
