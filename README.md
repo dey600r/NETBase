@@ -4,12 +4,12 @@ Solutions example to improve and practice clean code and clean architecture.
 ## Technologies
 Architectures on this is projects:
 * Backend:
-    * .NET Layer Architecture
-    * .NET and NodeJS Microservices
+    * .NET Layer Architecture with JWT
+    * .NET and NodeJS Microservices with JWT and/or keycloak
 * Frontend:
     * Angular with Keycloak
     * Angular using SSR builder
-    * .NET MVC with KeycloakHTML5, SCSS3 y Typescript
+    * .NET MVC with Keycloak
 
 ![Microservice-architecture](./Utils/images/Microservices-Architecture.png)
 
