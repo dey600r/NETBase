@@ -6,7 +6,7 @@ services:
   microservice-angular:
     container_name: microservice-angular
     hostname: "microservice-angular"
-    image: microservice-angular
+    image: microservice-angular:jwt
     build:
       context: ./
       dockerfile: Dockerfile-microservice-angular
@@ -18,7 +18,7 @@ services:
   microservice-gateway:
     container_name: microservice-gateway
     hostname: "microservice-gateway"
-    image: microservice-gateway
+    image: microservice-gateway:jwt
     build:
       context: ./
       dockerfile: Dockerfile-microservice-gateway
@@ -33,7 +33,7 @@ services:
   microservice-security-api:
     container_name: microservice-security-api
     hostname: "microservice-security-api"
-    image: microservice-security-api
+    image: microservice-security-api:jwt
     build:
       context: ./
       dockerfile: Dockerfile-microservice-security
@@ -50,7 +50,7 @@ services:
   microservice-vehicle-api:
     container_name: microservice-vehicle-api
     hostname: "microservice-vehicle-api"
-    image: microservice-vehicle-api
+    image: microservice-vehicle-api:jwt
     build:
       context: ./
       dockerfile: Dockerfile-microservice-vehicle
@@ -68,7 +68,7 @@ services:
   microservice-maintenance-api:
     container_name: microservice-maintenance-api
     hostname: "microservice-maintenance-api"
-    image: microservice-maintenance-api
+    image: microservice-maintenance-api:jwt
     build: 
       context: ./
       dockerfile: Dockerfile-microservice-maintenance
@@ -86,7 +86,7 @@ services:
   microservice-setting-api:
     container_name: microservice-setting-api
     hostname: "microservice-setting-api"
-    image: microservice-setting-api
+    image: microservice-setting-api:jwt
     build:
       context: ./
       dockerfile: Dockerfile-microservice-setting
@@ -155,6 +155,15 @@ services:
     networks:
       - network_microservices
 
+  ldap:
+    container_name: ldap
+    image: openmicroscopy/apacheds:latest
+    hostname: "ldap"
+    ports:
+      - "389:10389"
+    networks:
+      - network_microservices
+
   keycloak:
     container_name: keycloak
     image: quay.io/keycloak/keycloak:latest
@@ -169,7 +178,7 @@ services:
       - --http-port=8180
       - --import-realm
     volumes:
-      - ./Utils/docker-configs/keycloak-realms:/opt/keycloak/data/import
+      - ./Utils/docker-configs/keycloak-realms/docker:/opt/keycloak/data/import
     networks:
       - network_microservices
 

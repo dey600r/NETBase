@@ -20,5 +20,5 @@
 		"user": "appuser",
 		"pwd": "5551ce8816b920ac75b63872be0b82c5"
 	},
-	"keycloakEnabled": true
+	"keycloakEnabled": false
 }

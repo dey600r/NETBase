@@ -23,6 +23,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{8CD70590-F39
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.IoC", "Microservice.IoC\Microservice.IoC.csproj", "{3E42A998-4C7A-4A91-9925-7FE82DDF34B0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{10C98BCA-F470-4CE6-B578-CBA739C6C79C}"
+	ProjectSection(SolutionItems) = preProject
+		..\docker-compose.yml = ..\docker-compose.yml
+		..\Dockerfile-microservice-angular = ..\Dockerfile-microservice-angular
+		..\Dockerfile-microservice-angular-openshift = ..\Dockerfile-microservice-angular-openshift
+		..\Dockerfile-microservice-gateway = ..\Dockerfile-microservice-gateway
+		..\Dockerfile-microservice-gateway-openshift = ..\Dockerfile-microservice-gateway-openshift
+		..\Dockerfile-microservice-maintenance = ..\Dockerfile-microservice-maintenance
+		..\Dockerfile-microservice-maintenance-openshift = ..\Dockerfile-microservice-maintenance-openshift
+		..\Dockerfile-microservice-security = ..\Dockerfile-microservice-security
+		..\Dockerfile-microservice-security-openshift = ..\Dockerfile-microservice-security-openshift
+		..\Dockerfile-microservice-setting = ..\Dockerfile-microservice-setting
+		..\Dockerfile-microservice-setting-openshift = ..\Dockerfile-microservice-setting-openshift
+		..\Dockerfile-microservice-vehicle = ..\Dockerfile-microservice-vehicle
+		..\Dockerfile-microservice-vehicle-openshift = ..\Dockerfile-microservice-vehicle-openshift
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
