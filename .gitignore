@@ -399,5 +399,6 @@ FodyWeavers.xsd
 *.sln.iml
 /Frontend/angular-frontend-keycloak/.vscode
 /Frontend/angular-frontend-ssr/.vscode
+/Frontend/angular-frontend-hexagonal/.vscode
 #/MicroservicesBackend/Microservice.SettingApi/package-lock.json
 /MicroservicesBackend/Microservice.SettingApi/dist/assets/config.json

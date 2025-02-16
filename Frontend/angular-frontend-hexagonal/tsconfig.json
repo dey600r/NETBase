@@ -1,0 +1,44 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@environments/*": ["src/environments/*"],
+      "@assets/*": ["src/assets/*"],
+      "@pages/*": ["src/app/adapters/ui/pages/*"],
+      "@modules/*": ["src/app/adapters/ui/shared/modules/*"],
+      // "@components/*": ["src/app/adapters/ui/shared/components/*"],
+      "@api/*": ["src/app/adapters/api/*"],
+      "@domain/*": ["src/app/domain/*"],
+      "@core/*": ["src/app/domain/core/*"],
+      "@helpers/*": ["src/app/domain/helpers/*"],
+      "@models/*": ["src/app/domain/models/*"],
+      "@providers/*": ["src/app/domain/providers/*"],
+      "@ports/*": ["src/app/domain/ports/*"],
+      "@utils/*": ["src/app/domain/utils/*"],
+    },
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
