@@ -11,6 +11,8 @@ export class MaterialService {
   constructor() { }
 
   openSnackBar(message: string): void {
-    this._snackBar.open(message);
+    this._snackBar.open(message, '', {
+      duration: 2000
+    });
   }
 }

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { LoginModule } from './login.module';
@@ -11,12 +10,9 @@ import { ILoginUIPort, IUserUIPort } from '@ports/index';
 import { IUserModel } from '@models/index';
 import { MaterialService } from '@helpers/index';
 
-import { ProviderInterceptorApp } from '@providers/index';
-
 @Component({
   selector: 'app-login',
   imports: [ LoginModule ],
-  providers: [ProviderInterceptorApp],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -25,7 +21,6 @@ export class LoginComponent {
   
   // INJECTOS
   private readonly _router: Router = inject(Router);
-  private readonly _snackBar = inject(MatSnackBar);
   private readonly _materialService = inject(MaterialService);
   private readonly _loginDomain: ILoginUIPort = inject(LoginDomain);
   private readonly _userDomain: IUserUIPort = inject(UserDomain);

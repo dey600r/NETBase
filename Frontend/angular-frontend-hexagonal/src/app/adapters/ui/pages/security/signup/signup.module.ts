@@ -6,7 +6,6 @@ import { SharedModule } from '@modules/shared.module';
   exports: [
     SharedModule
   ],
-  providers: [],
   schemas :[ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class LoginModule { }
+export class SignupModule { }
