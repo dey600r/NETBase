@@ -1,18 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 
-import { StorageService } from '@helpers/index';
-
-import { AppConstants } from '@utils/index';
+// MODELS
 import { IUserModel } from '@models/index';
-import { IUserUIPort } from '@ports/index';
+import { AppConstants } from '@utils/index';
+
+// PORTS
+import { IStorageDatabasePort, StorageDatabasePort, UserUIPort } from '@ports/index';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserDomain implements IUserUIPort {
+export class UserDomain implements UserUIPort {
 
     // INJECTABLES
-    private readonly storageService: StorageService = inject(StorageService);
+    private readonly _databasePort: IStorageDatabasePort = inject(StorageDatabasePort);
 
     constructor() {
     }
@@ -43,16 +44,16 @@ export class UserDomain implements IUserUIPort {
 //   }
 
   setUser(user: IUserModel): void {
-    this.storageService.setData<IUserModel>(AppConstants.LOCAL_STORAGE_USER, user);
+    this._databasePort.setData<IUserModel>(AppConstants.LOCAL_STORAGE_USER, user);
   }
 
   getUser(): IUserModel | null {
-    const user = this.storageService.getData(AppConstants.LOCAL_STORAGE_USER);
+    const user = this._databasePort.getData(AppConstants.LOCAL_STORAGE_USER);
     return (!user ? null : JSON.parse(user) as IUserModel);
   }
 
   clearUser(): void {
-    this.storageService.removeData(AppConstants.LOCAL_STORAGE_USER);
+    this._databasePort.removeData(AppConstants.LOCAL_STORAGE_USER);
   }
 
 

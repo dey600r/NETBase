@@ -4,10 +4,14 @@ import { Router } from '@angular/router';
 
 import { LoginModule } from './login.module';
 
-import { UrlConstants } from '@utils/index';
-import { LoginDomain, UserDomain } from '@domain/core/security/index';
-import { ILoginUIPort, IUserUIPort } from '@ports/index';
+// MODELS
 import { IUserModel } from '@models/index';
+import { UrlConstants } from '@utils/index';
+
+// PORTS
+import { ILoginUIPort, LoginUIPort, IUserUIPort, UserUIPort } from '@ports/index';
+
+// OTHERS
 import { MaterialService } from '@helpers/index';
 
 @Component({
@@ -22,8 +26,8 @@ export class LoginComponent {
   // INJECTOS
   private readonly _router: Router = inject(Router);
   private readonly _materialService = inject(MaterialService);
-  private readonly _loginDomain: ILoginUIPort = inject(LoginDomain);
-  private readonly _userDomain: IUserUIPort = inject(UserDomain);
+  private readonly _loginPort: ILoginUIPort = inject(LoginUIPort);
+  private readonly _userPort: IUserUIPort = inject(UserUIPort);
   
   // ATRIBUTES
   form: FormGroup = inject(FormBuilder).group({
@@ -40,9 +44,9 @@ export class LoginComponent {
     event.preventDefault();
     if (this.form.valid) {
       const value = this.form.value;
-      this._loginDomain.login(value.email, value.password).then((user: IUserModel) => {
+      this._loginPort.login(value.email, value.password).then((user: IUserModel) => {
         if (user) {
-          this._userDomain.setUser(user);
+          this._userPort.setUser(user);
           this._router.navigateByUrl(`/${UrlConstants.URL_HOME}`);
         }
       }).catch(err => {

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { StorageDatabasePort } from '@ports/index';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
+export class StorageService implements StorageDatabasePort {
 
   setData<T>(key: string, data: T) {
     localStorage.setItem(key, JSON.stringify(data));

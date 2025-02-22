@@ -2,17 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { ILoginModel, ISignupModel, IUserModel } from '@models/index';
 import { UrlConstants } from '@utils/index';
-import { ISecurityApiPort } from '@ports/index';
+import { SecurityApiPort } from '@ports/index';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SecurityService implements ISecurityApiPort {
+export class SecurityService implements SecurityApiPort {
 
   private readonly httpService: HttpService = inject(HttpService);
-  
-  constructor() { 
-  }
 
   login(email: string, password: string): Promise<IUserModel> {
     return this.httpService.post<ILoginModel, IUserModel>(UrlConstants.URL_API_LOGIN, { email, password });

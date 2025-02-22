@@ -25,6 +25,7 @@
       "@pages/*": ["src/app/adapters/ui/pages/*"],
       "@modules/*": ["src/app/adapters/ui/shared/modules/*"],
       "@components/*": ["src/app/adapters/ui/shared/components/*"],
+      "@database/*": ["src/app/adapters/database/*"],
       "@api/*": ["src/app/adapters/api/*"],
       "@domain/*": ["src/app/domain/*"],
       "@core/*": ["src/app/domain/core/*"],

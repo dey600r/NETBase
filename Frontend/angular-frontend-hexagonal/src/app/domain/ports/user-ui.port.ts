@@ -5,3 +5,9 @@ export interface IUserUIPort {
     getUser(): IUserModel | null;
     clearUser(): void;
 }
+
+export abstract class UserUIPort implements IUserUIPort {
+    abstract setUser(user: IUserModel): void;
+    abstract getUser(): IUserModel | null;
+    abstract clearUser(): void;
+}

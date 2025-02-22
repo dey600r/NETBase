@@ -5,8 +5,7 @@ import { StorageService } from '@helpers/index';
 import { AppConstants, UrlConstants } from '@utils/index';
 import { IUserModel, ILoginModel, ISignupModel } from '@models/index';
 import { Router } from '@angular/router';
-import { ILoginUIPort, ISecurityApiPort } from '@ports/index';
-import { SecurityService } from '@api/index';
+import { ISecurityApiPort, LoginUIPort, SecurityApiPort } from '@ports/index';
 // import { KeycloakService } from 'keycloak-angular';
 // import { KeycloakProfile } from 'keycloak-js';
 // import { environment } from '@environments/environment';
@@ -15,17 +14,17 @@ import { SecurityService } from '@api/index';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginDomain implements ILoginUIPort {
+export class LoginDomain implements LoginUIPort {
 
     // INJECTABLES
-    private readonly storageService: StorageService = inject(StorageService);
-    private readonly securityApi: ISecurityApiPort = inject(SecurityService);
+    // private readonly _storageDatabase: StorageService = inject(StorageService);
+    private readonly _securityApi: ISecurityApiPort = inject(SecurityApiPort);
 
     constructor() {
     }
 
     login(email: string, password: string): Promise<IUserModel> {
-        return this.securityApi.login(email, password);
+        return this._securityApi.login(email, password);
     }
 
 //   user(): Promise<IUserModel> {
