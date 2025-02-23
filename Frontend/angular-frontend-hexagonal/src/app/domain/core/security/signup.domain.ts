@@ -6,7 +6,7 @@ import { inject, Injectable } from '@angular/core';
 import { IUserModel } from '@models/index';
 
 // PORTS
-import { ISecurityApiPort, SecurityApiPort, SignupUIPort } from '@ports/index';
+import { ISecurityApiPort, SecurityApiPort, SignupUIPort } from '@app/domain/ports/index';
 
 @Injectable({
   providedIn: 'root'

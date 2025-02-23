@@ -29,6 +29,7 @@
       "@api/*": ["src/app/adapters/api/*"],
       "@domain/*": ["src/app/domain/*"],
       "@core/*": ["src/app/domain/core/*"],
+      "@guards/*": ["src/app/domain/guards/*"],
       "@helpers/*": ["src/app/domain/helpers/*"],
       "@models/*": ["src/app/domain/models/*"],
       "@providers/*": ["src/app/domain/providers/*"],

@@ -4,7 +4,7 @@ import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpE
 import {Observable, catchError, throwError} from 'rxjs';
 
 import { UrlConstants } from '@utils/index';
-import { IUserUIPort } from '@ports/index';
+import { IUserUIPort } from '@app/domain/ports/index';
 import { MaterialService } from '@helpers/index';
 import { environment } from '@environments/environment';
 import { UserDomain } from '@core/security';

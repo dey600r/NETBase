@@ -1,11 +1,15 @@
 import { Component, inject, Input } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { UrlConstants } from '@utils/index';
-import { SharedModule } from '@modules/shared.module';
 // import { KeycloakService } from 'keycloak-angular';
+// MODULES
+import { SharedModule } from '@modules/shared.module';
 
-// import { ISecurityApiPort } from '@ports/index';
+// MODELS
+import { UrlConstants } from '@utils/index';
+
+// PORTS
+import { LoginUIPort, ILoginUIPort } from '@ports/index';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +20,7 @@ import { SharedModule } from '@modules/shared.module';
 })
 export class HeaderComponent {
 
-  //private securityService: ISecurityApiPort = inject(SecurityService);
+  private readonly _loginPort: ILoginUIPort = inject(LoginUIPort);
   private readonly router: Router = inject(Router);
 
   @Input() drawer: MatDrawer | null = null;
@@ -29,18 +33,17 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-  //   this.securityService.user()
-  //     .then(user => {
-  //       this.userName = `${user.firstName} ${user.lastName}`;
-  //       this.userLocation = user.location;
-  //       this.userRole = user.roles;
-  //       //user.roles.forEach((x, index) => this.userRole += `${(index != 0 ? ',' : '')}${x}`);
-  //     })
-  //     .catch(err => console.error(err));
+    this._loginPort.user().then(user => {
+        this.userName = `${user.firstName} ${user.lastName}`;
+        this.userLocation = user.location;
+        this.userRole = user.roles;
+        //user.roles.forEach((x, index) => this.userRole += `${(index != 0 ? ',' : '')}${x}`);
+      })
+      .catch(err => console.error(err));
   }
 
   logout(): void {
-    //this.securityService.logout();
+    this._loginPort.logout();
   }
 
   navigateToHome(): void {

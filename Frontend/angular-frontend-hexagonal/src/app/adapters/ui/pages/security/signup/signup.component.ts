@@ -9,7 +9,7 @@ import { IUserModel } from '@models/index';
 import { UrlConstants } from '@utils/index';
 
 // PORTS
-import { ISignupUIPort, SignupUIPort, IUserUIPort, UserUIPort } from '@ports/index';
+import { ISignupUIPort, SignupUIPort, IUserUIPort, UserUIPort } from '@app/domain/ports/index';
 
 // HELPERS
 import { MaterialService } from '@helpers/index';

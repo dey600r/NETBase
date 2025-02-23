@@ -1,7 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from './http.service';
+
+// MODELS
 import { ILoginModel, ISignupModel, IUserModel } from '@models/index';
 import { UrlConstants } from '@utils/index';
+
+// PORTS
 import { SecurityApiPort } from '@ports/index';
 
 @Injectable({
@@ -18,5 +22,9 @@ export class SecurityService implements SecurityApiPort {
   signup(firstName: string, lastName: string, location: string, userName: string, email: string, password: string): Promise<IUserModel> {
     return this.httpService.post<ISignupModel, IUserModel>(UrlConstants.URL_API_SIGNUP, 
       { firstName, lastName, location, userName, email, password });
+  }
+
+  getUser(): Promise<IUserModel> {
+    return this.httpService.get<IUserModel>(UrlConstants.URL_API_USER);
   }
 }

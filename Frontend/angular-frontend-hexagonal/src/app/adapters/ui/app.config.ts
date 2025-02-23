@@ -6,7 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 
-import { ProviderInterceptorApp, ProviderOutboundApp } from '@providers/index';
+import { ProviderInterceptorApp, ProviderCoreApp } from '@providers/index';
 
 
 export const appConfig: ApplicationConfig = {
@@ -17,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     ProviderInterceptorApp,
-    ProviderOutboundApp
+    ProviderCoreApp
   ]
 };

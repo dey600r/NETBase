@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from '@guards/index';
 import { UrlConstants } from '@utils/index';
 
 export const routes: Routes = [
@@ -17,7 +18,10 @@ export const routes: Routes = [
     },
     {
         path: UrlConstants.URL_HOME,
-        loadComponent: () => import('@pages/home/home.component').then(m => m.HomeComponent)
+        loadComponent: () => import('@pages/home/home.component').then(m => m.HomeComponent),
+        loadChildren: () => import('@pages/home/pages.routes').then(m => m.routesJWT),
+        canActivate: [AuthGuard],
+        data: { roles: ['admin', 'manager', 'customer'] }
     },
     {
         path: '**',

@@ -1,2 +1,2 @@
 export * from './http.interceptor';
-export * from './outbound.provider';
+export * from './core.provider';

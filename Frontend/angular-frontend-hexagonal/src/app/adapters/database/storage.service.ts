@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageDatabasePort } from '@ports/index';
+import { StorageDatabasePort } from '@app/domain/ports/index';
 
 @Injectable({
   providedIn: 'root'
