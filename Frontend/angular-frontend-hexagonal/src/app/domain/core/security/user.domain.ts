@@ -5,12 +5,12 @@ import { IUserModel } from '@models/index';
 import { AppConstants } from '@utils/index';
 
 // PORTS
-import { IStorageDatabasePort, StorageDatabasePort, UserUIPort } from '@ports/index';
+import { IStorageDatabasePort, StorageDatabasePort, IUserUIPort } from '@ports/index';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserDomain implements UserUIPort {
+export class UserDomain implements IUserUIPort {
 
   // INJECTABLES
   private readonly _databasePort: IStorageDatabasePort = inject(StorageDatabasePort);

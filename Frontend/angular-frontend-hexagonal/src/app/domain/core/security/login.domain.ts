@@ -10,7 +10,7 @@ import { AppConstants, UrlConstants } from '@utils/index';
 import { environment } from '@environments/environment';
 
 // PORTS
-import { ISecurityApiPort, IUserUIPort, LoginUIPort, SecurityApiPort, UserUIPort } from '@ports/index';
+import { ISecurityApiPort, IUserUIPort, ILoginUIPort, SecurityApiPort, UserUIPort } from '@ports/index';
 // import { KeycloakService } from 'keycloak-angular';
 // import { KeycloakProfile } from 'keycloak-js';
 // import { environment } from '@environments/environment';
@@ -19,7 +19,7 @@ import { ISecurityApiPort, IUserUIPort, LoginUIPort, SecurityApiPort, UserUIPort
 @Injectable({
   providedIn: 'root'
 })
-export class LoginDomain implements LoginUIPort {
+export class LoginDomain implements ILoginUIPort {
 
     // INJECTABLES
     private readonly router: Router = inject(Router);
