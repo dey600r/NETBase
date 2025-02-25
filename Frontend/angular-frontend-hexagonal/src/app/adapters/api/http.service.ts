@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { firstValueFrom, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  constructor(private readonly http: HttpClient) { }
 
+  private readonly http: HttpClient = inject(HttpClient);
 
   get<T>(url: string, params: string = ''): Promise<T> {
     return firstValueFrom(this.http.get<T>(`${url}`)

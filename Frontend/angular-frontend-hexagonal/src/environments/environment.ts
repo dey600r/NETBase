@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://localhost:44379/api',
+    apiUrl: 'http://localhost:3400',
     keycloak: {
         enable: false,
         url: 'http://localhost:8180',

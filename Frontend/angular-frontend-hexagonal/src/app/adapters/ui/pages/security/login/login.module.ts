@@ -6,7 +6,7 @@ import { SharedModule } from '@modules/shared.module';
 import { UserUIPort, LoginUIPort } from '@app/domain/ports/index';
 
 // DOMAIN
-import { LoginDomain, UserDomain } from '@core/security/index';
+import { LoginDomain, UserDomain } from '@app/domain/core/index';
 
 @NgModule({
   exports: [

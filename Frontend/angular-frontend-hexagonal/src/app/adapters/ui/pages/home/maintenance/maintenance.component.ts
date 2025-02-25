@@ -10,6 +10,9 @@ import { IConfigurationModel, IMaintenanceElementModel } from '@models/index';
 // HELPERS
 import { MaterialService } from '@helpers/index';
 
+// PORTS
+import { IReadMaintenanceUIPort, IWriteMaintenanceUIPort, ReadMaintenanceUIPort, WriteMaintenanceUIPort } from '@ports/index';
+
 @Component({
   selector: 'app-maintenance',
   imports: [ MaintenanceModule ],
@@ -21,6 +24,8 @@ export class MaintenanceComponent {
 
   // INJECTABLES
   private readonly _materialService: MaterialService = inject(MaterialService);
+  private readonly _readMaintenancePort: IReadMaintenanceUIPort = inject(ReadMaintenanceUIPort);
+  private readonly _writeMaintenancePort: IWriteMaintenanceUIPort = inject(WriteMaintenanceUIPort);
 
   displayedColumnsMaintenanceElement: string[] = ['0', '1', '2', '3', '4', '5', '6'];
   dataSourceMaintenanceElement: IMaintenanceElementModel[] = [];
@@ -34,11 +39,11 @@ export class MaintenanceComponent {
   }
 
   loadAllMaintenanceElement() {
-    //this.maintenanceService.getAllMaintenanceElement().then(x => this.dataSourceMaintenanceElement = x);
+    this._readMaintenancePort.getAllMaintenanceElement().then(x => this.dataSourceMaintenanceElement = x);
   }
 
   loadAllConfiguration() {
-    //this.maintenanceService.getAllConfiguration().then(x => this.dataSourceConfiguration = x);
+    this._readMaintenancePort.getAllConfiguration().then(x => this.dataSourceConfiguration = x);
   }
 
   openDialog(index: number = -1) {
@@ -50,14 +55,14 @@ export class MaintenanceComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        // this.maintenanceService.addMaintenanceElement(result).then(result => {
-        //   if(result) {
-        //     this.materialService.openSnackBar('Maintenance Element saved succesfully!!');
-        //     this.loadAllMaintenanceElement();
-        //   }
-        // }).catch(err => {
-        //   this.materialService.openSnackBar('Error on server side');
-        // });
+        this._writeMaintenancePort.addMaintenanceElement(result).then(result => {
+          if(result) {
+            this._materialService.openSnackBar('Maintenance Element saved succesfully!!');
+            this.loadAllMaintenanceElement();
+          }
+        }).catch(err => {
+          this._materialService.openSnackBar('Error on server side');
+        });
       }
     });
   }

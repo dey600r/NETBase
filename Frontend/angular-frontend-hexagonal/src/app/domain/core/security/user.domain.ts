@@ -5,7 +5,7 @@ import { IUserModel } from '@models/index';
 import { AppConstants } from '@utils/index';
 
 // PORTS
-import { IStorageDatabasePort, StorageDatabasePort, UserUIPort } from '@app/domain/ports/index';
+import { IStorageDatabasePort, StorageDatabasePort, UserUIPort } from '@ports/index';
 
 @Injectable({
   providedIn: 'root'

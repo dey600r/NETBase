@@ -6,12 +6,12 @@ import { ILoginModel, ISignupModel, IUserModel } from '@models/index';
 import { UrlConstants } from '@utils/index';
 
 // PORTS
-import { SecurityApiPort } from '@ports/index';
+import { ISecurityApiPort } from '@ports/index';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SecurityService implements SecurityApiPort {
+export class SecurityService implements ISecurityApiPort {
 
   private readonly httpService: HttpService = inject(HttpService);
 

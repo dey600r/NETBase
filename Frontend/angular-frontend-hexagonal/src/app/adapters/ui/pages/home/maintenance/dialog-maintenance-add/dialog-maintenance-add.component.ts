@@ -18,6 +18,7 @@ import { MaterialModule } from '@modules/material.module';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class DialogMaintenanceAddComponent {
+  
   name: FormControl = new FormControl('', [Validators.required]);
   description: FormControl = new FormControl('', [Validators.required]);
 
@@ -26,7 +27,7 @@ export class DialogMaintenanceAddComponent {
     description: this.description,
   });
   
-  constructor(private dialogRef: MatDialogRef<DialogMaintenanceAddComponent>,
+  constructor(private readonly dialogRef: MatDialogRef<DialogMaintenanceAddComponent>,
               @Inject(MAT_DIALOG_DATA) public data: IMaintenanceElementModel
   ) {
     if(data) {

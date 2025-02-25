@@ -7,7 +7,7 @@ import { UrlConstants } from '@utils/index';
 import { IUserUIPort } from '@app/domain/ports/index';
 import { MaterialService } from '@helpers/index';
 import { environment } from '@environments/environment';
-import { UserDomain } from '@core/security';
+import { UserDomain } from '@app/domain/core';
 
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
