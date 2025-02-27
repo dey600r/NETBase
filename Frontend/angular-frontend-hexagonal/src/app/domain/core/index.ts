@@ -3,3 +3,7 @@ export * from './security/signup.domain';
 export * from './security/user.domain';
 export * from './maintenance/read-maintenance.domain';
 export * from './maintenance/write-maintenance.domain';
+export * from './vehicle/read-vehicle.domain';
+export * from './vehicle/write-vehicle.domain';
+export * from './setting/read-setting.domain';
+export * from './setting/write-setting.domain';

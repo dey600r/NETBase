@@ -33,18 +33,18 @@ export const routesKeycloack: Routes = [
 ];
 
 export const routesJWT: Routes = [
-  //   {
-  //     path: UrlConstants.URL_SETTING,
-  //     loadChildren: () => import('./setting/setting.module').then(mod => mod.SettingModule),
-  //     canActivate: [AuthGuard],
-  //     data: { roles: ['admin'] }
-  //   },
-  //   {
-  //     path: UrlConstants.URL_VEHICLE,
-  //     loadChildren: () => import('./vehicle/vehicle.module').then(mod => mod.VehicleModule),
-  //     canActivate: [AuthGuard],
-  //     data: { roles: ['admin'] }
-  //   },
+    {
+      path: UrlConstants.URL_SETTING,
+      loadComponent: () => import('./setting/setting.component').then(mod => mod.SettingComponent),
+      canActivate: [AuthGuard],
+      data: { roles: ['admin'] }
+    },
+    {
+      path: UrlConstants.URL_VEHICLE,
+      loadComponent: () => import('./vehicle/vehicle.component').then(mod => mod.VehicleComponent),
+      canActivate: [AuthGuard],
+      data: { roles: ['admin'] }
+    },
     {
       path: UrlConstants.URL_MAINTENANCE,
       loadComponent: () => import('./maintenance/maintenance.component').then(mod => mod.MaintenanceComponent),
