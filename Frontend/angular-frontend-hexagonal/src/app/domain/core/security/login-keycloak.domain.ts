@@ -21,10 +21,6 @@ export class LoginKeycloakDomain extends LoginUIPortImpl {
   private readonly _userPort: IUserUIPort = inject(UserUIPort);
   private readonly _keycloak: KeycloakService = inject(KeycloakService);
 
-  override login(email: string, password: string): Promise<IUserModel> {
-      throw new Error('LOGIN JWT NOT CONFIGURED ON THIS ENVIRONMENT');
-  }
-
   override user(): Promise<IUserModel> {
     return new Promise((resolve, reject) => {
       this._keycloak.getToken().then(token => {

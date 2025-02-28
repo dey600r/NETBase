@@ -2,9 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
 import { UrlConstants } from '@utils/index';
 
-import { environment } from '@environments/environment';
-
-const routesJWT: Routes = [
+export const routesJWT: Routes = [
     {
         path: UrlConstants.URL_LOGIN,
         loadComponent: () => import('@pages/security/login/login.component').then(m => m.LoginComponent)
@@ -15,7 +13,7 @@ const routesJWT: Routes = [
     }
 ];
 
-const routesApp: Routes = [
+export const routesApp: Routes = [
     {
         path: '',
         redirectTo: UrlConstants.URL_HOME,
@@ -34,4 +32,3 @@ const routesApp: Routes = [
     }
 ];
 
-export const routes: Routes = (environment.keycloak.enable ? routesApp : [...routesJWT, ...routesApp]);
