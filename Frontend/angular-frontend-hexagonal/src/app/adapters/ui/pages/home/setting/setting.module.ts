@@ -6,10 +6,10 @@ import { SettingComponent } from './setting.component';
 import { DialogSettingAddComponent } from './dialog-setting-add/dialog-setting-add.component';
 
 // PORTS
-import { ReadSettingUIPort, SettingApiPort, WriteSettingUIPort } from '@ports/index';
+import { QuerySettingUIPort, SettingApiPort, CommandSettingUIPort } from '@ports/index';
 
 // DOMAIN
-import { ReadSettingDomain, WriteSettingDomain } from '@domain/core/index';
+import { QuerySettingDomain, CommandSettingDomain } from '@domain/core/index';
 
 // ADAPTERS
 import { SettingService } from '@api/index';
@@ -28,8 +28,8 @@ import { SettingService } from '@api/index';
     RouterModule
   ],
   providers: [
-    { provide: ReadSettingUIPort, useClass: ReadSettingDomain, multi: false },
-    { provide: WriteSettingUIPort, useClass: WriteSettingDomain, multi: false },
+    { provide: QuerySettingUIPort, useClass: QuerySettingDomain, multi: false },
+    { provide: CommandSettingUIPort, useClass: CommandSettingDomain, multi: false },
     { provide: SettingApiPort, useClass: SettingService, multi: false },
   ],
 })

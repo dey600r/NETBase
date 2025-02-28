@@ -4,12 +4,12 @@ import { inject, Injectable } from "@angular/core";
 import { IResponseModel, ISettingModel } from "@models/index";
 
 // PORTS
-import { ISettingApiPort, IWriteSettingUIPort, SettingApiPort } from "@ports/index";
+import { ISettingApiPort, ICommandSettingUIPort, SettingApiPort } from "@ports/index";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WriteSettingDomain implements IWriteSettingUIPort {
+export class CommandSettingDomain implements ICommandSettingUIPort {
   
   // INJECTABLES
   private readonly _settingApi: ISettingApiPort = inject(SettingApiPort);

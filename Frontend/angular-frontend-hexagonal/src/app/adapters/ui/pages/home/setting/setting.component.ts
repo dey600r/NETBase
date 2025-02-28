@@ -10,7 +10,7 @@ import { ISettingModel } from '@app/domain/models';
 import { MaterialService } from '@helpers/index';
 
 // PORTS
-import { IReadSettingUIPort, IWriteSettingUIPort, ReadSettingUIPort, WriteSettingUIPort } from '@ports/index';
+import { IQuerySettingUIPort, ICommandSettingUIPort, QuerySettingUIPort, CommandSettingUIPort } from '@ports/index';
 
 @Component({
   selector: 'app-setting',
@@ -23,8 +23,8 @@ export class SettingComponent {
 
   // INJECTABLES
   private readonly _materialService: MaterialService = inject(MaterialService);
-  private readonly _readSettingPort: IReadSettingUIPort = inject(ReadSettingUIPort);
-  private readonly _writeSettingPort: IWriteSettingUIPort = inject(WriteSettingUIPort);
+  private readonly _readSettingPort: IQuerySettingUIPort = inject(QuerySettingUIPort);
+  private readonly _writeSettingPort: ICommandSettingUIPort = inject(CommandSettingUIPort);
   
   displayedColumns: string[] = ['0', '1', '2', '3', '4', '6'];
   dataSource: ISettingModel[] = [];

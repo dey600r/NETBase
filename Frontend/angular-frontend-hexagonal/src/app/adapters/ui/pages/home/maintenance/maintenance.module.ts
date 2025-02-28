@@ -8,10 +8,10 @@ import { DialogMaintenanceAddComponent } from './dialog-maintenance-add/dialog-m
 import { SharedModule } from '@modules/shared.module';
 
 // PORTS
-import { MaintenanceApiPort, ReadMaintenanceUIPort, WriteMaintenanceUIPort } from '@ports/index';
+import { MaintenanceApiPort, QueryMaintenanceUIPort, CommandMaintenanceUIPort } from '@ports/index';
 
 // DOMAIN
-import { ReadMaintenanceDomain, WriteMaintenanceDomain } from '@domain/core/index';
+import { QueryMaintenanceDomain, CommandMaintenanceDomain } from '@domain/core/index';
 
 // ADAPTERS
 import { MaintenanceService } from '@api/index';
@@ -30,8 +30,8 @@ import { MaintenanceService } from '@api/index';
     RouterModule
   ],
   providers: [
-    { provide: ReadMaintenanceUIPort, useClass: ReadMaintenanceDomain, multi: false },
-    { provide: WriteMaintenanceUIPort, useClass: WriteMaintenanceDomain, multi: false },
+    { provide: QueryMaintenanceUIPort, useClass: QueryMaintenanceDomain, multi: false },
+    { provide: CommandMaintenanceUIPort, useClass: CommandMaintenanceDomain, multi: false },
     { provide: MaintenanceApiPort, useClass: MaintenanceService, multi: false },
   ],
   schemas :[ CUSTOM_ELEMENTS_SCHEMA ]

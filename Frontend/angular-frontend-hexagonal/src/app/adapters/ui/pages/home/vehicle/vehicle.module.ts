@@ -8,10 +8,10 @@ import { DialogConfigurationAddComponent } from './dialog-configuration-add/dial
 import { SharedModule } from '@modules/shared.module';
 
 // PORTS
-import { ReadVehicleUIPort, VehicleApiPort, WriteVehicleUIPort } from '@ports/index';
+import { QueryVehicleUIPort, VehicleApiPort, CommandVehicleUIPort } from '@ports/index';
 
 // DOMAIN
-import { ReadVehicleDomain, WriteVehicleDomain } from '@domain/core/index';
+import { QueryVehicleDomain, CommandVehicleDomain } from '@domain/core/index';
 
 // ADAPTERS
 import { VehicleService } from '@api/index';
@@ -30,8 +30,8 @@ import { VehicleService } from '@api/index';
     RouterModule
   ],
   providers: [
-    { provide: ReadVehicleUIPort, useClass: ReadVehicleDomain, multi: false },
-    { provide: WriteVehicleUIPort, useClass: WriteVehicleDomain, multi: false },
+    { provide: QueryVehicleUIPort, useClass: QueryVehicleDomain, multi: false },
+    { provide: CommandVehicleUIPort, useClass: CommandVehicleDomain, multi: false },
     { provide: VehicleApiPort, useClass: VehicleService, multi: false },
   ],
   schemas :[ CUSTOM_ELEMENTS_SCHEMA ]

@@ -1,13 +1,10 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from '@guards/index';
+import { AuthGuard } from '@guards/auth.guard';
 import { UrlConstants } from '@utils/index';
 
-export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: UrlConstants.URL_HOME,
-        pathMatch: 'full'
-    },
+import { environment } from '@environments/environment';
+
+const routesJWT: Routes = [
     {
         path: UrlConstants.URL_LOGIN,
         loadComponent: () => import('@pages/security/login/login.component').then(m => m.LoginComponent)
@@ -15,11 +12,19 @@ export const routes: Routes = [
     {
         path: UrlConstants.URL_SIGNUP,
         loadComponent: () => import('@pages/security/signup/signup.component').then(m => m.SignupComponent)
+    }
+];
+
+const routesApp: Routes = [
+    {
+        path: '',
+        redirectTo: UrlConstants.URL_HOME,
+        pathMatch: 'full'
     },
     {
         path: UrlConstants.URL_HOME,
         loadComponent: () => import('@pages/home/home.component').then(m => m.HomeComponent),
-        loadChildren: () => import('@pages/home/pages.routes').then(m => m.routesJWT),
+        loadChildren: () => import('@pages/home/pages.routes').then(m => m.routesPages),
         canActivate: [AuthGuard],
         data: { roles: ['admin', 'manager', 'customer'] }
     },
@@ -28,3 +33,5 @@ export const routes: Routes = [
         redirectTo: UrlConstants.URL_HOME
     }
 ];
+
+export const routes: Routes = (environment.keycloak.enable ? routesApp : [...routesJWT, ...routesApp]);

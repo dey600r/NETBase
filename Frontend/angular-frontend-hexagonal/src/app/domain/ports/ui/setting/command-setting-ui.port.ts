@@ -1,9 +1,9 @@
 import { IResponseModel, ISettingModel } from "@models/index";
 
-export interface IWriteSettingUIPort {
+export interface ICommandSettingUIPort {
     addSetting(setting: ISettingModel): Promise<IResponseModel<ISettingModel>>;
 }
 
-export abstract class WriteSettingUIPort implements IWriteSettingUIPort {
+export abstract class CommandSettingUIPort implements ICommandSettingUIPort {
     abstract addSetting(setting: ISettingModel): Promise<IResponseModel<ISettingModel>>;
 }

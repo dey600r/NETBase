@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 
 import { DialogConfigurationAddComponent } from './dialog-configuration-add/dialog-configuration-add.component';
 import { VehicleModule } from './vehicle.module';
@@ -11,7 +10,7 @@ import { IConfigurationModel, IMaintenanceElementModel, IVehicleTypeModel } from
 import { MaterialService } from '@helpers/index';
 
 // PORTS
-import { IReadVehicleUIPort, IWriteVehicleUIPort, ReadVehicleUIPort, WriteVehicleUIPort } from '@ports/index';
+import { IQueryVehicleUIPort, ICommandVehicleUIPort, QueryVehicleUIPort, CommandVehicleUIPort } from '@ports/index';
 
 @Component({
   selector: 'app-vehicle',
@@ -24,8 +23,8 @@ export class VehicleComponent {
 
   // INJECTABLES
   private readonly _materialService: MaterialService = inject(MaterialService);
-  private readonly _readVehiclePort: IReadVehicleUIPort = inject(ReadVehicleUIPort);
-  private readonly _writeVehiclePort: IWriteVehicleUIPort = inject(WriteVehicleUIPort);
+  private readonly _readVehiclePort: IQueryVehicleUIPort = inject(QueryVehicleUIPort);
+  private readonly _writeVehiclePort: ICommandVehicleUIPort = inject(CommandVehicleUIPort);
 
   displayedColumnsConfiguration: string[] = ['0', '1', '2', '3', '4', '5', '6'];
   dataSourceConfiguration: IConfigurationModel[] = [];

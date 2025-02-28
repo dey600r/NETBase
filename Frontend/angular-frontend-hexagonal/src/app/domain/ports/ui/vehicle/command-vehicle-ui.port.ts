@@ -1,9 +1,9 @@
 import { IConfigurationModel } from "@models/index";
 
-export interface IWriteVehicleUIPort {
+export interface ICommandVehicleUIPort {
     addConfiguration(conf: IConfigurationModel): Promise<IConfigurationModel>;
 }
 
-export abstract class WriteVehicleUIPort implements IWriteVehicleUIPort {
+export abstract class CommandVehicleUIPort implements ICommandVehicleUIPort {
     abstract addConfiguration(conf: IConfigurationModel): Promise<IConfigurationModel>;
 }

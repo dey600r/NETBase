@@ -4,12 +4,12 @@ import { inject, Injectable } from "@angular/core";
 import { IConfigurationModel, IMaintenanceElementModel, IVehicleTypeModel } from "@models/index";
 
 // PORTS
-import { IReadVehicleUIPort, IVehicleApiPort, VehicleApiPort } from "@ports/index";
+import { IQueryVehicleUIPort, IVehicleApiPort, VehicleApiPort } from "@ports/index";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReadVehicleDomain implements IReadVehicleUIPort {
+export class QueryVehicleDomain implements IQueryVehicleUIPort {
 
     // INJECTABLES
     private readonly _vehicleApi: IVehicleApiPort = inject(VehicleApiPort);

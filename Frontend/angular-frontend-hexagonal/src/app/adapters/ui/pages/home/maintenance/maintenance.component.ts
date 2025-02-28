@@ -11,7 +11,7 @@ import { IConfigurationModel, IMaintenanceElementModel } from '@models/index';
 import { MaterialService } from '@helpers/index';
 
 // PORTS
-import { IReadMaintenanceUIPort, IWriteMaintenanceUIPort, ReadMaintenanceUIPort, WriteMaintenanceUIPort } from '@ports/index';
+import { IQueryMaintenanceUIPort, ICommandMaintenanceUIPort, QueryMaintenanceUIPort, CommandMaintenanceUIPort } from '@ports/index';
 
 @Component({
   selector: 'app-maintenance',
@@ -24,8 +24,8 @@ export class MaintenanceComponent {
 
   // INJECTABLES
   private readonly _materialService: MaterialService = inject(MaterialService);
-  private readonly _readMaintenancePort: IReadMaintenanceUIPort = inject(ReadMaintenanceUIPort);
-  private readonly _writeMaintenancePort: IWriteMaintenanceUIPort = inject(WriteMaintenanceUIPort);
+  private readonly _readMaintenancePort: IQueryMaintenanceUIPort = inject(QueryMaintenanceUIPort);
+  private readonly _writeMaintenancePort: ICommandMaintenanceUIPort = inject(CommandMaintenanceUIPort);
 
   displayedColumnsMaintenanceElement: string[] = ['0', '1', '2', '3', '4', '5', '6'];
   dataSourceMaintenanceElement: IMaintenanceElementModel[] = [];

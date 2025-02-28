@@ -1,9 +1,9 @@
 import { IMaintenanceElementModel } from "@models/index";
 
-export interface IWriteMaintenanceUIPort {
+export interface ICommandMaintenanceUIPort {
     addMaintenanceElement(data: IMaintenanceElementModel): Promise<IMaintenanceElementModel>;
 }
 
-export abstract class WriteMaintenanceUIPort implements IWriteMaintenanceUIPort {
+export abstract class CommandMaintenanceUIPort implements ICommandMaintenanceUIPort {
     abstract addMaintenanceElement(data: IMaintenanceElementModel): Promise<IMaintenanceElementModel>;
 }

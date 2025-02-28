@@ -6,12 +6,12 @@ import { inject, Injectable } from '@angular/core';
 import { IMaintenanceElementModel } from '@models/index';
 
 // PORTS
-import { IWriteMaintenanceUIPort, IMaintenanceApiPort, MaintenanceApiPort } from '@ports/index';
+import { ICommandMaintenanceUIPort, IMaintenanceApiPort, MaintenanceApiPort } from '@ports/index';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WriteMaintenanceDomain implements IWriteMaintenanceUIPort {
+export class CommandMaintenanceDomain implements ICommandMaintenanceUIPort {
 
     // INJECTABLES
     private readonly _maintenanceApi: IMaintenanceApiPort = inject(MaintenanceApiPort);
