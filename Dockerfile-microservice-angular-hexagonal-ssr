@@ -1,0 +1,18 @@
+FROM node:20.13.1-alpine3.19 as build
+
+USER node
+RUN mkdir -p /tmp/app
+WORKDIR /tmp/app
+
+COPY --chown=node ./Frontend/angular-frontend-hexagonal .
+RUN npm i
+RUN npm run build-prod
+
+FROM node:20.13.1-alpine3.19
+USER node
+RUN mkdir -p /home/node/app
+
+WORKDIR /home/node/app
+COPY --from=build /tmp/app/dist/angular-frontend-hexagonal/ ./
+CMD node server/server.mjs
+EXPOSE 4100

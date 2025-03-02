@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --configuration=production",
+    "build-openshift": "ng build --configuration=openshift --base-href=/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:angular-frontend-hexagonal": "node dist/angular-frontend-hexagonal/server/server.mjs"
+    "serve-ssr": "node dist/angular-frontend-hexagonal/server/server.mjs"
   },
   "private": true,
   "dependencies": {

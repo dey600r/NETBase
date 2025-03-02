@@ -14,11 +14,23 @@ services:
       - "3300:8080"
     networks:
       - network_microservices
+  
+  microservice-angular-ssr:
+    container_name: microservice-angular-ssr
+    hostname: "microservice-angular-ssr"
+    image: microservice-angular:keycloak-ssr
+    build:
+      context: ./
+      dockerfile: Dockerfile-microservice-angular-hexagonal-ssr
+    ports:
+      - "3301:4100"
+    networks:
+      - network_microservices
 
   microservice-gateway:
     container_name: microservice-gateway
     hostname: "microservice-gateway"
-    image: microservice-gateway:jwt
+    image: microservice-gateway:keycloak
     build:
       context: ./
       dockerfile: Dockerfile-microservice-gateway
@@ -33,7 +45,7 @@ services:
   microservice-security-api:
     container_name: microservice-security-api
     hostname: "microservice-security-api"
-    image: microservice-security-api:jwt
+    image: microservice-security-api:keycloak
     build:
       context: ./
       dockerfile: Dockerfile-microservice-security
@@ -50,7 +62,7 @@ services:
   microservice-vehicle-api:
     container_name: microservice-vehicle-api
     hostname: "microservice-vehicle-api"
-    image: microservice-vehicle-api:jwt
+    image: microservice-vehicle-api:keycloak
     build:
       context: ./
       dockerfile: Dockerfile-microservice-vehicle
@@ -68,7 +80,7 @@ services:
   microservice-maintenance-api:
     container_name: microservice-maintenance-api
     hostname: "microservice-maintenance-api"
-    image: microservice-maintenance-api:jwt
+    image: microservice-maintenance-api:keycloak
     build: 
       context: ./
       dockerfile: Dockerfile-microservice-maintenance
@@ -86,7 +98,7 @@ services:
   microservice-setting-api:
     container_name: microservice-setting-api
     hostname: "microservice-setting-api"
-    image: microservice-setting-api:jwt
+    image: microservice-setting-api:keycloak
     build:
       context: ./
       dockerfile: Dockerfile-microservice-setting
