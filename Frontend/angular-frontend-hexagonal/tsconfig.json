@@ -22,6 +22,7 @@
       "@app/*": ["src/app/*"],
       "@environments/*": ["src/environments/*"],
       "@assets/*": ["src/assets/*"],
+      "@adapters/*": ["src/app/adapters/*"],
       "@pages/*": ["src/app/adapters/ui/pages/*"],
       "@modules/*": ["src/app/adapters/ui/shared/modules/*"],
       "@components/*": ["src/app/adapters/ui/shared/components/*"],

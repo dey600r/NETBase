@@ -1,6 +1,8 @@
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { AuthGuardData, createAuthGuard } from 'keycloak-angular';
+import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
+
+// KEYCLOAK
+import Keycloak from 'keycloak-js';
 
 // PORTS
 import { LoginUIPort } from '@ports/index';
@@ -10,21 +12,14 @@ const createAuthJWTGuard = (route: ActivatedRouteSnapshot, state: RouterStateSna
     return inject(LoginUIPort).validateToken(route.data['roles']);
 };
 
-const isKeycloackAccessAllowed = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot, authData: AuthGuardData): Promise<boolean | UrlTree> => {
-    
-    const { authenticated, grantedRoles } = authData;
-
+const createAuthKeycloakGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean => {
+    const key = inject(Keycloak);
     const _loginPort = inject(LoginUIPort);
 
-    if(authenticated && Object.values(grantedRoles.resourceRoles).some(x => _loginPort.validateRoles(x, route.data['roles']))) {
-        return true;
-    }
-
-    const router = inject(Router);
-    return router.parseUrl(state.url);
+    return !!key.authenticated && !!key.realmAccess && _loginPort.validateRoles(key.realmAccess.roles, route.data['roles']);
 };
 
 export const AuthGuard: CanActivateFn = (environment.keycloak.enable ? 
-    createAuthGuard<CanActivateFn>(isKeycloackAccessAllowed) : 
+    createAuthKeycloakGuard :
     createAuthJWTGuard
 );

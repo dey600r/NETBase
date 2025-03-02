@@ -1,35 +1,61 @@
-import { provideKeycloak, withAutoRefreshToken, AutoRefreshTokenService, UserActivityService } from 'keycloak-angular';
-import { KeycloakOnLoad } from 'keycloak-js';
+import { provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 
+// KEYCLOAK
+import { 
+  AutoRefreshTokenService, UserActivityService, 
+  createInterceptorCondition, IncludeBearerTokenCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, 
+  includeBearerTokenInterceptor,
+
+} from 'keycloak-angular';
+import Keycloak, { KeycloakOnLoad } from 'keycloak-js';
 import { environment } from '@environments/environment';
+import { routesApp } from '@adapters/ui/app.routes';
 
 // PORTS
 import { LoginUIPort } from '@ports/index';
 
 // DOMAINS
 import { LoginKeycloakDomain } from '@domain/core/index';
+import { provideAppInitializer } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
-const provideKeycloakAngular = () =>
-  provideKeycloak({
-    config: {
-      url: environment.keycloak.url,
-      realm: environment.keycloak.realm,
-      clientId: environment.keycloak.clientId,
-    },
-    initOptions: {
-      onLoad: environment.keycloak.onLoad as KeycloakOnLoad,  // allowed values 'login-required', 'check-sso';
-      //flow: "standard",          // allowed values 'standard', 'implicit', 'hybrid';
-    },
-    features: [
-      withAutoRefreshToken({
-        onInactivityTimeout: 'logout',
-        sessionTimeout: 60000
-      })
-    ],
-    providers: [AutoRefreshTokenService, UserActivityService]
-  });
 
-  export const ProviderAuthKeycloak = [
-    provideKeycloakAngular(),
-    { provide: LoginUIPort, useClass: LoginKeycloakDomain, multi: false },
-  ];
+const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
+  //urlPattern: /^(http:\/\/localhost:8180)(\/.*)?$/i,
+  urlPattern: /^(environment.keycloak.url)(\/.*)?$/i,
+  bearerPrefix: 'Bearer'
+});
+
+export const kecloakInstance = new Keycloak({
+  url: environment.keycloak.url,
+  realm: environment.keycloak.realm,
+  clientId: environment.keycloak.clientId,
+});
+
+export function initializeKeycloak(): () => Promise<void> {
+  return async () => {
+    try {
+      if(window !== undefined) {
+        const authenticated = await kecloakInstance.init({
+          onLoad: environment.keycloak.onLoad as KeycloakOnLoad, // or 'check-sso' for silent authentication
+          checkLoginIframe: false
+        });
+        console.log('✅ Keycloak initialized', authenticated ? 'User authenticated' : 'User not authenticated');
+
+      }
+    } catch (error) {
+      //console.error('❌ Keycloak initialization failed', error);
+    }
+  };
+}
+
+
+export const ProviderAuthKeycloak = [
+  provideAppInitializer(initializeKeycloak()),
+  provideRouter(routesApp),
+  provideHttpClient(withFetch(), withInterceptorsFromDi(), withInterceptors([includeBearerTokenInterceptor])),
+  AutoRefreshTokenService, UserActivityService,
+  { provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, useValue: [urlCondition] },
+  { provide: LoginUIPort, useClass: LoginKeycloakDomain, multi: false },
+  { provide: Keycloak, useValue: kecloakInstance }
+];

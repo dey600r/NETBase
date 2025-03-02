@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from '@guards/auth.guard';
 import { UrlConstants } from '@utils/index';
 
-
 export const routesPages: Routes = [
     {
       path: UrlConstants.URL_SETTING,
