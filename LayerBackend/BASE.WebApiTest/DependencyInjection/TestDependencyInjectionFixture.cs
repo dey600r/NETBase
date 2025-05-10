@@ -61,10 +61,10 @@ namespace BASE.WebApiTest.DependencyInjection
         protected override ValueTask DisposeAsyncCore()
             => new();
 
-        protected override IEnumerable<string> GetConfigurationFiles()
-        {
-            yield return "appsettings.json";
-        }
+        //protected override IEnumerable<string> GetConfigurationFiles()
+        //{
+        //    yield return "appsettings.json";
+        //}
 
         protected override IEnumerable<TestAppSettings> GetTestAppSettings()
         {
