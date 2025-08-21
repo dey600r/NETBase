@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -7,8 +8,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MaterialService {
 
   private readonly _snackBar: MatSnackBar = inject(MatSnackBar);
+  private readonly _dialog: MatDialog = inject(MatDialog);
 
-  openSnackBar(message: string) {
-    this._snackBar.open(message, 'ok', { duration: 3000 });
+  constructor() { }
+
+  openSnackBar(message: string): void {
+    this._snackBar.open(message, '', { duration: 3000 });
+  }
+
+  openDialog(component: any, setting: { data: any, height: string, width: string}): MatDialogRef<any> {
+    return this._dialog.open(component, setting);
   }
 }

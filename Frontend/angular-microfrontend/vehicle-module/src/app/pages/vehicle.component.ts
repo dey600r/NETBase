@@ -7,7 +7,8 @@ import { VehicleModule } from './vehicle.module';
 import { IConfigurationModel, IMaintenanceElementModel, IVehicleTypeModel } from '@models/index';
 
 // HELPERS
-import { MaterialService, VehicleService } from '@services/index';
+import { MaterialService } from 'security-lib';
+import { VehicleService } from '@services/index';
 
 @Component({
   selector: 'app-vehicle',

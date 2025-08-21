@@ -4,8 +4,8 @@ import { inject, Injectable } from '@angular/core';
 import { StorageService } from '../storage.service';
 
 // UTILS
-import { IUserModel } from '@lib-models/index';
-import { AppConstants } from '@lib-utils/index';
+import { IUserModel } from '../../models/index';
+import { AppConstants } from '../../utils/index';
 
 @Injectable({
   providedIn: 'root'

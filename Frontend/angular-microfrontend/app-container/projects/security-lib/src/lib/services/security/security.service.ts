@@ -8,8 +8,8 @@ import { SecurityAbstractService } from './security.interface';
 import { UserService } from './user.service';
 
 // UTILS
-import { IUserModel, ISignupModel } from '@lib-models/index';
-import { SecurityLibUrlConstants } from '@lib-utils/index';
+import { IUserModel, ISignupModel } from '../../models/index';
+import { SecurityLibUrlConstants } from '../../utils/index';
 
 @Injectable({
   providedIn: 'root'

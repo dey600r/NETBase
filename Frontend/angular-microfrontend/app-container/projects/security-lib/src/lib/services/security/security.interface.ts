@@ -1,4 +1,4 @@
-import { IUserModel } from "@lib-models/index";
+import { IUserModel } from "../../models/index";
 
 export interface ISecurityService {
     //LOGIN

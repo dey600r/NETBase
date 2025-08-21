@@ -9,7 +9,7 @@ import { SecurityService } from './security.service';
 
 // UTILS
 // import { SecurityLibUrlConstants } from '@lib-utils/index';
-import { IUserModel, ILoginModel } from '@lib-models/index';
+import { IUserModel, ILoginModel } from '../../models/index';
 
 @Injectable({
   providedIn: 'root'

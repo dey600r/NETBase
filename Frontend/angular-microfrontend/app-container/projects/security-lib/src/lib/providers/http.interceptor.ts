@@ -6,11 +6,11 @@ import {Observable, catchError, throwError} from 'rxjs';
 import { APP_CONFIG } from './app-config.provider';
 
 // SERVICES
-import { ISecurityService, MaterialService, SecurityAbstractService, UserService } from '@lib-services/index';
+import { MaterialService, UserService } from '../services/index';
 
 // UTILS
-import { SecurityLibUrlConstants } from '@lib-utils/index';
-import { AppConfig } from '@lib-models/index';
+import { SecurityLibUrlConstants } from '../utils/index';
+import { AppConfig } from '../models/index';
 
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
