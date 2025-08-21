@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <div class="example-sidenav-content">
+    <button type="button" mat-icon-button (click)="drawer?.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <button type="button" mat-icon-button (click)="navigateToHome()">
+    <span>Front Microservices Exmple</span>
+  </button>
+  <span class="example-spacer"></span>
+  <span class="user-text">{{ userName }}</span>
+  <button mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menuAccount" aria-label="icon accoung">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="logout" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #menuAccount="matMenu">
+  <button mat-menu-item>
+    <mat-icon>location_on</mat-icon>
+    <span>{{userLocation}}</span>
+  </button>
+  <button *ngFor="let role of userRole" mat-menu-item>
+    <mat-icon>accessibility</mat-icon>
+    <span>{{role}}</span>
+  </button>
+</mat-menu>

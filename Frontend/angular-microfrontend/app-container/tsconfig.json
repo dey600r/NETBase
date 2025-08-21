@@ -1,0 +1,45 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "paths": {
+      //"security-lib": ["./dist/security-lib"],
+      "@app/*": ["./projects/app-module/src/app/*"],
+      "@app-environments/*": ["./projects/app-module/src/environments/*"],
+      "@app-assets/*": ["./projects/app-module/src/assets/*"],
+      "@app-providers/*": ["./projects/app-module/src/app/core/providers/*"],
+      "@lib-providers/*": ["./projects/security-lib/src/lib/providers/*"],
+      "@app-services/*": ["./projects/app-module/src/app/core/services/*"],
+      "@lib-services/*": ["./projects/security-lib/src/lib/services/*"],
+      "@app-models/*": ["./projects/app-module/src/app/core/models/*"],
+      "@lib-models/*": ["./projects/security-lib/src/lib/models/*"],
+      "@app-utils/*": ["./projects/app-module/src/app/core/utils/*"],
+      "@lib-utils/*": ["./projects/security-lib/src/lib/utils/*"],
+      "@app-shared/*": ["./projects/app-module/src/app/shared/*"],
+      "@app-components/*": ["./projects/app-module/src/app/shared/components/*"],
+      "@app-modules/*": ["./projects/app-module/src/app/shared/modules/*"],
+      "@app-pages/*": ["./projects/app-module/src/app/pages/*"],
+      "@app-core/*": ["./projects/app-module/src/app/core/*"]
+    },
+    
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

@@ -1,0 +1,152 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"security-lib": {
+			"projectType": "library",
+			"root": "projects/security-lib",
+			"sourceRoot": "projects/security-lib/src",
+			"prefix": "lib",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"options": {
+						"project": "projects/security-lib/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "projects/security-lib/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "projects/security-lib/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"tsConfig": "projects/security-lib/tsconfig.spec.json",
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						]
+					}
+				}
+			}
+		},
+		"app-module": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/app-module",
+			"sourceRoot": "projects/app-module/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/app-module",
+						"index": "projects/app-module/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/app-module/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/app-module/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"@angular/material/prebuilt-themes/indigo-pink.css",
+							"projects/app-module/src/styles.scss"
+						],
+						"scripts": [],
+						"main": "projects/app-module/src/main.ts",
+						"extraWebpackConfig": "projects/app-module/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"fileReplacements": [
+								{
+								"replace": "projects/app-module/src/environments/environment.ts",
+								"with": "projects/app-module/src/environments/environment.production.ts"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/app-module/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "app-module:build:production",
+							"extraWebpackConfig": "projects/app-module/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "app-module:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "projects/app-module/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/app-module/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/app-module/public"
+							}
+						],
+						"styles": [
+							"projects/app-module/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		}
+    }
+}
