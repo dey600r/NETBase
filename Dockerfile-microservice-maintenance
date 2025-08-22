@@ -11,12 +11,12 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["./MicroservicesBackend/Microservice.MaintenanceApi/Microservice.MaintenanceApi.csproj", "Microservice.MaintenanceApi/"]
-COPY ["./MicroservicesBackend/Microservice.IoC/Microservice.IoC.csproj", "Microservice.IoC/"]
+COPY ["./Backend/MicroservicesBackend/Microservice.MaintenanceApi/Microservice.MaintenanceApi.csproj", "Microservice.MaintenanceApi/"]
+COPY ["./Backend/MicroservicesBackend/Microservice.IoC/Microservice.IoC.csproj", "Microservice.IoC/"]
 RUN dotnet restore "./Microservice.IoC/./Microservice.IoC.csproj"
 RUN dotnet restore "./Microservice.MaintenanceApi/./Microservice.MaintenanceApi.csproj"
-COPY ./MicroservicesBackend/Microservice.MaintenanceApi ./Microservice.MaintenanceApi
-COPY ./MicroservicesBackend/Microservice.IoC ./Microservice.IoC
+COPY ./Backend/MicroservicesBackend/Microservice.MaintenanceApi ./Microservice.MaintenanceApi
+COPY ./Backend/MicroservicesBackend/Microservice.IoC ./Microservice.IoC
 WORKDIR "/src/Microservice.MaintenanceApi"
 RUN dotnet build "./Microservice.MaintenanceApi.csproj" -c %BUILD_CONFIGURATION% -o /app/build
 
