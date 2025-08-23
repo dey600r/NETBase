@@ -4,11 +4,8 @@ import { Router } from '@angular/router';
 
 import { LoginModule } from './login.module';
 
-// MODELS
-import { UrlConstants } from '@app-utils/index';
-
 // LIBS
-import { MaterialService, SecurityAbstractService, IUserModel, UserService } from 'security-lib';
+import { MaterialService, SecurityAbstractService, IUserModel, UserService, SecurityLibUrlConstants } from 'security-lib';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +40,7 @@ export class LoginComponent {
       this._securityService.login(value.email, value.password).then((user: IUserModel) => {
         if (user) {
           this._userService.setUser(user);
-          this._router.navigateByUrl(`/${UrlConstants.URL_HOME}`);
+          this._router.navigateByUrl(`/${SecurityLibUrlConstants.URL_HOME}`);
         }
       }).catch(err => {
         this._materialService.openSnackBar(err);
@@ -53,6 +50,6 @@ export class LoginComponent {
   }
 
   navigateToSignup(): void {
-    this._router.navigateByUrl(`/${UrlConstants.URL_SIGNUP}`);
+    this._router.navigateByUrl(`/${SecurityLibUrlConstants.URL_SIGNUP}`);
   }
 }

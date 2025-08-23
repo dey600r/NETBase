@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { SharedModule } from '@app-modules/shared.module';
 
 // UTILS
+import { SecurityLibUrlConstants } from 'security-lib';
 import { UrlConstants } from '@app-utils/index';
 
 @Component({
@@ -26,22 +27,22 @@ export class MenuComponent {
   }
 
   navigateToHome(): void {
-    this.router.navigateByUrl(`/${UrlConstants.URL_HOME}`);
+    this.router.navigateByUrl(`/${SecurityLibUrlConstants.URL_HOME}`);
     this.drawer?.close();
   }
 
   navigateToSetting(): void {
-    this.router.navigateByUrl(`/${UrlConstants.URL_HOME}/${UrlConstants.URL_SETTING}`);
+    this.router.navigateByUrl(`/${SecurityLibUrlConstants.URL_HOME}/${UrlConstants.URL_SETTING}`);
     this.drawer?.close();
   }
 
   navigateToVehicle(): void {
-    this.router.navigateByUrl(`/${UrlConstants.URL_HOME}/${UrlConstants.URL_VEHICLE}`);
+    this.router.navigateByUrl(`/${SecurityLibUrlConstants.URL_HOME}/${UrlConstants.URL_VEHICLE}`);
     this.drawer?.close();
   }
 
   navigateToMaintenance(): void {
-    this.router.navigateByUrl(`/${UrlConstants.URL_HOME}/${UrlConstants.URL_MAINTENANCE}`);
+    this.router.navigateByUrl(`/${SecurityLibUrlConstants.URL_HOME}/${UrlConstants.URL_MAINTENANCE}`);
     this.drawer?.close();
   }
   

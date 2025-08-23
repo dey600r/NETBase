@@ -1,2 +1,1 @@
-declare module 'vehicle-module/routes';
 declare module 'security-module/routes';

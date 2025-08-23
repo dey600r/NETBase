@@ -4,11 +4,8 @@ import { Router } from '@angular/router';
 
 import { SignupModule } from './signup.module';
 
-// MODELS
-import { UrlConstants } from '@app-utils/index';
-
 // LIBS
-import { IUserModel, MaterialService, SecurityAbstractService, UserService } from 'security-lib';
+import { IUserModel, MaterialService, SecurityAbstractService, UserService, SecurityLibUrlConstants } from 'security-lib';
 
 @Component({
   selector: 'app-signup',
@@ -44,7 +41,7 @@ export class SignupComponent {
       this._securityService.signup(value.firstName, value.lastName, value.location, value.userName, value.email, value.password).then((user: IUserModel) => {
         if (user) {
           this._userService.setUser(user);
-          this._router.navigateByUrl(`/${UrlConstants.URL_HOME}`);
+          this._router.navigateByUrl(`/${SecurityLibUrlConstants.URL_HOME}`);
         }
       }).catch(err => {
         this._materialService.openSnackBar(err);

@@ -1,19 +1,13 @@
 {
-  "name": "app-container",
+  "name": "security-module",
   "version": "0.0.0",
-  "ngPackage": {
-    "lib": {
-      "entryFile": "./projects/security-lib/public_api.ts"
-    }
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js",
-    "pack": "ng build security-lib --configuration production && cd ./dist/security-lib && npm pack && cp security-lib-* ../../libs"
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
   "dependencies": {
@@ -28,14 +22,13 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
-    "ng-packagr": "^19.2.2",
     "rxjs": "~7.8.0",
-    "security-lib": "file:libs/security-lib-0.0.11.tgz",
+    "security-lib": "file:../app-container/libs/security-lib-0.0.11.tgz",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.15",
+    "@angular-devkit/build-angular": "^19.0.2",
     "@angular/cli": "^19.0.2",
     "@angular/compiler-cli": "^19.0.0",
     "@types/jasmine": "~5.1.0",

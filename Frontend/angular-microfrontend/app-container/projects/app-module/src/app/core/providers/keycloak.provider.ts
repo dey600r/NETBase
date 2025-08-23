@@ -51,7 +51,7 @@ import { provideRouter } from '@angular/router';
 
 export const ProviderAuthKeycloak = [
   // provideAppInitializer(initializeKeycloak()),
-  provideRouter(routesApp),
+  //provideRouter(routesApp),
   // provideHttpClient(withFetch(), withInterceptorsFromDi(), withInterceptors([includeBearerTokenInterceptor])),
   // AutoRefreshTokenService, UserActivityService,
   // { provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, useValue: [urlCondition] },

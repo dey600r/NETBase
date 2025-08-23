@@ -7,4 +7,5 @@ export class SecurityLibUrlConstants {
     // PAGES
     public static readonly URL_LOGIN: string ='login';
     public static readonly URL_SIGNUP: string ='signup';
+    public static readonly URL_HOME: string ='home';
 }

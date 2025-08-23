@@ -5,11 +5,8 @@ import { Router } from '@angular/router';
 // MODULES
 import { SharedModule } from '@app-modules/shared.module';
 
-// MODELS
-import { UrlConstants } from '@app-utils/index';
-
 // SERVICES
-import { IUserModel, SecurityAbstractService } from 'security-lib';
+import { IUserModel, SecurityAbstractService, SecurityLibUrlConstants } from 'security-lib';
 
 @Component({
   selector: 'app-header',
@@ -47,6 +44,6 @@ export class HeaderComponent {
   }
 
   navigateToHome(): void {
-    this._router.navigateByUrl(`/${UrlConstants.URL_HOME}`);
+    this._router.navigateByUrl(`/${SecurityLibUrlConstants.URL_HOME}`);
   }
 }

@@ -1,0 +1,22 @@
+MICROFRONTEND BUILDTIME
+-------------------------------
+
+- ANGULAR --- CREATE CONTAINER
+    ng new app-container --create-application=false
+
+- ANGULAR --- CREATE LIBRARY
+    ng generate library security-lib
+
+- ANGULAR --- CREATE app
+    ng g application app-module
+
+- ANGULAR --- BUILD PACK
+    npm install -D ng-packagr
+    ng build security-lib --configuration production
+    npm pack
+
+MICROFRONTEND RUNTIME
+----------------------------------
+- ANGULAR --- INSTALAR WEBPACK MODULE FEDERATION
+    npm i @angular-architects/module-federation@19.0.3
+    ng add @angular-architects/module-federation --port 4200 --project app-module
