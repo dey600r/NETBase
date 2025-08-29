@@ -4,13 +4,9 @@ module.exports = withModuleFederationPlugin({
 
   name: 'app-module',
 
-  // exposes: {
-  //   './AuthGuard': './projects/app-module/src/app/core/providers/guard.provider.ts',
-  // },
-
   remotes: {
-     "vehicle-module": "http://localhost:4201/remoteEntry.js",
-     "security-module": "http://localhost:4202/remoteEntry.js",
+      // "vehicle-module": "http://localhost:4201/remoteEntry.js",
+      // "security-module": "http://localhost:4202/remoteEntry.js", --> STATIC WEB
    },
 
   shared: {

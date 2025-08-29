@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
- import { createAuthKeycloakGuard, createAuthJWTGuard } from 'security-lib';
+ import { createAuthJWTGuard, createAuthKeycloakGuard } from 'security-lib';
 
 import { environment } from '@app-environments/environment';
 
