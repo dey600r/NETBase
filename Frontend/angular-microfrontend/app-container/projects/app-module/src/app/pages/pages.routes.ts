@@ -14,7 +14,6 @@ export const routesPages: Routes = [
     // },
     {
       path: UrlConstants.URL_VEHICLE,
-      // loadChildren: () => import('vehicle-module/routes').then(m => m.routes),
       loadChildren: () =>
                   // DYNAMIC WEB
                   loadRemoteModule({
@@ -27,14 +26,24 @@ export const routesPages: Routes = [
                       console.warn('⚠️ No se pudo cargar VEHICLE-MODULE:', err);
                       return import('security-lib').then(m => m.errorRoutes);
                   }),
-    //   loadComponent: () => import('./vehicle/vehicle.component').then(mod => mod.VehicleComponent),
       canActivate: [AuthGuard],
       data: { roles: ['admin'] }
     },
-    // {
-    //   path: UrlConstants.URL_MAINTENANCE,
-    //   loadComponent: () => import('./maintenance/maintenance.component').then(mod => mod.MaintenanceComponent),
-    //   canActivate: [AuthGuard],
-    //   data: { roles: ['admin', 'customer'] }
-    // }
+    {
+      path: UrlConstants.URL_MAINTENANCE,
+      loadChildren: () =>
+                  // DYNAMIC WEB
+                  loadRemoteModule({
+                      type: 'module',
+                      remoteEntry: environment.remotes.find(r => r.name === AppConstants.MAINTENANCE_MODULE)?.remoteEntry || '',
+                      exposedModule: environment.remotes.find(r => r.name === AppConstants.MAINTENANCE_MODULE)?.exposedModule || ''
+                  })
+                  .then(m => m.routes)
+                  .catch(err => {
+                      console.warn('⚠️ No se pudo cargar MAINTENANCE-MODULE:', err);
+                      return import('security-lib').then(m => m.errorRoutes);
+                  }),
+      canActivate: [AuthGuard],
+      data: { roles: ['admin', 'customer'] }
+    }
 ];

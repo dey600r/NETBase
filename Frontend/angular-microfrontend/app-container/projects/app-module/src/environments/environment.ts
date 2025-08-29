@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
-    // apiUrl: 'https://localhost:44360',
-    apiUrl: 'http://localhost:3400',
+    apiUrl: 'https://localhost:44360',
+    // apiUrl: 'http://localhost:3400',
     keycloak: {
         enable: true,
         url: 'http://localhost:8180',
@@ -18,6 +18,11 @@ export const environment = {
         {
             name: 'vehicle-module',
             remoteEntry: 'http://localhost:4201/remoteEntry.js',
+            exposedModule: './routes'
+        },
+        {
+            name: 'maintenance-module',
+            remoteEntry: 'http://localhost:4203/remoteEntry.js',
             exposedModule: './routes'
         }
     ]
