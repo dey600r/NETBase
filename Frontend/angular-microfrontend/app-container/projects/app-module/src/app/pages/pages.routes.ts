@@ -6,12 +6,19 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
 import { environment } from '@app-environments/environment';
 
 export const routesPages: Routes = [
-    // {
-    //   path: UrlConstants.URL_SETTING,
-    //   loadComponent: () => import('./setting/setting.component').then(mod => mod.SettingComponent),
-    //   canActivate: [AuthGuard],
-    //   data: { roles: ['admin'] }
-    // },
+    {
+        path: UrlConstants.URL_SETTING,
+        // loadChildren: () => ---> REACT DOESN'T WORK WITH loadChildren
+        //     loadRemoteModule({
+        //         type: 'script',
+        //         remoteName: 'setting_module',
+        //         remoteEntry: 'http://localhost:4204/remoteEntry.js',
+        //         exposedModule: './component'
+        //     }), 
+        loadComponent: () => import('./settings/settings.component').then(mod => mod.SettingsComponent),
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] }
+    },
     {
       path: UrlConstants.URL_VEHICLE,
       loadChildren: () =>

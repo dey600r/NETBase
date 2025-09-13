@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { PagesModule } from './pages.module';
+import { loadRemoteModule } from '@angular-architects/module-federation';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,7 @@ import { PagesModule } from './pages.module';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-
-  constructor() {
-  }
+  
 
   // @ViewChild('placeHolder', { read: ViewContainerRef })
   //  viewContainer!: ViewContainerRef;

@@ -5,8 +5,10 @@ module.exports = withModuleFederationPlugin({
   name: 'app-module',
 
   remotes: {
-      // "vehicle-module": "http://localhost:4201/remoteEntry.js",
-      // "security-module": "http://localhost:4202/remoteEntry.js", --> STATIC WEB
+    //"setting_module": "http://localhost:4204/remoteEntry.js",
+    // "vehicle-module": "http://localhost:4201/remoteEntry.js",
+    // "security-module": "http://localhost:4202/remoteEntry.js", --> STATIC WEB
+    // "maintenance-module": "http://localhost:4203/remoteEntry.js",
    },
 
   shared: {

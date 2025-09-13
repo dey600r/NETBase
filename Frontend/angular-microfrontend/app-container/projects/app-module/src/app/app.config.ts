@@ -33,7 +33,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     { provide: APP_CONFIG, useValue: environment },
     (environment.keycloak.enable ? ProviderAuthKeycloak : ProviderAuthJWT),
-    { provide: SecurityAbstractService, useClass: SecurityKeycloakService, multi: false },
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideClientHydration(withEventReplay()), 
     provideAnimationsAsync(),
