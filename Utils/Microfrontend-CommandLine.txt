@@ -21,9 +21,13 @@ MICROFRONTEND RUNTIME
     npm i @angular-architects/module-federation@19.0.3
     ng add @angular-architects/module-federation --port 4200 --project app-module
 
-- INIT EMPTY VUE NODE PROJECT
+- INIT EMPTY VUE PROJECT
     npm init -y
     npm i @babel/core @babel/preset-env babel-loader webpack webpack-cli webpack-dev-server @vue/compiler-sfc html-webpack-plugin style-loader css-loader vue vue-loader
 
 - INIT VUE PROJECT
     npm create vue@latest
+
+- INIT REACT PROJECT
+    npx create-react-app setting-module
+    npm install webpack webpack-cli webpack-dev-server webpack-merge html-webpack-plugin babel-loader @babel/preset-react — save-dev
