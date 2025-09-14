@@ -20,3 +20,10 @@ MICROFRONTEND RUNTIME
 - ANGULAR --- INSTALAR WEBPACK MODULE FEDERATION
     npm i @angular-architects/module-federation@19.0.3
     ng add @angular-architects/module-federation --port 4200 --project app-module
+
+- INIT EMPTY VUE NODE PROJECT
+    npm init -y
+    npm i @babel/core @babel/preset-env babel-loader webpack webpack-cli webpack-dev-server @vue/compiler-sfc html-webpack-plugin style-loader css-loader vue vue-loader
+
+- INIT VUE PROJECT
+    npm create vue@latest

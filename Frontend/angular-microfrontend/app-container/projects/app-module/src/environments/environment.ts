@@ -3,7 +3,7 @@ export const environment = {
     apiUrl: 'https://localhost:44360',
     // apiUrl: 'http://localhost:3400',
     keycloak: {
-        enable: false,
+        enable: true,
         url: 'https://keycloak-webapp-dpe9afcje2f9e7ad.westeurope-01.azurewebsites.net',
         //url: 'http://localhost:8180',
         realm: 'estimator-web-local',
@@ -29,6 +29,11 @@ export const environment = {
         {
             name: 'setting_module',
             remoteEntry: 'http://localhost:4204/remoteEntry.js',
+            exposedModule: './component'
+        },
+        {
+            name: 'home_module',
+            remoteEntry: 'http://localhost:4205/remoteEntry.js',
             exposedModule: './component'
         }
     ]
