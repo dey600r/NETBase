@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BASE.WebApi.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class BaseAuthorizeController : BaseController
 	{
 		public BaseAuthorizeController(ILogger<BaseController> logger, IHttpContextAccessor httpContextAccessor) : base(logger, httpContextAccessor)

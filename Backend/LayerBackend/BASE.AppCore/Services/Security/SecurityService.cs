@@ -18,20 +18,24 @@ namespace BASE.AppCore.Services.Security
 		private readonly RoleManager<Role> _roleManager;
 		private readonly IMapper _mapper;
 		private readonly IJwtGenerator _jwtGenerator;
-		private readonly SignInManager<User> _signInManager;
-		private readonly ISecurityRepository _securityRepository;
+		//private readonly SignInManager<User> _signInManager;
+		private readonly IAppSigInManagerFactory _appSigInManagerFactory;
+        private readonly ISecurityRepository _securityRepository;
 		private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public SecurityService(DBContext dBContext, UserManager<User> userManager, IMapper mapper, IJwtGenerator jwtGenerator, 
-			SignInManager<User> signInManager, RoleManager<Role> roleManager, ISecurityRepository securityRepository, IHttpContextAccessor httpContextAccessor) 
+		public SecurityService(DBContext dBContext, UserManager<User> userManager, IMapper mapper, IJwtGenerator jwtGenerator,
+            //SignInManager<User> signInManager, 
+            IAppSigInManagerFactory appSigInManagerFactory,
+            RoleManager<Role> roleManager, ISecurityRepository securityRepository, IHttpContextAccessor httpContextAccessor) 
 		{
 			_dbContext = dBContext;
 			_userManager = userManager;
 			_roleManager = roleManager;
 			_mapper = mapper;
 			_jwtGenerator = jwtGenerator;
-			_signInManager = signInManager;
-			_securityRepository = securityRepository;
+			//_signInManager = signInManager;
+			_appSigInManagerFactory = appSigInManagerFactory;
+            _securityRepository = securityRepository;
 			_httpContextAccessor = httpContextAccessor;
 		}
 
@@ -52,8 +56,9 @@ namespace BASE.AppCore.Services.Security
 			if (user == null)
 				throw new Exception("The email doesn't exist");
 
-			var result = await _signInManager.CheckPasswordSignInAsync(user, userLogin.Password, false);
-			if (result.Succeeded)
+			//var result = await _appSigInManagerFactory.CheckPasswordSignInAsync(user, userLogin.Password);
+			//if (result.Succeeded)
+			if (await _appSigInManagerFactory.CheckPasswordSignInAsync(user, userLogin.Password))
 				return GetUser(user);
 
 			throw new Exception("Login failed !!");

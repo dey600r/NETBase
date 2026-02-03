@@ -1,4 +1,6 @@
-﻿using BASE.AppCore.Mappers;
+﻿using System.Text;
+using Autofac.Core;
+using BASE.AppCore.Mappers;
 using BASE.AppCore.Services;
 using BASE.AppCore.Services.Security;
 using BASE.AppInfrastructure.Context;
@@ -16,7 +18,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog;
-using System.Text;
 
 namespace BASE.IoC
 {
@@ -83,9 +84,12 @@ namespace BASE.IoC
 			).AddIdentityCore<User>() // USERS & ROLES
 			.AddRoles<Role>()
 			.AddEntityFrameworkStores<DBContext>()
-			.AddSignInManager<SignInManager<User>>();
+            .AddSignInManager();
+            //.AddSignInManager<SignInManager<User>>();
 
-			return service;
+            service.AddScoped<IAppSigInManagerFactory, AppSigInManagerFactory>();
+
+            return service;
 		}
 
 		/// <summary>
@@ -144,8 +148,10 @@ namespace BASE.IoC
 			service.AddScoped<ISecurityRepository, SecurityRepository>();
 
 			// SERVICES
-			service.AddScoped<IVehicleTypeService, VehicleTypeService>();
-			if (config.Country == ConstantsSecurity.CONFIG_SCENARY_COUNTRY_SPAIN)
+			//service.AddScoped<IVehicleTypeService, VehicleTypeService>();
+            service.AddScoped<IAppVehicleTypeService, AppVehicleTypeService>();
+
+            if (config.Country == ConstantsSecurity.CONFIG_SCENARY_COUNTRY_SPAIN)
 				service.AddScoped<IVehicleService, VehicleSpainService>();
 			else
 				service.AddScoped<IVehicleService, VehicleService>();
