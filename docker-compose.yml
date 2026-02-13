@@ -26,6 +26,78 @@ services:
       - "3301:4100"
     networks:
       - network_microservices
+  
+  microfrontend-angular-security:
+    container_name: microfrontend-angular-security
+    hostname: "microfrontend-angular-security"
+    image: microfrontend-angular-security:jwt
+    build:
+      context: ./
+      dockerfile: Dockerfile-microfrontend-angular-security
+    ports:
+      - "2002:3300"
+    networks:
+      - network_microservices
+  
+  microfrontend-angular-container:
+    container_name: microfrontend-angular-container
+    hostname: "microfrontend-angular-container"
+    image: microfrontend-angular-container:keycloak
+    build:
+      context: ./
+      dockerfile: Dockerfile-microfrontend-angular-container
+    ports:
+      - "2000:3300"
+    networks:
+      - network_microservices
+  
+  microfrontend-angular-maintenance:
+    container_name: microfrontend-angular-maintenance
+    hostname: "microfrontend-angular-maintenance"
+    image: microfrontend-angular-maintenance:keycloak
+    build:
+      context: ./
+      dockerfile: Dockerfile-microfrontend-angular-maintenance
+    ports:
+      - "2003:3300"
+    networks:
+      - network_microservices
+  
+  microfrontend-angular-vehicle:
+    container_name: microfrontend-angular-vehicle
+    hostname: "microfrontend-angular-vehicle"
+    image: microfrontend-angular-vehicle:keycloak
+    build:
+      context: ./
+      dockerfile: Dockerfile-microfrontend-angular-vehicle
+    ports:
+      - "2001:3300"
+    networks:
+      - network_microservices
+
+  microfrontend-react-setting:
+    container_name: microfrontend-react-setting
+    hostname: "microfrontend-react-setting"
+    image: microfrontend-react-setting:keycloak
+    build:
+      context: ./
+      dockerfile: Dockerfile-microfrontend-react-setting
+    ports:
+      - "2004:3300"
+    networks:
+      - network_microservices
+  
+  microfrontend-vue-home:
+    container_name: microfrontend-vue-home
+    hostname: "microfrontend-vue-home"
+    image: microfrontend-vue-home:keycloak
+    build:
+      context: ./
+      dockerfile: Dockerfile-microfrontend-vue-home
+    ports:
+      - "2005:3300"
+    networks:
+      - network_microservices
 
   microservice-gateway:
     container_name: microservice-gateway

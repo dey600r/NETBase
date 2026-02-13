@@ -70,8 +70,7 @@
 						],
 						"scripts": [],
 						"main": "projects/app-module/src/main.ts",
-						"extraWebpackConfig": "projects/app-module/webpack.config.js",
-						"commonChunk": false
+						"extraWebpackConfig": "projects/app-module/webpack.config.js"
 					},
 					"configurations": {
 						"production": {
@@ -94,6 +93,38 @@
 								}
 							],
 							"outputHashing": "all",
+							"optimization": true,
+							"extractLicenses": true,
+							"sourceMap": false,
+							"namedChunks": true,
+							"buildOptimizer": true,
+							"extraWebpackConfig": "projects/app-module/webpack.prod.config.js"
+						},
+						"openshift": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"fileReplacements": [
+								{
+								"replace": "projects/app-module/src/environments/environment.ts",
+								"with": "projects/app-module/src/environments/environment.openshift.ts"
+								}
+							],
+							"outputHashing": "all",
+							"optimization": true,
+							"extractLicenses": true,
+							"sourceMap": false,
+							"namedChunks": true,
+							"buildOptimizer": true,
 							"extraWebpackConfig": "projects/app-module/webpack.prod.config.js"
 						},
 						"development": {

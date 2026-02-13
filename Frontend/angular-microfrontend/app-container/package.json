@@ -12,6 +12,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "build-prod": "ng build app-module --configuration=production",
+    "build-openshift": "ng build app-module --configuration=openshift --base-href=/",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js",
     "pack": "ng build security-lib --configuration production && cd ./dist/security-lib && npm pack && cp security-lib-* ../../libs"
   },
