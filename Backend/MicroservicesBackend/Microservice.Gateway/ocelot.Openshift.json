@@ -6,8 +6,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3500"
+					"Host": "svc-microservice-security.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/security",
@@ -23,8 +23,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3500"
+					"Host": "svc-microservice-security.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/security/signup",
@@ -36,8 +36,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3500"
+					"Host": "svc-microservice-security.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/security/login",
@@ -49,8 +49,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3600"
+					"Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/vehicle",
@@ -66,8 +66,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3600"
+					"Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/vehicle/maintenance-element",
@@ -83,8 +83,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3600"
+					"Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/vehicle/type",
@@ -100,8 +100,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3600"
+					"Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/configuration",
@@ -117,8 +117,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3600"
+					"Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/configuration",
@@ -134,8 +134,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3700"
+					"Host": "svc-microservice-maintenance.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/maintenance/configuration",
@@ -151,8 +151,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3700"
+					"Host": "svc-microservice-maintenance.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/maintenance/maintenance-element",
@@ -168,8 +168,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3700"
+					"Host": "svc-microservice-maintenance.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/maintenance/maintenance-element",
@@ -185,8 +185,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3800"
+					"Host": "svc-microservices-setting.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/settings/get-all",
@@ -202,8 +202,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3800"
+					"Host": "svc-microservices-setting.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/settings/get",
@@ -219,8 +219,8 @@
 			"DangerousAcceptAnyServerCertificateValidator": true,
 			"DownstreamHostAndPorts": [
 				{
-					"Host": "svc-microservices.microservices.svc.cluster.local",
-					"Port": "3800"
+					"Host": "svc-microservices-setting.microservices.svc.cluster.local",
+					"Port": "8080"
 				}
 			],
 			"UpstreamPathTemplate": "/settings/add",
