@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:3400',        
+    apiUrl: 'https://microservice-gateway-api.apps-crc.testing'    
 };

@@ -1,9 +1,9 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://localhost:44320/api',
+    apiUrl: 'https://microservice-gateway-api.apps-crc.testing',
     keycloak: {
         enable: true,
-        url: 'http://localhost:8180',
+        url: 'https://keycloak-microservices.apps-crc.testing',
         realm: 'microservices',
         clientId: 'frontend',
         onLoad: 'login-required',
@@ -11,7 +11,7 @@ export const environment = {
     remotes: [
         {
             name: 'security-module',
-            remoteEntry: 'http://localhost:4202/remoteEntry.js',
+            remoteEntry: 'https://microfrontend-angular-security.apps-crc.testing/remoteEntry.js',
             exposedModule: './routes'
         }
     ]        
