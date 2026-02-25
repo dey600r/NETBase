@@ -8,9 +8,6 @@ deployment:
       - apiVersion: apps/v1
         kind: Deployment
         name: keycloak
-      - apiVersion: apps/v1
-        kind: Deployment
-        name: microfrontend-angular-maintenance
   labels:
     runtime: angularjs
   image:
@@ -43,7 +40,7 @@ service:
   type: ClusterIP
   port: 3300
   protocol: TCP
-  portName: fr-contain-port
+  portName: fr-maint-port
 
 #ROUTE
 route:
