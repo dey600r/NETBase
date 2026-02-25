@@ -1,0 +1,7 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: is-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "microservice.labels" . | nindent 4 }}

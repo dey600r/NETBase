@@ -1,18 +1,18 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: route-microservice-gateway
+  name: route-microfrontend-angular-container
   namespace: microservices
   labels:
     app: microservices
     app.kubernetes.io/part-of: microservices
 spec:
-  host: microservice-gateway-api.apps-crc.testing
+  host: microfrontend-angular-container.apps-crc.testing
   to:
     kind: Service
     name: svc-microservices
   port:
-    targetPort: gateway-tcp
+    targetPort: microfrontend-angular-container-tcp
   tls:
     termination: edge
     wildcardPolicy: None

@@ -1,0 +1,34 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: bc-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "microservice.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.deployment.resources }}
+  resources:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: is-{{ .Release.Name }}:{{ .Values.deployment.image.tag }}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile-{{ .Release.Name }}-openshift
+  postCommit: {}
+  source:
+    type: {{ .Values.build.source.type }}
+    {{- with .Values.build.source.git }}
+    git:
+      uri: {{ .uri }}
+      ref: {{ .ref }}
+    {{- end }}
+  triggers:
+    - type: {{ .Values.build.triggers.type }}
+  runPolicy: Serial

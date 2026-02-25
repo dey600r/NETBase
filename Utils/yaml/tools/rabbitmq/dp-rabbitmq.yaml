@@ -27,7 +27,7 @@ spec:
           emptyDir: {}
       containers:
         - name: rabbitmq
-          image: image-registry.openshift-image-registry.svc:5000/microservices/is-rabbitmq:latest
+          image: image-registry.openshift-image-registry.svc:5000/microservices/is-rabbitmq:3-rabbitmq
           ports:
             - containerPort: 15671
               protocol: TCP

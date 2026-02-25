@@ -11,10 +11,10 @@ metadata:
     app.kubernetes.io/part-of: microservices
 spec:
   tags:
-    - name: 2022-preview-ubuntu-22.04
+    - name: 2022-sqlserver
       from:
         kind: DockerImage
-        name: 'mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04'
+        name: 'mcr.microsoft.com/mssql/server:2022-latest'
       generation: 2
       importPolicy:
         importMode: Legacy

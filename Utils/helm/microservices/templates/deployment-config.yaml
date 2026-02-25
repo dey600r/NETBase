@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dp-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  annotations: 
+    {{- include "microservice.annotations.connectsTo" . | nindent 4 }}
+  labels:
+    {{- include "microservice.labels" . | nindent 4 }}
+    {{- include "microservice.labels.runtime" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.deployment.image.repository }}/{{ .Release.Namespace }}/is-{{ .Release.Name }}:{{ .Values.deployment.image.tag }}
+          ports:
+            - name: {{ .Values.service.portName }}
+              containerPort: {{ .Values.service.port }}
+              protocol: {{ .Values.service.protocol }}
+          {{- with .Values.deployment.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: {{ .Values.deployment.policy }}
+      restartPolicy: {{ .Values.deployment.policy }}
+  {{- with .Values.deployment.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/part-of: microservices
 spec:
   tags:
-    - name: latest
+    - name: keycloak-latest
       from:
         kind: DockerImage
         name: 'quay.io/keycloak/keycloak:latest'

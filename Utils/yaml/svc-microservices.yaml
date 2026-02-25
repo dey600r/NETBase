@@ -10,6 +10,10 @@ spec:
   selector:
     app: microservices
   ports:
+    - name: microfrontend-angular-container-tcp
+      protocol: TCP
+      port: 2000
+      targetPort: microfrontend-angular-container-port
     - name: frontend-tcp
       protocol: TCP
       port: 3300

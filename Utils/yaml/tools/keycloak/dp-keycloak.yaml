@@ -28,13 +28,13 @@ spec:
             claimName: pvc-database
       containers:
         - name: keycloak
-          image: image-registry.openshift-image-registry.svc:5000/microservices/keycloak:latest
+          image: image-registry.openshift-image-registry.svc:5000/microservices/keycloak:keycloak-latest
           env:
             - name: KC_PROXY
               value: edge
-            - name: KEYCLOAK_ADMIN
+            - name: KC_BOOTSTRAP_ADMIN_USERNAME
               value: admin
-            - name: KEYCLOAK_ADMIN_PASSWORD
+            - name: KC_BOOTSTRAP_ADMIN_PASSWORD
               value: admin
           securityContext:
             privileged: false
@@ -48,7 +48,10 @@ spec:
             - name: keycloak-path
               mountPath: /opt/keycloak/data
           args:
-            - start-dev
+            - start
+            - '--proxy-headers=xforwarded'
+            - '--hostname-strict=false'
+            - '--http-enabled=true'
             - '--http-port=8180'
       restartPolicy: Always
   strategy:

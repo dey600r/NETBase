@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/part-of: microservices
 spec:
   tags:
-    - name: 3-management
+    - name: 3-rabbitmq
       from:
         kind: DockerImage
         name: 'rabbitmq:3-management'

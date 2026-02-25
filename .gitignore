@@ -399,7 +399,7 @@ FodyWeavers.xsd
 *.sln.iml
 #/MicroservicesBackend/Microservice.SettingApi/package-lock.json
 /Backend/MicroservicesBackend/Microservice.SettingApi/dist/assets/config.json
-Frontend/angular-microfrontend/app-container/libs
+#Frontend/angular-microfrontend/app-container/libs
 Frontend/**/package-lock.json
 Frontend/**/**/package-lock.json
 Frontend/**/**/.vscode

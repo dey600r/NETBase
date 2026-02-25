@@ -1,0 +1,51 @@
+nameOverride: ""
+
+# DEPLOYMENT CONFIG
+deployment:
+  replicas: 1
+  annotations: 
+    connectsTo:
+      - apiVersion: apps/v1
+        kind: Deployment
+        name: sql-server
+      - apiVersion: apps/v1
+        kind: Deployment
+        name: rabbitmq
+  labels:
+    runtime: dotnet
+  image:
+    repository: image-registry.openshift-image-registry.svc:5000
+    tag: keycloak
+  resources:
+    limits:
+      ephemeral-storage: 8Gi
+    requests:
+      ephemeral-storage: 4Gi
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 25%
+        maxSurge: 25%
+  policy: Always
+
+# BUILD CONFIG
+build:
+  source:
+      type: Git
+      git:
+        uri: 'https://github.com/dey600r/NETBase.git'
+        ref: master
+  triggers:
+      type: ConfigChange
+
+# SERVICE
+service:
+  type: ClusterIP
+  port: 8080
+  protocol: TCP
+  portName: maint-port
+
+#ROUTE
+route:
+  enabled: false
+  domain: "apps-crc.testing"

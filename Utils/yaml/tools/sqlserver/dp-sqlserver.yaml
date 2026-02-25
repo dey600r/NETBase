@@ -28,7 +28,7 @@ spec:
             claimName: pvc-database
       containers:
         - name: sql-server
-          image: image-registry.openshift-image-registry.svc:5000/microservices/sql-server:latest
+          image: image-registry.openshift-image-registry.svc:5000/microservices/sql-server:2022-sqlserver
           env:
             - name: MSSQL_SA_PASSWORD
               value: PassWord123?

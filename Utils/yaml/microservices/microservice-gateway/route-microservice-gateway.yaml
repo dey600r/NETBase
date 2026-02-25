@@ -1,18 +1,18 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: route-frontend
+  name: route-microservice-gateway
   namespace: microservices
   labels:
     app: microservices
     app.kubernetes.io/part-of: microservices
 spec:
-  host: microservice-frontend.apps-crc.testing
+  host: microservice-gateway-api.apps-crc.testing
   to:
     kind: Service
     name: svc-microservices
   port:
-    targetPort: frontend-tcp
+    targetPort: gateway-tcp
   tls:
     termination: edge
-    wildcardPolicy: None
+  wildcardPolicy: None
