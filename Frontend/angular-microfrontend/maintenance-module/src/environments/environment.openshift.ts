@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://microservice-gateway-api.apps-crc.testing',
+    apiUrl: 'https://microservice-gateway.apps-crc.testing',
     keycloak: {
         enable: true,
         url: 'https://keycloak-microservices.apps-crc.testing',
