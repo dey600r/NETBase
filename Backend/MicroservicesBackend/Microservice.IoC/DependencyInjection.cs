@@ -212,7 +212,7 @@ namespace Microservice.Ioc
 						NameClaimType = ClaimTypes.Name,
 						RoleClaimType = ClaimTypes.Role,
 						ValidateIssuer = true,
-						ValidIssuers = new[] { keycloackSettings.Authority, keycloackSettings.ClientId },
+						ValidIssuers = new[] { keycloackSettings.Authority },
 						ValidateAudience = true,
 						ValidAudiences = new[] { keycloackSettings.Audience, keycloackSettings.ClientId },
 					 };
