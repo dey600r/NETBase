@@ -1,4 +1,10 @@
-﻿using MassTransit;
+﻿using System.Net.Security;
+using System.Reflection;
+using System.Security.Authentication;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using MassTransit;
 using MassTransit.Logging;
 using Microservice.IoC.Helper;
 using Microservice.IoC.Settings;
@@ -10,11 +16,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Authentication;
-using System.Security.Claims;
-using System.Text;
 
 namespace Microservice.Ioc
 {
@@ -190,7 +191,8 @@ namespace Microservice.Ioc
 		public static IServiceCollection AddKeycloakExtensionConfiguration(this IServiceCollection service, IConfiguration configuration)
 		{
 			var keycloackSettings = configuration.GetSection("Keycloak").Get<KeycloakSettings>();
-			service
+       
+            service
 				.AddHttpContextAccessor()
 				.AddAuthorization(options =>
 				{
@@ -207,7 +209,18 @@ namespace Microservice.Ioc
 					options.Authority = keycloackSettings.Authority;
 					options.MetadataAddress = keycloackSettings.AuthorizationUrl;
 					options.RequireHttpsMetadata = false;
-					options.TokenValidationParameters = new TokenValidationParameters
+
+                    // OBTENER LA CLAVE PÚBLICA DESDE LA URL https://keycloak-microservices.apps-crc.testing/realms/microservices/protocol/openid-connect/certs
+					// SOLO ES NECESARIO EL x5c
+                    byte[] certBytes = Convert.FromBase64String(keycloackSettings.PublicKey);
+                    var cert = new X509Certificate2(certBytes);
+                    var key = new RsaSecurityKey(cert.GetRSAPublicKey());
+                    // Permite obtener jwks_uri aunque TLS sea self-signed
+                    //options.BackchannelHttpHandler = new HttpClientHandler
+                    //{
+                    //    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                    //};
+                    options.TokenValidationParameters = new TokenValidationParameters
 					{
 						NameClaimType = ClaimTypes.Name,
 						RoleClaimType = ClaimTypes.Role,
@@ -215,8 +228,17 @@ namespace Microservice.Ioc
 						ValidIssuers = new[] { keycloackSettings.Authority },
 						ValidateAudience = true,
 						ValidAudiences = new[] { keycloackSettings.Audience, keycloackSettings.ClientId },
-					 };
-				});
+						IssuerSigningKey = key
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnAuthenticationFailed = ctx =>
+                        {
+                            Console.WriteLine(ctx.Exception);
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
 			return service;
 		}
