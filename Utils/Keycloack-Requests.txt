@@ -9,3 +9,6 @@ LOGIN -> http://localhost:8180/realms/microservices/protocol/openid-connect/toke
 USER -> http://localhost:8180/realms/microservices/account
 
 TOKEN -> http://localhost:8180/realms/microservices/protocol/openid-connect/token
+
+PUBLIC KEY -> https://keycloak-microservices.apps-crc.testing/realms/microservices/protocol/openid-connect/certs
+    - El certificado xc5 va en la propiedad publicKey del appsettings

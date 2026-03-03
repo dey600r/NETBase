@@ -12,8 +12,12 @@ export class AppConfigWithRemotes {
     exposedModule: string = '';
 }
 
-export class AppConfig {
+export class EnvConfig {
     production: boolean = false;
+    configPath: string = '';
+}
+
+export class AppConfig {
     apiUrl: string = '';
     keycloak: AppConfigWithKeycloak = new AppConfigWithKeycloak();
     remotes: AppConfigWithRemotes[] = [];

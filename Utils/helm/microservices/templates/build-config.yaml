@@ -20,7 +20,7 @@ spec:
   strategy:
     type: Docker
     dockerStrategy:
-      dockerfilePath: Dockerfile-{{ .Release.Name }}-openshift
+      dockerfilePath: Dockerfile-{{ .Release.Name }}
   postCommit: {}
   source:
     type: {{ .Values.build.source.type }}

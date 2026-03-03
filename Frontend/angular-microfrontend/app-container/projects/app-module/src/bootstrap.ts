@@ -1,6 +1,12 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { buildConfiguration } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { loadAppConfig } from 'security-lib';
+import { environment } from '@app-environments/environment';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+(async () => {
+  const config = await loadAppConfig(environment.configPath);
+  
+  await bootstrapApplication(AppComponent, buildConfiguration(config))
+    .catch((err) => console.error(err));
+})();

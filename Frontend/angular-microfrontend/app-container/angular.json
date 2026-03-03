@@ -62,6 +62,11 @@
 								"glob": "**/*",
 								"input": "projects/app-module/public",
 								"output": "."
+							},
+							{
+								"glob": "**/*",
+								"input": "projects/app-module/src/assets",
+								"output": "assets"
 							}
 						],
 						"styles": [
@@ -88,35 +93,8 @@
 							],
 							"fileReplacements": [
 								{
-								"replace": "projects/app-module/src/environments/environment.ts",
-								"with": "projects/app-module/src/environments/environment.production.ts"
-								}
-							],
-							"outputHashing": "all",
-							"optimization": true,
-							"extractLicenses": true,
-							"sourceMap": false,
-							"namedChunks": true,
-							"buildOptimizer": true,
-							"extraWebpackConfig": "projects/app-module/webpack.prod.config.js"
-						},
-						"openshift": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"fileReplacements": [
-								{
-								"replace": "projects/app-module/src/environments/environment.ts",
-								"with": "projects/app-module/src/environments/environment.openshift.ts"
+								"replace": "projects/app-module/src/assets/config.json",
+								"with": "projects/app-module/src/assets/config.prod.json"
 								}
 							],
 							"outputHashing": "all",
@@ -169,6 +147,10 @@
 							{
 								"glob": "**/*",
 								"input": "projects/app-module/public"
+							},
+							{
+								"glob": "**/*",
+								"input": "projects/app-module/src/assets"
 							}
 						],
 						"styles": [

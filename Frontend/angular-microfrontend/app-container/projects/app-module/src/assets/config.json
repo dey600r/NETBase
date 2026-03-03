@@ -1,0 +1,37 @@
+{
+    "apiUrl": "https://localhost:44360",
+    "keycloak": {
+        "enable": true,
+        "url": "https://keycloak-microservices.apps-crc.testing",
+        "realm": "microservices",
+        "clientId": "frontend",
+        "onLoad": "login-required"
+    },
+    "remotes": [
+        {
+            "name": "security-module",
+            "remoteEntry": "http://localhost:4202/remoteEntry.js",
+            "exposedModule": "./routes"
+        },
+        {
+            "name": "vehicle-module",
+            "remoteEntry": "http://localhost:4201/remoteEntry.js",
+            "exposedModule": "./routes"
+        },
+        {
+            "name": "maintenance-module",
+            "remoteEntry": "http://localhost:4203/remoteEntry.js",
+            "exposedModule": "./routes"
+        },
+        {
+            "name": "setting_module",
+            "remoteEntry": "http://localhost:4204/remoteEntry.js",
+            "exposedModule": "./component"
+        },
+        {
+            "name": "home_module",
+            "remoteEntry": "http://localhost:4205/remoteEntry.js",
+            "exposedModule": "./component"
+        }
+    ]
+}

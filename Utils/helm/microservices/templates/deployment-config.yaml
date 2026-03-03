@@ -18,9 +18,31 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      {{- if .Values.configmap.volume }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: cm-{{ .Release.Name }}
+      {{- end }}
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.deployment.image.repository }}/{{ .Release.Namespace }}/is-{{ .Release.Name }}:{{ .Values.deployment.image.tag }}
+          {{- if .Values.configmap.enabled }}
+          {{- if .Values.configmap.volume }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: {{ .Values.configmap.mountPath }}
+          {{- end }}
+          {{- if not .Values.configmap.volume }}
+          envFrom:
+            - configMapRef:
+                name: cm-{{ .Release.Name }}
+            {{- if .Values.secret.enabled }}
+            - secretRef:
+                name: secret-{{ .Release.Name }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
           ports:
             - name: {{ .Values.service.portName }}
               containerPort: {{ .Values.service.port }}

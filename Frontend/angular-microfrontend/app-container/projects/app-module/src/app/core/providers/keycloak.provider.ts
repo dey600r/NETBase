@@ -1,27 +1,31 @@
 // KEYCLOAK
 import { createInterceptorCondition, IncludeBearerTokenCondition } from 'keycloak-angular';
 import Keycloak, { KeycloakOnLoad } from 'keycloak-js';
-import { environment } from '@app-environments/environment';
+import { AppConfig } from 'security-lib';
 
+export function buildUrlCondition(config: AppConfig) {
+  return createInterceptorCondition<IncludeBearerTokenCondition>({
+    //urlPattern: /^(http:\/\/localhost:8180)(\/.*)?$/i,
+    //urlPattern: /^(config.keycloak.url)(\/.*)?$/i,
+    urlPattern: new RegExp(`^(${config.keycloak.url})(\\/.*)?$`, 'i'),
+    bearerPrefix: 'Bearer'
+  });
+}
 
-export const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
-  //urlPattern: /^(http:\/\/localhost:8180)(\/.*)?$/i,
-  urlPattern: /^(environment.keycloak.url)(\/.*)?$/i,
-  bearerPrefix: 'Bearer'
-});
+export function buildKeycloakInstance(config: AppConfig) {
+  return new Keycloak({
+    url: config.keycloak.url,
+    realm: config.keycloak.realm,
+    clientId: config.keycloak.clientId,
+  });
+}
 
-export const kecloakInstance = new Keycloak({
-  url: environment.keycloak.url,
-  realm: environment.keycloak.realm,
-  clientId: environment.keycloak.clientId,
-});
-
-export function initializeKeycloak(): () => Promise<void> {
+export function initializeKeycloak(config: AppConfig, keycloakInstance: Keycloak): () => Promise<void> {
   return async () => {
     try {
       if(window !== undefined) {
-        const authenticated = await kecloakInstance.init({
-          onLoad: environment.keycloak.onLoad as KeycloakOnLoad, // or 'check-sso' for silent authentication
+        const authenticated = await keycloakInstance.init({
+          onLoad: config.keycloak.onLoad as KeycloakOnLoad, // or 'check-sso' for silent authentication
           checkLoginIframe: false
         });
         console.log('✅ Keycloak initialized', authenticated ? 'User authenticated' : 'User not authenticated');

@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { PagesModule } from './pages.module';
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { environment } from '@app-environments/environment';
+import { APP_CONFIG, AppConfig } from 'security-lib';
 import { AppConstants } from '@app-utils/index';
 
 @Component({
@@ -13,14 +13,13 @@ import { AppConstants } from '@app-utils/index';
 })
 export class HomeComponent implements OnInit {
   
-  @ViewChild('placeHolder', { read: ViewContainerRef })
-   viewContainer!: ViewContainerRef;
-
-   private unmount?: () => void;
+  private readonly _appConfig: AppConfig = inject(APP_CONFIG);
+  @ViewChild('placeHolder', { read: ViewContainerRef }) viewContainer!: ViewContainerRef;
+  private unmount?: () => void;
    
   async ngAfterViewInit() {
     try {
-      const setting = environment.remotes.find(r => r.name === AppConstants.HOME_MODULE)
+      const setting = this._appConfig.remotes.find(r => r.name === AppConstants.HOME_MODULE);
       const m = await loadRemoteModule({
         type: 'script',
         remoteEntry: setting?.remoteEntry || '',

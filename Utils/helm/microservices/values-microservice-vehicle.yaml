@@ -53,12 +53,10 @@ route:
 #CONFIGMAP
 configmap:
   enabled: true
-  volume: false
-  mountPath:
   data:
     ConnectionStrings__Encripted: "true" 
     RabbitMQSettings__Host: "rabbitmq.microservices.svc.cluster.local"
-    RabbitMQSettings__ServiceName: "Receiver"
+    RabbitMQSettings__ServiceName: "Processor"
     RabbitMQSettings__Port: "15672"
     RabbitMQSettings__VHost: "/"
     RabbitMQSettings__SslOptionsEnabled: "false"
@@ -75,7 +73,9 @@ configmap:
 #SECRET
 secret:
   enabled: true
+  volume: false
+  mountPath:
   data:
-    #ConnectionStrings__SqlServer: "Server=sql-server.microservices.svc.cluster.local,1433;Database=MaintenanceDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
-    ConnectionStrings__SqlServer: "wmjFg9uYOS6RTY5xs4R2m/tGofJ6xU8ecnhCHpvgdBM/Z+k9dt5n42kPGzNFSI0GTrIrczQKpID6LKAHkyaAMA039n5/zHUamT+7gJvoUmjHsqZnL3e2pydKn2hXgpiaNe/j9nAS9TwBKbGHm75C/jMQihuv45MCP5/eCO7T8gDNBcbSfsRkMnWbPRtjZjwqa0eiNlAx8Lw1aHG7O3Bd1Q=="
+    #ConnectionStrings__SqlServer: "Server=sql-server.microservices.svc.cluster.local,1433;Database=VehicleDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
+    ConnectionStrings__SqlServer: "p0xoK5J2XOh97kwyoC5IECwhT0z272nSgtRyVjJO2PMmZjxiow37kNmZpM/4zEu8W4zkbiD9HnNzj5zJpEDp27V4Oo88GDRr13PSspAJlXMmEFsjYr0jfoGgeLIXRBhcltqsAzGlvvt1K2/bi3V0zIYf0pXfstY6OV7YWzpK46ywGH9zntCh5Ge6QGvXNxAVQa/7jTP+22fcNPwBBeFhkw=="
     Keycloak__PublicKey: "MIICqTCCAZECBgGckL961DANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1taWNyb3NlcnZpY2VzMB4XDTI2MDIyNDE3NDEzM1oXDTM2MDIyNDE3NDMxM1owGDEWMBQGA1UEAwwNbWljcm9zZXJ2aWNlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALZ0yfOeF/PUifAvCSis1PcVuoYxkBIYwW25gfHzAg5tnz4jhRi0Z6Cxp+dFdke3wQg5RRtCPB7Gormk1Zt5ks0bNCZ6lWZhlotmMIJqyNr0smpnPa4KFagXnG+U46WHqWZoSX3BtUwR/bfhpjieDu9qijZyZvzigTsGj+YaETMvoFLsHuwjcOEuQwjSgZb0ZTA1u2813JQWUvFBZAAYwBp9uBjwLDNuZEqW3vaPIXWN8ypvvyENRUGb7skmDYv5QO1El/PkpoyjH2okLrYigLBOiezZtZbLM1dVbKoATDSqXQnw+f9f7J6lcoWeZ//2ywhIBBcY/9vFogpmVUysyfECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAeyhwTxGtNaM8B73R23kvjAeY2jfiCEDjMh3FFDC8fHCk2Y85cet4L9rSleUyKOP6Dl+1VUPp+rohaSUVci3xYsM0TVbWm6Wy+00cdl5SHoEJb3bvwdFr4wILzBoQ+SlO1F3Mg2Asu6ReFumafTqJErrTJcRNihED5Jm/HChX6KyLyJjmaV/d8ZsbT2gQ9oNTr3Ng3WFto4cfHSG8iHX7BjkXPxu9n6+Esy2l/wLNe+72DsUMlHTsf2P7Nsm/j37jAZIpkk54jQPdNAvbvOk+uCBDT/H4SkGw/+WgboF6PYBOj6eJX2o/l2VbU5kwXu6ZdiJodv1WNj+oXMntovXdMA=="

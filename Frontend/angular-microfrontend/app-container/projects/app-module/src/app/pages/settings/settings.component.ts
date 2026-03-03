@@ -1,9 +1,8 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { Component, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, ViewContainerRef } from '@angular/core';
 import { SettingsModule } from './settings.module';
 import { AppConstants } from '@app-utils/index';
-import { environment } from '@app-environments/environment';
-
+import { APP_CONFIG, AppConfig } from 'security-lib';
 
 @Component({
   selector: 'app-maintenance',
@@ -14,6 +13,7 @@ import { environment } from '@app-environments/environment';
 })
 export class SettingsComponent {
 
+  private readonly _appConfig: AppConfig = inject(APP_CONFIG);
   @ViewChild('reactRoot', { static: true }) reactRoot!: ElementRef<HTMLDivElement>;
   @ViewChild('reactRoot', { read: ViewContainerRef })
   viewContainer!: ViewContainerRef; 
@@ -22,7 +22,7 @@ export class SettingsComponent {
 
   async ngAfterViewInit() {
     try {
-      const setting = environment.remotes.find(r => r.name === AppConstants.SETTING_MODULE)
+      const setting = this._appConfig.remotes.find(r => r.name === AppConstants.SETTING_MODULE)
       const m = await loadRemoteModule({
         type: 'script',
         remoteEntry: setting?.remoteEntry || '',
