@@ -1,6 +1,7 @@
 // KEYCLOAK
 import { createInterceptorCondition, IncludeBearerTokenCondition } from 'keycloak-angular';
-import Keycloak, { KeycloakOnLoad } from 'keycloak-js';
+import KeycloakModule, { type KeycloakOnLoad} from 'keycloak-js';
+import type Keycloak from 'keycloak-js';
 import { AppConfig } from '../models/index';
 
 export function buildUrlCondition(config: AppConfig) {
@@ -12,8 +13,10 @@ export function buildUrlCondition(config: AppConfig) {
   });
 }
 
+const KeycloakCtor = (KeycloakModule as any).default || KeycloakModule;
+
 export function buildKeycloakInstance(config: AppConfig) {
-  return new Keycloak({
+  return new KeycloakCtor({
     url: config.keycloak.url,
     realm: config.keycloak.realm,
     clientId: config.keycloak.clientId,

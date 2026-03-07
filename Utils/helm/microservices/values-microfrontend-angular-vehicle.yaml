@@ -40,7 +40,7 @@ service:
   type: ClusterIP
   port: 3300
   protocol: TCP
-  portName: fr-maint-port
+  portName: fr-vehicle-port
 
 #ROUTE
 route:
