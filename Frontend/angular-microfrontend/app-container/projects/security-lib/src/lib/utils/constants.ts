@@ -4,4 +4,6 @@ export class AppConstants {
     public static readonly SECURITY_PROTOCOL_JWT = 'jwt';
 
     public static readonly UNKNOWN = 'unknown';
+
+    public static readonly SECURITY_MODULE: string ='security-module';
 }

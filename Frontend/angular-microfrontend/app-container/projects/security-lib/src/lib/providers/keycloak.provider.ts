@@ -1,7 +1,7 @@
 // KEYCLOAK
 import { createInterceptorCondition, IncludeBearerTokenCondition } from 'keycloak-angular';
 import Keycloak, { KeycloakOnLoad } from 'keycloak-js';
-import { AppConfig } from 'security-lib';
+import { AppConfig } from '../models/index';
 
 export function buildUrlCondition(config: AppConfig) {
   return createInterceptorCondition<IncludeBearerTokenCondition>({

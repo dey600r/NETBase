@@ -11,11 +11,14 @@ deployment:
       - apiVersion: apps/v1
         kind: Deployment
         name: dp-microfrontend-angular-maintenance
+      - apiVersion: apps/v1
+        kind: Deployment
+        name: dp-microfrontend-angular-vehicle
   labels:
     runtime: angularjs
   image:
     repository: image-registry.openshift-image-registry.svc:5000
-    tag: keycloak
+    tag: latest
   resources:
     limits:
       ephemeral-storage: 8Gi
@@ -64,7 +67,7 @@ configmap:
             "url": "https://keycloak-microservices.apps-crc.testing",
             "realm": "microservices",
             "clientId": "frontend",
-            "onLoad": "login-required",
+            "onLoad": "login-required"
         },
         "remotes": [
           {

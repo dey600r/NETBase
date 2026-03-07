@@ -93,8 +93,8 @@
 							],
 							"fileReplacements": [
 								{
-								"replace": "projects/app-module/src/assets/config.json",
-								"with": "projects/app-module/src/assets/config.prod.json"
+									"replace": "projects/app-module/src/assets/config.json",
+									"with": "projects/app-module/src/assets/config.prod.json"
 								}
 							],
 							"outputHashing": "all",

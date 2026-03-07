@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 import { UrlConstants, AppConstants } from '@app-utils/index';
 
-import { AuthGuard } from '@app-providers/index';
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { environment } from '@app-environments/environment';
-import { AppConfig } from 'security-lib';
+import { AppConfig, AuthGuard } from 'security-lib';
 
 export function buildRoutesPages(config: AppConfig): Routes {
     const vehicleModule = config.remotes.find(r => r.name === AppConstants.VEHICLE_MODULE);
