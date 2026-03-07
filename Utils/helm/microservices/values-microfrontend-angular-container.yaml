@@ -14,6 +14,12 @@ deployment:
       - apiVersion: apps/v1
         kind: Deployment
         name: dp-microfrontend-angular-vehicle
+      - apiVersion: apps/v1
+        kind: Deployment
+        name: dp-microfrontend-vue-home
+      - apiVersion: apps/v1
+        kind: Deployment
+        name: dp-microfrontend-react-setting
   labels:
     runtime: angularjs
   image:

@@ -212,6 +212,20 @@ ERROR CE
 En la página de error "La conexión no es privada", haz clic en cualquier lugar de la pantalla en blanco.
 Escribe la frase: thisisunsafe (sin espacios, aunque no veas un campo de texto, Chrome lo detectará).
 
+FIX CERTIFICATES
+-----------------
+1. Descargar certificados de OCP
+  - crc oc-env
+  - oc extract -n openshift-ingress-operator secret/router-ca --keys=tls.crt --to=.  -> genera el certificado tls.crt
+2. Instala el certificado
+  - Abre mmc
+  - Certificates (Computer Account)
+  - Trusted Root Certification Authorities
+  - Import
+  - Importa el certificado .crt
+3. Probar: 
+  - curl https://keycloak-microservices.apps-crc.testing/realms/microservices-local/protocol/openid-connect/certs
+
 CADENA DE CONEXSION AZURE
 Server=server-epad.database.windows.net,1433;Initial Catalog=SecurityDB;Persist Security Info=False;User ID=CloudSA337e4665;Password=Developer123?;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
 Server=server-epad.database.windows.net,1433;Initial Catalog=VehicleDB;Persist Security Info=False;User ID=CloudSA337e4665;Password=Developer123?;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;

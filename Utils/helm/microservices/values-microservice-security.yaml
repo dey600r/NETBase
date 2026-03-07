@@ -1,0 +1,63 @@
+nameOverride: ""
+
+# DEPLOYMENT CONFIG
+deployment:
+  replicas: 1
+  annotations: 
+    connectsTo:
+      - apiVersion: apps/v1
+        kind: Deployment
+        name: sql-server
+  labels:
+    runtime: dotnet
+  image:
+    repository: image-registry.openshift-image-registry.svc:5000
+    tag: latest
+  resources:
+    limits:
+      ephemeral-storage: 8Gi
+    requests:
+      ephemeral-storage: 4Gi
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 25%
+        maxSurge: 25%
+  policy: Always
+
+# BUILD CONFIG
+build:
+  source:
+      type: Git
+      git:
+        uri: 'https://github.com/dey600r/NETBase.git'
+        ref: master
+  triggers:
+      type: ConfigChange
+
+# SERVICE
+service:
+  type: ClusterIP
+  port: 8080
+  protocol: TCP
+  portName: security-port
+
+#ROUTE
+route:
+  enabled: false
+  domain: "apps-crc.testing"
+
+#CONFIGMAP
+configmap:
+  enabled: true
+  volume: false
+  mountPath:
+  data:
+    ConnectionStrings__Encripted: "true" 
+
+#SECRET
+secret:
+  enabled: true
+  data:
+    #ConnectionStrings__SqlServer: "Server=sql-server.microservices.svc.cluster.local,1433;Database=SecurityDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
+    ConnectionStrings__SqlServer: "SMUi05kC3FUkfW5/i2pnniILPopCDFq81n4gd5dOzhCvs2kNzR6TyRPwgczrETQn2bvPlWzuLJ6LnIQCkejf4DmgqHaeHUtEERuTo12GVGkaba0H82QDksrL52KMCFfarVPsGfBappw8PWhNSXMrtXL34CSv/MLIFXdgzUDztidPjeDekDwvIwxxEm5lt4Ca64wgzR8h9+GaBhMvT9541w=="

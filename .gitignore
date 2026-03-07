@@ -405,3 +405,4 @@ Frontend/**/**/package-lock.json
 Frontend/**/**/.vscode
 Frontend/**/.vscode
 Frontend/.vscode
+Utils/tls.crt

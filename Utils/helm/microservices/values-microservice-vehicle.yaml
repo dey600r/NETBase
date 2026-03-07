@@ -69,7 +69,6 @@ configmap:
     Keycloak__ClientId: "backend"
     keycloakEnabled: "true"
 
-
 #SECRET
 secret:
   enabled: true

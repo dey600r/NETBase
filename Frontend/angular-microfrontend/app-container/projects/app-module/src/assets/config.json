@@ -3,7 +3,7 @@
     "keycloak": {
         "enable": true,
         "url": "https://keycloak-microservices.apps-crc.testing",
-        "realm": "microservices",
+        "realm": "microservices-local",
         "clientId": "frontend",
         "onLoad": "login-required"
     },

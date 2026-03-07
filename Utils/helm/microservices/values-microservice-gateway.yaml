@@ -14,6 +14,9 @@ deployment:
       - apiVersion: apps/v1
         kind: Deployment
         name: dp-microservice-vehicle
+      - apiVersion: apps/v1
+        kind: Deployment
+        name: dp-microservice-security
   labels:
     runtime: dotnet
   image:

@@ -2,8 +2,8 @@
     "apiUrl": "https://localhost:44320/api",
     "keycloak": {
         "enable": true,
-        "url": "http://localhost:8180",
-        "realm": "microservices",
+        "url": "https://keycloak-microservices.apps-crc.testing",
+        "realm": "microservices-local",
         "clientId": "frontend",
         "onLoad": "login-required"
     },
