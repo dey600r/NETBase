@@ -1,0 +1,19 @@
+{{- if .Values.route.enabled -}}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: route-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "microservice.labels" . | nindent 4 }}
+spec:
+  host: {{ .Release.Name }}.{{ .Values.route.domain }}
+  to:
+    kind: Service
+    name: svc-{{ .Release.Name }}
+  port:
+    targetPort: {{ .Release.Name }}-tcp
+  tls:
+    termination: edge
+  wildcardPolicy: None
+{{- end }}

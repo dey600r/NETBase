@@ -49,7 +49,7 @@ route:
 
 #CONFIGMAP
 configmap:
-  enabled: false
+  enabled: true
   volume: true
   mountPath: /usr/share/nginx/html/assets/
   data:

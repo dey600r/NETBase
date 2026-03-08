@@ -1,0 +1,9 @@
+MONGODB
+---------------------------------------------------------------------
+mongosh "mongodb://root:example@localhost:27017" --> Connet to DB
+show dbs -> Mostrar BD
+use SettingDB -> Crear DB
+db.createUser({user: 'appuser', pwd: 'appuser', roles: [ {role: 'readWrite', db: 'SettingDB'}]}); -> Create user
+
+oc port-forward pod/dp-mongodb-597d87675c-v7pk2 27017:27017 -n microservices
+oc port-forward pod/sql-server-778c55f77c-9f9fr 20468:1433

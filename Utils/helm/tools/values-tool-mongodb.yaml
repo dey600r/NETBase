@@ -1,0 +1,51 @@
+nameOverride: ""
+
+# DEPLOYMENT CONFIG
+deployment:
+  replicas: 1
+  labels:
+    runtime: mongodb
+  image:
+    repository: image-registry.openshift-image-registry.svc:5000
+  env:
+    - name: MONGO_INITDB_ROOT_USERNAME
+      value: root
+    - name: MONGO_INITDB_ROOT_PASSWORD
+      value: example
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 25%
+        maxSurge: 25%
+  policy: Always
+
+# IMAGE STREAM
+imageStream:
+  tag: latest
+  from:
+    kind: DockerImage
+    name: mongo
+  importPolicy: Legacy
+  referencePolicy: Local
+
+# SERVICE
+service:
+  ports:
+    - name: mongo-tcp
+      port: 27017
+      protocol: TCP
+      targetPort: 27017
+
+#ROUTE
+route:
+  enabled: false
+  domain: "apps-crc.testing"
+
+#PERSISTANCE CLAIM
+persistenceClaim:
+  enabled: true
+  name: mongo-path
+  claimName: pvc-database
+  mountPaths:
+    - /data/configdb
+    - /data/db
