@@ -266,6 +266,14 @@ services:
     networks:
       - network_microservices
 
+  nexus:
+    container_name: nexus
+    image: sonatype/nexus3:3.90.1-alpine
+    volumes:
+      - "./Utils/docker-configs/nexus-volume:/nexus-data"
+    ports:
+      - "8081:8081"
+
 
 networks:
   network_microservices:

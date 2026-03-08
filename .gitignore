@@ -406,3 +406,4 @@ Frontend/**/**/.vscode
 Frontend/**/.vscode
 Frontend/.vscode
 Utils/tls.crt
+Utils/docker-configs/nexus-volume

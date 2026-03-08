@@ -7,6 +7,7 @@ http://localhost:8081/ --> mongo-express --> root/example
 http://localhost:8180/ --> keycloak --> admin/admin
 http://localhost:15672/ --> Rabbitmq --> guest/guest
 http://localhost:3300 --> Microservice FrontEnad --> admin@example.com/Dj123?
+http://localhost:8081 --> admin/admin123?
 
 -- docker build LDAP --
 docker pull openmicroscopy/apacheds
