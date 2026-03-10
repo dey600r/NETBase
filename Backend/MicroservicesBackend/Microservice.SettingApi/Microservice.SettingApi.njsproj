@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\server\core\encrypter.ts" />
+    <TypeScriptCompile Include="src\server\core\middlewares\authentication-keycloak.ts" />
     <TypeScriptCompile Include="src\server\core\middlewares\authentication.ts" />
+    <TypeScriptCompile Include="src\server\core\middlewares\config.ts" />
     <TypeScriptCompile Include="src\server\core\models\schemas\setting.model.ts" />
     <TypeScriptCompile Include="src\server\core\models\utils\config-setting.model.ts" />
     <TypeScriptCompile Include="src\server\core\server.ts" />
