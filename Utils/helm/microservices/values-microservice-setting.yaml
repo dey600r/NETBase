@@ -51,7 +51,7 @@ route:
 configmap:
   enabled: true
   volume: true
-  mountPath: /opt/app/assets/
+  mountPath: /opt/app/dist/assets/
   data:
     config.json: |
       {
