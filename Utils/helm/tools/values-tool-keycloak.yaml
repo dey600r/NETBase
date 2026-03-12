@@ -1,0 +1,57 @@
+nameOverride: ""
+
+# DEPLOYMENT CONFIG
+deployment:
+  replicas: 1
+  labels:
+    runtime: mongodb
+  image:
+    repository: image-registry.openshift-image-registry.svc:5000
+  env:
+    - name: KC_PROXY
+      value: edge
+    - name: KC_BOOTSTRAP_ADMIN_USERNAME
+      value: admin
+    - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+      value: admin
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 25%
+        maxSurge: 25%
+  policy: Always
+
+# IMAGE STREAM
+imageStream:
+  tag: latest
+  from:
+    kind: DockerImage
+    name: mongo
+  importPolicy: Legacy
+  referencePolicy: Local
+
+# SERVICE
+service:
+  ports:
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+    - name: 8180-tcp
+      protocol: TCP
+      port: 8180
+      targetPort: 8180
+
+#ROUTE
+route:
+  enabled: false
+  domain: "apps-crc.testing"
+
+#PERSISTANCE CLAIM
+persistenceClaim:
+  enabled: true
+  name: mongo-path
+  claimName: pvc-database
+  mountPaths:
+    - /data/configdb
+    - /data/db

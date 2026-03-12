@@ -48,10 +48,13 @@ route:
   domain: "apps-crc.testing"
 
 #CONFIGMAP
-configmap:
+configmapEnv:
+  enabled: false
+
+configmapVolume:
   enabled: true
-  volume: true
   mountPath: /opt/app/dist/assets/
+  subPath: config.json
   data:
     config.json: |
       {

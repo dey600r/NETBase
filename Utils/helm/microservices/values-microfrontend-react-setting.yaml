@@ -44,8 +44,11 @@ route:
   enabled: true
   domain: "apps-crc.testing"
 
-#CONFIGMAP
-configmap:
+#CONFIGMAPS
+configmapEnv:
+  enabled: false
+
+configmapVolume:
   enabled: false
 
 #SECRET

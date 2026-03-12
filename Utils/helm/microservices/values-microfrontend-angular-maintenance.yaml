@@ -47,11 +47,14 @@ route:
   enabled: true
   domain: "apps-crc.testing"
 
-#CONFIGMAP
-configmap:
+#CONFIGMAPS
+configmapEnv:
+  enabled: false
+
+configmapVolume:
   enabled: true
-  volume: true
   mountPath: /usr/share/nginx/html/assets/
+  subPath: config.json
   data:
     config.json: |
       {

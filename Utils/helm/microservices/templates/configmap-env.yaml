@@ -1,0 +1,11 @@
+{{- if .Values.configmapEnv.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-env-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+data:
+{{- range $key, $value := .Values.configmapEnv.data }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}

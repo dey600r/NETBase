@@ -59,11 +59,9 @@ route:
   enabled: true
   domain: "apps-crc.testing"
 
-#CONFIGMAP
-configmap:
+#CONFIGMAPS
+configmapEnv:
   enabled: true
-  volume: false
-  mountPath: 
   data:
     Keycloak__Authority: "https://keycloak-microservices.apps-crc.testing/realms/microservices"
     Keycloak__AuthorizationUrl: "https://keycloak-microservices.apps-crc.testing/realms/microservices/.well-known/openid-configuration"
@@ -71,6 +69,250 @@ configmap:
     Keycloak__Realm: "microservices"
     Keycloak__ClientId: "backend"
     keycloakEnabled: "true"
+
+configmapVolume:
+  enabled: true
+  mountPath: /app/
+  subPath: ocelot.Production.json
+  data:
+    ocelot.Production.json: |
+      {
+        "Routes": [
+          {
+            "DownstreamPathTemplate": "/api/security",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-security.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/security",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/security/signup",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-security.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/security/signup",
+            "UpstreamHttpMethod": [ "POST" ]
+          },
+          {
+            "DownstreamPathTemplate": "/api/security/login",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-security.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/security/login",
+            "UpstreamHttpMethod": [ "POST" ]
+          },
+          {
+            "DownstreamPathTemplate": "/api/vehicle",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/vehicle",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/vehicle/maintenance-element",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/vehicle/maintenance-element",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/vehicle/type",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/vehicle/type",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/configuration",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/configuration",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/configuration",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-vehicle.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/configuration",
+            "UpstreamHttpMethod": [ "POST" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/maintenance/configuration",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-maintenance.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/maintenance/configuration",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/maintenance/maintenance-element",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-maintenance.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/maintenance/maintenance-element",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/maintenance/maintenance-element",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-maintenance.microservices.svc.cluster.local",
+                "Port": "8080"
+              }
+            ],
+            "UpstreamPathTemplate": "/maintenance/maintenance-element",
+            "UpstreamHttpMethod": [ "POST" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/settings/get-all",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-setting.microservices.svc.cluster.local",
+                "Port": "3800"
+              }
+            ],
+            "UpstreamPathTemplate": "/settings/get-all",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/settings/get",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-setting.microservices.svc.cluster.local",
+                "Port": "3800"
+              }
+            ],
+            "UpstreamPathTemplate": "/settings/get",
+            "UpstreamHttpMethod": [ "GET" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          },
+          {
+            "DownstreamPathTemplate": "/api/settings/add",
+            "DownstreamScheme": "http",
+            "DangerousAcceptAnyServerCertificateValidator": true,
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "svc-microservice-setting.microservices.svc.cluster.local",
+                "Port": "3800"
+              }
+            ],
+            "UpstreamPathTemplate": "/settings/add",
+            "UpstreamHttpMethod": [ "POST" ],
+            "AuthenticationOptions": {
+              "AuthenticationProviderKey": "Bearer",
+              "AllowedScopes": []
+            }
+          }
+        ],
+        "GlobalConfiguration": {
+          "BaseUrl": "https://microservice-gateway.apps-crc.testing"
+        }
+      }
 
 #SECRET
 secret:

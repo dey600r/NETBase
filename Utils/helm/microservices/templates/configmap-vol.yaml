@@ -1,11 +1,11 @@
-{{- if .Values.configmap.enabled -}}
+{{- if .Values.configmapVolume.enabled -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cm-{{ .Release.Name }}
+  name: cm-vol-{{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 data:
-{{- range $key, $value := .Values.configmap.data }}
+{{- range $key, $value := .Values.configmapVolume.data }}
   {{ $key }}: {{ $value | quote }}
 {{- end }}
 {{- end }}

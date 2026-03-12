@@ -18,30 +18,29 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
-      {{- if .Values.configmap.volume }}
+      {{- if .Values.configmapVolume.enabled }}
       volumes:
         - name: config-volume
           configMap:
-            name: cm-{{ .Release.Name }}
+            name: cm-vol-{{ .Release.Name }}
       {{- end }}
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.deployment.image.repository }}/{{ .Release.Namespace }}/is-{{ .Release.Name }}:{{ .Values.deployment.image.tag }}
-          {{- if .Values.configmap.enabled }}
-          {{- if .Values.configmap.volume }}
+          {{- if .Values.configmapVolume.enabled }}
           volumeMounts:
             - name: config-volume
-              mountPath: {{ .Values.configmap.mountPath }}
+              mountPath: {{ .Values.configmapVolume.mountPath }}{{ .Values.configmapVolume.subPath }}
+              subPath: {{ .Values.configmapVolume.subPath }}
           {{- end }}
-          {{- if not .Values.configmap.volume }}
+          {{- if .Values.configmapEnv.enabled }}
           envFrom:
             - configMapRef:
-                name: cm-{{ .Release.Name }}
+                name: cm-env-{{ .Release.Name }}
             {{- if .Values.secret.enabled }}
             - secretRef:
                 name: secret-{{ .Release.Name }}
             {{- end }}
-          {{- end }}
           {{- end }}
           ports:
             - name: {{ .Values.service.portName }}

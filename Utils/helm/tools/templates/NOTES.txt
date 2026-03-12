@@ -1,2 +1,26 @@
-1. Get the application URL by running these commands:
+===================================================================
+CHART: {{ .Chart.Name }} instalado correctamente.
+===================================================================
 
+Nombre del despliegue: {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+Runtime detectado: {{ .Values.deployment.labels.runtime }}
+
+Acceso al Servicio:
+{{- if .Values.route.enabled }}
+URL: http://{{ .Values.route.domain }}
+{{- else }}
+El servicio es: svc-{{ .Release.Name }}
+Puertos configurados:
+{{- range .Values.service.ports }}
+  - {{ .name }}: {{ .port }} -> {{ .targetPort }} ({{ .protocol }})
+{{- end }}
+{{- end }}
+
+Persistencia:
+Estado: {{ if .Values.persistenceClaim.enabled }}HABILITADO{{ else }}DESHABILITADO{{ end }}
+PVC asociada: {{ .Values.persistenceClaim.claimName }}
+
+¿Qué sigue?
+1. Revisa los pods: kubectl get pods -l runtime={{ .Values.deployment.labels.runtime }}
+2. Revisa los logs: kubectl logs -f deployment/dp-{{ .Release.Name }}

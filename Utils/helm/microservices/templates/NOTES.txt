@@ -1,2 +1,117 @@
-1. Get the application URL by running these commands:
+Thank you for installing {{ .Chart.Name }}! 🚀
 
+1. Application Information
+--------------------------
+
+Release Name: {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+
+Replicas: {{ .Values.deployment.replicas }}
+
+Container Image:
+  {{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}
+
+Service:
+  Type: {{ .Values.service.type }}
+  Port: {{ .Values.service.port }}
+  Protocol: {{ .Values.service.protocol }}
+
+2. Access the Application
+--------------------------
+
+{{- if .Values.route.enabled }}
+
+The API Gateway is exposed through an OpenShift Route.
+
+URL:
+  https://{{ .Release.Name }}.{{ .Values.route.domain }}
+
+Example test:
+
+  curl https://{{ .Release.Name }}.{{ .Values.route.domain }}/security
+
+{{- else }}
+
+To access the service locally:
+
+  kubectl port-forward svc/{{ .Release.Name }} {{ .Values.service.port }}:{{ .Values.service.port }}
+
+Then open:
+
+  http://localhost:{{ .Values.service.port }}
+
+{{- end }}
+
+3. Connected Microservices
+--------------------------
+
+This {{ .Release.Name }} routes traffic to the following services:
+
+{{- range .Values.deployment.annotations.connectsTo }}
+- {{ .name }}
+{{- end }}
+
+Ensure these deployments are running:
+
+  kubectl get deployments
+
+{{- if .Values.configmapEnv.enabled -}}
+4. Configurations Environmet Vars
+--------------------------------
+
+{{- range $key, $value := .Values.configmapEnv.data }}
+  {{ $key }}
+  {{ $value | quote }}
+{{- end }}
+
+{{- end }}
+
+{{- if .Values.configmapVolume.enabled -}}
+5. Configuration Volume data
+----------------
+
+Routes are defined via ConfigMap and mounted at:
+
+  {{ .Values.configmapVolume.mounthPath }}
+
+Configuration file:
+
+  {{ .Values.configmapVolume.subPath }}
+
+This file contains all Ocelot routing configuration.
+
+{{- end }}
+
+6. Useful Commands
+------------------
+
+Check pods:
+
+  kubectl get pods -n {{ .Release.Namespace }}
+
+Check service:
+
+  kubectl get svc {{ .Release.Name }} . 
+
+Check route:
+
+  kubectl get route {{ .Release.Name }} . 
+
+Check logs:
+
+  kubectl logs -l app.kubernetes.io/instance={{ .Release.Name }}
+
+7. Source Repository
+--------------------
+
+Build source repository:
+
+  {{ .Values.build.source.git.uri }}
+
+Branch:
+
+  {{ .Values.build.source.git.ref }}
+
+--------------------------------------------------
+
+Your {{ .Release.Name }} is ready! 🎉

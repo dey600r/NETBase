@@ -47,13 +47,14 @@ route:
   enabled: false
   domain: "apps-crc.testing"
 
-#CONFIGMAP
-configmap:
+#CONFIGMAPS
+configmapEnv:
   enabled: true
-  volume: false
-  mountPath:
   data:
-    ConnectionStrings__Encripted: "true" 
+    ConnectionStrings__Encripted: "true"
+
+configmapVolume:
+  enabled: false
 
 #SECRET
 secret:

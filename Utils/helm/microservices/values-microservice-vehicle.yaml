@@ -50,8 +50,8 @@ route:
   enabled: false
   domain: "apps-crc.testing"
 
-#CONFIGMAP
-configmap:
+#CONFIGMAPS
+configmapEnv:
   enabled: true
   data:
     ConnectionStrings__Encripted: "true" 
@@ -69,11 +69,12 @@ configmap:
     Keycloak__ClientId: "backend"
     keycloakEnabled: "true"
 
+configmapVolume:
+  enabled: false
+
 #SECRET
 secret:
   enabled: true
-  volume: false
-  mountPath:
   data:
     #ConnectionStrings__SqlServer: "Server=sql-server.microservices.svc.cluster.local,1433;Database=VehicleDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
     ConnectionStrings__SqlServer: "p0xoK5J2XOh97kwyoC5IECwhT0z272nSgtRyVjJO2PMmZjxiow37kNmZpM/4zEu8W4zkbiD9HnNzj5zJpEDp27V4Oo88GDRr13PSspAJlXMmEFsjYr0jfoGgeLIXRBhcltqsAzGlvvt1K2/bi3V0zIYf0pXfstY6OV7YWzpK46ywGH9zntCh5Ge6QGvXNxAVQa/7jTP+22fcNPwBBeFhkw=="

@@ -50,11 +50,9 @@ route:
   enabled: false
   domain: "apps-crc.testing"
 
-#CONFIGMAP
-configmap:
+#CONFIGMAPS
+configmapEnv:
   enabled: true
-  volume: false
-  mountPath:
   data:
     ConnectionStrings__Encripted: "true" 
     RabbitMQSettings__Host: "rabbitmq.microservices.svc.cluster.local"
@@ -70,6 +68,9 @@ configmap:
     Keycloak__Realm: "microservices"
     Keycloak__ClientId: "backend"
     keycloakEnabled: "true"
+
+configmapVolume:
+  enabled: false
 
 #SECRET
 secret:

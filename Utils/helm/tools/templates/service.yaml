@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     app: {{ .Release.Name }}
-    deployment: svc-{{ .Release.Name }}
+    deployment: dp-{{ .Release.Name }}
   ports:
   {{- range .Values.service.ports }}
     - name: {{ .name }}
