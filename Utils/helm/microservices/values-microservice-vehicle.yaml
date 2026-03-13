@@ -7,10 +7,10 @@ deployment:
     connectsTo:
       - apiVersion: apps/v1
         kind: Deployment
-        name: sql-server
+        name: dp-sql-server
       - apiVersion: apps/v1
         kind: Deployment
-        name: rabbitmq
+        name: dp-rabbitmq
   labels:
     runtime: dotnet
   image:
@@ -55,16 +55,16 @@ configmapEnv:
   enabled: true
   data:
     ConnectionStrings__Encripted: "true" 
-    RabbitMQSettings__Host: "rabbitmq.microservices.svc.cluster.local"
+    RabbitMQSettings__Host: "svc-rabbitmq.microservices.svc.cluster.local"
     RabbitMQSettings__ServiceName: "Processor"
     RabbitMQSettings__Port: "15672"
     RabbitMQSettings__VHost: "/"
     RabbitMQSettings__SslOptionsEnabled: "false"
     RabbitMQSettings__User: "guest"
     RabbitMQSettings__Pwd: "guest"
-    Keycloak__Authority: "https://keycloak-microservices.apps-crc.testing/realms/microservices"
-    Keycloak__AuthorizationUrl: "https://keycloak-microservices.apps-crc.testing/realms/microservices/.well-known/openid-configuration"
-    Keycloak__TokenUrl: "https://keycloak-microservices.apps-crc.testing/realms/microservices/protocol/openid-connect/token"
+    Keycloak__Authority: "https://keycloak.apps-crc.testing/realms/microservices"
+    Keycloak__AuthorizationUrl: "https://keycloak.apps-crc.testing/realms/microservices/.well-known/openid-configuration"
+    Keycloak__TokenUrl: "https://keycloak.apps-crc.testing/realms/microservices/protocol/openid-connect/token"
     Keycloak__Realm: "microservices"
     Keycloak__ClientId: "backend"
     keycloakEnabled: "true"
@@ -76,6 +76,6 @@ configmapVolume:
 secret:
   enabled: true
   data:
-    #ConnectionStrings__SqlServer: "Server=sql-server.microservices.svc.cluster.local,1433;Database=VehicleDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
-    ConnectionStrings__SqlServer: "p0xoK5J2XOh97kwyoC5IECwhT0z272nSgtRyVjJO2PMmZjxiow37kNmZpM/4zEu8W4zkbiD9HnNzj5zJpEDp27V4Oo88GDRr13PSspAJlXMmEFsjYr0jfoGgeLIXRBhcltqsAzGlvvt1K2/bi3V0zIYf0pXfstY6OV7YWzpK46ywGH9zntCh5Ge6QGvXNxAVQa/7jTP+22fcNPwBBeFhkw=="
+    #ConnectionStrings__SqlServer: "Server=svc-sql-server.microservices.svc.cluster.local,1433;Database=VehicleDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
+    ConnectionStrings__SqlServer: "n1Py6XoWV99FZ34C+ppl4H0inHuYk28D3PD2T8UOurBsKASX5Y6b1qrkoQe7n96wGLS5FL+k548TbGk2heh6NrLXAkJdJYtFvQ8EQA4xkSQt5/BnbVdha91OR4zm6ZshSfGVPXZA8AqMIOR3bTcRY42k2AyHFabA6Yy9jBc9rFZbGtd7BrdgBqq7Yw/AyLt5AHXfB5cMhO+Px/FWwMPb+A=="
     Keycloak__PublicKey: "MIICqTCCAZECBgGckL961DANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1taWNyb3NlcnZpY2VzMB4XDTI2MDIyNDE3NDEzM1oXDTM2MDIyNDE3NDMxM1owGDEWMBQGA1UEAwwNbWljcm9zZXJ2aWNlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALZ0yfOeF/PUifAvCSis1PcVuoYxkBIYwW25gfHzAg5tnz4jhRi0Z6Cxp+dFdke3wQg5RRtCPB7Gormk1Zt5ks0bNCZ6lWZhlotmMIJqyNr0smpnPa4KFagXnG+U46WHqWZoSX3BtUwR/bfhpjieDu9qijZyZvzigTsGj+YaETMvoFLsHuwjcOEuQwjSgZb0ZTA1u2813JQWUvFBZAAYwBp9uBjwLDNuZEqW3vaPIXWN8ypvvyENRUGb7skmDYv5QO1El/PkpoyjH2okLrYigLBOiezZtZbLM1dVbKoATDSqXQnw+f9f7J6lcoWeZ//2ywhIBBcY/9vFogpmVUysyfECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAeyhwTxGtNaM8B73R23kvjAeY2jfiCEDjMh3FFDC8fHCk2Y85cet4L9rSleUyKOP6Dl+1VUPp+rohaSUVci3xYsM0TVbWm6Wy+00cdl5SHoEJb3bvwdFr4wILzBoQ+SlO1F3Mg2Asu6ReFumafTqJErrTJcRNihED5Jm/HChX6KyLyJjmaV/d8ZsbT2gQ9oNTr3Ng3WFto4cfHSG8iHX7BjkXPxu9n6+Esy2l/wLNe+72DsUMlHTsf2P7Nsm/j37jAZIpkk54jQPdNAvbvOk+uCBDT/H4SkGw/+WgboF6PYBOj6eJX2o/l2VbU5kwXu6ZdiJodv1WNj+oXMntovXdMA=="

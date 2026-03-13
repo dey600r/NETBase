@@ -7,7 +7,7 @@ deployment:
     connectsTo:
       - apiVersion: apps/v1
         kind: Deployment
-        name: keycloak
+        name: dp-keycloak
       - apiVersion: apps/v1
         kind: Deployment
         name: dp-microservice-maintenance
@@ -63,9 +63,9 @@ route:
 configmapEnv:
   enabled: true
   data:
-    Keycloak__Authority: "https://keycloak-microservices.apps-crc.testing/realms/microservices"
-    Keycloak__AuthorizationUrl: "https://keycloak-microservices.apps-crc.testing/realms/microservices/.well-known/openid-configuration"
-    Keycloak__TokenUrl: "https://keycloak-microservices.apps-crc.testing/realms/microservices/protocol/openid-connect/token"
+    Keycloak__Authority: "https://keycloak.apps-crc.testing/realms/microservices"
+    Keycloak__AuthorizationUrl: "https://keycloak.apps-crc.testing/realms/microservices/.well-known/openid-configuration"
+    Keycloak__TokenUrl: "https://keycloak.apps-crc.testing/realms/microservices/protocol/openid-connect/token"
     Keycloak__Realm: "microservices"
     Keycloak__ClientId: "backend"
     keycloakEnabled: "true"

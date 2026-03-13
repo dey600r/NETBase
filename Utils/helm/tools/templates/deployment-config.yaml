@@ -29,7 +29,7 @@ spec:
           env:
           {{- range .Values.deployment.env }}
             - name: {{ .name }}
-              value: {{ .value }}
+              value: {{ .value | quote }}
           {{- end }}
           ports:
           {{- range .Values.service.ports }}
@@ -44,9 +44,19 @@ spec:
               mountPath: {{ . }}
           {{- end }}
           {{- end }}
+          {{- with .Values.deployment.args }}
+          args:
+            {{- range . }}
+              - {{ . | quote }}
+            {{- end }}
+          {{- end }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: {{ .Values.deployment.policy }}
+          {{- with .Values.deployment.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       restartPolicy: {{ .Values.deployment.policy }}
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst

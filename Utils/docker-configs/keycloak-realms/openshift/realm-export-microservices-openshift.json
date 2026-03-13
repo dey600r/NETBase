@@ -2614,7 +2614,7 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "frontendUrl": "https://keycloak-microservices.apps-crc.testing/",
+    "frontendUrl": "https://keycloak.apps-crc.testing/",
     "acr.loa.map": "{}"
   },
   "keycloakVersion": "26.5.4",

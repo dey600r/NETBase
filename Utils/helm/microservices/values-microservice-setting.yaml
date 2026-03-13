@@ -67,7 +67,7 @@ configmapVolume:
         },
         "keycloackSettings": {
           "realm": "microservices",
-            "auth-server-url": "https://keycloak-microservices.apps-crc.testing",
+            "auth-server-url": "https://keycloak.apps-crc.testing",
             "ssl-required": "none",
             "resource": "frontend",
             "bearer-only": true

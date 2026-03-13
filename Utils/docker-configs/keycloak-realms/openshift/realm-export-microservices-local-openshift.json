@@ -2832,7 +2832,7 @@
     "saml.signature.algorithm": "",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "frontendUrl": "https://keycloak-microservices.apps-crc.testing/",
+    "frontendUrl": "https://keycloak.apps-crc.testing/",
     "acr.loa.map": "{}",
     "darkMode": "true"
   },

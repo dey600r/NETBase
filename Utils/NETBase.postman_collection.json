@@ -1552,7 +1552,7 @@
 							]
 						},
 						"url": {
-							"raw": "https://keycloak-microservices.apps-crc.testing/realms/microservices/protocol/openid-connect/token",
+							"raw": "https://keycloak.apps-crc.testing/realms/microservices/protocol/openid-connect/token",
 							"protocol": "https",
 							"host": [
 								"keycloak-microservices",

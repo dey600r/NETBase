@@ -3,7 +3,7 @@ export const environment = {
     apiUrl: 'https://microservice-gateway-api.apps-crc.testing',
     keycloak: {
       enable: true,
-      url: 'https://keycloak-microservices.apps-crc.testing',
+      url: 'https://keycloak.apps-crc.testing',
       realm: 'microservices',
       clientId: 'frontend',
       onLoad: 'login-required',

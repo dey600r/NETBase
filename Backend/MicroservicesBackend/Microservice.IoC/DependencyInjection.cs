@@ -210,7 +210,7 @@ namespace Microservice.Ioc
 					options.MetadataAddress = keycloackSettings.AuthorizationUrl;
 					options.RequireHttpsMetadata = false;
 
-                    // OBTENER LA CLAVE PÚBLICA DESDE LA URL https://keycloak-microservices.apps-crc.testing/realms/microservices/protocol/openid-connect/certs
+                    // OBTENER LA CLAVE PÚBLICA DESDE LA URL https://keycloak.apps-crc.testing/realms/microservices/protocol/openid-connect/certs
 					// SOLO ES NECESARIO EL x5c
                     byte[] certBytes = Convert.FromBase64String(keycloackSettings.PublicKey);
                     var cert = new X509Certificate2(certBytes);

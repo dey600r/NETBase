@@ -7,7 +7,7 @@ deployment:
     connectsTo:
       - apiVersion: apps/v1
         kind: Deployment
-        name: sql-server
+        name: dp-sql-server
   labels:
     runtime: dotnet
   image:
@@ -60,5 +60,5 @@ configmapVolume:
 secret:
   enabled: true
   data:
-    #ConnectionStrings__SqlServer: "Server=sql-server.microservices.svc.cluster.local,1433;Database=SecurityDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
-    ConnectionStrings__SqlServer: "SMUi05kC3FUkfW5/i2pnniILPopCDFq81n4gd5dOzhCvs2kNzR6TyRPwgczrETQn2bvPlWzuLJ6LnIQCkejf4DmgqHaeHUtEERuTo12GVGkaba0H82QDksrL52KMCFfarVPsGfBappw8PWhNSXMrtXL34CSv/MLIFXdgzUDztidPjeDekDwvIwxxEm5lt4Ca64wgzR8h9+GaBhMvT9541w=="
+    #ConnectionStrings__SqlServer: "Server=svc-sql-server.microservices.svc.cluster.local,1433;Database=SecurityDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
+    ConnectionStrings__SqlServer: "wMQxWqixTNIuYQBt6hhWYYvLPR66q9ecz3Slvnn5kE8o9+4+KK22d3F9WSfo1+as0etk+UmKWP+FQDobh2Vxz4x4GHDSnQVyzz8s8BzV/gv/gycxopO3brwNJ7h36qusplvJ0c95V7n5na6zMO0RUAyt/0CSD2mVkD1+AeMsOLMv3P2PFwMO+Xg0RtB5X5Q4sxIGG4FNp9tzs75ATH+iTg=="

@@ -6,7 +6,7 @@ deployment:
   annotations: 
     connectsTo:
   labels:
-    runtime: vue
+    runtime: nodejs
   image:
     repository: image-registry.openshift-image-registry.svc:5000
     tag: latest
