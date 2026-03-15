@@ -55,11 +55,15 @@ service:
 route:
   enabled: true
   domain: "apps-crc.testing"
+  tls:
+    termination: edge
 
 #PERSISTANCE CLAIM
 persistenceClaim:
   enabled: true
   name: keycloak-path
-  claimName: pvc-database
+  dir:
+    persistentVolumeClaim:
+      claimName: pvc-database
   mountPaths:
     - /opt/keycloak/data

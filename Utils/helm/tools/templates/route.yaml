@@ -13,7 +13,9 @@ spec:
     name: svc-{{ .Release.Name }}
   port:
     targetPort: {{ .Release.Name }}-tcp
+  {{- with .Values.route.tls }}
   tls:
-    termination: edge
+    {{- toYaml . | nindent 4 }}
+  {{- end }}    
   wildcardPolicy: None
 {{- end }}

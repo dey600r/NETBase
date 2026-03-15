@@ -47,11 +47,15 @@ service:
 route:
   enabled: true
   domain: "apps-crc.testing"
+  tls:
+    termination: edge
 
 #PERSISTANCE CLAIM
 persistenceClaim:
   enabled: true
   name: sql-server-path
-  claimName: pvc-database
+  dir:
+    persistentVolumeClaim:
+      claimName: pvc-database
   mountPaths:
     - /var/opt/mssql

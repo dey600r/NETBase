@@ -40,12 +40,16 @@ service:
 route:
   enabled: false
   domain: "apps-crc.testing"
+  tls:
+    termination: edge
 
 #PERSISTANCE CLAIM
 persistenceClaim:
   enabled: true
   name: mongo-path
-  claimName: pvc-database
+  dir:
+    persistentVolumeClaim:
+      claimName: pvc-database
   mountPaths:
     - /data/configdb
     - /data/db

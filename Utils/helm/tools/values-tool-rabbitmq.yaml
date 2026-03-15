@@ -64,11 +64,15 @@ service:
 route:
   enabled: true
   domain: "apps-crc.testing"
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
 
 #PERSISTANCE CLAIM
 persistenceClaim:
   enabled: true
   name: rabbitmq-path
-  claimName: pvc-database
+  dir:
+    emptyDir: {}
   mountPaths:
     - /var/lib/rabbitmq
