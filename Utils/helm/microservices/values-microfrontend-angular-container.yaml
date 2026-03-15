@@ -10,6 +10,9 @@ deployment:
         name: dp-keycloak
       - apiVersion: apps/v1
         kind: Deployment
+        name: dp-microfrontend-angular-security
+      - apiVersion: apps/v1
+        kind: Deployment
         name: dp-microfrontend-angular-maintenance
       - apiVersion: apps/v1
         kind: Deployment
