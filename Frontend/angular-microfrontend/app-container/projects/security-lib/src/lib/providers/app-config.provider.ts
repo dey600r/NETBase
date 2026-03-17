@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, InjectionToken, Provider } from "@angular/core";
+import { InjectionToken, Provider } from "@angular/core";
 
 import Keycloak from 'keycloak-js';
 import { AppConfig, EnvConfig } from "../models/index";

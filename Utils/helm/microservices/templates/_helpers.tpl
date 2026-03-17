@@ -30,8 +30,10 @@ app.openshift.io/runtime-namespace: {{ .Release.Namespace }}
 {{- end }}
 
 {{- define "microservice.annotations.connectsTo" -}}
+{{- if .Values.deployment.annotations }}
 app.openshift.io/connects-to: '{{ .Values.deployment.annotations.connectsTo | toJson }}'
-{{- end}}
+{{- end }}
+{{- end }}
 
 {{/*
 Selector labels

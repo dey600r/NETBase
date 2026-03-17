@@ -8,6 +8,8 @@ import { IUserUIPort } from '@app/domain/ports/index';
 import { MaterialService } from '@helpers/index';
 import { environment } from '@environments/environment';
 import { UserDomain } from '@app/domain/core';
+import { AppConfig } from '@models/index';
+import { APP_CONFIG } from './app-config.provider';
 
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
@@ -20,6 +22,7 @@ export class APIInterceptor implements HttpInterceptor {
   private readonly userDomain: IUserUIPort = inject(UserDomain);
   private readonly materialService: MaterialService = inject(MaterialService);
   private readonly router: Router = inject(Router);
+  private readonly _appConfig: AppConfig = inject(APP_CONFIG);
 
   constructor() {}
 
@@ -34,7 +37,7 @@ export class APIInterceptor implements HttpInterceptor {
 
     const apiReq = req.clone({ 
       headers: new HttpHeaders(header),
-      url: `${environment.apiUrl}${req.url}`,
+      url: `${this._appConfig.apiUrl}${req.url}`,
     });
     return next.handle(apiReq)
             .pipe(catchError((err: HttpErrorResponse, caught) => {

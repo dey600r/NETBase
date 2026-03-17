@@ -32,7 +32,7 @@
 							},
 							{
 								"glob": "**/*",
-								"input": "projects/app-module/src/assets",
+								"input": "src/assets",
 								"output": "assets"
 							}
 						],

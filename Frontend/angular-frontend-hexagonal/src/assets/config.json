@@ -1,0 +1,10 @@
+{
+    "apiUrl": "https://microservice-gateway.apps-crc.testing",
+    "keycloak": {
+        "enable": true,
+        "url": "https://keycloak.apps-crc.testing",
+        "realm": "microservices-local",
+        "clientId": "frontend",
+        "onLoad": "login-required"
+    }            
+}

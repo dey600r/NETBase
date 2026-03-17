@@ -20,3 +20,7 @@ Architectures on this is projects:
 ## Microservices with Openshift
 
 ![Microservice-architecture-openshift](./Utils/images/Microservices-Architecture-Openshift.png)
+
+## Microservices & Microfrontend with Openshift
+
+![Microservice-architecture-openshift](./Utils/images/Microservices-Architecture-Openshift-microfrontend.png)

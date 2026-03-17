@@ -2,19 +2,18 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppConfig } from '@models/index';
 
-import { ProviderInterceptorApp, ProviderCoreApp, ProviderAuthJWT, ProviderAuthKeycloak } from '@providers/index';
-
-import { environment } from '@environments/environment';
+import { buildProviderAppConfig } from '@providers/index';
 
 
-export const appConfig: ApplicationConfig = {
-  providers: [
-    (environment.keycloak.enable ? ProviderAuthKeycloak : ProviderAuthJWT),
-    provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideClientHydration(withEventReplay()), 
-    provideAnimationsAsync(),
-    ProviderInterceptorApp,
-    ProviderCoreApp
-  ]
-};
+export function buildConfiguration(config: AppConfig): ApplicationConfig {
+  return {
+    providers: [
+      provideZoneChangeDetection({ eventCoalescing: true }), 
+      provideClientHydration(withEventReplay()), 
+      provideAnimationsAsync(),
+      buildProviderAppConfig(config)
+    ]
+  };
+}

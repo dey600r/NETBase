@@ -42,6 +42,7 @@ Then open:
 
 {{- end }}
 
+{{- if .Values.deployment.annotations }}
 3. Connected Microservices
 --------------------------
 
@@ -54,6 +55,8 @@ This {{ .Release.Name }} routes traffic to the following services:
 Ensure these deployments are running:
 
   kubectl get deployments
+
+{{- end }}
 
 {{- if .Values.configmapEnv.enabled -}}
 4. Configurations Environmet Vars

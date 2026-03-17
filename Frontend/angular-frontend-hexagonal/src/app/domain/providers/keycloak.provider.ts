@@ -1,43 +1,51 @@
+import { provideAppInitializer } from '@angular/core';
 import { provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 // KEYCLOAK
 import { 
-  AutoRefreshTokenService, UserActivityService, 
-  createInterceptorCondition, IncludeBearerTokenCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, 
+  AutoRefreshTokenService,
+  createInterceptorCondition, INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, IncludeBearerTokenCondition,
   includeBearerTokenInterceptor,
+  UserActivityService, 
 
 } from 'keycloak-angular';
-import Keycloak, { KeycloakOnLoad } from 'keycloak-js';
-import { environment } from '@environments/environment';
-import { routesApp } from '@adapters/ui/app.routes';
-
-// PORTS
-import { LoginUIPort } from '@ports/index';
+import KeycloakModule, { KeycloakOnLoad } from 'keycloak-js';
+import type Keycloak from 'keycloak-js';
 
 // DOMAINS
-import { LoginKeycloakDomain } from '@domain/core/index';
-import { provideAppInitializer } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { AppConfig } from '@models/index';
+import { routesApp } from '@adapters/ui/app.routes';
+import { LoginUIPort } from '@ports/index';
+import { LoginKeycloakDomain } from '@core/index';
+import { KEYCLOAK_INSTANCE } from './app-config.provider';
 
 
-const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
-  //urlPattern: /^(http:\/\/localhost:8180)(\/.*)?$/i,
-  urlPattern: /^(environment.keycloak.url)(\/.*)?$/i,
-  bearerPrefix: 'Bearer'
-});
+export function buildUrlCondition(config: AppConfig) {
+  return createInterceptorCondition<IncludeBearerTokenCondition>({
+    //urlPattern: /^(http:\/\/localhost:8180)(\/.*)?$/i,
+    //urlPattern: /^(config.keycloak.url)(\/.*)?$/i,
+    urlPattern: new RegExp(`^(${config.keycloak.url})(\\/.*)?$`, 'i'),
+    bearerPrefix: 'Bearer'
+  });
+}
 
-export const kecloakInstance = new Keycloak({
-  url: environment.keycloak.url,
-  realm: environment.keycloak.realm,
-  clientId: environment.keycloak.clientId,
-});
+const KeycloakCtor = (KeycloakModule as any).default || KeycloakModule;
 
-export function initializeKeycloak(): () => Promise<void> {
+export function buildKeycloakInstance(config: AppConfig) {
+  return new KeycloakCtor({
+    url: config.keycloak.url,
+    realm: config.keycloak.realm,
+    clientId: config.keycloak.clientId,
+  });
+}
+
+export function initializeKeycloak(config: AppConfig, keycloakInstance: Keycloak): () => Promise<void> {
   return async () => {
     try {
       if(window !== undefined) {
-        const authenticated = await kecloakInstance.init({
-          onLoad: environment.keycloak.onLoad as KeycloakOnLoad, // or 'check-sso' for silent authentication
+        const authenticated = await keycloakInstance.init({
+          onLoad: config.keycloak.onLoad as KeycloakOnLoad, // or 'check-sso' for silent authentication
           checkLoginIframe: false
         });
         console.log('✅ Keycloak initialized', authenticated ? 'User authenticated' : 'User not authenticated');
@@ -49,13 +57,17 @@ export function initializeKeycloak(): () => Promise<void> {
   };
 }
 
+export function buildProviderAuthKeycloak(config: AppConfig) {
+  const keycloakInstance = buildKeycloakInstance(config);
+  return [
+      provideAppInitializer(initializeKeycloak(config, keycloakInstance)),
+      provideRouter(routesApp),
+      provideHttpClient(withFetch(), withInterceptorsFromDi(), withInterceptors([includeBearerTokenInterceptor])),
+      AutoRefreshTokenService, UserActivityService,
+      { provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, useValue: [buildUrlCondition(config)] },
+      { provide: LoginUIPort, useClass: LoginKeycloakDomain, multi: false },
+      { provide: KEYCLOAK_INSTANCE, useValue: keycloakInstance }
+  ];
+}
 
-export const ProviderAuthKeycloak = [
-  provideAppInitializer(initializeKeycloak()),
-  provideRouter(routesApp),
-  provideHttpClient(withFetch(), withInterceptorsFromDi(), withInterceptors([includeBearerTokenInterceptor])),
-  AutoRefreshTokenService, UserActivityService,
-  { provide: INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG, useValue: [urlCondition] },
-  { provide: LoginUIPort, useClass: LoginKeycloakDomain, multi: false },
-  { provide: Keycloak, useValue: kecloakInstance }
-];
+          

@@ -10,6 +10,7 @@ import { AppConstants } from '@utils/index';
 
 // PORTS
 import { IUserUIPort, UserUIPort } from '@ports/index';
+import { KEYCLOAK_INSTANCE } from '@domain/providers';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class LoginKeycloakDomain extends LoginUIPortImpl {
 
   // INJECTABLES
   private readonly _userPort: IUserUIPort = inject(UserUIPort);
-  private readonly _keycloak: Keycloak = inject(Keycloak);
+  private readonly _keycloak: Keycloak = inject(KEYCLOAK_INSTANCE);
 
   override user(): Promise<IUserModel> {
     return new Promise((resolve, reject) => {
