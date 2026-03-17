@@ -21,7 +21,7 @@ services:
     image: microservice-angular:keycloak-ssr
     build:
       context: ./
-      dockerfile: Dockerfile-microservice-angular-hexagonal-ssr
+      dockerfile: Dockerfile-frontend-angular-hexagonal-ssr
     ports:
       - "3301:4100"
     networks:
