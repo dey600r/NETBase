@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingroute-microservice-api-gateway
+  namespace: microservices
+  labels:
+    app: microservices
+    app.kubernetes.io/part-of: microservices
+    app.kubernetes.io/name: microservices
+    app.kubernetes.io/instance: ingroute-microservice-api-gateway
+spec:
+  tls:
+    - hosts:
+        - microservice-api-gateway.apps-crc.testing
+      secretName: tls-microservice-api-gateway
+  rules:
+    - host: microservice-api-gateway.apps-crc.testing
+      http:
+        paths:
+
+          - path: /security
+            pathType: Prefix
+            backend:
+              service:
+                name: svc-microservice-security
+                port:
+                  number: 8080
+
+          - path: /vehicle
+            pathType: Prefix
+            backend:
+              service:
+                name: svc-microservice-vehicle
+                port:
+                  number: 8080
+
+          - path: /maintenance
+            pathType: Prefix
+            backend:
+              service:
+                name: svc-microservice-maintenance
+                port:
+                  number: 8080
+
+          - path: /settings
+            pathType: Prefix
+            backend:
+              service:
+                name: svc-microservice-setting
+                port:
+                  number: 3800

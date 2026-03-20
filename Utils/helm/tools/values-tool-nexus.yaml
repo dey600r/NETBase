@@ -1,0 +1,50 @@
+nameOverride: ""
+
+# DEPLOYMENT CONFIG
+deployment:
+  replicas: 1
+  labels:
+    runtime: artifactory
+  image:
+    repository: image-registry.openshift-image-registry.svc:5000
+  strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 25%
+        maxSurge: 25%
+  policy: Always
+
+# IMAGE STREAM
+imageStream:
+  tag: latest
+  from:
+    kind: DockerImage
+    name: sonatype/nexus3:3.90.1-alpine
+  importPolicy: Legacy
+  referencePolicy: Local
+
+# SERVICE
+service:
+  ports:
+    - name: nexus-tcp
+      protocol: TCP
+      port: 8081
+      targetPort: 8081
+    
+
+#ROUTE
+route:
+  enabled: true
+  domain: "apps-crc.testing"
+  tls:
+    termination: edge
+
+#PERSISTANCE CLAIM
+persistenceClaim:
+  enabled: true
+  name: nexus-path
+  dir:
+    persistentVolumeClaim:
+      claimName: pvc-database
+  mountPaths:
+    - /nexus-data

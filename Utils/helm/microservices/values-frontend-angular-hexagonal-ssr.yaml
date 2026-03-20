@@ -48,7 +48,7 @@ configmapEnv:
 
 configmapVolume:
   enabled: true
-  mountPath: /usr/share/nginx/html/assets/
+  mountPath: /home/node/app/browser/assets/
   subPath: config.json
   data:
     config.json: |
