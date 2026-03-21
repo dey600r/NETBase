@@ -15,7 +15,7 @@
     "build-prod": "ng build app-module --configuration=production",
     "build-openshift": "ng build app-module --configuration=openshift --base-href=/",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js",
-    "pack": "ng build security-lib --configuration production && cd ./dist/security-lib && npm pack && cp security-lib-* ../../libs"
+    "pack": "ng build security-lib --configuration production && cd ./dist/security-lib && npm pack && cp microfrontend-security-lib-* ../../libs"
   },
   "private": true,
   "dependencies": {
@@ -30,11 +30,11 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "@microfrontend/security-lib": "^0.1.8",
     "keycloak-angular": "^19.0.2",
     "keycloak-js": "^26.1.3",
     "ng-packagr": "^19.2.2",
     "rxjs": "~7.8.0",
-    "security-lib": "file:libs/security-lib-0.1.6.tgz",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

@@ -113,3 +113,9 @@ configmapVolume:
 #SECRET
 secret:
   enabled: false
+
+buildSecret:
+  enabled: true
+  data:
+    - name: NPM_TOKEN
+      key: NpmToken.cd98ad7e-76dc-3f67-ad12-cf55c6cd26d7

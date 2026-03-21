@@ -20,6 +20,16 @@ spec:
   strategy:
     type: Docker
     dockerStrategy:
+      {{- if .Values.buildSecret.enabled }}
+      buildArgs:
+        {{- range .Values.buildSecret.data }}
+        - name: {{ .name }}
+          valueFrom:
+            secretKeyRef:
+              name: secret-{{ $.Release.Name }}
+              key: {{ .key }}
+        {{- end }}
+      {{- end }}
       dockerfilePath: Dockerfile-{{ .Release.Name }}
   postCommit: {}
   source:
