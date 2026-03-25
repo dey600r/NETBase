@@ -1,0 +1,43 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: bc-microfrontend-angular-security-lib
+  namespace: microservices
+  labels:
+    helm.sh/chart: microservices-0.1.0
+    app: microservices
+    app.kubernetes.io/part-of: microservices
+    app.kubernetes.io/name: microservices
+    app.kubernetes.io/instance: microfrontend-angular-security-lib
+spec:
+  resources:
+    limits:
+      ephemeral-storage: 8Gi
+    requests:
+      ephemeral-storage: 4Gi
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: is-microfrontend-angular-security-lib:latest
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      buildArgs:
+        - name: NPM_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: secret-microfrontend-angular-container
+              key: NPM_TOKEN
+      dockerfilePath: Dockerfile-microfrontend-angular-security-lib
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: https://github.com/dey600r/NETBase.git
+      ref: master
+  triggers:
+    - type: ConfigChange
+  runPolicy: Serial

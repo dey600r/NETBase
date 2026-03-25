@@ -2,6 +2,7 @@ nameOverride: ""
 
 # DEPLOYMENT CONFIG
 deployment:
+  enabled: true
   replicas: 1
   annotations: 
     connectsTo:
@@ -52,6 +53,7 @@ build:
 
 # SERVICE
 service:
+  enabled: true
   type: ClusterIP
   port: 3300
   protocol: TCP

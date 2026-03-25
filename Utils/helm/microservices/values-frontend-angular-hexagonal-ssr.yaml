@@ -2,6 +2,7 @@ nameOverride: ""
 
 # DEPLOYMENT CONFIG
 deployment:
+  enabled: true
   replicas: 1
   labels:
     runtime: angularjs
@@ -32,6 +33,7 @@ build:
 
 # SERVICE
 service:
+  enabled: true
   type: ClusterIP
   port: 4100
   protocol: TCP
@@ -65,4 +67,7 @@ configmapVolume:
 
 #SECRET
 secret:
+  enabled: false
+
+buildSecret:
   enabled: false

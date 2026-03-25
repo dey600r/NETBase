@@ -2,6 +2,7 @@ nameOverride: ""
 
 # DEPLOYMENT CONFIG
 deployment:
+  enabled: true
   replicas: 1
   annotations: 
     connectsTo:
@@ -37,6 +38,7 @@ build:
 
 # SERVICE
 service:
+  enabled: true
   type: ClusterIP
   port: 8080
   protocol: TCP
@@ -62,3 +64,6 @@ secret:
   data:
     #ConnectionStrings__SqlServer: "Server=svc-sql-server.microservices.svc.cluster.local,1433;Database=SecurityDB;TrustServerCertificate=true;User Id=sa;Password=PassWord123?"
     ConnectionStrings__SqlServer: "wMQxWqixTNIuYQBt6hhWYYvLPR66q9ecz3Slvnn5kE8o9+4+KK22d3F9WSfo1+as0etk+UmKWP+FQDobh2Vxz4x4GHDSnQVyzz8s8BzV/gv/gycxopO3brwNJ7h36qusplvJ0c95V7n5na6zMO0RUAyt/0CSD2mVkD1+AeMsOLMv3P2PFwMO+Xg0RtB5X5Q4sxIGG4FNp9tzs75ATH+iTg=="
+
+buildSecret:
+  enabled: false

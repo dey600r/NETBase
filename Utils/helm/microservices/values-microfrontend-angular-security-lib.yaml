@@ -2,26 +2,11 @@ nameOverride: ""
 
 # DEPLOYMENT CONFIG
 deployment:
-  enabled: true
-  replicas: 1
-  annotations: 
-    connectsTo:
-  labels:
-    runtime: nodejs
+  enabled: false
   image:
     repository: image-registry.openshift-image-registry.svc:5000
     tag: latest
-  resources:
-    limits:
-      ephemeral-storage: 8Gi
-    requests:
-      ephemeral-storage: 4Gi
-  strategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 25%
-        maxSurge: 25%
-  policy: Always
+
 
 # BUILD CONFIG
 build:
@@ -35,16 +20,11 @@ build:
 
 # SERVICE
 service:
-  enabled: true
-  type: ClusterIP
-  port: 3300
-  protocol: TCP
-  portName: fr-home-port
+  enabled: false
 
 #ROUTE
 route:
-  enabled: true
-  domain: "apps-crc.testing"
+  enabled: false
 
 #CONFIGMAPS
 configmapEnv:
@@ -58,4 +38,6 @@ secret:
   enabled: false
 
 buildSecret:
-  enabled: false
+  enabled: true
+  data:
+    NPM_TOKEN: NpmToken.cd98ad7e-76dc-3f67-ad12-cf55c6cd26d7
