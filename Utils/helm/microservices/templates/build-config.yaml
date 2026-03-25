@@ -22,12 +22,12 @@ spec:
     dockerStrategy:
       {{- if .Values.buildSecret.enabled }}
       buildArgs:
-        {{- range .Values.buildSecret.data }}
-        - name: {{ .name }}
+        {{- range $key, $value := .Values.buildSecret.data }}
+        - name: {{ $key }}
           valueFrom:
             secretKeyRef:
               name: secret-{{ $.Release.Name }}
-              key: {{ .key }}
+              key: {{ $key }}
         {{- end }}
       {{- end }}
       dockerfilePath: Dockerfile-{{ .Release.Name }}

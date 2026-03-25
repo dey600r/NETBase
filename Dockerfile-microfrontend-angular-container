@@ -5,6 +5,7 @@ RUN echo "INSTALL LIBRARIES"
 RUN mkdir -p ./libs
 # COPY ./Frontend/angular-microfrontend/app-container/libs/security-lib-0.1.6.tgz ./libs
 COPY ./Frontend/angular-microfrontend/app-container/package*.json ./
+COPY ./Frontend/angular-microfrontend/app-container/.npmrc ./
 ARG NPM_TOKEN
 RUN echo "//nexus.apps-crc.testing/repository/npm-microfrontend/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 RUN npm install
