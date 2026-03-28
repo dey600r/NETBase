@@ -4,10 +4,9 @@ WORKDIR /app
 RUN echo "INSTALL LIBRARIES"
 RUN mkdir -p ./libs
 COPY ./Frontend/angular-microfrontend/app-container/package*.json ./
-COPY ./Frontend/angular-microfrontend/app-container/.npmrc ./
+COPY ./Frontend/angular-microfrontend/app-container/.npmrc /root/
 
-RUN echo "//nexus.apps-crc.testing/repository/npm-microfrontend/:_authToken=${NPM_TOKEN}" >> .npmrc
-RUN cat .npmrc
+RUN echo "//nexus.apps-crc.testing/repository/npm-microfrontend/:_authToken=${NPM_TOKEN}" >> /root/.npmrc
 RUN npm install
 
 RUN echo "PACK"
@@ -17,6 +16,5 @@ RUN npm run pack
 RUN echo "PUBLISH"
 WORKDIR /app/dist/security-lib
 RUN npm publish
-RUN rm -f /app/.npmrc
 
 CMD ["echo", "Library published"]

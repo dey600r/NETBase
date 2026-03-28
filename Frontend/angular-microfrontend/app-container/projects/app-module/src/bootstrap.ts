@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { buildConfiguration } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { loadAppConfig } from 'security-lib';
+import { loadAppConfig } from '@microfrontend/security-lib';
 import { environment } from '@app-environments/environment';
 
 (async () => {

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { SignupModule } from './signup.module';
 
 // LIBS
-import { IUserModel, MaterialService, SecurityAbstractService, UserService, SecurityLibUrlConstants } from 'security-lib';
+import { IUserModel, MaterialService, SecurityAbstractService, UserService, SecurityLibUrlConstants } from '@microfrontend/security-lib';
 
 @Component({
   selector: 'app-signup',

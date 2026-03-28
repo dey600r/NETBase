@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { SharedModule } from '@app-modules/shared.module';
 
 // SERVICES
-import { IUserModel, SecurityAbstractService, SecurityLibUrlConstants } from 'security-lib';
+import { IUserModel, SecurityAbstractService, SecurityLibUrlConstants } from '@microfrontend/security-lib';
 
 @Component({
   selector: 'app-header',

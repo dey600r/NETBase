@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpService } from 'security-lib';
+import { HttpService } from '@microfrontend/security-lib';
 
 // MODELS
 import { IConfigurationModel, IMaintenanceElementModel, IVehicleTypeModel } from '@models/index';

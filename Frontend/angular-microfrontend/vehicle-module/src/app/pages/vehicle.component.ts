@@ -7,7 +7,7 @@ import { VehicleModule } from './vehicle.module';
 import { IConfigurationModel, IMaintenanceElementModel, IVehicleTypeModel } from '@models/index';
 
 // HELPERS
-import { MaterialService } from 'security-lib';
+import { MaterialService } from '@microfrontend/security-lib';
 import { VehicleService } from '@services/index';
 
 @Component({

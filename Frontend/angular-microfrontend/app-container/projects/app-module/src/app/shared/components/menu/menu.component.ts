@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { SharedModule } from '@app-modules/shared.module';
 
 // UTILS
-import { SecurityLibUrlConstants } from 'security-lib';
+import { SecurityLibUrlConstants } from '@microfrontend/security-lib';
 import { UrlConstants } from '@app-utils/index';
 
 @Component({

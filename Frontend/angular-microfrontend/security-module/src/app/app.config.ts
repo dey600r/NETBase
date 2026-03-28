@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { environment } from '@environments/environment';
-import { APP_CONFIG, AppConfig, ENV_CONFIG, ProviderInterceptorApp, SecurityAbstractService, SecurityJWTService } from 'security-lib';
+import { APP_CONFIG, AppConfig, ENV_CONFIG, ProviderInterceptorApp, SecurityAbstractService, SecurityJWTService } from '@microfrontend/security-lib';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 
 export function buildConfiguration(config: AppConfig): ApplicationConfig {

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { UrlConstants, AppConstants } from '@app-utils/index';
 
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { AppConfig, AuthGuard } from 'security-lib';
+import { AppConfig, AuthGuard } from '@microfrontend/security-lib';
 
 export function buildRoutesPages(config: AppConfig): Routes {
     const vehicleModule = config.remotes.find(r => r.name === AppConstants.VEHICLE_MODULE);
@@ -33,7 +33,7 @@ export function buildRoutesPages(config: AppConfig): Routes {
                     .then(m => m.routes)
                     .catch(err => {
                         console.warn('⚠️ No se pudo cargar VEHICLE-MODULE:', err);
-                        return import('security-lib').then(m => m.errorRoutes);
+                        return import('@microfrontend/security-lib').then(m => m.errorRoutes);
                     }),
         canActivate: [AuthGuard],
         data: { roles: ['admin'] }
@@ -50,7 +50,7 @@ export function buildRoutesPages(config: AppConfig): Routes {
                     .then(m => m.routes)
                     .catch(err => {
                         console.warn('⚠️ No se pudo cargar MAINTENANCE-MODULE:', err);
-                        return import('security-lib').then(m => m.errorRoutes);
+                        return import('@microfrontend/security-lib').then(m => m.errorRoutes);
                     }),
         canActivate: [AuthGuard],
         data: { roles: ['admin', 'customer'] }

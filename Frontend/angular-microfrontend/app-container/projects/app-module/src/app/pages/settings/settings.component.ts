@@ -2,7 +2,7 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Component, ElementRef, inject, ViewChild, ViewContainerRef } from '@angular/core';
 import { SettingsModule } from './settings.module';
 import { AppConstants } from '@app-utils/index';
-import { APP_CONFIG, AppConfig } from 'security-lib';
+import { APP_CONFIG, AppConfig } from '@microfrontend/security-lib';
 
 @Component({
   selector: 'app-maintenance',
@@ -38,7 +38,7 @@ export class SettingsComponent {
 
       this.unmount = () => root.unmount();
     } catch (error) {
-        import('security-lib').then(m => this.viewContainer.createComponent(m.ErrorPageComponent));
+        import('@microfrontend/security-lib').then(m => this.viewContainer.createComponent(m.ErrorPageComponent));
     }
   }
 

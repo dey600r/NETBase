@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { AppConfig, AuthGuard, SecurityLibUrlConstants } from 'security-lib';
+import { AppConfig, AuthGuard, SecurityLibUrlConstants } from '@microfrontend/security-lib';
 
 export function buildRoutesApp(config: AppConfig): Routes {
     return [

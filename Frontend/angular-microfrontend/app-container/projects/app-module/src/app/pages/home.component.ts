@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { PagesModule } from './pages.module';
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { APP_CONFIG, AppConfig } from 'security-lib';
+import { APP_CONFIG, AppConfig } from '@microfrontend/security-lib';
 import { AppConstants } from '@app-utils/index';
 
 @Component({
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
       this.unmount = () => m.unmount();
     } catch (error) {
-        import('security-lib').then(m => this.viewContainer.createComponent(m.ErrorPageComponent));
+        import('@microfrontend/security-lib').then(m => this.viewContainer.createComponent(m.ErrorPageComponent));
     }
   }
 

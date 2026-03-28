@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from 'security-lib';
+import { AuthGuard } from '@microfrontend/security-lib';
 
 export const routes: Routes = [
   {

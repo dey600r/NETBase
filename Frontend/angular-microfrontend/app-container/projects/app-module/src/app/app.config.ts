@@ -5,7 +5,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { environment } from '@app-environments/environment';
 import { 
   APP_CONFIG, AppConfig, ENV_CONFIG, buildProviderAppConfig
-} from 'security-lib';
+} from '@microfrontend/security-lib';
 import { buildRoutesApp } from './app.routes';
 
 export function buildConfiguration(config: AppConfig): ApplicationConfig {

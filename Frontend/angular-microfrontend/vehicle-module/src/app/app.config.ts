@@ -3,7 +3,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 
 import { 
   APP_CONFIG, AppConfig, buildProviderAppConfig, ENV_CONFIG
-} from 'security-lib';
+} from '@microfrontend/security-lib';
 
 import { environment } from '@environments/environment';
 import { routesApp } from './app.routes';

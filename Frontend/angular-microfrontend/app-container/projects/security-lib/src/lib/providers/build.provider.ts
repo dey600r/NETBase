@@ -33,7 +33,7 @@ export function buildRoutesJWT(config: AppConfig): Routes {
               .catch(err => {
                   console.warn('⚠️ No se pudo cargar SECURITY-MODULE:', err);
                   return errorRoutes;
-                  //return import('security-lib').then(m => m.errorRoutes);
+                  //return import('@microfrontend/security-lib').then(m => m.errorRoutes);
               }),
       //   loadChildren: () => import('security-module/routes').then(m => m.routes) --> STATIC WEB
       },

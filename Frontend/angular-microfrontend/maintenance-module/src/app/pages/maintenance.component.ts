@@ -8,7 +8,7 @@ import { MaintenanceModule } from './maintenance.module';
 import { IConfigurationModel, IMaintenanceElementModel } from '@models/index';
 
 // HELPERS
-import { MaterialService } from 'security-lib';
+import { MaterialService } from '@microfrontend/security-lib';
 
 // PORTS
 import { MaintenanceService } from '@services/index';
