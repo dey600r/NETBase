@@ -21,7 +21,7 @@ spec:
     type: Docker
     dockerStrategy:
       {{- if .Values.buildSecret.enabled }}
-      buildArgs:
+      env:
         {{- range $key, $value := .Values.buildSecret.data }}
         - name: {{ $key }}
           valueFrom:
