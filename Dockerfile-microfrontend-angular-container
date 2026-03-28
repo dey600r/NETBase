@@ -8,7 +8,7 @@ COPY ./Frontend/angular-microfrontend/app-container/package*.json ./
 COPY ./Frontend/angular-microfrontend/app-container/.npmrc /root/
 
 RUN echo "TOKEN=${NPM_TOKEN}"
-RUN echo "//nexus.apps-crc.testing/repository/npm-microfrontend/:_authToken=${NPM_TOKEN}" > /root/.npmrc
+RUN echo "//nexus.apps-crc.testing/repository/npm-microfrontend/:_authToken=${NPM_TOKEN}" >> /root/.npmrc
 RUN cat /root/.npmrc
 RUN npm install
 
