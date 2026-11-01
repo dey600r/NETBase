@@ -1,5 +1,3 @@
-version: "3.4"
-
 name: microservices-environment
 services:
 
@@ -273,6 +271,19 @@ services:
       - "./Utils/docker-configs/nexus-volume:/nexus-data"
     ports:
       - "8081:8081"
+
+  pgvectordb:
+    image: pgvector/pgvector:pg17
+    container_name: pgvector-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: example_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./Utils/docker-configs/pgvector/data:/var/lib/postgresql/data
+      - ./Utils/docker-configs/pgvector/schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
 
 networks:

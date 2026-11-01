@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34309.116
+# Visual Studio Version 18
+VisualStudioVersion = 18.11.12328.437 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{2CE63AD4-FB6C-4BE0-AFDD-C187DDECA1C3}"
 EndProject
@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{10C98B
 		..\Dockerfile-microservice-vehicle-openshift = ..\Dockerfile-microservice-vehicle-openshift
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.Chatbot", "Microservice.Chatbot\Microservice.Chatbot.csproj", "{03861B3F-1C5C-4307-9064-C40DD4DF02E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{3E42A998-4C7A-4A91-9925-7FE82DDF34B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E42A998-4C7A-4A91-9925-7FE82DDF34B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E42A998-4C7A-4A91-9925-7FE82DDF34B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03861B3F-1C5C-4307-9064-C40DD4DF02E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03861B3F-1C5C-4307-9064-C40DD4DF02E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03861B3F-1C5C-4307-9064-C40DD4DF02E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03861B3F-1C5C-4307-9064-C40DD4DF02E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{0254ED43-2556-4425-A7CA-EC1C8E97781D} = {727D5A43-D46A-47FC-8128-CCDFAB78B8D6}
 		{12EDB48B-0275-40FB-84EB-32D8E5794F32} = {2CE63AD4-FB6C-4BE0-AFDD-C187DDECA1C3}
 		{3E42A998-4C7A-4A91-9925-7FE82DDF34B0} = {8CD70590-F39B-483E-B914-89BE1DB0CD7C}
+		{03861B3F-1C5C-4307-9064-C40DD4DF02E6} = {727D5A43-D46A-47FC-8128-CCDFAB78B8D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11DE7B14-4BE5-4568-B4AD-EFAEFEA82F4D}
