@@ -1,6 +1,7 @@
 
 <script setup>
 import HelloWorld from './HelloWorld.vue'
+import Chatbot from './Chatbot.vue'
 
 </script>
 
@@ -14,7 +15,7 @@ import HelloWorld from './HelloWorld.vue'
   </header>
 
   <main>
-
+    <Chatbot />
   </main>
 </template>
 

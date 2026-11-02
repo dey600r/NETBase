@@ -30,6 +30,17 @@ builder.Services.AddScoped<IChatbotRepository, ChatbotRepository>();
 builder.Services.AddScoped<IHttpChatbotRequest, HttpChatbotRequest>();
 builder.Services.AddScoped<IChatbotCore, ChatbotCore>();
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(name: "CorsRule", rule =>
+    {
+        rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*").AllowAnyOrigin();
+    });
+});
+
+// CONTROLLER LOWER CASE
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,7 +51,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("CorsRule");
+
 
 app.UseAuthorization();
 
