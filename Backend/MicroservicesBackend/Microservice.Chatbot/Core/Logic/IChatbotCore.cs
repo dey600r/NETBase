@@ -5,8 +5,10 @@ namespace Microservice.Chatbot.Core.Logic
 {
     public interface IChatbotCore
     {
-        Task<string> SearchExplanation(string sentence);
-        Task<IEnumerable<SearchCoseneItemView>> GetItemsByVector(string sentence);
+        Task<string> SearchExplanation(string sentence, string type);
+        Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorGemini(string sentence);
+        Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorOllama(string sentence);
+        Task<IEnumerable<SearchCoseneItemView>> GetItemsByVector(string sentence, string type);
         Task<object> VectorizeAndSaveData(string plainText);
     }
 }

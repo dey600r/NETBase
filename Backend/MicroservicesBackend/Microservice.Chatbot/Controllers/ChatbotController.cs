@@ -15,7 +15,7 @@ namespace Microservice.Chatbot.Controllers
         }
 
         [HttpPost("search-explanation")]
-        public async Task<IActionResult> SearchExplanation(string? plainText)
+        public async Task<IActionResult> SearchExplanation(string? plainText, string type)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace Microservice.Chatbot.Controllers
                 {
                     return BadRequest("El texto no puede estar vacío.");
                 }
-                var response = await _chatbotCore.SearchExplanation(plainText);
+                var response = await _chatbotCore.SearchExplanation(plainText, type);
                 return Ok(response);
             }
             catch (InvalidOperationException ex)
@@ -44,7 +44,7 @@ namespace Microservice.Chatbot.Controllers
 
         // GET: api/Chatbot
         [HttpPost("get-items-by-vector")]
-        public async Task<IActionResult> GetItemsByVector(string? plainText)
+        public async Task<IActionResult> GetItemsByVector(string? plainText, string type)
         {
             try { 
                 if (string.IsNullOrWhiteSpace(plainText))
@@ -57,7 +57,8 @@ namespace Microservice.Chatbot.Controllers
                 {
                     return BadRequest("El texto no puede estar vacío.");
                 }
-                var items = await _chatbotCore.GetItemsByVector(plainText);
+                var items = await _chatbotCore.GetItemsByVector(plainText, type);
+
                 return Ok(items);
             }
             catch (InvalidOperationException ex)

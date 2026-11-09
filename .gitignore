@@ -408,6 +408,8 @@ Frontend/.vscode
 Utils/tls.crt
 Utils/docker-configs/pgvector/data
 Utils/docker-configs/nexus-volume
+Utils/docker-configs/ollama-data
+Utils/docker-configs/ollama-webui-data
 Utils/helm/yaml/tls.crt
 Utils/helm/yaml/tls.key
 

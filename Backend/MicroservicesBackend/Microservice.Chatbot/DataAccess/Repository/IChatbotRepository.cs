@@ -7,7 +7,8 @@ namespace Microservice.Chatbot.DataAccess.Repository
 {
     public interface IChatbotRepository
     {
-        Task<IEnumerable<SearchCoseneItemView>> GetItemsByVector(Vector vector, int topK);
+        Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorGemini(Vector vector, int topK);
+        Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorOllama(Vector vector, int topK);
         Task<int> SaveItems(List<Items> items);
     }
 }

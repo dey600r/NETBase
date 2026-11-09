@@ -14,11 +14,40 @@ namespace Microservice.Chatbot.Helper
             _configuration = configuration;
         }
 
-        public async Task<IReadOnlyList<float>> CallEmbeddingAPI(string sentence)
+        public async Task<IReadOnlyList<float>> CallEmbeddingOllamaAPI(string sentence)
+        {
+            var embeddingUrl = GetEmbeddingUrl("OllamaAI");
+
+            var request = new OllamaEmbeddingRequest("nomic-embed-text", sentence);
+
+            var response = await SendPost($"{embeddingUrl}", request);
+
+            var embeddingResponse = await response.Content.ReadFromJsonAsync<OllamaEmbeddingResponse>();
+            var values = embeddingResponse?.Embeddings?.FirstOrDefault();
+
+            if (values == null)
+            {
+                throw new InvalidOperationException("La respuesta del embedding no contiene valores.");
+            }
+            return values;
+        }
+
+        public async Task<string?> CallGenerateContentOllamaAPI(string prompt)
+        {
+            var generateContentUrl = GetGenerateContentUrl("OllamaAI");
+
+            var request = new OllamaGenerateContentRequest("gemma3:1b", new[] { new OllamaMessage("user", prompt) }, false);
+
+            var response = await SendPost($"{generateContentUrl}", request);
+            var contentResponse = await response.Content.ReadFromJsonAsync<OllamaGenerateContentResponse>();
+            return contentResponse?.Message?.Content;
+        }
+
+        public async Task<IReadOnlyList<float>> CallEmbeddingGeminiAPI(string sentence)
         {
             var apiKey = GetApiKey();
 
-            var embeddingUrl = GetEmbeddingUrl();
+            var embeddingUrl = GetEmbeddingUrl("GoogleAi");
 
             var request = new GeminiEmbeddingRequest(
                 "models/gemini-embedding-2",
@@ -35,11 +64,11 @@ namespace Microservice.Chatbot.Helper
             return embeddingResponse.Embedding.Values;
         }
 
-        public async Task<string?> CallGenerateContentAPI(string prompt)
+        public async Task<string?> CallGenerateContentGeminiAPI(string prompt)
         {
             var apiKey = GetApiKey();
 
-            var generateContentUrl = GetGenerateContentUrl();
+            var generateContentUrl = GetGenerateContentUrl("GoogleAi");
 
             var request = new GeminiGenerateContentRequest(
                 new[]
@@ -81,25 +110,51 @@ namespace Microservice.Chatbot.Helper
             return apiKey;
         }
 
-        private string GetEmbeddingUrl()
+        private string GetEmbeddingUrl(string property)
         {
-            var embeddingUrl = _configuration["GoogleAi:EmbeddingUrl"];
+            var embeddingUrl = _configuration[$"{property}:EmbeddingUrl"];
             if (string.IsNullOrWhiteSpace(embeddingUrl))
             {
-                throw new InvalidOperationException("No se encontró GoogleAi:EmbeddingUrl en la configuración.");
+                throw new InvalidOperationException($"No se encontró {property}:EmbeddingUrl en la configuración.");
             }
             return embeddingUrl;
         }
 
-        private string GetGenerateContentUrl()
+        private string GetGenerateContentUrl(string property)
         {
-            var generateContentUrl = _configuration["GoogleAi:GenerateContentUrl"];
+            var generateContentUrl = _configuration[$"{property}:GenerateContentUrl"];
             if (string.IsNullOrWhiteSpace(generateContentUrl))
             {
-                throw new InvalidOperationException("No se encontró GoogleAi:GenerateContentUrl en la configuración.");
+                throw new InvalidOperationException($"No se encontró {property}:GenerateContentUrl en la configuración.");
             }
             return generateContentUrl;
         }
+        #endregion
+
+        #region Private Records for Ollama API
+
+        private sealed record OllamaGenerateContentRequest(
+           [property: JsonPropertyName("model")] string Model,
+           [property: JsonPropertyName("messages")] IReadOnlyList<OllamaMessage> Content,
+           [property: JsonPropertyName("stream")] bool Stream);
+
+        private sealed record OllamaMessage(
+            [property: JsonPropertyName("role")] string Role,
+            [property: JsonPropertyName("content")] string Content);
+
+        private sealed record OllamaGenerateContentResponse(
+            [property: JsonPropertyName("model")] string Model,
+            [property: JsonPropertyName("created_at")] string CreatedAt,
+            [property: JsonPropertyName("message")] OllamaMessage Message);
+
+        private sealed record OllamaEmbeddingRequest(
+            [property: JsonPropertyName("model")] string Model,
+            [property: JsonPropertyName("input")] string Input);
+
+        private sealed record OllamaEmbeddingResponse(
+            [property: JsonPropertyName("model")] string Model,
+            [property: JsonPropertyName("embeddings")] IReadOnlyList<IReadOnlyList<float>> Embeddings);
+
         #endregion
 
         #region Private Records for Gemini API

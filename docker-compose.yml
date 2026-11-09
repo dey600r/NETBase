@@ -285,6 +285,23 @@ services:
       - ./Utils/docker-configs/pgvector/data:/var/lib/postgresql/data
       - ./Utils/docker-configs/pgvector/schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
+  ollama:
+    image: ollama/ollama
+    container_name: ollama-service
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./Utils/docker-configs/ollama-data:/root/.ollama
+  
+  ollama-webui:
+    image: ghcr.io/ollama-webui/ollama-webui:main
+    container_name: ollama-webui
+    ports: ["3000:8080"]
+    volumes:
+      - ./Utils/docker-configs/ollama-webui-data:/app/backend/data
+    depends_on:
+      - ollama
+
 
 networks:
   network_microservices:

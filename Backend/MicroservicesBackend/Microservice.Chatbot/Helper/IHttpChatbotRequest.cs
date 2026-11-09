@@ -2,8 +2,10 @@
 {
     public interface IHttpChatbotRequest
     {
-        Task<IReadOnlyList<float>> CallEmbeddingAPI(string sentence);
-        Task<string?> CallGenerateContentAPI(string prompt);
+        Task<IReadOnlyList<float>> CallEmbeddingOllamaAPI(string sentence);
+        Task<string?> CallGenerateContentOllamaAPI(string prompt);
+        Task<IReadOnlyList<float>> CallEmbeddingGeminiAPI(string sentence);
+        Task<string?> CallGenerateContentGeminiAPI(string prompt);
         Task<HttpResponseMessage> SendPost(string url, object request);
     }
 }

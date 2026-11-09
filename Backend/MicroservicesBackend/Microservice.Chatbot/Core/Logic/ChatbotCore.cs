@@ -20,9 +20,10 @@ namespace Microservice.Chatbot.Core.Logic
             _chatbotRepository = chatbotRepository;
         }
 
-        public async Task<string> SearchExplanation(string sentence)
+        public async Task<string> SearchExplanation(string sentence, string type)
         {
-            var values = (await GetItemsByVector(sentence)).ToList();
+
+            var values = GetItemsByVector(sentence, type).Result.ToList();
 
             var context = values.Count == 0
                 ? "No hay contexto recuperado."
@@ -33,7 +34,12 @@ namespace Microservice.Chatbot.Core.Logic
                          $"CONTEXTO RECUPERADO:\n{context}\n\n" +
                          $"PREGUNTA DEL USUARIO:\n{sentence}";
 
-            var response = await _requestHttp.CallGenerateContentAPI(prompt);
+            var response = type switch
+            {
+                "gemini" => await _requestHttp.CallGenerateContentGeminiAPI(prompt),
+                "ollama" => await _requestHttp.CallGenerateContentOllamaAPI(prompt),
+                _ => throw new ArgumentException("Tipo de embedding no soportado.", nameof(type))
+            };
 
             if (string.IsNullOrWhiteSpace(response))
             {
@@ -43,11 +49,28 @@ namespace Microservice.Chatbot.Core.Logic
             return response;
         }
 
-        public async Task<IEnumerable<SearchCoseneItemView>> GetItemsByVector(string sentence)
+        public async Task<IEnumerable<SearchCoseneItemView>> GetItemsByVector(string sentence, string type)
         {
-            var values = await _requestHttp.CallEmbeddingAPI(sentence);
+            return type switch
+            {
+                "gemini" => await GetItemsByVectorGemini(sentence),
+                "ollama" => await GetItemsByVectorOllama(sentence),
+                _ => throw new ArgumentException("Tipo de embedding no soportado.", nameof(type))
+            };
+        }
+
+        public async Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorGemini(string sentence)
+        {
+            var values = await _requestHttp.CallEmbeddingGeminiAPI(sentence);
             var vector = new Vector(values.ToArray()); // Aquí deberías convertir el plainText en un vector
-            return await _chatbotRepository.GetItemsByVector(vector, 5);
+            return await _chatbotRepository.GetItemsByVectorGemini(vector, 5);
+        }
+
+        public async Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorOllama(string sentence)
+        {
+            var values = await _requestHttp.CallEmbeddingOllamaAPI(sentence);
+            var vector = new Vector(values.ToArray()); // Aquí deberías convertir el plainText en un vector
+            return await _chatbotRepository.GetItemsByVectorOllama(vector, 5);
         }
 
         public async Task<object> VectorizeAndSaveData(string plainText)
@@ -64,13 +87,15 @@ namespace Microservice.Chatbot.Core.Logic
             {
                 var sentence = sentences[index];
                 
-                var values = await _requestHttp.CallEmbeddingAPI(sentence);
+                var valuesGemini = await _requestHttp.CallEmbeddingGeminiAPI(sentence);
+                var valuesOllama = await _requestHttp.CallEmbeddingOllamaAPI(sentence);
 
                 itemsToInsert.Add(new Items
                 {
                     name = $"sentence_{index + 1}",
                     item_data = JsonSerializer.Serialize(new ItemDataModel { text = sentence }),
-                    embedding = new Vector(values.ToArray())
+                    embedding = new Vector(valuesGemini.ToArray()),
+                    embedding_small = new Vector(valuesOllama.ToArray())
                 });
             }
 

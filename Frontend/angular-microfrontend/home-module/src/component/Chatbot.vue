@@ -4,6 +4,7 @@ import { ref, nextTick } from 'vue'
 const API_BASE = 'https://localhost:44306/api/Chatbot'
 
 const input = ref('')
+const model = ref('ollama')
 const messages = ref([])
 const loading = ref(false)
 const outputRef = ref(null)
@@ -15,8 +16,10 @@ async function addMessage(author, text) {
 }
 
 async function callApi(endpoint, text) {
+  const params = new URLSearchParams({ plainText: text })
+  if (endpoint === 'search-explanation') params.set('type', model.value)
   const response = await fetch(
-    `${API_BASE}/${endpoint}?plainText=${encodeURIComponent(text)}`,
+    `${API_BASE}/${endpoint}?${params}`,
     { method: 'POST', headers: { accept: '*/*' }, body: '' }
   )
   if (!response.ok) throw new Error(`HTTP ${response.status}`)
@@ -68,6 +71,10 @@ async function send(endpoint) {
         :disabled="loading"
         @keyup.enter="send('search-explanation')"
       />
+      <select v-model="model" :disabled="loading" aria-label="Modelo">
+        <option value="gemini">Gemini</option>
+        <option value="ollama">Ollama</option>
+      </select>
       <button :disabled="loading || !input.trim()" @click="send('vectorize')">Guardar en contexto</button>
       <button :disabled="loading || !input.trim()" @click="send('search-explanation')">Consultar</button>
     </div>
@@ -122,6 +129,7 @@ async function send(endpoint) {
 
 .chat-input {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0.75rem;
   border-top: 1px solid #ccc;
@@ -129,6 +137,11 @@ async function send(endpoint) {
 
 .chat-input input {
   flex: 1;
+  min-width: 10rem;
+  padding: 0.5rem;
+}
+
+.chat-input select {
   padding: 0.5rem;
 }
 

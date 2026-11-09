@@ -17,7 +17,7 @@ namespace Microservice.Chatbot.DataAccess.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<SearchCoseneItemView>> GetItemsByVector(Vector vector, int topN = 5)
+        public async Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorGemini(Vector vector, int topN = 5)
         {
             return await _context.Items
                 .Where(x => x.embedding != null)
@@ -28,6 +28,23 @@ namespace Microservice.Chatbot.DataAccess.Repository
                     sentence = JsonSerializer.Deserialize<ItemDataModel>(x.item_data).text,
                     distance = x.embedding != null ? x.embedding.CosineDistance(vector) : float.MaxValue,
                     similarity = x.embedding != null ? 1 - x.embedding.CosineDistance(vector) : 0
+                })
+                .OrderBy(x => x.distance)
+                .Take(topN)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<SearchCoseneItemView>> GetItemsByVectorOllama(Vector vector, int topN = 5)
+        {
+            return await _context.Items
+                .Where(x => x.embedding_small != null)
+                .Select(x => new SearchCoseneItemView
+                {
+                    id = x.id,
+                    name = x.name,
+                    sentence = JsonSerializer.Deserialize<ItemDataModel>(x.item_data).text,
+                    distance = x.embedding_small != null ? x.embedding_small.CosineDistance(vector) : float.MaxValue,
+                    similarity = x.embedding_small != null ? 1 - x.embedding_small.CosineDistance(vector) : 0
                 })
                 .OrderBy(x => x.distance)
                 .Take(topN)
