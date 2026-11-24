@@ -410,6 +410,9 @@ Utils/docker-configs/pgvector/data
 Utils/docker-configs/nexus-volume
 Utils/docker-configs/ollama-data
 Utils/docker-configs/ollama-webui-data
+Utils/docker-configs/n8n_data
+Utils/docker-configs/traefik-data
+Utils/docker-configs/local-files
 Utils/helm/yaml/tls.crt
 Utils/helm/yaml/tls.key
 

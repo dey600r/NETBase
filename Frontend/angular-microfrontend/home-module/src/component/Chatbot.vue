@@ -2,8 +2,14 @@
 import { ref, nextTick } from 'vue'
 
 const API_BASE = 'https://localhost:44306/api/Chatbot'
+const N8N_ENDPOINTS = {
+  'search-explanation': 'http://127.0.0.1:5678/webhook-test/857d82ed-6032-4582-a95c-ed003c52d145',
+  vectorize: 'http://127.0.0.1:5678/webhook-test/7aaf6446-3990-45df-aa3a-30c2ee3e819f'
+}
+const sessionId = Math.floor(Math.random() * 1_000_000_000)
 
 const input = ref('')
+const backend = ref('local')
 const model = ref('ollama')
 const messages = ref([])
 const loading = ref(false)
@@ -15,21 +21,44 @@ async function addMessage(author, text) {
   if (outputRef.value) outputRef.value.scrollTop = outputRef.value.scrollHeight
 }
 
-async function callApi(endpoint, text) {
-  const params = new URLSearchParams({ plainText: text })
-  if (endpoint === 'search-explanation') params.set('type', model.value)
-  const response = await fetch(
-    `${API_BASE}/${endpoint}?${params}`,
-    { method: 'POST', headers: { accept: '*/*' }, body: '' }
-  )
-  if (!response.ok) throw new Error(`HTTP ${response.status}`)
-  const raw = await response.text()
+function formatResponse(raw) {
   try {
-    const data = JSON.parse(raw)
-    return typeof data === 'string' ? data : JSON.stringify(data, null, 2)
+    let data = JSON.parse(raw)
+    if (Array.isArray(data) && data.length === 1) data = data[0]
+    if (typeof data === 'string') return data
+    // n8n webhooks usually wrap the answer in one of these fields
+    const text = data?.output ?? data?.text ?? data?.response ?? data?.message
+    return typeof text === 'string' ? text : JSON.stringify(data, null, 2)
   } catch {
     return raw
   }
+}
+
+function callLocal(endpoint, text) {
+  const params = new URLSearchParams({ plainText: text })
+  if (endpoint === 'search-explanation') params.set('type', model.value)
+  return fetch(`${API_BASE}/${endpoint}?${params}`, {
+    method: 'POST',
+    headers: { accept: '*/*' },
+    body: ''
+  })
+}
+
+function callN8n(endpoint, text) {
+  const body = endpoint === 'search-explanation' ? { text, sessionId } : { text }
+  return fetch(N8N_ENDPOINTS[endpoint], {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  })
+}
+
+async function callApi(endpoint, text) {
+  const response = backend.value === 'n8n'
+    ? await callN8n(endpoint, text)
+    : await callLocal(endpoint, text)
+  if (!response.ok) throw new Error(`HTTP ${response.status}`)
+  return formatResponse(await response.text())
 }
 
 async function send(endpoint) {
@@ -71,7 +100,11 @@ async function send(endpoint) {
         :disabled="loading"
         @keyup.enter="send('search-explanation')"
       />
-      <select v-model="model" :disabled="loading" aria-label="Modelo">
+      <select v-model="backend" :disabled="loading" aria-label="API">
+        <option value="local">local</option>
+        <option value="n8n">n8n</option>
+      </select>
+      <select v-if="backend === 'local'" v-model="model" :disabled="loading" aria-label="Modelo">
         <option value="gemini">Gemini</option>
         <option value="ollama">Ollama</option>
       </select>

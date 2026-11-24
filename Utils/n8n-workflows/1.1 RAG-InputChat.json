@@ -1,0 +1,213 @@
+{
+  "name": "1.1 RAG-InputChat",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "857d82ed-6032-4582-a95c-ed003c52d145",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        -96
+      ],
+      "id": "9a630f5c-913e-4a8e-972c-e717f38653fe",
+      "name": "Webhook1",
+      "webhookId": "857d82ed-6032-4582-a95c-ed003c52d145"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "14640669-bfa7-42fa-8ea8-37a77373e52a",
+              "name": "text",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            },
+            {
+              "id": "ecb0bf6a-2c83-45eb-8272-44e67cae8d9a",
+              "name": "sessionId",
+              "value": "={{ $json.body.sessionId }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        144,
+        -96
+      ],
+      "id": "70e65dd4-6a85-4d4c-ad0d-98b204f399bd",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "lastNode"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -64,
+        128
+      ],
+      "id": "0404e5ae-6c47-4b82-bba5-e823401712c3",
+      "name": "When chat message received",
+      "webhookId": "bda1406c-5b01-4de2-a99f-ae2681979196"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "HtI3fZetZZ5PlPfI",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/HtI3fZetZZ5PlPfI",
+          "cachedResultName": "2.2 RAG-CoreAi"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "sessionId": "={{ $json.sessionId }}",
+            "text": "={{ $json.text }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "text",
+              "displayName": "text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        432,
+        0
+      ],
+      "id": "958d4506-85bf-4465-9589-2f96cd09b8d2",
+      "name": "Call 'RAG-CoreAi'"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a3abaac5-fe5a-42e7-a42b-5a28e0426bed",
+              "name": "text",
+              "value": "={{ $json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "dab32d05-ceb4-43b7-97ba-972eb744ca51",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        160,
+        128
+      ],
+      "id": "2cbfa6fb-e63e-455c-9729-6c10cbecd4ee",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Call 'RAG-CoreAi'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Call 'RAG-CoreAi'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'RAG-CoreAi'": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "4f8c0afb-833a-457a-a4b2-1206e54ee250",
+  "meta": {
+    "instanceId": "f8625bbe19d2ff0cfd916adeeba260b5a3d61428afc40e7b27ce278c4c6d3536"
+  },
+  "nodeGroups": [],
+  "id": "iLDTCDnTguHVJ219",
+  "tags": []
+}

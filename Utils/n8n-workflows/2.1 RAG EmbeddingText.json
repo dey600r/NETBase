@@ -1,0 +1,146 @@
+{
+  "name": "2.1 RAG EmbeddingText",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7aaf6446-3990-45df-aa3a-30c2ee3e819f",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -176,
+        16
+      ],
+      "id": "dbf90f29-4867-4b9b-b0f8-1ba44810b066",
+      "name": "Webhook",
+      "webhookId": "7aaf6446-3990-45df-aa3a-30c2ee3e819f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "869d7006-2c1e-4832-8b57-8ffdf9c3f39d",
+              "name": "text",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        16,
+        16
+      ],
+      "id": "6b5ff9d6-a22b-407a-9287-5e8c1e830f17",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "const texto = $input.first().json.text;\n\n// Separar por puntos, limpiar espacios y eliminar frases vacías\nconst frases = texto\n  .split(\".\")\n  .map(frase => frase.trim())\n  .filter(frase => frase.length > 0);\n\n// Crear un elemento independiente por cada frase\nreturn frases.map((frase, index) => ({\n  json: {\n    id: index + 1,\n    texto: frase\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        16
+      ],
+      "id": "6a9e451c-ed22-4855-9a83-b0896e68b997",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "YdKtdCmR7dppTEtd",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/YdKtdCmR7dppTEtd",
+          "cachedResultName": "2.2 RAG-CoreEmbedding"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [
+            "data"
+          ],
+          "schema": [
+            {
+              "id": "data",
+              "displayName": "data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        464,
+        16
+      ],
+      "id": "0ff1ede3-f590-48e6-b8c2-3bc2e8a69ace",
+      "name": "Call 'RAG-CoreEmbedding'"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Call 'RAG-CoreEmbedding'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "40ace40b-c967-4f72-93fd-535c552dbe34",
+  "meta": {
+    "instanceId": "f8625bbe19d2ff0cfd916adeeba260b5a3d61428afc40e7b27ce278c4c6d3536"
+  },
+  "nodeGroups": [],
+  "id": "kP1JQyEsq10yCE5I",
+  "tags": []
+}

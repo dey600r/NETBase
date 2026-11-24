@@ -1,0 +1,571 @@
+{
+  "name": "RAG-Embedding&IAChatbot",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        48,
+        224
+      ],
+      "id": "62e1c9a4-23df-4712-b72e-52219597eedd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": "n8n_embeddings",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.4,
+      "position": [
+        960,
+        80
+      ],
+      "id": "e8e0c23e-a44c-4c85-9e1f-35409d5b8c09",
+      "name": "Postgres PGVector Store",
+      "credentials": {
+        "postgres": {
+          "id": "d9RJjhV6qDK30qAF",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "nomic-embed-text:latest"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
+      "typeVersion": 1,
+      "position": [
+        864,
+        416
+      ],
+      "id": "a393e14f-c809-4071-9371-940b2c15a0b0",
+      "name": "Embeddings Ollama",
+      "credentials": {
+        "ollamaApi": {
+          "id": "wf3qJUiN4naGLSvi",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1088,
+        272
+      ],
+      "id": "41ec4d19-9d58-412a-976e-e4a118e2b350",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.2,
+      "position": [
+        640,
+        144
+      ],
+      "id": "4be89e99-b597-43e7-a161-0260e895f70b",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "fileSelector": "/files/RAG - Knowledge.pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        224
+      ],
+      "id": "b8399398-14e7-4910-aa8f-041a92f54ec5",
+      "name": "Read/Write Files from Disk"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        464,
+        144
+      ],
+      "id": "eebc106f-2fcc-440e-874e-68ecdf5cd975",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "formTitle": "Upload file",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Add your file",
+              "fieldType": "file",
+              "fieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        192,
+        80
+      ],
+      "id": "a4a58a2f-084e-489b-90d3-a3755798a435",
+      "name": "On form submission",
+      "webhookId": "9dacf0cc-b217-475e-8455-58795546d58a"
+    },
+    {
+      "parameters": {
+        "model": "gemma3:1b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        928,
+        -336
+      ],
+      "id": "bc03038a-4cd7-42e9-9429-41348a7cba86",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "wf3qJUiN4naGLSvi",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "tableName": "n8n_embeddings",
+        "prompt": "={{ $json.chatInput }}",
+        "options": {
+          "distanceStrategy": "cosine"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.4,
+      "position": [
+        336,
+        -512
+      ],
+      "id": "f00439ad-1d40-4335-a03a-41e633651d66",
+      "name": "Postgres PGVector Store1",
+      "credentials": {
+        "postgres": {
+          "id": "d9RJjhV6qDK30qAF",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "=Eres un asistente virtual útil y preciso. Responde a la pregunta del usuario basándote ÚNICAMENTE en el siguiente contexto recuperado de nuestra base de datos.\n\nReglas estrictas:\n1. Si la respuesta no está en el contexto proporcionado, di exactamente: \"No tengo información suficiente en mi base de datos para responder a esa pregunta\".\n2. No inventes datos ni uses conocimiento externo.\n3. Responde de forma clara, directa y en español.\n\nContexto de la base de datos:\n{{ $json.data.map(item => item.document.pageContent).join('\\n---\\n') }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        928,
+        -528
+      ],
+      "id": "a1d79dd4-70ee-4eb7-82f7-2daadee3c01c",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        656,
+        -528
+      ],
+      "id": "1882698b-6752-406e-b16b-355196c54006",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        1072,
+        -336
+      ],
+      "id": "5f038413-5a7a-4993-9a9f-3d89e3fb5c3a",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "content": "## Chatbot Workflow ",
+        "height": 464,
+        "width": 1504,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -160,
+        -672
+      ],
+      "typeVersion": 1,
+      "id": "936e1630-e4f7-4e6f-ba0f-a3a93cea3bd0",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Embedding - Proceso de ingesta ",
+        "height": 752,
+        "width": 1488,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -144,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "088dbe38-082a-4707-b472-63d20e234844",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7aaf6446-3990-45df-aa3a-30c2ee3e819f",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        192,
+        -48
+      ],
+      "id": "dd0c652b-7497-4bba-b003-afc2587d2ca4",
+      "name": "Webhook",
+      "webhookId": "7aaf6446-3990-45df-aa3a-30c2ee3e819f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "869d7006-2c1e-4832-8b57-8ffdf9c3f39d",
+              "name": "body.text",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        368,
+        -48
+      ],
+      "id": "74b8930c-8aaf-4901-8889-f88b8e4cc5a7",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "const texto = $input.first().json.body.text;\n\n// Separar por puntos, limpiar espacios y eliminar frases vacías\nconst frases = texto\n  .split(\".\")\n  .map(frase => frase.trim())\n  .filter(frase => frase.length > 0);\n\n// Crear un elemento independiente por cada frase\nreturn frases.map((frase, index) => ({\n  json: {\n    id: index + 1,\n    texto: frase\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        656,
+        -32
+      ],
+      "id": "f7939a47-598d-43d1-b326-ef5f6fbbbf40",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "857d82ed-6032-4582-a95c-ed003c52d145",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        -608
+      ],
+      "id": "1bdeaa22-9870-4550-a4dd-575d03fe9ca9",
+      "name": "Webhook1",
+      "webhookId": "857d82ed-6032-4582-a95c-ed003c52d145"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "14640669-bfa7-42fa-8ea8-37a77373e52a",
+              "name": "chatInput",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        80,
+        -608
+      ],
+      "id": "3770493f-cf18-4142-bfa9-a5692538c671",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -80,
+        -384
+      ],
+      "id": "68f68773-04be-41a1-94df-197d08e78b86",
+      "name": "When chat message received",
+      "webhookId": "bda1406c-5b01-4de2-a99f-ae2681979196"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Ollama": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Postgres PGVector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read/Write Files from Disk": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres PGVector Store": {
+      "main": [
+        []
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres PGVector Store1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Postgres PGVector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d08290f7-56ec-48b2-9dec-9f593111f896",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f8625bbe19d2ff0cfd916adeeba260b5a3d61428afc40e7b27ce278c4c6d3536"
+  },
+  "nodeGroups": [],
+  "id": "O99OHK0ihLRzWOpk",
+  "tags": []
+}

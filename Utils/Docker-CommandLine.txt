@@ -8,7 +8,8 @@ http://localhost:8180/ --> keycloak --> admin/admin
 http://localhost:15672/ --> Rabbitmq --> guest/guest
 http://localhost:3300 --> Microservice FrontEnad --> admin@example.com/Dj123?
 http://localhost:8081 --> admin/admin123?
-http://localhost:3000 -> dey125r@gmail.com -> admin
+http://localhost:3000 -> dey125r -> admin
+http://localhost:5678 -> dey125r -> Admin123?
 
 https://nexus.apps-crc.testing/ --> admin/Admin123?
 
